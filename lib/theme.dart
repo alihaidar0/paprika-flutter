@@ -1,0 +1,1 @@
+export 'src/theme/paprica_theme.dart';

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "727793080333",
+    "firebase_url": "https://paprica-36891.firebaseio.com",
+    "project_id": "paprica-36891",
+    "storage_bucket": "paprica-36891.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727793080333:android:7a9e4ecd6b2cc2c8655d44",
+        "android_client_info": {
+          "package_name": "me.paprica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727793080333-qblkdq9eaplkqsrmn7va7atmbffqjuu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC14z6sbF4MuyNFLcaEFzbdHIfqmSgnA6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727793080333-qblkdq9eaplkqsrmn7va7atmbffqjuu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

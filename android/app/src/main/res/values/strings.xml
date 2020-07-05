@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Paprica.</string>
+
+    <string name="facebook_app_id">921216954918626</string>
+
+    <!--
+     hash: pVMLmjWWvcYsjT07H5N8neX43L8=
+    -->
+    <string name="fb_login_protocol_scheme">fb921216954918626</string>
+</resources>

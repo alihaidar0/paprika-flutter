@@ -1,0 +1,496 @@
+Index: paprica_dart_client/lib/model/offer_paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/offer_paprica_item_dto.dart	(date 1564529884589)
++++ paprica_dart_client/lib/model/offer_paprica_item_dto.dart	(date 1564529884589)
+@@ -0,0 +1,67 @@
++part of swagger.api;
++
++class OfferPapricaItemDto {
++  
++  int restaurantId = null;
++  
++
++  String restaurantName = null;
++  
++
++  String image = null;
++  
++
++  String description = null;
++  
++
++  int id = null;
++  
++  OfferPapricaItemDto();
++
++  @override
++  String toString() {
++    return 'OfferPapricaItemDto[restaurantId=$restaurantId, restaurantName=$restaurantName, image=$image, description=$description, id=$id, ]';
++  }
++
++  OfferPapricaItemDto.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    restaurantId =
++        json['restaurantId']
++    ;
++    restaurantName =
++        json['restaurantName']
++    ;
++    image =
++        json['image']
++    ;
++    description =
++        json['description']
++    ;
++    id =
++        json['id']
++    ;
++  }
++
++  Map<String, dynamic> toJson() {
++    return {
++      'restaurantId': restaurantId,
++      'restaurantName': restaurantName,
++      'image': image,
++      'description': description,
++      'id': id
++     };
++  }
++
++  static List<OfferPapricaItemDto> listFromJson(List<dynamic> json) {
++    return json == null ? new List<OfferPapricaItemDto>() : json.map((value) => new OfferPapricaItemDto.fromJson(value)).toList();
++  }
++
++  static Map<String, OfferPapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
++    var map = new Map<String, OfferPapricaItemDto>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new OfferPapricaItemDto.fromJson(value));
++    }
++    return map;
++  }
++}
++
+Index: paprica_dart_client/lib/model/event_paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/event_paprica_item_dto.dart	(date 1564530062741)
++++ paprica_dart_client/lib/model/event_paprica_item_dto.dart	(date 1564530062741)
+@@ -0,0 +1,63 @@
++part of swagger.api;
++
++class EventPapricaItemDto {
++  String name = null;
++
++  int restaurantId = null;
++
++  String restaurantName = null;
++
++  String restaurantLogo = null;
++
++  String image = null;
++
++  String description = null;
++
++  DateTime time = null;
++
++  int id = null;
++
++  EventPapricaItemDto();
++
++  @override
++  String toString() {
++    return 'EventPapricaItemDto[name=$name, restaurantId=$restaurantId, restaurantName=$restaurantName, restaurantLogo=$restaurantLogo, image=$image, description=$description, time=$time, id=$id, ]';
++  }
++
++  EventPapricaItemDto.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    name = json['name'];
++    restaurantId = json['restaurantId'];
++    restaurantName = json['restaurantName'];
++    restaurantLogo = json['restaurantLogo'];
++    image = json['image'];
++    description = json['description'];
++    time = DateTime.now(); //= json['time'] == null ? null : DateTime.parse(json['time']);
++    id = json['id'];
++  }
++
++  Map<String, dynamic> toJson() {
++    return {
++      'name': name,
++      'restaurantId': restaurantId,
++      'restaurantName': restaurantName,
++      'restaurantLogo': restaurantLogo,
++      'image': image,
++      'description': description,
++      'time': time == null ? '' : time.toUtc().toIso8601String(),
++      'id': id
++    };
++  }
++
++  static List<EventPapricaItemDto> listFromJson(List<dynamic> json) {
++    return json == null ? new List<EventPapricaItemDto>() : json.map((value) => new EventPapricaItemDto.fromJson(value)).toList();
++  }
++
++  static Map<String, EventPapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
++    var map = new Map<String, EventPapricaItemDto>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new EventPapricaItemDto.fromJson(value));
++    }
++    return map;
++  }
++}
+Index: paprica_dart_client/lib/model/list_paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/list_paprica_item_dto.dart	(date 1564532443262)
++++ paprica_dart_client/lib/model/list_paprica_item_dto.dart	(date 1564532443262)
+@@ -0,0 +1,45 @@
++part of swagger.api;
++
++class ListPapricaItemDto {
++  String title = null;
++
++  List<dynamic> items = null;
++
++  ApiFilterModel filter = null;
++
++  ListPapricaItemDto();
++
++  @override
++  String toString() {
++    return 'ListPapricaItemDto[title=$title, items=$items, filter=$filter, ]';
++  }
++
++  ListPapricaItemDto.fromJson(Map<String, dynamic> json, int type) {
++    if (json == null) return;
++    title = json['title'];
++    if (type == 5) items = RestaurantInListPapricaItem.listFromJson(json['items']);
++    filter = json['filter'];
++  }
++
++  Map<String, dynamic> toJson() {
++    return {
++      'title': title,
++      'items': items,
++      'filter': filter,
++    };
++  }
++
++  static List<ListPapricaItemDto> listFromJson(List<dynamic> json, int type) {
++    return json == null
++        ? new List<ListPapricaItemDto>()
++        : json.map((value) => new ListPapricaItemDto.fromJson(value, type)).toList();
++  }
++
++  static Map<String, ListPapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json, int type) {
++    var map = new Map<String, ListPapricaItemDto>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ListPapricaItemDto.fromJson(value, type));
++    }
++    return map;
++  }
++}
+Index: paprica_dart_client/lib/model/reservation_paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/reservation_paprica_item_dto.dart	(date 1564531239744)
++++ paprica_dart_client/lib/model/reservation_paprica_item_dto.dart	(date 1564531239744)
+@@ -0,0 +1,66 @@
++part of swagger.api;
++
++class ReservationPapricaItemDto {
++  int restaurantId = null;
++
++  int numberOfPeople = null;
++
++  DateTime time = null;
++
++  int status = null;
++
++  bool hasPendingUpdate = null;
++
++  String restaurantPhoneNumber = null;
++
++  String restaurantName = null;
++
++  int id = null;
++
++  ReservationPapricaItemDto();
++
++  @override
++  String toString() {
++    return 'ReservationPapricaItemDto[restaurantId=$restaurantId, numberOfPeople=$numberOfPeople, time=$time, status=$status, hasPendingUpdate=$hasPendingUpdate, restaurantPhoneNumber=$restaurantPhoneNumber,  restaurantName=$restaurantName,  id=$id, ]';
++  }
++
++  ReservationPapricaItemDto.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    restaurantId = json['restaurantId'];
++    numberOfPeople = json['numberOfPeople'];
++    time = json['time'] == null ? null : DateTime.parse(json['time']);
++    status = json['status'];
++    hasPendingUpdate = json['hasPendingUpdate'];
++    restaurantPhoneNumber = json['restaurantPhoneNumber'];
++    restaurantName = json['restaurantName'];
++
++    id = json['id'];
++  }
++
++  Map<String, dynamic> toJson() {
++    return {
++      'restaurantId': restaurantId,
++      'numberOfPeople': numberOfPeople,
++      'time': time == null ? '' : time.toUtc().toIso8601String(),
++      'status': status,
++      'hasPendingUpdate': hasPendingUpdate,
++      'restaurantPhoneNumber': restaurantPhoneNumber,
++      'restaurantName': restaurantName,
++      'id': id
++    };
++  }
++
++  static List<ReservationPapricaItemDto> listFromJson(List<dynamic> json) {
++    return json == null
++        ? new List<ReservationPapricaItemDto>()
++        : json.map((value) => new ReservationPapricaItemDto.fromJson(value)).toList();
++  }
++
++  static Map<String, ReservationPapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
++    var map = new Map<String, ReservationPapricaItemDto>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ReservationPapricaItemDto.fromJson(value));
++    }
++    return map;
++  }
++}
+Index: paprica_dart_client/lib/model/restaurant_in_list_paprica_item.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/restaurant_in_list_paprica_item.dart	(date 1564531450883)
++++ paprica_dart_client/lib/model/restaurant_in_list_paprica_item.dart	(date 1564531450883)
+@@ -0,0 +1,47 @@
++part of swagger.api;
++
++class RestaurantInListPapricaItem {
++  int id = null;
++
++  String name = null;
++
++  double rate = null;
++
++  String logo = null;
++
++  bool isOpen = null;
++
++  RestaurantInListPapricaItem();
++
++  @override
++  String toString() {
++    return 'RestaurantInListPapricaItem[id=$id, name=$name, rate=$rate, logo=$logo, isOpen=$isOpen, ]';
++  }
++
++  RestaurantInListPapricaItem.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    id = json['id'];
++    name = json['name'];
++    rate = json['rate'];
++    logo = json['logo'];
++    isOpen = json['isOpen'];
++  }
++
++  Map<String, dynamic> toJson() {
++    return {'id': id, 'name': name, 'rate': rate, 'logo': logo, 'isOpen': isOpen};
++  }
++
++  static List<RestaurantInListPapricaItem> listFromJson(List<dynamic> json) {
++    return json == null
++        ? new List<RestaurantInListPapricaItem>()
++        : json.map((value) => new RestaurantInListPapricaItem.fromJson(value)).toList();
++  }
++
++  static Map<String, RestaurantInListPapricaItem> mapFromJson(Map<String, Map<String, dynamic>> json) {
++    var map = new Map<String, RestaurantInListPapricaItem>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RestaurantInListPapricaItem.fromJson(value));
++    }
++    return map;
++  }
++}
+Index: paprica_dart_client/lib/model/api_filter_model.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/api_filter_model.dart	(date 1564532164409)
++++ paprica_dart_client/lib/model/api_filter_model.dart	(date 1564532164409)
+@@ -0,0 +1,78 @@
++part of swagger.api;
++
++class ApiFilterModel {
++  int parkingType;
++  int ambianceType;
++
++  int musicType;
++  bool isSmokeFree;
++
++  bool isAlcoholFree;
++  int cuisineTypes;
++
++  int amenityTypes;
++  bool hasOutdoor;
++
++  bool is24Hour;
++  int restaurantTypes;
++
++  double longitude;
++  double latitude;
++
++  bool isFeatured;
++  int skipCount;
++
++  int maxResultCount;
++
++  ApiFilterModel();
++
++  ApiFilterModel.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    parkingType = json['parkingType'];
++    ambianceType = json['ambianceType'];
++    musicType = json['musicType'];
++    isSmokeFree = json['isSmokeFree'];
++    isAlcoholFree = json['isAlcoholFree'];
++    cuisineTypes = json['cuisineTypes'];
++    amenityTypes = json['amenityTypes'];
++    hasOutdoor = json['hasOutdoor'];
++    is24Hour = json['is24Hour'];
++    restaurantTypes = json['restaurantTypes'];
++    longitude = json['longitude'];
++    latitude = json['latitude'];
++    isFeatured = json['isFeatured'];
++    skipCount = json['skipCount'];
++    maxResultCount = json['maxResultCount'];
++   
++  }
++  Map<String, dynamic> toJson() {
++    return {
++      'parkingType': parkingType,
++      'ambianceType': ambianceType,
++      'musicType': musicType,
++      'isSmokeFree': isSmokeFree,
++      'isAlcoholFree': isAlcoholFree,
++      'cuisineTypes': cuisineTypes,
++      'amenityTypes': amenityTypes,
++      'hasOutdoor': hasOutdoor,
++      'is24Hour': is24Hour,
++      'restaurantTypes': restaurantTypes,
++      'longitude': longitude,
++      'latitude': latitude,
++      'isFeatured': isFeatured,
++      'skipCount': skipCount,
++      'maxResultCount': maxResultCount,
++    };
++  }
++  static List<ApiFilterModel> listFromJson(List<dynamic> json) {
++    return json == null ? new List<ApiFilterModel>() : json.map((value) => new ApiFilterModel.fromJson(value)).toList();
++  }
++
++  static Map<String, ApiFilterModel> mapFromJson(Map<String, Map<String, dynamic>> json) {
++    var map = new Map<String, ApiFilterModel>();
++    if (json != null && json.length > 0) {
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ApiFilterModel.fromJson(value));
++    }
++    return map;
++  }
++}
+Index: paprica_dart_client/lib/model/paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/paprica_item_dto.dart	(date 1564529033000)
++++ paprica_dart_client/lib/model/paprica_item_dto.dart	(date 1564532657011)
+@@ -5,7 +5,7 @@
+ 
+   int type = null;
+ 
+-  //enum typeEnum {  1,  2,  3,  4,  };
++  //enum typeEnum {  1 (reservation),  2 (offer),  3 (event),  4 (restaurant), 5 (restaurants), 6 (news)};
+ 
+   dynamic model = null;
+ 
+@@ -16,16 +16,20 @@
+ 
+     switch (type) {
+       case 1:
+-        model = new CustomerUpcomingReservationDto.fromJson(json['model']);
++        model = ReservationPapricaItemDto.fromJson(json['model']);
+         break;
+       case 2:
+-        model = new CustomerOfferDto.fromJson(json['model']);
++        model = OfferPapricaItemDto.fromJson(json['model']);
+         break;
+       case 3:
+-        model = new CustomerEventDto.fromJson(json['model']);
++        model = EventPapricaItemDto.fromJson(json['model']);
+         break;
+       case 4:
+-        model = new RestaurantSummaryDto.fromJson(json['model']);
++        model = RestaurantSummaryDto.fromJson(json['model']);
++        break;
++      case 5:
++        model = ListPapricaItemDto.fromJson(json['model'], type);
++        break;
+     }
+   }
+ 
+@@ -41,17 +45,13 @@
+   }
+ 
+   static List<PapricaItemDto> listFromJson(List<dynamic> json) {
+-    return json == null
+-        ? new List<PapricaItemDto>()
+-        : json.map((value) => new PapricaItemDto.fromJson(value)).toList();
++    return json == null ? new List<PapricaItemDto>() : json.map((value) => new PapricaItemDto.fromJson(value)).toList();
+   }
+ 
+-  static Map<String, PapricaItemDto> mapFromJson(
+-      Map<String, Map<String, dynamic>> json) {
++  static Map<String, PapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+     var map = new Map<String, PapricaItemDto>();
+     if (json != null && json.length > 0) {
+-      json.forEach((String key, Map<String, dynamic> value) =>
+-          map[key] = new PapricaItemDto.fromJson(value));
++      json.forEach((String key, Map<String, dynamic> value) => map[key] = new PapricaItemDto.fromJson(value));
+     }
+     return map;
+   }
+Index: paprica_dart_client/lib/api.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/api.dart	(date 1564529033000)
++++ paprica_dart_client/lib/api.dart	(date 1564532164137)
+@@ -200,6 +200,12 @@
+ part 'model/user_login_info_dto.dart';
+ part 'model/visitor_contact_info_dto.dart';
+ part 'model/update_opening_times_dto.dart';
++part 'model/api_filter_model.dart';
++part 'model/event_paprica_item_dto.dart';
++part 'model/offer_paprica_item_dto.dart';
++part 'model/reservation_paprica_item_dto.dart';
++part 'model/restaurant_in_list_paprica_item.dart';
++part 'model/list_paprica_item_dto.dart';
+ 
+ 
+ ApiClient defaultApiClient = new ApiClient();

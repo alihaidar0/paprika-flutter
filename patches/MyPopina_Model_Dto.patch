@@ -1,0 +1,94 @@
+Index: paprica_dart_client/lib/model/paprica_item_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/paprica_item_dto.dart	(date 1561310195000)
++++ paprica_dart_client/lib/model/paprica_item_dto.dart	(date 1561317844601)
+@@ -1,15 +1,34 @@
+ part of swagger.api;
+ 
+ class PapricaItemDto {
+-  
+   int stamp = null;
+-  
+ 
+   int type = null;
++
+   //enum typeEnum {  1,  2,  3,  4,  };
+ 
+-  IPapricaItemModelDto model = null;
+-  
++  dynamic model = null;
++
++  PapricaItemDto.fromJson(Map<String, dynamic> json) {
++    if (json == null) return;
++    stamp = json['stamp'];
++    type = json['type'];
++
++    switch (type) {
++      case 1:
++        model = new CustomerUpcomingReservationDto.fromJson(json['model']);
++        break;
++      case 2:
++        model = new CustomerOfferDto.fromJson(json['model']);
++        break;
++      case 3:
++        model = new CustomerEventDto.fromJson(json['model']);
++        break;
++      case 4:
++        model = new RestaurantSummaryDto.fromJson(json['model']);
++    }
++  }
++
+   PapricaItemDto();
+ 
+   @override
+@@ -17,39 +36,23 @@
+     return 'PapricaItemDto[stamp=$stamp, type=$type, model=$model, ]';
+   }
+ 
+-  PapricaItemDto.fromJson(Map<String, dynamic> json) {
+-    if (json == null) return;
+-    stamp =
+-        json['stamp']
+-    ;
+-    type =
+-        json['type']
+-    ;
+-    model =
+-      
+-      
+-      new IPapricaItemModelDto.fromJson(json['model'])
+-;
+-  }
+-
+   Map<String, dynamic> toJson() {
+-    return {
+-      'stamp': stamp,
+-      'type': type,
+-      'model': model
+-     };
++    return {'stamp': stamp, 'type': type, 'model': model};
+   }
+ 
+   static List<PapricaItemDto> listFromJson(List<dynamic> json) {
+-    return json == null ? new List<PapricaItemDto>() : json.map((value) => new PapricaItemDto.fromJson(value)).toList();
++    return json == null
++        ? new List<PapricaItemDto>()
++        : json.map((value) => new PapricaItemDto.fromJson(value)).toList();
+   }
+ 
+-  static Map<String, PapricaItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
++  static Map<String, PapricaItemDto> mapFromJson(
++      Map<String, Map<String, dynamic>> json) {
+     var map = new Map<String, PapricaItemDto>();
+     if (json != null && json.length > 0) {
+-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new PapricaItemDto.fromJson(value));
++      json.forEach((String key, Map<String, dynamic> value) =>
++          map[key] = new PapricaItemDto.fromJson(value));
+     }
+     return map;
+   }
+ }
+-

@@ -1,0 +1,16 @@
+Index: paprica_dart_client/lib/model/customer_upcoming_reservation_dto.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- paprica_dart_client/lib/model/customer_upcoming_reservation_dto.dart	(date 1565030346000)
++++ paprica_dart_client/lib/model/customer_upcoming_reservation_dto.dart	(date 1565033290596)
+@@ -51,7 +51,7 @@
+     restaurantId = json['restaurantId'];
+     restaurantImage = json['restaurantImage'];
+     restaurantName = json['restaurantName'];
+-    updateRequest = new UpdateReservationRequestDto.fromJson(json['updateRequest']);
++    updateRequest = json['updateRequest'] == null ? null : UpdateReservationRequestDto.fromJson(json['updateRequest']);
+   }
+ 
+   Map<String, dynamic> toJson() {

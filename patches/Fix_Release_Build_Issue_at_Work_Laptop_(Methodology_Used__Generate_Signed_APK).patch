@@ -1,0 +1,52 @@
+Index: android/gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1256
+===================================================================
+--- android/gradle.properties	(revision 965bdc51f8a6f83f1fefa80aa4f26e4629a1a589)
++++ android/gradle.properties	(date 1561378093182)
+@@ -1,1 +1,3 @@
+ org.gradle.jvmargs=-Xmx1536M
++android.useAndroidX=true
++android.enableJetifier=true
+\ No newline at end of file
+Index: android/key.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1256
+===================================================================
+--- android/key.properties	(revision 965bdc51f8a6f83f1fefa80aa4f26e4629a1a589)
++++ android/key.properties	(date 1561374897243)
+@@ -1,4 +1,4 @@
+ storePassword=Gksa#mf%$3,.A
+ keyPassword=Gksa#mf%$3,.A
+ keyAlias=key
+-storeFile=D:/softup/key.jks
+\ No newline at end of file
++storeFile=D:/key.jks
+\ No newline at end of file
+Index: android/app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/build.gradle	(revision 965bdc51f8a6f83f1fefa80aa4f26e4629a1a589)
++++ android/app/build.gradle	(date 1561377438924)
+@@ -31,7 +31,7 @@
+ }
+ 
+ android {
+-    compileSdkVersion 27
++    compileSdkVersion 28
+ 
+     lintOptions {
+         disable 'InvalidPackage'
+@@ -41,7 +41,7 @@
+         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+         applicationId "com.softup.bookme"
+         minSdkVersion 16
+-        targetSdkVersion 27
++        targetSdkVersion 28
+         versionCode flutterVersionCode.toInteger()
+         versionName flutterVersionName
+         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
