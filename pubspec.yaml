@@ -46,6 +46,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  flutter_svg: ^0.18.1
   flutter_local_notifications:
   incrementally_loading_listview:
 
@@ -141,6 +142,9 @@ flutter:
     - assets/icons/paper_plane.png
     - assets/icons/smartphone.png
     - assets/icons/filter.png
+    - assets/icons/reserve.svg
+    - assets/icons/order.svg
+    - assets/icons/noun_food_delivery.svg
     - assets/images/no_restaurants.png
     - assets/images/no_events.png
     - assets/images/no_reservation.png

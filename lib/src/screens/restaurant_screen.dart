@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paprica/src/models/meal_share.dart';
 import 'package:paprica/src/models/menu_state.dart';
 import 'package:paprica/src/models/reviews_state.dart';
@@ -163,6 +164,58 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
               // Caching the widget
               widgetLogoImage ??= CachedNetworkImageProvider(restData.logoImage);
               return Scaffold(
+                persistentFooterButtons: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: (){},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/icons/order.svg",width: 30, height: 30,),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:8.0,top: 5.0),
+                                  child: Text("Order Now"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: (){},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/icons/reserve.svg",width: 25, height: 25,),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:8.0,top: 5.0),
+                                  child: Text("Reserve Now"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(right: 20),
+                          child: InkWell(
+                            onTap: (){},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.more_horiz),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
                 body: NestedScrollView(
                   controller: _scrollController,
                   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -320,13 +373,6 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                     ],
                   ),
                 ),
-                floatingActionButton: _reservable && showFab
-                    ? CustomizedActiveButton(
-                        onPressed: () => _onReservePressed(context),
-                        title: S.of(context).reserveNow,
-                      )
-                    : EmptyWidget(),
-                floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
               );
             } else if (snapshot.hasError) {
               return _RestaurantPlaceHolder(RequestRetry(message: S.of(context).errorUnknown, retryCallback: _getRestaurantDataAsync));
