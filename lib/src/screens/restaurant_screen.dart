@@ -24,7 +24,8 @@ class RestaurantHome extends StatefulWidget {
 
   final MealShare mealShare;
 
-  const RestaurantHome({Key key, this.restaurantId, this.mealShare}) : super(key: key);
+  const RestaurantHome({Key key, this.restaurantId, this.mealShare})
+      : super(key: key);
 
   @override
   _RestaurantHomeState createState() => _RestaurantHomeState();
@@ -32,7 +33,8 @@ class RestaurantHome extends StatefulWidget {
 
 typedef ReviewStateStore(ReviewDto newState);
 
-class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _RestaurantHomeState extends State<RestaurantHome>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   Future<RestaurantHomeDto> futureRestData;
   RestaurantHomeDto restData;
   ScrollController _scrollController;
@@ -46,7 +48,9 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
   CachedNetworkImageProvider widgetLogoImage;
 
   get _reservable {
-    return restData.settings.services.where((service) => service.code == 'reservation').isNotEmpty;
+    return restData.settings.services
+        .where((service) => service.code == 'reservation')
+        .isNotEmpty;
   }
 
   @override
@@ -60,11 +64,13 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
     menuState ??= MenuState(isGrid: true);
     reviewsState ??= ReviewsState();
     _scrollController = ScrollController();
-    _tabController = TabController(initialIndex: widget.mealShare != null ? 1 : 0, length: 3, vsync: this);
+    _tabController = TabController(
+        initialIndex: widget.mealShare != null ? 1 : 0, length: 3, vsync: this);
     _screenActivity = StreamController<bool>.broadcast();
     _tabController.addListener(() {
       if (_scrollController.offset != 0) {
-        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: ElasticInOutCurve());
+        _scrollController.animateTo(0,
+            duration: Duration(milliseconds: 300), curve: ElasticInOutCurve());
       }
     });
   }
@@ -112,7 +118,8 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
   }
 
   scrollDelegate(double offset) {
-    _scrollController.animateTo(offset, duration: Duration(milliseconds: 1), curve: ElasticInCurve());
+    _scrollController.animateTo(offset,
+        duration: Duration(milliseconds: 1), curve: ElasticInCurve());
   }
 
   storeMenuState(MenuState newState) {
@@ -124,20 +131,27 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
   }
 
   Future _getRestaurantDataAsync() {
-    if (widget.restaurantId == null && (widget.mealShare == null || widget.mealShare.restaurantId == null || widget.mealShare.restaurantId <= 0)) {
+    if (widget.restaurantId == null &&
+        (widget.mealShare == null ||
+            widget.mealShare.restaurantId == null ||
+            widget.mealShare.restaurantId <= 0)) {
       debugPrint(widget.mealShare.toString());
       return Future.value();
     }
     ApiClient client = PapricaApiClient();
     CustomerRestaurantApi apiInstance = CustomerRestaurantApi(client);
     setState(() {
-      futureRestData = apiInstance.apiServicesAppCustomerRestaurantGetGet(id: widget.restaurantId ?? widget.mealShare.restaurantId);
+      futureRestData = apiInstance.apiServicesAppCustomerRestaurantGetGet(
+          id: widget.restaurantId ?? widget.mealShare.restaurantId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.restaurantId == null && (widget.mealShare == null || widget.mealShare.restaurantId == null || widget.mealShare.restaurantId <= 0)) {
+    if (widget.restaurantId == null &&
+        (widget.mealShare == null ||
+            widget.mealShare.restaurantId == null ||
+            widget.mealShare.restaurantId <= 0)) {
       debugPrint(widget.mealShare.toString());
       Navigator.of(context).pop();
     }
@@ -162,7 +176,8 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
             if (snapshot.hasData) {
               restData = snapshot.data;
               // Caching the widget
-              widgetLogoImage ??= CachedNetworkImageProvider(restData.logoImage);
+              widgetLogoImage ??=
+                  CachedNetworkImageProvider(restData.logoImage);
               return Scaffold(
                 persistentFooterButtons: [
                   Container(
@@ -172,13 +187,18 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                       children: [
                         Expanded(
                           child: InkWell(
-                            onTap: (){},
+                            onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset("assets/icons/order.svg",width: 30, height: 30,),
+                                SvgPicture.asset(
+                                  "assets/icons/order.svg",
+                                  width: 30,
+                                  height: 30,
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left:8.0,top: 5.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, top: 5.0),
                                   child: Text("Order Now"),
                                 ),
                               ],
@@ -187,13 +207,18 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: (){},
+                            onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset("assets/icons/reserve.svg",width: 25, height: 25,),
+                                SvgPicture.asset(
+                                  "assets/icons/reserve.svg",
+                                  width: 25,
+                                  height: 25,
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left:8.0,top: 5.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, top: 5.0),
                                   child: Text("Reserve Now"),
                                 ),
                               ],
@@ -203,7 +228,7 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                         Container(
                           margin: EdgeInsets.only(right: 20),
                           child: InkWell(
-                            onTap: (){},
+                            onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -218,13 +243,18 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                 ],
                 body: NestedScrollView(
                   controller: _scrollController,
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                         leading: IconButton(
                           icon: Icon(
                             Icons.arrow_back,
-                            textDirection: Localizations.localeOf(context).languageCode == 'en' ? TextDirection.ltr : TextDirection.rtl,
+                            textDirection:
+                                Localizations.localeOf(context).languageCode ==
+                                        'en'
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
                           ),
                           onPressed: () {
                             _screenActivity.add(false);
@@ -245,7 +275,8 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                 imageUrl: restData.coverImage,
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => Image(
-                                  image: AssetImage("assets/images/placeholder.png"),
+                                  image: AssetImage(
+                                      "assets/images/placeholder.png"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -254,14 +285,27 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                   gradient: LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
-                                    colors: <Color>[Colors.black38, Colors.black12, Colors.black12, Colors.black],
+                                    colors: <Color>[
+                                      Colors.black38,
+                                      Colors.black12,
+                                      Colors.black12,
+                                      Colors.black
+                                    ],
                                   ),
                                 ),
                               ),
                               Positioned(
                                 bottom: 0,
-                                left: Localizations.localeOf(context).languageCode == 'en' ? 0 : null,
-                                right: Localizations.localeOf(context).languageCode == 'en' ? null : 0,
+                                left: Localizations.localeOf(context)
+                                            .languageCode ==
+                                        'en'
+                                    ? 0
+                                    : null,
+                                right: Localizations.localeOf(context)
+                                            .languageCode ==
+                                        'en'
+                                    ? null
+                                    : 0,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
@@ -269,7 +313,8 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                     children: <Widget>[
                                       Row(
                                         mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Container(
                                               child: Container(
@@ -277,7 +322,11 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                                     width: 55.0,
                                                     height: 55.0,
                                                     decoration: new BoxDecoration(
-                                                        shape: BoxShape.circle, color: Colors.white, image: DecorationImage(image: widgetLogoImage)),
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.white,
+                                                        image: DecorationImage(
+                                                            image:
+                                                                widgetLogoImage)),
                                                   ),
                                                   decoration: new BoxDecoration(
                                                     border: new Border.all(
@@ -290,31 +339,58 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                               decoration: new BoxDecoration(
                                                 border: new Border.all(
                                                   width: 2.0,
-                                                  color: snapshot.data.isOpen ? Colors.green : Colors.grey,
+                                                  color: snapshot.data.isOpen
+                                                      ? Colors.green
+                                                      : Colors.grey,
                                                 ),
                                                 shape: BoxShape.circle,
                                                 color: Color(0xffa5a5a5),
                                               )),
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: <Widget>[
                                                 Row(
                                                   children: <Widget>[
                                                     Container(
-                                                        constraints: BoxConstraints(maxWidth: 140),
-                                                        margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                maxWidth: 140),
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
+                                                                0, 15, 0, 0),
                                                         child: Stack(
                                                           children: <Widget>[
                                                             Text(snapshot.data.name,
                                                                 maxLines: 1,
-                                                                overflow: TextOverflow.ellipsis,
-                                                                style: TextStyle(color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.w500)),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        22.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500)),
                                                             Padding(
-                                                                padding: const EdgeInsets.fromLTRB(0, 22, 0, 0), child: _getRestaurantOpenLabel(snapshot.data))
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .fromLTRB(
+                                                                        0,
+                                                                        22,
+                                                                        0,
+                                                                        0),
+                                                                child: _getRestaurantOpenLabel(
+                                                                    snapshot
+                                                                        .data))
                                                           ],
                                                         )),
                                                   ],
@@ -329,18 +405,31 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                                 ),
                               ),
                               Positioned(
-                                  right: Localizations.localeOf(context).languageCode == 'en' ? 0 : null,
-                                  left: Localizations.localeOf(context).languageCode == 'en' ? null : 0,
+                                  right: Localizations.localeOf(context)
+                                              .languageCode ==
+                                          'en'
+                                      ? 0
+                                      : null,
+                                  left: Localizations.localeOf(context)
+                                              .languageCode ==
+                                          'en'
+                                      ? null
+                                      : 0,
                                   bottom: 8,
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: ActionsRow(restData, _scrollController, false, _screenActivity.stream),
+                                    child: ActionsRow(
+                                        restData,
+                                        _scrollController,
+                                        false,
+                                        _screenActivity.stream),
                                   )),
                             ],
                           ),
                         ),
                         actions: <Widget>[
-                          ActionsRow(restData, _scrollController, true, _screenActivity.stream),
+                          ActionsRow(restData, _scrollController, true,
+                              _screenActivity.stream),
                         ],
                       ),
                       SliverPersistentHeader(
@@ -352,11 +441,26 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                RestaurantTab(0, "assets/icons/home_filled.png", "assets/icons/home_empty.png", S.of(context).homePage, _tabController),
+                                RestaurantTab(
+                                    0,
+                                    "assets/icons/home_filled.png",
+                                    "assets/icons/home_empty.png",
+                                    S.of(context).homePage,
+                                    _tabController),
                                 DotsSeparator(),
-                                RestaurantTab(1, "assets/icons/menu_filled.png", "assets/icons/menu_empty.png", S.of(context).menu, _tabController),
+                                RestaurantTab(
+                                    1,
+                                    "assets/icons/menu_filled.png",
+                                    "assets/icons/menu_empty.png",
+                                    S.of(context).menu,
+                                    _tabController),
                                 DotsSeparator(),
-                                RestaurantTab(2, "assets/icons/star_filled.png", "assets/icons/star_empty.png", S.of(context).reviews, _tabController),
+                                RestaurantTab(
+                                    2,
+                                    "assets/icons/star_filled.png",
+                                    "assets/icons/star_empty.png",
+                                    S.of(context).reviews,
+                                    _tabController),
                               ],
                             ),
                           ),
@@ -368,14 +472,19 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
                     controller: _tabController,
                     children: <Widget>[
                       RestaurantHomePage(snapshot.data),
-                      RestaurantMenuPage(restData, menuState, storeMenuState, _scrollController, scrollDelegate, mealShare: widget.mealShare),
-                      RestaurantReviewsPage(reviewsState, storeReviewsState, snapshot.data, _scrollController),
+                      RestaurantMenuPage(restData, menuState, storeMenuState,
+                          _scrollController, scrollDelegate,
+                          mealShare: widget.mealShare),
+                      RestaurantReviewsPage(reviewsState, storeReviewsState,
+                          snapshot.data, _scrollController),
                     ],
                   ),
                 ),
               );
             } else if (snapshot.hasError) {
-              return _RestaurantPlaceHolder(RequestRetry(message: S.of(context).errorUnknown, retryCallback: _getRestaurantDataAsync));
+              return _RestaurantPlaceHolder(RequestRetry(
+                  message: S.of(context).errorUnknown,
+                  retryCallback: _getRestaurantDataAsync));
             }
             return _RestaurantPlaceHolder(CircularProgressIndicator());
           }),
@@ -394,11 +503,18 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
               yesButton: FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(asAService: true))).then((loggedIn) {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
                         _showReservationDialog();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(S.of(context).actionReserve));
+                        PapricaToast.showToast(S
+                            .of(context)
+                            .loggingInRequired(S.of(context).actionReserve));
                       }
                     });
                   },
@@ -409,8 +525,10 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
   }
 
   void _showReservationDialog() {
-    showDialog(context: context, builder: (BuildContext context) => ReservationDialog(restData?.id, restData?.name, restData?.settings?.maxPeopleAllowed))
-        .then((ok) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ReservationDialog(restData?.id,
+            restData?.name, restData?.settings?.maxPeopleAllowed)).then((ok) {
       if (ok != null)
         showDialog(
           context: context,
@@ -420,7 +538,8 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
             footer: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () => _viewMyReservations(context),
-              child: Text(S.of(context).viewReservations, style: TextStyle(color: Theme.of(context).primaryColor)),
+              child: Text(S.of(context).viewReservations,
+                  style: TextStyle(color: Theme.of(context).primaryColor)),
             ),
           ),
         );
@@ -428,16 +547,19 @@ class _RestaurantHomeState extends State<RestaurantHome> with SingleTickerProvid
   }
 
   void _viewMyReservations(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return new HomeScreen(action: HomeScreenAction.reservations);
     }));
   }
 
   _getRestaurantOpenLabel(RestaurantHomeDto data) {
     if (data.isOpen)
-      return Text(S.of(context).opened, style: TextStyle(color: Colors.green, fontSize: 12));
+      return Text(S.of(context).opened,
+          style: TextStyle(color: Colors.green, fontSize: 12));
     else
-      return Text(S.of(context).closed, style: TextStyle(color: Colors.grey, fontSize: 12));
+      return Text(S.of(context).closed,
+          style: TextStyle(color: Colors.grey, fontSize: 12));
   }
 }
 
@@ -456,7 +578,10 @@ class _RestaurantPlaceHolder extends StatelessWidget {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  textDirection: Localizations.localeOf(context).languageCode == 'en' ? TextDirection.ltr : TextDirection.rtl,
+                  textDirection:
+                      Localizations.localeOf(context).languageCode == 'en'
+                          ? TextDirection.ltr
+                          : TextDirection.rtl,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -488,7 +613,8 @@ class _RestaurantPlaceHolder extends StatelessWidget {
                                   alignment: Alignment.bottomLeft,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Container(
                                         margin: EdgeInsets.all(8),
@@ -500,33 +626,43 @@ class _RestaurantPlaceHolder extends StatelessWidget {
                                               children: <Widget>[
                                                 Shimmer.fromColors(
                                                   baseColor: Colors.white30,
-                                                  highlightColor: Colors.white70,
+                                                  highlightColor:
+                                                      Colors.white70,
                                                   child: Container(
                                                     width: 55.0,
                                                     height: 55.0,
-                                                    decoration: new BoxDecoration(
+                                                    decoration:
+                                                        new BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color: Colors.red,
                                                     ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 6),
                                                   child: Column(
-                                                    mainAxisSize: MainAxisSize.max,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: <Widget>[
                                                       SizedBox(
                                                         height: 8,
                                                       ),
                                                       Shimmer.fromColors(
-                                                        baseColor: Colors.white30,
-                                                        highlightColor: Colors.white70,
+                                                        baseColor:
+                                                            Colors.white30,
+                                                        highlightColor:
+                                                            Colors.white70,
                                                         child: Container(
                                                           width: 120.0,
                                                           height: 14.0,
-                                                          decoration: new BoxDecoration(
-                                                            shape: BoxShape.rectangle,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
                                                             color: Colors.red,
                                                           ),
                                                         ),
@@ -535,13 +671,17 @@ class _RestaurantPlaceHolder extends StatelessWidget {
                                                         height: 6,
                                                       ),
                                                       Shimmer.fromColors(
-                                                        baseColor: Colors.white30,
-                                                        highlightColor: Colors.white70,
+                                                        baseColor:
+                                                            Colors.white30,
+                                                        highlightColor:
+                                                            Colors.white70,
                                                         child: Container(
                                                           width: 80.0,
                                                           height: 14.0,
-                                                          decoration: new BoxDecoration(
-                                                            shape: BoxShape.rectangle,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
                                                             color: Colors.red,
                                                           ),
                                                         ),
@@ -607,7 +747,8 @@ class _CustomTabsSliverDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => 80;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return widget;
   }
 
@@ -653,7 +794,10 @@ class _TitleState extends State<Title> {
       child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.20,
           height: 25,
-          child: Text(widget.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis)),
+          child: Text(widget.title,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis)),
       duration: Duration(milliseconds: 500),
     );
   }
@@ -672,7 +816,8 @@ class RestaurantTab extends StatefulWidget {
   final String selectedImage;
   final String unSelectedImage;
 
-  RestaurantTab(this.index, this.selectedImage, this.unSelectedImage, this.title, this.tabController);
+  RestaurantTab(this.index, this.selectedImage, this.unSelectedImage,
+      this.title, this.tabController);
 
   @override
   _RestaurantTabState createState() => _RestaurantTabState();
@@ -706,21 +851,30 @@ class _RestaurantTabState extends State<RestaurantTab> {
       splashColor: Colors.transparent,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: 10, horizontal: widget.index == 0 || (widget.index == 2 && Localizations.localeOf(context).languageCode == 'ar') ? 4 : 16),
+            vertical: 10,
+            horizontal: widget.index == 0 ||
+                    (widget.index == 2 &&
+                        Localizations.localeOf(context).languageCode == 'ar')
+                ? 4
+                : 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.asset(currentIndex == widget.index ? widget.selectedImage : widget.unSelectedImage),
+              child: Image.asset(currentIndex == widget.index
+                  ? widget.selectedImage
+                  : widget.unSelectedImage),
             ),
             SizedBox(
               height: 10,
             ),
             Text(widget.title,
                 style: TextStyle(
-                  color: widget.index == currentIndex ? Theme.of(context).primaryColor : Colors.black45,
+                  color: widget.index == currentIndex
+                      ? Theme.of(context).primaryColor
+                      : Colors.black45,
                 )),
           ],
         ),
@@ -745,7 +899,8 @@ class ActionsRow extends StatefulWidget {
   final bool isExtra;
   final RestaurantHomeDto restData;
 
-  const ActionsRow(this.restData, this.scrollController, this.isExtra, this.screenActivityStream);
+  const ActionsRow(this.restData, this.scrollController, this.isExtra,
+      this.screenActivityStream);
 
   @override
   _ActionsRowState createState() => _ActionsRowState();
@@ -765,7 +920,9 @@ class _ActionsRowState extends State<ActionsRow> {
       // A disable button color
       return Color(0xffcccccc);
     else
-      return _isFavorite != null && _isFavorite ? Colors.redAccent : Colors.white;
+      return _isFavorite != null && _isFavorite
+          ? Colors.redAccent
+          : Colors.white;
   }
 
   @override
@@ -837,19 +994,22 @@ class _ActionsRowState extends State<ActionsRow> {
           child: Icon(Icons.share, color: Colors.white),
         ),
       ),
-      widget.restData.audioTrack != null && widget.restData.audioTrack.isNotEmpty
+      widget.restData.audioTrack != null &&
+              widget.restData.audioTrack.isNotEmpty
           ? GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: _actionToggleMusic,
-              child: Padding(padding: const EdgeInsets.all(4.0), child: _getMusicIcon()),
+              child: Padding(
+                  padding: const EdgeInsets.all(4.0), child: _getMusicIcon()),
             )
           : Container(),
       GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: _onTapAddToFavorite,
         child: Padding(
-            padding:
-                Localizations.localeOf(context).languageCode == "en" ? const EdgeInsets.only(left: 4, right: 8.0) : const EdgeInsets.only(left: 8, right: 4.0),
+            padding: Localizations.localeOf(context).languageCode == "en"
+                ? const EdgeInsets.only(left: 4, right: 8.0)
+                : const EdgeInsets.only(left: 8, right: 4.0),
             child: Icon(Icons.favorite, color: _isFavoriteColor)),
       )
     ];
@@ -863,17 +1023,25 @@ class _ActionsRowState extends State<ActionsRow> {
     });
     ApiClient client = PapricaApiClient();
     var restaurantApi = CustomerRestaurantApi(client);
-    AddFavoriteRestaurantDto input = AddFavoriteRestaurantDto.fromJson({"restaurantId": widget.restData?.id});
+    AddFavoriteRestaurantDto input = AddFavoriteRestaurantDto.fromJson(
+        {"restaurantId": widget.restData?.id});
 
     if (_isFavorite) {
-      restaurantApi.apiServicesAppCustomerRestaurantRemoveFavoriteRestaurantPost(input: input).then((_) {
+      restaurantApi
+          .apiServicesAppCustomerRestaurantRemoveFavoriteRestaurantPost(
+              input: input)
+          .then((_) {
         if (mounted) {
           setState(() {
             isAddingToFavorite = false;
             _isFavorite = false;
           });
         }
-        PapricaToast.showToast(S.of(context).restaurantRemovedFromFavorites(widget.restData?.name ?? ""), ToastType.Normal);
+        PapricaToast.showToast(
+            S
+                .of(context)
+                .restaurantRemovedFromFavorites(widget.restData?.name ?? ""),
+            ToastType.Normal);
       }).catchError((_) {
         if (mounted) {
           setState(() {
@@ -882,14 +1050,21 @@ class _ActionsRowState extends State<ActionsRow> {
         }
       });
     } else {
-      restaurantApi.apiServicesAppCustomerRestaurantAddFavoriteRestaurantPost(input: input).then((_) {
+      restaurantApi
+          .apiServicesAppCustomerRestaurantAddFavoriteRestaurantPost(
+              input: input)
+          .then((_) {
         if (mounted) {
           setState(() {
             isAddingToFavorite = false;
             _isFavorite = true;
           });
         }
-        PapricaToast.showToast(S.of(context).restaurantAddedToFavorites(widget.restData?.name ?? ""), ToastType.Normal);
+        PapricaToast.showToast(
+            S
+                .of(context)
+                .restaurantAddedToFavorites(widget.restData?.name ?? ""),
+            ToastType.Normal);
       }).catchError((_) {
         if (mounted) {
           setState(() {
@@ -918,7 +1093,8 @@ class _ActionsRowState extends State<ActionsRow> {
   }
 
   void _actionShare() {
-    Share.share(S.of(context).shareText(widget.restData.name, "https://links.popina.me/restaurant/" + widget.restData.id.toString()));
+    Share.share(S.of(context).shareText(widget.restData.name,
+        "https://links.popina.me/restaurant/" + widget.restData.id.toString()));
   }
 
   Future<void> play() async {
@@ -1020,7 +1196,10 @@ class _ActionsRowState extends State<ActionsRow> {
         ),
       );
     else
-      return Icon(Icons.music_note, color: _isMusicPlaying != null && _isMusicPlaying ? Colors.redAccent : Colors.white);
+      return Icon(Icons.music_note,
+          color: _isMusicPlaying != null && _isMusicPlaying
+              ? Colors.redAccent
+              : Colors.white);
   }
 
   void _onTapAddToFavorite() {
@@ -1031,15 +1210,23 @@ class _ActionsRowState extends State<ActionsRow> {
           context: context,
           builder: (_context) {
             return PapricaSimpleDialog(
-              title: S.of(context).loggingInRequired(S.of(context).actionAddToFavorite),
+              title: S
+                  .of(context)
+                  .loggingInRequired(S.of(context).actionAddToFavorite),
               yesButton: FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(asAService: true))).then((loggedIn) {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
                         _actionAddToFavorite();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(S.of(context).actionAddToFavorite));
+                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                            S.of(context).actionAddToFavorite));
                       }
                     });
                   },

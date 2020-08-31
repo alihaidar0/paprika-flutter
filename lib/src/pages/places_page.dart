@@ -24,7 +24,7 @@ class _PlacesPageState extends State<PlacesPage>
   Future<PlacesResponse> futureRestData;
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
 
   LocationData locationData;
 
@@ -80,24 +80,21 @@ class _PlacesPageState extends State<PlacesPage>
                             color: Colors.white,
                             margin: EdgeInsets.symmetric(vertical: 5),
                             child: PlacesRestaurantsList(
-                              restaurantsList: snapshot.data.result[index].items,
+                              restaurantsList:
+                                  snapshot.data.result[index].items,
                               title: snapshot.data.result[index].title,
-                              titleColor: Theme
-                                  .of(context)
-                                  .primaryColor,
-                              filterModel: PapricaFilterModel.apiToFilterModelAdapter(snapshot.data.result[index].filter, context),
-                            )
-                        );
-                      }
-                  )
-              ),
+                              titleColor: Theme.of(context).primaryColor,
+                              filterModel:
+                                  PapricaFilterModel.apiToFilterModelAdapter(
+                                      snapshot.data.result[index].filter,
+                                      context),
+                            ));
+                      })),
             );
           } else {
             return _PlacesPagePlaceHolder(
               RequestRetry(
-                  message: S
-                      .of(context)
-                      .errorUnknown,
+                  message: S.of(context).errorUnknown,
                   retryCallback: _getPlacesDataAsync),
               getData: _getPlacesDataAsync,
             );
@@ -105,9 +102,7 @@ class _PlacesPageState extends State<PlacesPage>
         } else if (snapshot.connectionState == ConnectionState.none) {
           return _PlacesPagePlaceHolder(
             RequestRetry(
-                message: S
-                    .of(context)
-                    .errorUnknown,
+                message: S.of(context).errorUnknown,
                 retryCallback: _getPlacesDataAsync),
             getData: _getPlacesDataAsync,
           );
@@ -116,10 +111,7 @@ class _PlacesPageState extends State<PlacesPage>
             Column(
               children: <Widget>[
                 SizedBox(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.15,
                 ),
                 CircularProgressIndicator(),
               ],
@@ -161,7 +153,7 @@ class _PlacesPagePlaceHolder extends StatefulWidget {
 
 class __PlacesPagePlaceHolderState extends State<_PlacesPagePlaceHolder> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
@@ -176,10 +168,7 @@ class __PlacesPagePlaceHolderState extends State<_PlacesPagePlaceHolder> {
         children: <Widget>[
           Center(child: this.widget.child),
           Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.60,
+            height: MediaQuery.of(context).size.height * 0.60,
           ),
         ],
       ),

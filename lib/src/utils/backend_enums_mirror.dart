@@ -100,7 +100,8 @@ class ApiHelper {
     }
   }
 
-  static String toStringRestaurantTypes(BuildContext context, int restaurantTypes) {
+  static String toStringRestaurantTypes(
+      BuildContext context, int restaurantTypes) {
     switch (restaurantTypes) {
       case 1:
         return "PizzaHouse";

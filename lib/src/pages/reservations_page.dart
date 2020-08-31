@@ -84,7 +84,6 @@ class _ReservationsPageState extends State<ReservationsPage>
   }
 
   void _scrollControllerListener() {
-
     if (scrollController.position.maxScrollExtent - scrollController.offset <=
         0) {
       streamScrollController.add(true);

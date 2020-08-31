@@ -55,7 +55,8 @@ class Result {
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         title: json["title"],
-        items: List<PlacesListItem>.from(json["items"].map((x) => PlacesListItem.fromJson(x))),
+        items: List<PlacesListItem>.from(
+            json["items"].map((x) => PlacesListItem.fromJson(x))),
         filter: ApiFilterModel.fromJson(json["filter"]),
       );
 
@@ -65,8 +66,6 @@ class Result {
         "filter": filter.toJson(),
       };
 }
-
-
 
 //class Filter {
 //  bool isFeatured;

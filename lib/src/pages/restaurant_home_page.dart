@@ -31,13 +31,16 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
         child: Column(
           children: <Widget>[
             _checkUpcomingEvents(context),
-            widget.restData != null && widget.restData.galleryItems != null && widget.restData.galleryItems.length > 0
+            widget.restData != null &&
+                    widget.restData.galleryItems != null &&
+                    widget.restData.galleryItems.length > 0
                 ? Container(
                     color: Color(0xFFf2f2f2),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ImagesGallery(
-                        thumbnails: extractThumbnailList(widget.restData.galleryItems),
+                        thumbnails:
+                            extractThumbnailList(widget.restData.galleryItems),
                         urls: extractGalleryList(widget.restData.galleryItems),
                       ),
                     ),
@@ -53,18 +56,21 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
               serviceRate: widget.restData.serviceRate,
               shishaRate: widget.restData.shishaRate,
               ambianceRate: widget.restData.ambianceRate,
-              noiseLevel: ApiHelper.toStringNoiseLevel(context, widget.restData.noiseLevel),
+              noiseLevel: ApiHelper.toStringNoiseLevel(
+                  context, widget.restData.noiseLevel),
               backgroundColor: Colors.white,
             ),
             InformationSection(widget.restData),
             MapSection(
                 address: widget.restData.address,
-                markers: (widget.restData.latitude != null && widget.restData.longitude != null)
+                markers: (widget.restData.latitude != null &&
+                        widget.restData.longitude != null)
                     ? <Marker>[
                         Marker(
                             markerId: MarkerId(widget.restData.name),
                             infoWindow: InfoWindow(title: widget.restData.name),
-                            position: LatLng(widget.restData.latitude, widget.restData.longitude))
+                            position: LatLng(widget.restData.latitude,
+                                widget.restData.longitude))
                       ].toSet()
                     : null),
             SizedBox(height: 60)
@@ -110,7 +116,9 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
                             )));
               },
               child: Container(
-                decoration: BoxDecoration(color: Colors.white, border: Border.all(color: Colors.grey, width: 0.5)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey, width: 0.5)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -165,16 +173,19 @@ class InformationSection extends StatelessWidget {
 
             /// Opening Time ///
             (restData.is24Hour != null && restData.is24Hour) ||
-                    (restData.openingTimes == null || restData.openingTimes.length == 0)
+                    (restData.openingTimes == null ||
+                        restData.openingTimes.length == 0)
                 ? Container()
                 : Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Row(
                       children: <Widget>[
                         Padding(
-                          padding: Localizations.localeOf(context).languageCode == 'en'
-                              ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
-                              : const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                          padding:
+                              Localizations.localeOf(context).languageCode ==
+                                      'en'
+                                  ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
+                                  : const EdgeInsets.fromLTRB(8, 8, 0, 8),
                           child: SizedBox(
                             height: 20,
                             width: 20,
@@ -188,26 +199,39 @@ class InformationSection extends StatelessWidget {
                           child: Container(
                             color: Colors.white,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Table(
-                                    columnWidths: {0: FlexColumnWidth(3), 1: FlexColumnWidth(7)},
-                                    children: restData.openingTimes.map<TableRow>((ot) {
+                                    columnWidths: {
+                                      0: FlexColumnWidth(3),
+                                      1: FlexColumnWidth(7)
+                                    },
+                                    children: restData.openingTimes
+                                        .map<TableRow>((ot) {
                                       return TableRow(children: [
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 2, horizontal: 4),
                                           child: Text(
-                                            ApiHelper.toStringDayOfWeek(context, ot.dayOfWeek),
+                                            ApiHelper.toStringDayOfWeek(
+                                                context, ot.dayOfWeek),
                                             style: TextStyle(
-                                              color: Theme.of(context).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
                                           ),
                                         ),
-                                        Text(PapricaFormatter.formatTimeOnly(context, ot.fromTime) +
-                                            (Localizations.localeOf(context).languageCode == 'en' ? " → " : " ← ") +
+                                        Text(PapricaFormatter.formatTimeOnly(
+                                                context, ot.fromTime) +
+                                            (Localizations.localeOf(context)
+                                                        .languageCode ==
+                                                    'en'
+                                                ? " → "
+                                                : " ← ") +
                                             PapricaFormatter.formatTimeOnly(
                                               context,
                                               ot.toTime,
@@ -251,7 +275,9 @@ class InformationSection extends StatelessWidget {
     if (restData.cuisineTypes != null && restData.cuisineTypes != 0) {
       drawables.add(
         InfoRow(
-          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(restData.cuisineTypes, Type.cuisines, maxNumber: 2, separator: S.of(context).comma + ' '),
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              restData.cuisineTypes, Type.cuisines,
+              maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/cuisine.png'),
         ),
       );
@@ -259,7 +285,9 @@ class InformationSection extends StatelessWidget {
     if (restData.musicTypes != null && restData.musicTypes != 0) {
       drawables.add(
         InfoRow(
-          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(restData.musicTypes, Type.music, maxNumber: 2, separator: S.of(context).comma + ' '),
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              restData.musicTypes, Type.music,
+              maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/music.png'),
         ),
       );
@@ -267,7 +295,9 @@ class InformationSection extends StatelessWidget {
     if (restData.parkingTypes != null && restData.parkingTypes != 0) {
       drawables.add(
         InfoRow(
-          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(restData.parkingTypes, Type.parking, maxNumber: 2, separator: S.of(context).comma + ' '),
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              restData.parkingTypes, Type.parking,
+              maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/parking.png'),
         ),
       );
@@ -275,7 +305,9 @@ class InformationSection extends StatelessWidget {
     if (restData.ambianceTypes != null && restData.ambianceTypes != 0) {
       drawables.add(
         InfoRow(
-          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(restData.ambianceTypes, Type.ambiance, maxNumber: 2, separator: S.of(context).comma + ' '),
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              restData.ambianceTypes, Type.ambiance,
+              maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/ambiance.png'),
         ),
       );
@@ -283,7 +315,9 @@ class InformationSection extends StatelessWidget {
     if (restData.amenityTypes != null && restData.amenityTypes != 0) {
       drawables.add(
         InfoRow(
-          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(restData.amenityTypes, Type.amenities, maxNumber: 2, separator: S.of(context).comma + ' '),
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              restData.amenityTypes, Type.amenities,
+              maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/amenities.png'),
         ),
       );
@@ -302,9 +336,10 @@ class InformationSection extends StatelessWidget {
     if (restData.isAlcoholFree != null && restData.isAlcoholFree) {
       drawables.add(
         InfoRow(
-          title: this.restData.isAlcoholFree != null && this.restData.isAlcoholFree
-              ? S.of(context).alcoholFree
-              : S.of(context).noAlcohol,
+          title:
+              this.restData.isAlcoholFree != null && this.restData.isAlcoholFree
+                  ? S.of(context).alcoholFree
+                  : S.of(context).noAlcohol,
           icon: AssetImage('assets/icons/alcohol.png'),
         ),
       );
@@ -312,7 +347,8 @@ class InformationSection extends StatelessWidget {
     return drawables;
   }
 
-  String _getOpeningTimes(BuildContext context, List<OpeningTimeDto> openingTimes) {
+  String _getOpeningTimes(
+      BuildContext context, List<OpeningTimeDto> openingTimes) {
     String openingTime = "";
     for (OpeningTimeDto ot in openingTimes) {
       openingTime += ApiHelper.toStringDayOfWeek(context, ot.dayOfWeek) +
@@ -360,7 +396,9 @@ class _MapSectionState extends State<MapSection> {
                     ),
                     Text(
                       S.of(context).address,
-                      style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w500),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(6.0),
@@ -379,7 +417,7 @@ class _MapSectionState extends State<MapSection> {
             child: SizedBox(
               height: 160,
               child: GoogleMap(
-                onTap: (latLog){
+                onTap: (latLog) {
                   MapUtils.openMap(
                     latitude: widget.markers.toList()[0].position.latitude,
                     longitude: widget.markers.toList()[0].position.longitude,
@@ -410,7 +448,8 @@ class _MapSectionState extends State<MapSection> {
   void _resetMapCamera() {
     if (mapController != null) {
       mapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: widget.markers?.toList()[0]?.position, zoom: 11.0),
+        CameraPosition(
+            target: widget.markers?.toList()[0]?.position, zoom: 11.0),
       ));
     }
   }

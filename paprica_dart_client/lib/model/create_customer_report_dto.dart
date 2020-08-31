@@ -1,15 +1,12 @@
 part of swagger.api;
 
 class CreateCustomerReportDto {
-  
   int customerId = null;
-  
 
   int reservationId = null;
-  
 
   String description = null;
-  
+
   CreateCustomerReportDto();
 
   @override
@@ -19,15 +16,9 @@ class CreateCustomerReportDto {
 
   CreateCustomerReportDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    customerId =
-        json['customerId']
-    ;
-    reservationId =
-        json['reservationId']
-    ;
-    description =
-        json['description']
-    ;
+    customerId = json['customerId'];
+    reservationId = json['reservationId'];
+    description = json['description'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,19 +26,24 @@ class CreateCustomerReportDto {
       'customerId': customerId,
       'reservationId': reservationId,
       'description': description
-     };
+    };
   }
 
   static List<CreateCustomerReportDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<CreateCustomerReportDto>() : json.map((value) => new CreateCustomerReportDto.fromJson(value)).toList();
+    return json == null
+        ? new List<CreateCustomerReportDto>()
+        : json
+            .map((value) => new CreateCustomerReportDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, CreateCustomerReportDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, CreateCustomerReportDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, CreateCustomerReportDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new CreateCustomerReportDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CreateCustomerReportDto.fromJson(value));
     }
     return map;
   }
 }
-

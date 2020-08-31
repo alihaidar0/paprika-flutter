@@ -25,8 +25,11 @@ class ReservationDialog extends StatefulWidget {
 
   final EventModel event;
 
-  const ReservationDialog(this.restaurantId, this.restaurantName, this.maxPeopleAllowed,{ this.oldReservation, this.event})
-      : assert(event == null || oldReservation == null, "You should specify only an event or an old reservation ");
+  const ReservationDialog(
+      this.restaurantId, this.restaurantName, this.maxPeopleAllowed,
+      {this.oldReservation, this.event})
+      : assert(event == null || oldReservation == null,
+            "You should specify only an event or an old reservation ");
 
   @override
   ReservationDialogState createState() => ReservationDialogState();
@@ -89,7 +92,8 @@ class ReservationDialogState extends State<ReservationDialog> {
       _peopleNumber = 2;
     } else {
       var now = DateTime.now();
-      date = DateTime(now.year, now.month, now.day, now.hour, _roundIntegerToNearest15(now.minute, forceCeil: true));
+      date = DateTime(now.year, now.month, now.day, now.hour,
+          _roundIntegerToNearest15(now.minute, forceCeil: true));
       _peopleNumber = 2;
     }
   }
@@ -122,52 +126,68 @@ class ReservationDialogState extends State<ReservationDialog> {
                           children: <Widget>[
                             widget.event != null
                                 ? Text(
-                                  S.of(context)
-                                      .reservationDialogHeader(widget.event.eventName, widget.restaurantName),
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18),
-                                )
+                                    S.of(context).reservationDialogHeader(
+                                        widget.event.eventName,
+                                        widget.restaurantName),
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18),
+                                  )
                                 : EmptyWidget(),
                             this.error
                                 ? Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5),
-                                  child: _renderValidationSummery()
-                                )
+                                    padding: EdgeInsets.symmetric(vertical: 5),
+                                    child: _renderValidationSummery())
                                 : Container(),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Column(
                                     children: <Widget>[
                                       RawMaterialButton(
                                         onPressed: widget.event != null
-                                            ? () => PapricaToast.showToast(S.of(context).dateAndTimeCannotBeChanged, ToastType.Normal)
+                                            ? () => PapricaToast.showToast(
+                                                S
+                                                    .of(context)
+                                                    .dateAndTimeCannotBeChanged,
+                                                ToastType.Normal)
                                             : () => _showDatePicker(context),
                                         splashColor: Colors.transparent,
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
-                                            Text(S.of(context).date, style: TextStyle(fontWeight: FontWeight.w500)),
+                                            Text(S.of(context).date,
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w500)),
                                             SizedBox(height: 16),
                                             Opacity(
-                                              opacity: this.widget.event != null ? 0.4 : 1,
+                                              opacity: this.widget.event != null
+                                                  ? 0.4
+                                                  : 1,
                                               child: SizedBox(
                                                 width: 32,
                                                 height: 32,
-                                                child: Image.asset("assets/icons/date.png"),
+                                                child: Image.asset(
+                                                    "assets/icons/date.png"),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 10,
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(top: 7.0),
-                                              child: Text(PapricaFormatter.formatDateOnly(context, this.date),
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  PapricaFormatter
+                                                      .formatDateOnly(
+                                                          context, this.date),
                                                   style: TextStyle(
                                                     fontSize: 14,
                                                   )),
@@ -182,28 +202,42 @@ class ReservationDialogState extends State<ReservationDialog> {
                                       Container(
                                         child: RawMaterialButton(
                                           onPressed: widget.event != null
-                                              ? () => PapricaToast.showToast(S.of(context).dateAndTimeCannotBeChanged, ToastType.Normal)
+                                              ? () => PapricaToast.showToast(
+                                                  S
+                                                      .of(context)
+                                                      .dateAndTimeCannotBeChanged,
+                                                  ToastType.Normal)
                                               : () => _showTimePicker(context),
                                           splashColor: Colors.transparent,
                                           child: Column(
                                             children: <Widget>[
-                                              Text(S.of(context).time, style: TextStyle(fontWeight: FontWeight.w500)),
+                                              Text(S.of(context).time,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500)),
                                               SizedBox(height: 16),
                                               Opacity(
-                                                opacity: this.widget.event != null ? 0.4 : 1,
+                                                opacity:
+                                                    this.widget.event != null
+                                                        ? 0.4
+                                                        : 1,
                                                 child: SizedBox(
                                                   width: 32,
                                                   height: 32,
-                                                  child: Image.asset("assets/icons/clock.png"),
+                                                  child: Image.asset(
+                                                      "assets/icons/clock.png"),
                                                 ),
                                               ),
                                               SizedBox(
                                                 height: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(top: 6.0),
+                                                padding: const EdgeInsets.only(
+                                                    top: 6.0),
                                                 child: Text(
-                                                  PapricaFormatter.formatTimeOnly(context, this.date),
+                                                  PapricaFormatter
+                                                      .formatTimeOnly(
+                                                          context, this.date),
                                                   style: TextStyle(
                                                     fontSize: 14,
                                                   ),
@@ -224,51 +258,79 @@ class ReservationDialogState extends State<ReservationDialog> {
                                           },
                                           splashColor: Colors.transparent,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: <Widget>[
-                                              Text(S.of(context).people, style: TextStyle(fontWeight: FontWeight.w500)),
+                                              Text(S.of(context).people,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500)),
                                               SizedBox(height: 12),
                                               SizedBox(
                                                 width: 32,
                                                 height: 32,
-                                                child: Image.asset("assets/icons/user.png"),
+                                                child: Image.asset(
+                                                    "assets/icons/user.png"),
                                               ),
                                               SizedBox(
                                                 height: 10,
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color(0xFF707070)),
-                                                    borderRadius: BorderRadius.circular(8)),
+                                                    border: Border.all(
+                                                        color:
+                                                            Color(0xFF707070)),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
                                                 child: Row(
                                                   children: <Widget>[
                                                     Padding(
-                                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                                      child: Text(_peopleNumber.toString()),
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8),
+                                                      child: Text(_peopleNumber
+                                                          .toString()),
                                                     ),
                                                     Container(
                                                       decoration: BoxDecoration(
-                                                          color: Color(0xFF707070),
-                                                          border: Border.all(color: Color(0xFF707070)),
-                                                          borderRadius: BorderRadius.only(
+                                                          color:
+                                                              Color(0xFF707070),
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xFF707070)),
+                                                          borderRadius:
+                                                              BorderRadius.only(
                                                             topLeft: Radius.circular(
-                                                                Localizations.localeOf(context).languageCode == 'en'
+                                                                Localizations.localeOf(context)
+                                                                            .languageCode ==
+                                                                        'en'
                                                                     ? 0
                                                                     : 6),
-                                                            bottomLeft: Radius.circular(
-                                                                Localizations.localeOf(context).languageCode == 'en'
-                                                                    ? 0
-                                                                    : 6),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    Localizations.localeOf(context).languageCode ==
+                                                                            'en'
+                                                                        ? 0
+                                                                        : 6),
                                                             topRight: Radius.circular(
-                                                                Localizations.localeOf(context).languageCode == 'en'
+                                                                Localizations.localeOf(context)
+                                                                            .languageCode ==
+                                                                        'en'
                                                                     ? 6
                                                                     : 0),
-                                                            bottomRight: Radius.circular(
-                                                                Localizations.localeOf(context).languageCode == 'en'
-                                                                    ? 6
-                                                                    : 0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    Localizations.localeOf(context).languageCode ==
+                                                                            'en'
+                                                                        ? 6
+                                                                        : 0),
                                                           )),
-                                                      child: Icon(Icons.keyboard_arrow_down, color: Colors.white70),
+                                                      child: Icon(
+                                                          Icons
+                                                              .keyboard_arrow_down,
+                                                          color:
+                                                              Colors.white70),
                                                     ),
                                                   ],
                                                 ),
@@ -290,7 +352,8 @@ class ReservationDialogState extends State<ReservationDialog> {
                                 RawMaterialButton(
                                   onPressed: () {
                                     setState(() {
-                                      _isShownCustomerInfo = !_isShownCustomerInfo;
+                                      _isShownCustomerInfo =
+                                          !_isShownCustomerInfo;
                                     });
                                   },
                                   child: Card(
@@ -298,15 +361,19 @@ class ReservationDialogState extends State<ReservationDialog> {
                                     margin: EdgeInsets.all(0),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(3), topRight: Radius.circular(3))),
+                                            topLeft: Radius.circular(3),
+                                            topRight: Radius.circular(3))),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Text(
                                             S.of(context).moreInformation,
-                                            style: TextStyle(color: Theme.of(context).primaryColor),
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .primaryColor),
                                           ),
                                           _isShownCustomerInfo
                                               ? Icon(Icons.keyboard_arrow_up)
@@ -326,112 +393,201 @@ class ReservationDialogState extends State<ReservationDialog> {
                                                 elevation: 0,
                                                 margin: EdgeInsets.all(0),
                                                 shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.only(
-                                                        bottomLeft: Radius.circular(3),
-                                                        bottomRight: Radius.circular(3))),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft: Radius
+                                                                .circular(3),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    3))),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: <Widget>[
                                                       Text(
-                                                        S.of(context).customerName,
+                                                        S
+                                                            .of(context)
+                                                            .customerName,
                                                         style: TextStyle(
                                                           fontSize: 14,
-                                                          color: Color(0xFF747373),
+                                                          color:
+                                                              Color(0xFF747373),
                                                         ),
                                                       ),
                                                       SizedBox(height: 3),
                                                       TextFormField(
-                                                        controller: _customerNameController,
-                                                        textInputAction: TextInputAction.done,
-                                                        style: TextStyle(fontSize: 14),
-                                                        decoration: InputDecoration(
-                                                          border: InputBorder.none,
+                                                        controller:
+                                                            _customerNameController,
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .done,
+                                                        style: TextStyle(
+                                                            fontSize: 14),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              InputBorder.none,
                                                           filled: true,
-                                                          fillColor: Color(0xFFF2F2F2),
+                                                          fillColor:
+                                                              Color(0xFFF2F2F2),
                                                           contentPadding:
-                                                              EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderSide: BorderSide(color: Color(0xFFaa757f)),
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          6,
+                                                                      vertical:
+                                                                          8),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color: Color(
+                                                                    0xFFaa757f)),
                                                             borderRadius:
-                                                                const BorderRadius.all(const Radius.circular(3.0)),
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    const Radius
+                                                                            .circular(
+                                                                        3.0)),
                                                           ),
                                                         ),
                                                       ),
                                                       SizedBox(height: 10),
                                                       Text(
-                                                        S.of(context).phoneNumber,
+                                                        S
+                                                            .of(context)
+                                                            .phoneNumber,
                                                         style: TextStyle(
                                                           fontSize: 14,
-                                                          color: Color(0xFF747373),
+                                                          color:
+                                                              Color(0xFF747373),
                                                         ),
                                                       ),
                                                       SizedBox(height: 3),
                                                       TextFormField(
-                                                        controller: _phoneNumberController,
-                                                        textInputAction: TextInputAction.done,
-                                                        keyboardType: TextInputType.phone,
-                                                        textDirection: TextDirection.ltr,
+                                                        controller:
+                                                            _phoneNumberController,
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .done,
+                                                        keyboardType:
+                                                            TextInputType.phone,
+                                                        textDirection:
+                                                            TextDirection.ltr,
                                                         textAlign: Localizations
-                                                            .localeOf(context)
-                                                            .languageCode == "en"
+                                                                        .localeOf(
+                                                                            context)
+                                                                    .languageCode ==
+                                                                "en"
                                                             ? TextAlign.left
                                                             : TextAlign.right,
-
-                                                        style: TextStyle(fontSize: 14),
-                                                        decoration: InputDecoration(
-                                                          border: InputBorder.none,
+                                                        style: TextStyle(
+                                                            fontSize: 14),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              InputBorder.none,
                                                           filled: true,
-                                                          fillColor: Color(0xFFF2F2F2),
+                                                          fillColor:
+                                                              Color(0xFFF2F2F2),
                                                           contentPadding:
-                                                              EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderSide: BorderSide(color: Color(0xFFaa757f)),
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          6,
+                                                                      vertical:
+                                                                          8),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color: Color(
+                                                                    0xFFaa757f)),
                                                             borderRadius:
-                                                                const BorderRadius.all(const Radius.circular(3.0)),
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    const Radius
+                                                                            .circular(
+                                                                        3.0)),
                                                           ),
                                                         ),
                                                       ),
                                                       SizedBox(height: 20),
                                                       Row(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: <Widget>[
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        8,
+                                                                    vertical:
+                                                                        24),
                                                             child: SizedBox(
                                                               width: 32,
                                                               height: 32,
-                                                              child: Image.asset("assets/icons/comment.png"),
+                                                              child: Image.asset(
+                                                                  "assets/icons/comment.png"),
                                                             ),
                                                           ),
                                                           Expanded(
                                                             child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: <Widget>[
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <
+                                                                  Widget>[
                                                                 Text(
-                                                                  S.of(context).notes,
-                                                                  style: TextStyle(fontSize: 14),
+                                                                  S
+                                                                      .of(context)
+                                                                      .notes,
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          14),
                                                                 ),
                                                                 TextFormField(
-                                                                  controller: _additionalValueController,
-                                                                  keyboardType: TextInputType.multiline,
-                                                                  textInputAction: TextInputAction.done,
+                                                                  controller:
+                                                                      _additionalValueController,
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .multiline,
+                                                                  textInputAction:
+                                                                      TextInputAction
+                                                                          .done,
                                                                   maxLines: 2,
-                                                                  style: TextStyle(fontSize: 14),
-                                                                  decoration: InputDecoration(
-                                                                    filled: true,
-                                                                    fillColor: Color(0xFFF2F2F2),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          14),
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    filled:
+                                                                        true,
+                                                                    fillColor:
+                                                                        Color(
+                                                                            0xFFF2F2F2),
                                                                     contentPadding: EdgeInsets.symmetric(
-                                                                        horizontal: 6, vertical: 12),
-                                                                    enabledBorder: OutlineInputBorder(
-                                                                        borderSide: BorderSide(color: Colors.white)),
-                                                                    focusedBorder: OutlineInputBorder(
-                                                                      borderSide: BorderSide(color: Color(0xFFaa757f)),
-                                                                      borderRadius: const BorderRadius.all(
-                                                                          const Radius.circular(3.0)),
+                                                                        horizontal:
+                                                                            6,
+                                                                        vertical:
+                                                                            12),
+                                                                    enabledBorder:
+                                                                        OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(color: Colors.white)),
+                                                                    focusedBorder:
+                                                                        OutlineInputBorder(
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                              color: Color(0xFFaa757f)),
+                                                                      borderRadius: const BorderRadius
+                                                                          .all(const Radius
+                                                                              .circular(
+                                                                          3.0)),
                                                                     ),
                                                                   ),
                                                                 )
@@ -459,8 +615,11 @@ class ReservationDialogState extends State<ReservationDialog> {
                               children: <Widget>[
                                 Spacer(),
                                 CustomizedActiveButton(
-                                  onPressed:
-                                      isUpdatingReservation || !dataChange || error ? null : () => _onReserveClicked(context),
+                                  onPressed: isUpdatingReservation ||
+                                          !dataChange ||
+                                          error
+                                      ? null
+                                      : () => _onReserveClicked(context),
                                   title: _getReservationText(context),
                                 )
                               ],
@@ -483,18 +642,23 @@ class ReservationDialogState extends State<ReservationDialog> {
     );
   }
 
-  Widget _renderValidationSummery(){
+  Widget _renderValidationSummery() {
     var text = S.of(context).errorReservationValidation;
-    if(DateTime.now().isAfter(date))
+    if (DateTime.now().isAfter(date))
       text = S.of(context).reservationTimeShouldBeInTheFuture;
 
-    return Text(text, style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14));
+    return Text(text,
+        style: TextStyle(
+            color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14));
   }
 
   void _showPeopleNumberPicker(BuildContext context) {
     Picker(
         adapter: NumberPickerAdapter(data: [
-          NumberPickerColumn(begin: 1, end: widget.maxPeopleAllowed ?? 24, initValue: _peopleNumber ?? 1),
+          NumberPickerColumn(
+              begin: 1,
+              end: widget.maxPeopleAllowed ?? 24,
+              initValue: _peopleNumber ?? 1),
         ]),
         looping: true,
         hideHeader: true,
@@ -522,7 +686,8 @@ class ReservationDialogState extends State<ReservationDialog> {
     ).then((pickerDate) {
       if (pickerDate != null) {
         setState(() {
-          date = DateTime(pickerDate.year, pickerDate.month, pickerDate.day, date.hour, date.minute, date.second);
+          date = DateTime(pickerDate.year, pickerDate.month, pickerDate.day,
+              date.hour, date.minute, date.second);
           this.errorDate = errorDate = date.isBefore(DateTime.now());
         });
       }
@@ -533,15 +698,19 @@ class ReservationDialogState extends State<ReservationDialog> {
   }
 
   void _showTimePicker(BuildContext context) {
-    showTimePicker(context: context, initialTime: TimeOfDay.fromDateTime(date)).then((pickerDate) {
+    showTimePicker(context: context, initialTime: TimeOfDay.fromDateTime(date))
+        .then((pickerDate) {
       if (pickerDate != null) {
         setState(() {
-          var selectedDateTime = DateTime(date.year, date.month, date.day, pickerDate.hour, pickerDate.minute);
+          var selectedDateTime = DateTime(date.year, date.month, date.day,
+              pickerDate.hour, pickerDate.minute);
           var roundedDateTime = _roundToNearest15Mins(selectedDateTime);
           date = roundedDateTime;
-          if(selectedDateTime != roundedDateTime)
-            PapricaToast.showToast(S.of(context).timeHasBeenRoundedToTheNearest15Minutes, ToastType.Normal);
-            this.errorDate = errorDate = date.isBefore(DateTime.now());
+          if (selectedDateTime != roundedDateTime)
+            PapricaToast.showToast(
+                S.of(context).timeHasBeenRoundedToTheNearest15Minutes,
+                ToastType.Normal);
+          this.errorDate = errorDate = date.isBefore(DateTime.now());
         });
       }
 
@@ -550,15 +719,18 @@ class ReservationDialogState extends State<ReservationDialog> {
     });
   }
 
-  DateTime _roundToNearest15Mins(DateTime value){
-    return DateTime(value.year, value.month, value.day, value.hour, _roundIntegerToNearest15(value.minute));
+  DateTime _roundToNearest15Mins(DateTime value) {
+    return DateTime(value.year, value.month, value.day, value.hour,
+        _roundIntegerToNearest15(value.minute));
   }
 
   int _roundIntegerToNearest15(int value, {forceCeil = false}) {
     var overflowBy = value % 15;
-    if(overflowBy != 0){
-      if(forceCeil || overflowBy > 7) value = ((value / 15).floor() + 1) * 15;
-      else value = (value / 15).round() * 15 ;
+    if (overflowBy != 0) {
+      if (forceCeil || overflowBy > 7)
+        value = ((value / 15).floor() + 1) * 15;
+      else
+        value = (value / 15).round() * 15;
     }
     return value;
   }
@@ -584,8 +756,9 @@ class ReservationDialogState extends State<ReservationDialog> {
   void _showReservationConfirmationDialog(BuildContext context) {
     showGeneralDialog(
             context: context,
-            pageBuilder:
-                (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+            pageBuilder: (BuildContext buildContext,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
               return ReservationConfirmationDialog(
                 restaurantName: widget.restaurantName,
                 count: _peopleNumber,
@@ -597,13 +770,16 @@ class ReservationDialogState extends State<ReservationDialog> {
               );
             },
             barrierDismissible: true,
-            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             barrierColor: Colors.white54,
             transitionDuration: const Duration(milliseconds: 150))
         .then((ok) {
       if (ok != null && ok) {
-        Navigator.of(context).pop(
-            ReservationModel(date: date, moreInfo: _additionalValueController.text, numberOfPeople: _peopleNumber));
+        Navigator.of(context).pop(ReservationModel(
+            date: date,
+            moreInfo: _additionalValueController.text,
+            numberOfPeople: _peopleNumber));
       }
 
       // Dismiss keyboard
@@ -645,7 +821,9 @@ class ReservationDialogState extends State<ReservationDialog> {
       'id': widget.oldReservation.id,
       'personName': _customerNameController.text
     });
-    reservationApi.apiServicesAppCustomerReservationUpdateReservationPost(input: model).then((message) {
+    reservationApi
+        .apiServicesAppCustomerReservationUpdateReservationPost(input: model)
+        .then((message) {
       dialog.hide();
       setState(() {
         isUpdatingReservation = false;
@@ -681,7 +859,8 @@ void _handleUnconfirmedPhoneNumber(BuildContext context) {
           yesButton: FlatButton(
               onPressed: () {
                 Navigator.of(_context).pop();
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return ConfirmPhoneNumberScreen();
                 })).then((confirmed) {
                   if (confirmed != null && confirmed) {
@@ -718,10 +897,12 @@ class ReservationConfirmationDialog extends StatefulWidget {
       this.restaurantId});
 
   @override
-  _ReservationConfirmationDialogState createState() => _ReservationConfirmationDialogState();
+  _ReservationConfirmationDialogState createState() =>
+      _ReservationConfirmationDialogState();
 }
 
-class _ReservationConfirmationDialogState extends State<ReservationConfirmationDialog> {
+class _ReservationConfirmationDialogState
+    extends State<ReservationConfirmationDialog> {
   @override
   void initState() {
     super.initState();
@@ -774,7 +955,9 @@ class _ReservationConfirmationDialogState extends State<ReservationConfirmationD
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).creatingReservation);
     dialog.show();
-    reservationApi.apiServicesAppCustomerReservationCreateReservationPost(input: model).then((message) {
+    reservationApi
+        .apiServicesAppCustomerReservationCreateReservationPost(input: model)
+        .then((message) {
       dialog.hide();
       Navigator.of(context).pop(true);
 
@@ -819,7 +1002,8 @@ class MessageDialog extends StatefulWidget {
   State<StatefulWidget> createState() => MessageDialogState();
 }
 
-class MessageDialogState extends State<MessageDialog> with SingleTickerProviderStateMixin {
+class MessageDialogState extends State<MessageDialog>
+    with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> scaleAnimation;
 
@@ -835,7 +1019,9 @@ class MessageDialogState extends State<MessageDialog> with SingleTickerProviderS
 
     controller = AnimationController(
       vsync: this,
-      duration: widget.duration != null ? widget.duration : Duration(milliseconds: 450),
+      duration: widget.duration != null
+          ? widget.duration
+          : Duration(milliseconds: 450),
     );
     scaleAnimation = CurvedAnimation(
       parent: controller,
@@ -869,11 +1055,13 @@ class MessageDialogState extends State<MessageDialog> with SingleTickerProviderS
                       child: Container(
                         decoration: ShapeDecoration(
                             color: Colors.white,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0))),
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8),
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 16.0, 16.0, 8),
                               child: Text(
                                 widget.message,
                                 style: TextStyle(
@@ -885,12 +1073,14 @@ class MessageDialogState extends State<MessageDialog> with SingleTickerProviderS
                             null == widget.footer
                                 ? EmptyWidget()
                                 : Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       EmptyWidget(),
                                       Spacer(),
                                       Padding(
-                                        padding: EdgeInsets.fromLTRB(30, 0, 30, 16),
+                                        padding:
+                                            EdgeInsets.fromLTRB(30, 0, 30, 16),
                                         child: widget.footer,
                                       )
                                     ],
@@ -901,7 +1091,10 @@ class MessageDialogState extends State<MessageDialog> with SingleTickerProviderS
                     ),
                   ),
                   Positioned(
-                      right: Localizations.localeOf(context).languageCode == 'en' ? 0 : null,
+                      right:
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? 0
+                              : null,
                       top: 0,
                       child: Container(
                         transform: Matrix4.translationValues(0.0, -20, 0.0),
@@ -917,11 +1110,11 @@ class MessageDialogState extends State<MessageDialog> with SingleTickerProviderS
                             minHeight: 24,
                             minWidth: 24,
                           ),
-                          shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+                          shape: CircleBorder(
+                              side: BorderSide(color: Colors.white30)),
                           elevation: 2.0,
                         ),
-                      )
-                  )
+                      ))
                 ],
               ),
             ),
@@ -948,12 +1141,15 @@ class PapricaSimpleDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(this.title ?? S.of(context).confirm, style: Theme.of(context).textTheme.subhead),
+      title: Text(this.title ?? S.of(context).confirm,
+          style: Theme.of(context).textTheme.subhead),
       content: this.content != null ? Text(this.content) : null,
       actions: <Widget>[
-        this.noButton ?? FlatButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(S.of(context).cancel, style: TextStyle(color: Colors.grey))),
+        this.noButton ??
+            FlatButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(S.of(context).cancel,
+                    style: TextStyle(color: Colors.grey))),
         this.yesButton ??
             FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
@@ -1005,7 +1201,8 @@ class ProgressDialog {
               insetAnimationCurve: Curves.easeInOut,
               insetAnimationDuration: Duration(milliseconds: 100),
               elevation: 10.0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: _dialog);
         },
       );
@@ -1042,7 +1239,10 @@ class _ProgressDialogState extends State<_ProgressDialog> {
           const SizedBox(width: 15.0),
           Expanded(
             child: Text(_dialogMessage,
-                style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w500)),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w500)),
           )
         ]));
   }
@@ -1053,7 +1253,9 @@ class CallRestaurantDialog extends StatelessWidget {
 
   final String phoneNumber;
 
-  const CallRestaurantDialog({Key key, this.restaurantName, @required this.phoneNumber}) : super(key: key);
+  const CallRestaurantDialog(
+      {Key key, this.restaurantName, @required this.phoneNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -1064,7 +1266,9 @@ class CallRestaurantDialog extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             child: Text(
-              S.of(context).callRestaurant(this.restaurantName != null ? this.restaurantName : this.phoneNumber),
+              S.of(context).callRestaurant(this.restaurantName != null
+                  ? this.restaurantName
+                  : this.phoneNumber),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -1087,7 +1291,11 @@ class CallRestaurantDialog extends StatelessWidget {
                     )),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: Localizations.localeOf(context).languageCode == 'en' ? 16 : 24, vertical: 3),
+                      horizontal:
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? 16
+                              : 24,
+                      vertical: 3),
                   child: Text(
                     S.of(context).no,
                     style: TextStyle(),
@@ -1107,7 +1315,11 @@ class CallRestaurantDialog extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: Localizations.localeOf(context).languageCode == 'en' ? 16 : 24, vertical: 4),
+                    horizontal:
+                        Localizations.localeOf(context).languageCode == 'en'
+                            ? 16
+                            : 24,
+                    vertical: 4),
                 child: Text(
                   S.of(context).yes,
                   style: TextStyle(
@@ -1126,7 +1338,11 @@ class PapricaErrorDialog extends StatelessWidget {
   final Widget extraButton;
   final VoidCallback actionHandler;
 
-  const PapricaErrorDialog({@required this.title, this.content, this.extraButton, this.actionHandler});
+  const PapricaErrorDialog(
+      {@required this.title,
+      this.content,
+      this.extraButton,
+      this.actionHandler});
 
   @override
   Widget build(BuildContext context) {
@@ -1136,7 +1352,9 @@ class PapricaErrorDialog extends StatelessWidget {
       actions: <Widget>[
         this.extraButton ?? Container(),
         FlatButton(
-          onPressed: () => this.actionHandler != null ? this.actionHandler() : Navigator.of(context).pop(),
+          onPressed: () => this.actionHandler != null
+              ? this.actionHandler()
+              : Navigator.of(context).pop(),
           child: Text(S.of(context).ok),
         ),
       ],
@@ -1154,7 +1372,12 @@ class PapricaInputDialog extends StatelessWidget {
   final String cancelText;
   final String confirmText;
 
-  PapricaInputDialog({this.title, this.content, this.confirmCallback, this.cancelText, this.confirmText})
+  PapricaInputDialog(
+      {this.title,
+      this.content,
+      this.confirmCallback,
+      this.cancelText,
+      this.confirmText})
       : _cancelReasonController = TextEditingController();
 
   @override
@@ -1164,12 +1387,16 @@ class PapricaInputDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            content != null ? Row(children: <Widget>[Text(content)]) : Container(),
+            content != null
+                ? Row(children: <Widget>[Text(content)])
+                : Container(),
             TextFormField(
               maxLines: 5,
               minLines: 1,
               maxLength: 124,
-              textAlign: Localizations.localeOf(context).languageCode == 'en' ? TextAlign.left : TextAlign.right,
+              textAlign: Localizations.localeOf(context).languageCode == 'en'
+                  ? TextAlign.left
+                  : TextAlign.right,
               controller: _cancelReasonController,
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(
@@ -1185,7 +1412,8 @@ class PapricaInputDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text(cancelText ?? S.of(context).cancel, style: TextStyle(color: Colors.grey)),
+          child: Text(cancelText ?? S.of(context).cancel,
+              style: TextStyle(color: Colors.grey)),
           onPressed: () => Navigator.of(context).pop(false),
         ),
         FlatButton(

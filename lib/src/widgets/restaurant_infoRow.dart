@@ -6,11 +6,7 @@ class InfoRow extends StatelessWidget {
   final AssetImage icon;
   final TextDirection textDirection;
 
-  InfoRow({
-    this.icon,
-    this.title,
-    this.textDirection
-  });
+  InfoRow({this.icon, this.title, this.textDirection});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +14,9 @@ class InfoRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Padding(
-          padding: Localizations.localeOf(context).languageCode == 'en' ? const EdgeInsets.fromLTRB(0, 8, 8, 8) : const EdgeInsets.fromLTRB(8, 8, 0, 8),
+          padding: Localizations.localeOf(context).languageCode == 'en'
+              ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
+              : const EdgeInsets.fromLTRB(8, 8, 0, 8),
           child: Image(
             image: this.icon,
             width: 0.05 * MediaQuery.of(context).size.width,

@@ -14,7 +14,10 @@ import '../../widgets.dart';
 class EventCardThemeData {
   Color backgroundColor, titleColor, actionTextColor;
 
-  EventCardThemeData({@required this.backgroundColor, @required this.titleColor, @required this.actionTextColor});
+  EventCardThemeData(
+      {@required this.backgroundColor,
+      @required this.titleColor,
+      @required this.actionTextColor});
 }
 
 class EventCard extends StatelessWidget {
@@ -38,14 +41,18 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLtr = Localizations.localeOf(context).languageCode == 'en';
     Radius radiusTopRight = isLtr ? Radius.circular(borderRadius) : Radius.zero;
-    Radius radiusBottomRight = isLtr ? Radius.circular(borderRadius) : Radius.zero;
+    Radius radiusBottomRight =
+        isLtr ? Radius.circular(borderRadius) : Radius.zero;
     Radius radiusTopLeft = isLtr ? Radius.zero : Radius.circular(borderRadius);
-    Radius radiusBottomLeft = isLtr ? Radius.zero : Radius.circular(borderRadius);
+    Radius radiusBottomLeft =
+        isLtr ? Radius.zero : Radius.circular(borderRadius);
 
     //Initiate card theme data
     EventCardThemeData themeData = cardThemeData ?? /*if not null, else */
         EventCardThemeData(
-            backgroundColor: Colors.white, titleColor: Colors.black, actionTextColor: Theme.of(context).primaryColor);
+            backgroundColor: Colors.white,
+            titleColor: Colors.black,
+            actionTextColor: Theme.of(context).primaryColor);
     return GestureDetector(
       onTap: () => this.onPressed != null && this.onPressed is Function
           ? this.onPressed()
@@ -73,12 +80,16 @@ class EventCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: event.imageUrl,
                 width: MediaQuery.of(context).size.width * 0.25,
-                height: Localizations.localeOf(context).languageCode == 'en' ? 100 : 113,
+                height: Localizations.localeOf(context).languageCode == 'en'
+                    ? 100
+                    : 113,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Image(
                   image: AssetImage("assets/images/placeholder.png"),
                   width: MediaQuery.of(context).size.width * 0.25,
-                  height: Localizations.localeOf(context).languageCode == 'en' ? 100 : 113,
+                  height: Localizations.localeOf(context).languageCode == 'en'
+                      ? 100
+                      : 113,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -94,7 +105,8 @@ class EventCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SizedBox(
-                          width: MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 0.35,
+                          width: MediaQuery.of(context).size.width -
+                              MediaQuery.of(context).size.width * 0.35,
                           child: Text(
                             event.eventName,
                             maxLines: 1,
@@ -120,11 +132,13 @@ class EventCard extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           PapricaFormatter.formatDateOnly(context, event.date),
-                          style: TextStyle(color: themeData.titleColor, fontSize: 12),
+                          style: TextStyle(
+                              color: themeData.titleColor, fontSize: 12),
                         ),
                         Text(
                           PapricaFormatter.formatTimeOnly(context, event.date),
-                          style: TextStyle(color: themeData.titleColor, fontSize: 12),
+                          style: TextStyle(
+                              color: themeData.titleColor, fontSize: 12),
                         ),
                         GestureDetector(
                           onTap: null,
@@ -174,7 +188,9 @@ class MyPapricaEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     EventCardThemeData themeData = cardThemeData ?? /*if not null, else */
         EventCardThemeData(
-            backgroundColor: Colors.white, titleColor: Colors.black, actionTextColor: Theme.of(context).primaryColor);
+            backgroundColor: Colors.white,
+            titleColor: Colors.black,
+            actionTextColor: Theme.of(context).primaryColor);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -219,7 +235,8 @@ class MyPapricaEventCard extends StatelessWidget {
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) {
                               return RestaurantHome(
                                 restaurantId: event.restaurantId,
                               );
@@ -259,7 +276,8 @@ class MyPapricaEventCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -285,9 +303,11 @@ class MyPapricaEventCard extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            PapricaFormatter.formatDateOnly(context, event.time),
+                            PapricaFormatter.formatDateOnly(
+                                context, event.time),
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: themeData.actionTextColor, fontSize: 12),
+                            style: TextStyle(
+                                color: themeData.actionTextColor, fontSize: 12),
                           ),
                         ),
                         SizedBox(
@@ -295,7 +315,8 @@ class MyPapricaEventCard extends StatelessWidget {
                         ),
                         Text(
                           PapricaFormatter.formatTimeOnly(context, event.time),
-                          style: TextStyle(color: themeData.actionTextColor, fontSize: 12),
+                          style: TextStyle(
+                              color: themeData.actionTextColor, fontSize: 12),
                         ),
                       ],
                     ),
@@ -304,18 +325,19 @@ class MyPapricaEventCard extends StatelessWidget {
                     ),
                     event.description != null && event.description.isNotEmpty
                         ? Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            event.description,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black, fontSize: 14),
-                          ),
-                        ),
-                      ],
-                    )
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Flexible(
+                                child: Text(
+                                  event.description,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          )
                         : Container(),
                   ],
                 ),
@@ -325,28 +347,27 @@ class MyPapricaEventCard extends StatelessWidget {
                 children: <Widget>[
                   Container(
                       decoration: BoxDecoration(
-                          border:
-                          Border.all(
+                          border: Border.all(
                               color: (DateTime.now().isAfter(event.time)
-                                ? Colors.grey
-                                : Theme.of(context).primaryColor),
+                                  ? Colors.grey
+                                  : Theme.of(context).primaryColor),
                               width: 1,
                               style: BorderStyle.solid)),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Text(
-                          (DateTime.now().isAfter(event.time)
-                              ? S.of(context).oldEvent.toUpperCase()
-                              : S.of(context).event.toUpperCase()),
-                          style: TextStyle(
-                            letterSpacing: 1.5,
-                            fontSize: 18,
-                            color: (DateTime.now().isAfter(event.time)
-                                ? Colors.grey
-                                : Theme.of(context).primaryColor),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
+                          padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                          child: Text(
+                            (DateTime.now().isAfter(event.time)
+                                ? S.of(context).oldEvent.toUpperCase()
+                                : S.of(context).event.toUpperCase()),
+                            style: TextStyle(
+                              letterSpacing: 1.5,
+                              fontSize: 18,
+                              color: (DateTime.now().isAfter(event.time)
+                                  ? Colors.grey
+                                  : Theme.of(context).primaryColor),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
 //                        Text(
 //                          S.of(context).event.toUpperCase(),
 //                          style: TextStyle(
@@ -356,7 +377,7 @@ class MyPapricaEventCard extends StatelessWidget {
 //                            fontWeight: FontWeight.bold,
 //                          ),
 //                        ),
-                      ))
+                          ))
                 ],
               )
             ],

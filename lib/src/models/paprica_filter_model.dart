@@ -36,24 +36,34 @@ class PapricaFilterModel {
       this.musicTypesSelections,
       this.parkingTypesSelections});
 
-  PapricaFilterModel.apiToFilterModelAdapter(ApiFilterModel filter, BuildContext context) {
+  PapricaFilterModel.apiToFilterModelAdapter(
+      ApiFilterModel filter, BuildContext context) {
     if (filter == null)
       PapricaFilterModel();
     else {
       isFeatured = filter.isFeatured;
-      hasOutdoorValue = (filter.hasOutdoor ?? false) ? S.of(context).outdoor : null;
-      smokeValue = (filter.isSmokeFree ?? false) ? S.of(context).smokeFree : null;
-      alcoholValue = (filter.isAlcoholFree ?? false) ? S.of(context).alcoholFree : null;
-      twentyFourValue = (filter.is24Hour ?? false) ? S.of(context).twentyFourSeven : null;
-      placesSelections = ApiTypesHelper().getTypeNamesListByValue(filter.restaurantTypes ?? 0, Type.places);
-      cuisinesSelections = ApiTypesHelper().getTypeNamesListByValue(filter.cuisineTypes ?? 0, Type.cuisines);
-      amenitiesSelections = ApiTypesHelper().getTypeNamesListByValue(filter.amenityTypes ?? 0, Type.amenities);
-      ambianceSelections = ApiTypesHelper().getTypeNamesListByValue(filter.ambianceType ?? 0, Type.ambiance);
-      musicTypesSelections = ApiTypesHelper().getTypeNamesListByValue(filter.musicType ?? 0, Type.music);
-      parkingTypesSelections = ApiTypesHelper().getTypeNamesListByValue(filter.parkingType ?? 0, Type.parking);
+      hasOutdoorValue =
+          (filter.hasOutdoor ?? false) ? S.of(context).outdoor : null;
+      smokeValue =
+          (filter.isSmokeFree ?? false) ? S.of(context).smokeFree : null;
+      alcoholValue =
+          (filter.isAlcoholFree ?? false) ? S.of(context).alcoholFree : null;
+      twentyFourValue =
+          (filter.is24Hour ?? false) ? S.of(context).twentyFourSeven : null;
+      placesSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.restaurantTypes ?? 0, Type.places);
+      cuisinesSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.cuisineTypes ?? 0, Type.cuisines);
+      amenitiesSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.amenityTypes ?? 0, Type.amenities);
+      ambianceSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.ambianceType ?? 0, Type.ambiance);
+      musicTypesSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.musicType ?? 0, Type.music);
+      parkingTypesSelections = ApiTypesHelper()
+          .getTypeNamesListByValue(filter.parkingType ?? 0, Type.parking);
     }
   }
-
 
   PapricaFilterModel.deepCopy(PapricaFilterModel filter) {
     if (filter == null)

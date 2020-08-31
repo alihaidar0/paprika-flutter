@@ -1,15 +1,12 @@
 part of swagger.api;
 
 class ApplicationInfoDto {
-  
   String version = null;
-  
 
   DateTime releaseDate = null;
-  
 
   Map<String, bool> features = {};
-  
+
   ApplicationInfoDto();
 
   @override
@@ -19,33 +16,35 @@ class ApplicationInfoDto {
 
   ApplicationInfoDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    version =
-        json['version']
-    ;
-    releaseDate = json['releaseDate'] == null ? null : DateTime.parse(json['releaseDate']);
-    features =
-        json['features']
-    ;
+    version = json['version'];
+    releaseDate = json['releaseDate'] == null
+        ? null
+        : DateTime.parse(json['releaseDate']);
+    features = json['features'];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'version': version,
-      'releaseDate': releaseDate == null ? '' : releaseDate.toUtc().toIso8601String(),
+      'releaseDate':
+          releaseDate == null ? '' : releaseDate.toUtc().toIso8601String(),
       'features': features
-     };
+    };
   }
 
   static List<ApplicationInfoDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<ApplicationInfoDto>() : json.map((value) => new ApplicationInfoDto.fromJson(value)).toList();
+    return json == null
+        ? new List<ApplicationInfoDto>()
+        : json.map((value) => new ApplicationInfoDto.fromJson(value)).toList();
   }
 
-  static Map<String, ApplicationInfoDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, ApplicationInfoDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, ApplicationInfoDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ApplicationInfoDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new ApplicationInfoDto.fromJson(value));
     }
     return map;
   }
 }
-
