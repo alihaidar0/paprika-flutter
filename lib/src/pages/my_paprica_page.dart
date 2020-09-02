@@ -288,7 +288,8 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                   RestaurantsListModel.fromMyPapricaModel(papricaItem.model),
               title: temp.title,
               titleColor: Theme.of(context).primaryColor,
-              filterModel: PapricaFilterModel.apiToFilterModelAdapter(temp.filter, context),
+              filterModel: PapricaFilterModel.apiToFilterModelAdapter(
+                  temp.filter, context),
             ),
             SizedBox(
               height: 5,

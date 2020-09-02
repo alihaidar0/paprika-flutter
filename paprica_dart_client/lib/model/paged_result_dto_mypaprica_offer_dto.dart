@@ -14,7 +14,7 @@ class PagedResultDtoMyPapricaOfferDto {
 
   PagedResultDtoMyPapricaOfferDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    title =  json['title'];
+    title = json['title'];
     items = OfferPapricaItemDto.listFromJson(json['items']);
   }
 
@@ -22,7 +22,8 @@ class PagedResultDtoMyPapricaOfferDto {
     return {'title': title, 'items': items};
   }
 
-  static List<PagedResultDtoMyPapricaOfferDto> listFromJson(List<dynamic> json) {
+  static List<PagedResultDtoMyPapricaOfferDto> listFromJson(
+      List<dynamic> json) {
     return json == null
         ? new List<PagedResultDtoMyPapricaOfferDto>()
         : json

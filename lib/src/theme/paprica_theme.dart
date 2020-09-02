@@ -4,8 +4,8 @@ final ThemeData papricaThemeData = new ThemeData(
     cursorColor: Colors.grey,
     textSelectionColor: Colors.grey,
     textSelectionHandleColor: Colors.grey,
-    primaryColor:Colors.orange,// Color(0xFFAA0025),
-    accentColor: Colors.orange,//Color(0xFFAA0025),
+    primaryColor: Colors.orange, // Color(0xFFAA0025),
+    accentColor: Colors.orange, //Color(0xFFAA0025),
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.grey,
       textTheme: ButtonTextTheme.primary,

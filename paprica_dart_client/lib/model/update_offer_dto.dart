@@ -1,18 +1,14 @@
 part of swagger.api;
 
 class UpdateOfferDto {
-  
   bool isActive = null;
-  
 
   String image = null;
-  
 
   String description = null;
-  
 
   int id = null;
-  
+
   UpdateOfferDto();
 
   @override
@@ -22,18 +18,10 @@ class UpdateOfferDto {
 
   UpdateOfferDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    isActive =
-        json['isActive']
-    ;
-    image =
-        json['image']
-    ;
-    description =
-        json['description']
-    ;
-    id =
-        json['id']
-    ;
+    isActive = json['isActive'];
+    image = json['image'];
+    description = json['description'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,19 +30,22 @@ class UpdateOfferDto {
       'image': image,
       'description': description,
       'id': id
-     };
+    };
   }
 
   static List<UpdateOfferDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<UpdateOfferDto>() : json.map((value) => new UpdateOfferDto.fromJson(value)).toList();
+    return json == null
+        ? new List<UpdateOfferDto>()
+        : json.map((value) => new UpdateOfferDto.fromJson(value)).toList();
   }
 
-  static Map<String, UpdateOfferDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdateOfferDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdateOfferDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdateOfferDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdateOfferDto.fromJson(value));
     }
     return map;
   }
 }
-

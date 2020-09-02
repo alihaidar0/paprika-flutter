@@ -14,7 +14,7 @@ class S implements WidgetsLocalizations {
   static S current;
 
   static const GeneratedLocalizationsDelegate delegate =
-    GeneratedLocalizationsDelegate();
+      GeneratedLocalizationsDelegate();
 
   static S of(BuildContext context) => Localizations.of<S>(context, S);
 
@@ -66,7 +66,8 @@ class S implements WidgetsLocalizations {
   String get cancellingReservation => "Cancelling Reservation..";
   String get catsNotAvailable => "Menu is currently empty.";
   String get change => "Change";
-  String get changeLanguageOffer => "You can change the language from More -> language";
+  String get changeLanguageOffer =>
+      "You can change the language from More -> language";
   String get changePassword => "Change my password";
   String get changingImage => "Changing profile image...";
   String get changingLanguage => "Changing language...";
@@ -82,7 +83,8 @@ class S implements WidgetsLocalizations {
   String get comingEvents => "Coming Events";
   String get confirm => "Confirm";
   String get confirmCancelReservation => "Confirm Cancel Reservation";
-  String get confirmCancelUpdateRequest => "Do you really want to cancel the update?";
+  String get confirmCancelUpdateRequest =>
+      "Do you really want to cancel the update?";
   String get confirmCancellation => "Confirm Cancellation";
   String get confirmPassword => "Confirm Password";
   String get confirmPhoneNumber => "Confirm Phone Number";
@@ -114,10 +116,12 @@ class S implements WidgetsLocalizations {
   String get enterCode => "Enter the code";
   String get enterPhoneNumber => "Please enter your phone number.";
   String get error => "Error";
-  String get errorChangeLanguage => "Could not change the language. Please try again later.";
+  String get errorChangeLanguage =>
+      "Could not change the language. Please try again later.";
   String get errorEmptyField => "This field is required";
   String get errorEventNotFound => "Problems loading event";
-  String get errorInternetConnection => "Seems like you don't have internet connection.";
+  String get errorInternetConnection =>
+      "Seems like you don't have internet connection.";
   String get errorLogin => "There was an error while trying to log you in";
   String get errorName => "Name can't be empty";
   String get errorNoConnection => "No Connection";
@@ -125,17 +129,23 @@ class S implements WidgetsLocalizations {
   String get errorPasswordMatch => "Passwords don't match";
   String get errorPermissionLocation => "App Permission";
   String get errorPhoneNumberFormat => "Phone number is not valid";
-  String get errorPlayingAudio => "Sorry, your system doesn't support this feature.";
-  String get errorRateMeal => "Couldn't save your rating. Please try again later.";
-  String get errorReservationValidation => "Please make sure to provide needed information.";
+  String get errorPlayingAudio =>
+      "Sorry, your system doesn't support this feature.";
+  String get errorRateMeal =>
+      "Couldn't save your rating. Please try again later.";
+  String get errorReservationValidation =>
+      "Please make sure to provide needed information.";
   String get errorToken => "Error identifying you, please log in agian.";
   String get errorUnknown => "Something went wrong. Please try again later.";
-  String get errorUnknownWannaTryAgain => "Unknown error has occurred, do you want to try again?";
-  String get errorUploadImage => "Something went wrong while trying to upload the image.";
+  String get errorUnknownWannaTryAgain =>
+      "Unknown error has occurred, do you want to try again?";
+  String get errorUploadImage =>
+      "Something went wrong while trying to upload the image.";
   String get event => "Event";
   String get events => "Events";
   String get facebook => "Facebook";
-  String get failurePhoneNumberConfirmation => "Phone number confirmation failed.";
+  String get failurePhoneNumberConfirmation =>
+      "Phone number confirmation failed.";
   String get featured => "Featured";
   String get featuredCafe => "Featured Cafes";
   String get featuredFastFood => "Featured FastFood";
@@ -143,8 +153,10 @@ class S implements WidgetsLocalizations {
   String get featuredRestaurants => "Featured Restaurants";
   String get filter => "Filter";
   String get filterCleared => "Filter Cleared";
-  String get filterCoverSentence => "Find the right place for you and your loved ones";
-  String get filterNoRestaurants => "Sorry, there are no restaurants that match your search.";
+  String get filterCoverSentence =>
+      "Find the right place for you and your loved ones";
+  String get filterNoRestaurants =>
+      "Sorry, there are no restaurants that match your search.";
   String get filterTrySomethingElse => "Edit Filter";
   String get find => "Find";
   String get findFabTooltip => "Search Options";
@@ -184,22 +196,26 @@ class S implements WidgetsLocalizations {
   String get loggingIn => "Logging In...";
   String get loggingOut => "Logging Out...";
   String get loginPhoneNumber => "Phone Number or Username";
-  String get loginPromotionNotifications => "Please log in to view your reservations";
+  String get loginPromotionNotifications =>
+      "Please log in to view your reservations";
   String get loginPromotionProfile => "Please log in to view your profile";
-  String get loginPromotionReservations => "Please log in to view your reservations";
+  String get loginPromotionReservations =>
+      "Please log in to view your reservations";
   String get low => "Low";
   String get marriage => "Marriage";
   String get menu => "Menu";
   String get messageClearNotification => "Clear All Notification?";
   String get messageEventNotFound => "Restaurant might have removed the event";
-  String get messageLocationPermission => "Paprica needs to access your location.";
+  String get messageLocationPermission =>
+      "Paprica needs to access your location.";
   String get messageOfferNotFound => "Restaurant might have removed the offer";
   String get moderate => "Moderate";
   String get monday => "Monday";
   String get more => "More";
   String get moreInfo => "More Info";
   String get moreInformation => "More Information";
-  String get msgCancelReservation => "Let the restaurant know why you want to cancel the reservation (Optional)";
+  String get msgCancelReservation =>
+      "Let the restaurant know why you want to cancel the reservation (Optional)";
   String get music => "Music";
   String get myNotifications => "My Notifications";
   String get myPipina => "My Paprica";
@@ -220,9 +236,11 @@ class S implements WidgetsLocalizations {
   String get noOffers => "We couldn't find offers here. Keep looking!";
   String get noOldReservations => "You don't have any old reservation";
   String get noRestaurantsToView => "Sorry, no restaurants here yet";
-  String get noRestaurantsToViewMap => "There are no restaurants to view on map";
+  String get noRestaurantsToViewMap =>
+      "There are no restaurants to view on map";
   String get noSmoking => "No Smoking";
-  String get noUpcomingReservations => "Seems like you don't have any plan for the weekend.";
+  String get noUpcomingReservations =>
+      "Seems like you don't have any plan for the weekend.";
   String get noiseLevel => "Noise Level";
   String get none => "None";
   String get notes => "Notes";
@@ -251,13 +269,16 @@ class S implements WidgetsLocalizations {
   String get people => "People";
   String get person => "person";
   String get phoneNumber => "Phone Number";
-  String get phoneNumberConfirmationNeeded => "Your phone number needs confirmation";
-  String get phoneNumberDoesNotExistPleaseEnterYours => "Please enter your phone number:";
+  String get phoneNumberConfirmationNeeded =>
+      "Your phone number needs confirmation";
+  String get phoneNumberDoesNotExistPleaseEnterYours =>
+      "Please enter your phone number:";
   String get phoneNumberIsConfirmed => "Phone number is confirmed";
   String get phoneNumberUpdated => "Updated the Number";
   String get placeRate => "Restaurant Rate";
   String get places => "Places";
-  String get pleaseEnterTheCodeAndYourNewPassword => "Please enter the received code and your new password.";
+  String get pleaseEnterTheCodeAndYourNewPassword =>
+      "Please enter the received code and your new password.";
   String get pleaseLogIn => "Please log in";
   String get pleaseLoginInOrderToReserve => "Please login to reserve";
   String get pleaseSelectLanguage => "Please select your language";
@@ -274,8 +295,10 @@ class S implements WidgetsLocalizations {
   String get relax => "Relax";
   String get resendCode => "Resend code";
   String get reservation => "Reservation";
-  String get reservationShouldBeInTheFuture => "The reservation should be in the future";
-  String get reservationTimeShouldBeInTheFuture => "Reservation time should be in the future";
+  String get reservationShouldBeInTheFuture =>
+      "The reservation should be in the future";
+  String get reservationTimeShouldBeInTheFuture =>
+      "Reservation time should be in the future";
   String get reservationUpdateDate => "Changed date from";
   String get reservationUpdateInfo => "Changed notes from";
   String get reservationUpdatePeople => "Changed number of people from";
@@ -308,22 +331,27 @@ class S implements WidgetsLocalizations {
   String get skip => "Skip";
   String get smokeFree => "Smoke Free";
   String get submit => "Submit";
-  String get successConfirmPhoneNumber => "Your phone number was confirmed successfully";
+  String get successConfirmPhoneNumber =>
+      "Your phone number was confirmed successfully";
   String get successPasswordChanged => "Your password was changed";
   String get successRate => "Thanks for your feedback";
-  String get successReservation => "Thank You! You will receive restaurant response soon.";
+  String get successReservation =>
+      "Thank You! You will receive restaurant response soon.";
   String get successReservationCancel => "Reservation was cancelled";
-  String get successReservationUpdate => "Reservation updated successfully. Please wait for restaurant approval";
+  String get successReservationUpdate =>
+      "Reservation updated successfully. Please wait for restaurant approval";
   String get successUpdateProfile => "Profile was updated successfully";
   String get sunday => "Sunday";
   String get sureDelete => "Are you sure you want to delete this item?";
-  String get thankYouAdminWillReviewYourFeedback => "Thank you, we will review your comment before it's published.";
+  String get thankYouAdminWillReviewYourFeedback =>
+      "Thank you, we will review your comment before it's published.";
   String get thisMonth => "This Month";
   String get thisWeek => "This Week";
   String get thursday => "Thursday";
   String get time => "Time";
   String get timeAM => "AM";
-  String get timeHasBeenRoundedToTheNearest15Minutes => "Time has been rounded to the nearest 15 minutes";
+  String get timeHasBeenRoundedToTheNearest15Minutes =>
+      "Time has been rounded to the nearest 15 minutes";
   String get timePM => "PM";
   String get title => "Paprica";
   String get to => "To";
@@ -346,7 +374,8 @@ class S implements WidgetsLocalizations {
   String get viewUpdates => "View Updates";
   String get wednesday => "Wednesday";
   String get yes => "Yes";
-  String get youCouldHearPinDrop => "You could hear a pin drop in here! Get more engaged to get more notifications.";
+  String get youCouldHearPinDrop =>
+      "You could hear a pin drop in here! Get more engaged to get more notifications.";
   String get youHavePending => "You have pending reservation";
   String get youHaveUpcoming => "You have upcoming reservation";
   String get yourName => "Your Name";
@@ -357,19 +386,32 @@ class S implements WidgetsLocalizations {
   String eventsListTitle(String restaurantName) => "$restaurantName's Events";
   String loggingInRequired(String action) => "Please log in to $action";
   String menuNoAvailable(String category) => "No Available $category";
-  String noEvents(String restaurantName) => "We're sorry, there aren't any upcoming events in $restaurantName.";
-  String noReviews(String restaurantName) => "$restaurantName doesn't have reviews yet";
-  String phoneNumberConfirmationText(String phoneNumber) => "We've sent you a confirmation code to $phoneNumber.\nPlease enter the code to confirm your identity.";
-  String reservationDialogHeader(String eventName, String restaurantName) => "$eventName Event at $restaurantName";
-  String reservationSummary(String restaurantName, String peopleNumber, String suffix, String date, String time) => "A reservation at $restaurantName will be made for $peopleNumber $suffix.\n\nDate: $date\nTime: $time";
-  String restaurantAddedToFavorites(String restaurant) => "$restaurant was added to your favorites list";
-  String restaurantRemovedFromFavorites(String restaurant) => "$restaurant was removed from  your favorites list";
-  String shareText(String restaurantName, String link) => "Hi,\nCheckout out $restaurantName on Paprica at $link";
+  String noEvents(String restaurantName) =>
+      "We're sorry, there aren't any upcoming events in $restaurantName.";
+  String noReviews(String restaurantName) =>
+      "$restaurantName doesn't have reviews yet";
+  String phoneNumberConfirmationText(String phoneNumber) =>
+      "We've sent you a confirmation code to $phoneNumber.\nPlease enter the code to confirm your identity.";
+  String reservationDialogHeader(String eventName, String restaurantName) =>
+      "$eventName Event at $restaurantName";
+  String reservationSummary(String restaurantName, String peopleNumber,
+          String suffix, String date, String time) =>
+      "A reservation at $restaurantName will be made for $peopleNumber $suffix.\n\nDate: $date\nTime: $time";
+  String restaurantAddedToFavorites(String restaurant) =>
+      "$restaurant was added to your favorites list";
+  String restaurantRemovedFromFavorites(String restaurant) =>
+      "$restaurant was removed from  your favorites list";
+  String shareText(String restaurantName, String link) =>
+      "Hi,\nCheckout out $restaurantName on Paprica at $link";
   String shareTextApp(String link) => "Hi,\nCheckout out Paprica at $link";
-  String shareTextEvent(String eventName, String link) => "Hi,\nCheckout out event $eventName on Paprica at $link";
-  String shareTextMeal(String offerName, String restaurantName, String link) => "Hi,\nCheckout out $offerName at $restaurantName on Paprica at $link";
-  String shareTextOffer(String offerName, String link) => "Hi,\nCheckout out offer $offerName on Paprica at $link";
-  String successRateMeal(String meal) => "Sharing is Caring! Now people will have a better idea about the $meal";
+  String shareTextEvent(String eventName, String link) =>
+      "Hi,\nCheckout out event $eventName on Paprica at $link";
+  String shareTextMeal(String offerName, String restaurantName, String link) =>
+      "Hi,\nCheckout out $offerName at $restaurantName on Paprica at $link";
+  String shareTextOffer(String offerName, String link) =>
+      "Hi,\nCheckout out offer $offerName on Paprica at $link";
+  String successRateMeal(String meal) =>
+      "Sharing is Caring! Now people will have a better idea about the $meal";
 }
 
 class $ar extends S {
@@ -447,7 +489,8 @@ class $ar extends S {
   @override
   String get customerName => "اسم الزبون";
   @override
-  String get errorUploadImage => "حدث خطأ أثناء رفع الصورة. الرجاء المحاولة مرة أخرى.";
+  String get errorUploadImage =>
+      "حدث خطأ أثناء رفع الصورة. الرجاء المحاولة مرة أخرى.";
   @override
   String get noiseLevel => "مستوى الضجيج";
   @override
@@ -467,11 +510,13 @@ class $ar extends S {
   @override
   String get messageClearNotification => "هل تريد مسح جميع الإشعارات؟";
   @override
-  String get errorToken => "حصل خطأ أثناء محاولة تسجيل الدخول، الرجاء تسجيل الدخول مرة أخرى";
+  String get errorToken =>
+      "حصل خطأ أثناء محاولة تسجيل الدخول، الرجاء تسجيل الدخول مرة أخرى";
   @override
   String get processing => "يتم المعالجة...";
   @override
-  String get errorLogin => "حدث خطأ أثناء محاولة تسجيل الدخول. الرجاء المحاولة أخرى.";
+  String get errorLogin =>
+      "حدث خطأ أثناء محاولة تسجيل الدخول. الرجاء المحاولة أخرى.";
   @override
   String get goToPlaces => "اذهب إلى صفحة الأماكن";
   @override
@@ -555,9 +600,11 @@ class $ar extends S {
   @override
   String get notes => "ملاحظات";
   @override
-  String get phoneNumberDoesNotExistPleaseEnterYours => "رقم الهاتف غير موجود، \n الرجاء إدخال رقم الهاتف الخاص بك.";
+  String get phoneNumberDoesNotExistPleaseEnterYours =>
+      "رقم الهاتف غير موجود، \n الرجاء إدخال رقم الهاتف الخاص بك.";
   @override
-  String get youCouldHearPinDrop => "القائمة الخالية، تفاعل أكثر لتستلم المزيد من الإشعارات.";
+  String get youCouldHearPinDrop =>
+      "القائمة الخالية، تفاعل أكثر لتستلم المزيد من الإشعارات.";
   @override
   String get errorPhoneNumberFormat => "رقم الهاتف غير صالح";
   @override
@@ -565,9 +612,11 @@ class $ar extends S {
   @override
   String get language => "اللغة";
   @override
-  String get errorReservationValidation => "الرجاء التأكد من تامين المعلومات المطلوبة لعملية الحجز.";
+  String get errorReservationValidation =>
+      "الرجاء التأكد من تامين المعلومات المطلوبة لعملية الحجز.";
   @override
-  String get errorChangeLanguage => "لم نستطع تغيير اللغة. الرجاء المحاولة لاحقاً.";
+  String get errorChangeLanguage =>
+      "لم نستطع تغيير اللغة. الرجاء المحاولة لاحقاً.";
   @override
   String get sentCode => "تم إرسال رمز التفعيل";
   @override
@@ -603,7 +652,8 @@ class $ar extends S {
   @override
   String get loadReviews => "عرض المزيد";
   @override
-  String get loginPromotionNotifications => "الرجاء تسحيل الدخول لمشاهدة الإشعارات";
+  String get loginPromotionNotifications =>
+      "الرجاء تسحيل الدخول لمشاهدة الإشعارات";
   @override
   String get cuisines => "مطابخ";
   @override
@@ -613,9 +663,11 @@ class $ar extends S {
   @override
   String get errorNoConnection => "لا يوجد اتصال";
   @override
-  String get timeHasBeenRoundedToTheNearest15Minutes => "تم تقريب الوقت لاقرب ربع ساعة";
+  String get timeHasBeenRoundedToTheNearest15Minutes =>
+      "تم تقريب الوقت لاقرب ربع ساعة";
   @override
-  String get errorUnknownWannaTryAgain => "حصل خطأ أثناء محاولة الاتصال، هل تريد المحاولة مرة أخرى؟";
+  String get errorUnknownWannaTryAgain =>
+      "حصل خطأ أثناء محاولة الاتصال، هل تريد المحاولة مرة أخرى؟";
   @override
   String get region => "المنطقة";
   @override
@@ -661,7 +713,8 @@ class $ar extends S {
   @override
   String get oldEvent => "حدث قديم";
   @override
-  String get pleaseEnterTheCodeAndYourNewPassword => "الرجاء إداخال الرمز إضافة إلى كلمة المرور الجديدة الخاصة بك.";
+  String get pleaseEnterTheCodeAndYourNewPassword =>
+      "الرجاء إداخال الرمز إضافة إلى كلمة المرور الجديدة الخاصة بك.";
   @override
   String get dateAndTimeCannotBeChanged => "لا يمكن تغيير الوقت والتاريخ";
   @override
@@ -693,7 +746,8 @@ class $ar extends S {
   @override
   String get home => "الرئيسية";
   @override
-  String get errorUnknown => "حدث خطأ أثناء محاولة الاتصال. الرجاء المحاولة لاحقاً.";
+  String get errorUnknown =>
+      "حدث خطأ أثناء محاولة الاتصال. الرجاء المحاولة لاحقاً.";
   @override
   String get byParking => "نوع موقف السيارات";
   @override
@@ -755,7 +809,8 @@ class $ar extends S {
   @override
   String get updatingReservation => "يتم تعديل الحجز";
   @override
-  String get messageLocationPermission => "من أجل تجربة أفضل، نحن بحاجة لمعرفة موقعك الحالي";
+  String get messageLocationPermission =>
+      "من أجل تجربة أفضل، نحن بحاجة لمعرفة موقعك الحالي";
   @override
   String get gallery => "الصور";
   @override
@@ -775,7 +830,8 @@ class $ar extends S {
   @override
   String get myNotifications => "إشعاراتي";
   @override
-  String get pleaseLoginInOrderToReserve => "الرجاء تسجيل الدخول لتتمكن من الحجز";
+  String get pleaseLoginInOrderToReserve =>
+      "الرجاء تسجيل الدخول لتتمكن من الحجز";
   @override
   String get loading => "جاري التحميل...";
   @override
@@ -801,7 +857,8 @@ class $ar extends S {
   @override
   String get nearbyRestaurants => "مطاعم قريبة";
   @override
-  String get loginPromotionReservations => "الرجاء تسحيل الدخول لمشاهدة حجوزاتك";
+  String get loginPromotionReservations =>
+      "الرجاء تسحيل الدخول لمشاهدة حجوزاتك";
   @override
   String get errorPlayingAudio => "عذراً جهازك لا يدعم هذه الميزة";
   @override
@@ -887,11 +944,13 @@ class $ar extends S {
   @override
   String get selectDate => "الرجاء اختيار تاريخ";
   @override
-  String get reservationTimeShouldBeInTheFuture => "يجب أن يكون وقت الحجز في المستقبل";
+  String get reservationTimeShouldBeInTheFuture =>
+      "يجب أن يكون وقت الحجز في المستقبل";
   @override
   String get high => "مرتفع";
   @override
-  String get successReservationUpdate => "تم تعديل الحجز بنجاح. رجاء انتظر التأكيد من المطعم";
+  String get successReservationUpdate =>
+      "تم تعديل الحجز بنجاح. رجاء انتظر التأكيد من المطعم";
   @override
   String get updating => "يتم التحديث...";
   @override
@@ -917,7 +976,8 @@ class $ar extends S {
   @override
   String get phoneNumberIsConfirmed => "رقم الهاتف مؤكَّد";
   @override
-  String get filterNoRestaurants => "المعذرة، لا يوجد مطاعم تطابق البحث الخاص بك";
+  String get filterNoRestaurants =>
+      "المعذرة، لا يوجد مطاعم تطابق البحث الخاص بك";
   @override
   String get reservationUpdates => "تعديلات الحجز";
   @override
@@ -995,7 +1055,8 @@ class $ar extends S {
   @override
   String get approvedNotification => "تم الموافقة على الحجز";
   @override
-  String get thankYouAdminWillReviewYourFeedback => "شكراً لك، سنقوم بتدقيق مراجعتك قبل عرضها ضمن قائمة الآراء.";
+  String get thankYouAdminWillReviewYourFeedback =>
+      "شكراً لك، سنقوم بتدقيق مراجعتك قبل عرضها ضمن قائمة الآراء.";
   @override
   String get rateMeal => "قيّم الوجبة";
   @override
@@ -1033,39 +1094,54 @@ class $ar extends S {
   @override
   String get youAreAllCaughtUp => "جرى استعراض كافة المحتويات";
   @override
-  String reservationSummary(String restaurantName, String peopleNumber, String suffix, String date, String time) => "سيتم الحجز في  $restaurantName لـ $peopleNumber $suffix.\n\nالتاريخ: $date\nالوقت: $time";
+  String reservationSummary(String restaurantName, String peopleNumber,
+          String suffix, String date, String time) =>
+      "سيتم الحجز في  $restaurantName لـ $peopleNumber $suffix.\n\nالتاريخ: $date\nالوقت: $time";
   @override
-  String shareText(String restaurantName, String link) => "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprica على الرابط $link";
+  String shareText(String restaurantName, String link) =>
+      "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprica على الرابط $link";
   @override
-  String restaurantAddedToFavorites(String restaurant) => "تم إضافة $restaurant إلى قائمة المطاعم المفضلة لديك";
+  String restaurantAddedToFavorites(String restaurant) =>
+      "تم إضافة $restaurant إلى قائمة المطاعم المفضلة لديك";
   @override
-  String reservationDialogHeader(String eventName, String restaurantName) => "$eventName في $restaurantName";
+  String reservationDialogHeader(String eventName, String restaurantName) =>
+      "$eventName في $restaurantName";
   @override
-  String shareTextApp(String link) => "مرحبا،\nجرّب تطبيق Paprica على الرابط $link";
+  String shareTextApp(String link) =>
+      "مرحبا،\nجرّب تطبيق Paprica على الرابط $link";
   @override
-  String successRateMeal(String meal) => "شكراً! هلأ الناس رح تعرف أكتر عن $meal";
+  String successRateMeal(String meal) =>
+      "شكراً! هلأ الناس رح تعرف أكتر عن $meal";
   @override
-  String phoneNumberConfirmationText(String phoneNumber) => "تم إرسال رمز التفعيل إلى $phoneNumber.\nالرجاء إدخال الرمز للتأكد من هويتك.";
+  String phoneNumberConfirmationText(String phoneNumber) =>
+      "تم إرسال رمز التفعيل إلى $phoneNumber.\nالرجاء إدخال الرمز للتأكد من هويتك.";
   @override
   String loggingInRequired(String action) => "الرجاء تسجيل الدخول لكي $action";
   @override
-  String shareTextMeal(String mealName, String restaurantName, String link) => "مرحبا،\nصار فيك تجرب $mealName in $restaurantName on Paprica at $link";
+  String shareTextMeal(String mealName, String restaurantName, String link) =>
+      "مرحبا،\nصار فيك تجرب $mealName in $restaurantName on Paprica at $link";
   @override
   String eventsListTitle(String restaurantName) => "أحداث في $restaurantName";
   @override
-  String callRestaurant(String restaurantName) => "هل تريد الاتصال ب$restaurantName؟";
+  String callRestaurant(String restaurantName) =>
+      "هل تريد الاتصال ب$restaurantName؟";
   @override
-  String noEvents(String restaurantName) => "نعتذر منك. لا يوجد أحداث في $restaurantName.";
+  String noEvents(String restaurantName) =>
+      "نعتذر منك. لا يوجد أحداث في $restaurantName.";
   @override
-  String restaurantRemovedFromFavorites(String restaurant) => "تم إزالة $restaurant من قائمة المطاعم المفضلة لديك";
+  String restaurantRemovedFromFavorites(String restaurant) =>
+      "تم إزالة $restaurant من قائمة المطاعم المفضلة لديك";
   @override
-  String shareTextEvent(String eventName, String link) => "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprica على الرابط $link";
+  String shareTextEvent(String eventName, String link) =>
+      "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprica على الرابط $link";
   @override
   String menuNoAvailable(String category) => "لايوجد  $category";
   @override
-  String shareTextOffer(String offerName, String link) => "مرحبا،\nصار فيك تشوف العرض $offerName على تطبيق Paprica على الرابط $link";
+  String shareTextOffer(String offerName, String link) =>
+      "مرحبا،\nصار فيك تشوف العرض $offerName على تطبيق Paprica على الرابط $link";
   @override
-  String noReviews(String restaurantName) => " لا يوجد تقييمات خاصة بـ $restaurantName ";
+  String noReviews(String restaurantName) =>
+      " لا يوجد تقييمات خاصة بـ $restaurantName ";
 }
 
 class $en extends S {
@@ -1082,7 +1158,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     ];
   }
 
-  LocaleListResolutionCallback listResolution({Locale fallback, bool withCountry = true}) {
+  LocaleListResolutionCallback listResolution(
+      {Locale fallback, bool withCountry = true}) {
     return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return fallback ?? supported.first;
@@ -1092,7 +1169,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     };
   }
 
-  LocaleResolutionCallback resolution({Locale fallback, bool withCountry = true}) {
+  LocaleResolutionCallback resolution(
+      {Locale fallback, bool withCountry = true}) {
     return (Locale locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported, withCountry);
     };
@@ -1110,7 +1188,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
           S.current = const $en();
           return SynchronousFuture<S>(S.current);
         default:
-          // NO-OP.
+        // NO-OP.
       }
     }
     S.current = const S();
@@ -1126,7 +1204,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
   ///
   /// Internal method to resolve a locale from a list of locales.
   ///
-  Locale _resolve(Locale locale, Locale fallback, Iterable<Locale> supported, bool withCountry) {
+  Locale _resolve(Locale locale, Locale fallback, Iterable<Locale> supported,
+      bool withCountry) {
     if (locale == null || !_isSupported(locale, withCountry)) {
       return fallback ?? supported.first;
     }
@@ -1159,7 +1238,9 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
         }
 
         // If no country requirement is requested, check if this locale has no country.
-        if (true != withCountry && (supportedLocale.countryCode == null || supportedLocale.countryCode.isEmpty)) {
+        if (true != withCountry &&
+            (supportedLocale.countryCode == null ||
+                supportedLocale.countryCode.isEmpty)) {
           return true;
         }
       }
@@ -1169,7 +1250,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 }
 
 String getLang(Locale l) => l == null
-  ? null
-  : l.countryCode != null && l.countryCode.isEmpty
-    ? l.languageCode
-    : l.toString();
+    ? null
+    : l.countryCode != null && l.countryCode.isEmpty
+        ? l.languageCode
+        : l.toString();

@@ -101,11 +101,13 @@ class EventsListView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        PapricaFormatter.formatDateOnly(context, eventsList[x].date),
+                        PapricaFormatter.formatDateOnly(
+                            context, eventsList[x].date),
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(
-                        PapricaFormatter.formatTimeOnly(context, eventsList[x].date),
+                        PapricaFormatter.formatTimeOnly(
+                            context, eventsList[x].date),
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(

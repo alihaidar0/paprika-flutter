@@ -102,7 +102,7 @@ class FlutterRatingBarIndicator extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: List.generate(
           itemCount,
-              (index) {
+          (index) {
             return Padding(
               padding: itemPadding,
               child: Container(
@@ -118,6 +118,7 @@ class FlutterRatingBarIndicator extends StatelessWidget {
     );
   }
 }
+
 class FlutterRatingBar extends StatefulWidget {
   ///[itemCount] is the count of rating bar items.
   final int itemCount;

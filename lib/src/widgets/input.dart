@@ -16,14 +16,14 @@ class CustomInputText extends StatelessWidget {
 
   CustomInputText(this.label,
       {this.lastTextField,
-        this.inputType = TextInputType.text,
-        this.obscure,
-        this.controller,
-        this.mTextInputAction,
-        this.currentNodeFocus,
-        this.textDirection,
-        this.nextNodeFocus,
-        this.errorMessage});
+      this.inputType = TextInputType.text,
+      this.obscure,
+      this.controller,
+      this.mTextInputAction,
+      this.currentNodeFocus,
+      this.textDirection,
+      this.nextNodeFocus,
+      this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,11 @@ class CustomInputText extends StatelessWidget {
           controller: controller,
           textDirection: textDirection,
           textInputAction: this.mTextInputAction,
-          textAlign: Localizations
-              .localeOf(context)
-              .languageCode == 'en' ? TextAlign.left : TextAlign.right,
-          focusNode: this.currentNodeFocus != null ? this.currentNodeFocus : null,
+          textAlign: Localizations.localeOf(context).languageCode == 'en'
+              ? TextAlign.left
+              : TextAlign.right,
+          focusNode:
+              this.currentNodeFocus != null ? this.currentNodeFocus : null,
           onFieldSubmitted: (term) {
             this.currentNodeFocus.unfocus();
             if (this.lastTextField == false) {
@@ -57,7 +58,8 @@ class CustomInputText extends StatelessWidget {
             fillColor: Colors.white,
             errorText: errorMessage,
             contentPadding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFFaa757f)),
               borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
@@ -96,16 +98,16 @@ class _PasswordInputTextState extends State<PasswordInputText> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Localizations
-          .localeOf(context)
-          .languageCode == "en" ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: Localizations.localeOf(context).languageCode == "en"
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
       children: <Widget>[
         TextFormField(
           controller: widget.mController,
           textInputAction: TextInputAction.done,
-          textAlign: Localizations
-              .localeOf(context)
-              .languageCode == 'en' ? TextAlign.left : TextAlign.right,
+          textAlign: Localizations.localeOf(context).languageCode == 'en'
+              ? TextAlign.left
+              : TextAlign.right,
           focusNode: widget.currentNodeFocus,
           onFieldSubmitted: (term) {
             widget.currentNodeFocus.unfocus();
@@ -117,7 +119,8 @@ class _PasswordInputTextState extends State<PasswordInputText> {
             filled: true,
             fillColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFFaa757f)),
               borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
@@ -133,9 +136,7 @@ class _PasswordInputTextState extends State<PasswordInputText> {
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Icon(
                 Icons.remove_red_eye,
-                color: Theme
-                    .of(context)
-                    .primaryColor,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),

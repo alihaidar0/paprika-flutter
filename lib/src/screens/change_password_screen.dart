@@ -57,13 +57,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFaa757f)),
-                            borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                            borderRadius: const BorderRadius.all(
+                                const Radius.circular(3.0)),
                           ),
-                          errorText: _currentValidationResult.isValid ? null : _currentValidationResult.message),
+                          errorText: _currentValidationResult.isValid
+                              ? null
+                              : _currentValidationResult.message),
                     )
                   : EmptyWidget(),
               SizedBox(height: 10),
@@ -79,13 +84,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFFaa757f)),
-                      borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(3.0)),
                     ),
-                    errorText: _newValidationResult.isValid ? null : _newValidationResult.message),
+                    errorText: _newValidationResult.isValid
+                        ? null
+                        : _newValidationResult.message),
               ),
               SizedBox(height: 10),
               Text(
@@ -100,13 +110,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFFaa757f)),
-                      borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(3.0)),
                     ),
-                    errorText: (_newValidationResult.isValid == false) ? _newValidationResult.message : null),
+                    errorText: (_newValidationResult.isValid == false)
+                        ? _newValidationResult.message
+                        : null),
               ),
               Center(
                 child: Padding(
@@ -125,9 +140,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   void _onResetPressed(BuildContext context) {
-    _currentValidationResult = ValidationMessage(isValid: _currentController.text.isNotEmpty, message: S.of(context).errorEmptyField);
+    _currentValidationResult = ValidationMessage(
+        isValid: _currentController.text.isNotEmpty,
+        message: S.of(context).errorEmptyField);
     _newValidationResult = _validateNewPassword(context);
-    if (widget.currentNeeded && _currentValidationResult.isValid && _newValidationResult.isValid) {
+    if (widget.currentNeeded &&
+        _currentValidationResult.isValid &&
+        _newValidationResult.isValid) {
       ProgressDialog dialog = ProgressDialog(context);
       dialog.setMessage(S.of(context).processing);
       ApiClient client = PapricaApiClient();
@@ -150,9 +169,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   ValidationMessage _validateNewPassword(BuildContext context) {
-    if (_newController.text.isEmpty) return ValidationMessage(isValid: false, message: S.of(context).errorEmptyField, reason: ValidationReason.empty);
+    if (_newController.text.isEmpty)
+      return ValidationMessage(
+          isValid: false,
+          message: S.of(context).errorEmptyField,
+          reason: ValidationReason.empty);
     if (_newController.text != _confirmNewController.text)
-      return ValidationMessage(isValid: false, message: S.of(context).errorPasswordMatch, reason: ValidationReason.mismatch);
+      return ValidationMessage(
+          isValid: false,
+          message: S.of(context).errorPasswordMatch,
+          reason: ValidationReason.mismatch);
     return ValidationMessage(isValid: true);
   }
 }

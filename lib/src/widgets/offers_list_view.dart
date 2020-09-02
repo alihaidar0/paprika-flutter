@@ -34,7 +34,8 @@ class OffersListInMyPaprica extends StatelessWidget {
       widgets.add(
         Container(
           height: MediaQuery.of(context).size.width * 0.70,
-          child: isFromMyPaprica ? _buildMyPapricaOffers(context, x) : Container(),
+          child:
+              isFromMyPaprica ? _buildMyPapricaOffers(context, x) : Container(),
         ),
       );
     }
@@ -70,10 +71,12 @@ class OffersListInMyPaprica extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 S.of(context).viewAll,
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
                               ),
                               Icon(
-                                Localizations.localeOf(context).languageCode == 'en'
+                                Localizations.localeOf(context).languageCode ==
+                                        'en'
                                     ? Icons.keyboard_arrow_right
                                     : Icons.keyboard_arrow_left,
                                 color: Theme.of(context).primaryColor,
@@ -102,13 +105,16 @@ class OffersListInMyPaprica extends StatelessWidget {
   Widget _buildMyPapricaOffers(BuildContext context, int x) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-          return OfferScreen(offer: OfferModel.fromMyPapricaEventDto(offersList.items[x]));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return OfferScreen(
+              offer: OfferModel.fromMyPapricaEventDto(offersList.items[x]));
         }));
       },
       child: Card(
         color: Colors.white70,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +165,8 @@ class OffersListInMyPaprica extends StatelessWidget {
   }
 
   void _onSeeMore(BuildContext mContext) {
-    Navigator.of(mContext).push(MaterialPageRoute(builder: (BuildContext context) {
+    Navigator.of(mContext)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return OffersListScreen();
     }));
   }

@@ -34,7 +34,13 @@ class NotificationModel {
 
   ApiNotification notification;
 
-  NotificationModel({this.color, this.imageUrl, this.title, this.body, this.description, this.date});
+  NotificationModel(
+      {this.color,
+      this.imageUrl,
+      this.title,
+      this.body,
+      this.description,
+      this.date});
 
   NotificationModel.fromNotificationDto(NotificationInfoDto infoDto) {
     date = infoDto.creationTime;
@@ -143,7 +149,6 @@ class NotificationRestaurantAdded {
   }
 }
 
-
 abstract class NotificationReservation {
   int reservationId;
   int customerId;
@@ -165,7 +170,7 @@ class NotificationReservationUpdateApproved extends NotificationReservation {
   }
 }
 
-class NotificationReservationUpdateReject extends NotificationReservation  {
+class NotificationReservationUpdateReject extends NotificationReservation {
   NotificationReservationUpdateReject.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];
@@ -177,7 +182,7 @@ class NotificationReservationUpdateReject extends NotificationReservation  {
   }
 }
 
-class NotificationReservationApproved extends NotificationReservation  {
+class NotificationReservationApproved extends NotificationReservation {
   NotificationReservationApproved.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];
@@ -189,7 +194,7 @@ class NotificationReservationApproved extends NotificationReservation  {
   }
 }
 
-class NotificationReservationRejected extends NotificationReservation  {
+class NotificationReservationRejected extends NotificationReservation {
   NotificationReservationRejected.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];

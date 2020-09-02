@@ -22,7 +22,8 @@ class EventModel {
       this.description,
       this.offer,
       this.isReservable,
-      this.restaurantLogo,this.maxPeopleAllowed});
+      this.restaurantLogo,
+      this.maxPeopleAllowed});
 
   EventModel.fromRestaurantEventDto(RestaurantEventDto dto) {
     id = dto.id;

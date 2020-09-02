@@ -10,7 +10,6 @@ import '../../utils.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 class LogInScreen extends StatefulWidget {
   final bool asAService;
 
@@ -59,18 +58,13 @@ class _MyLogInState extends State<LogInScreen> {
     ]);
 
     double textFieldsSpacing =
-    Localizations
-        .localeOf(context)
-        .languageCode == 'en' ? 10 : 2;
+        Localizations.localeOf(context).languageCode == 'en' ? 10 : 2;
 
     return Scaffold(
       body: ScrollConfiguration(
         behavior: NoGlowScrollBehaviour(),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background_white.png'),
@@ -93,18 +87,15 @@ class _MyLogInState extends State<LogInScreen> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  Row(
-                      children: <Widget>[
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: Text(S
-                              .of(context)
-                              .logIn, style: TextStyle(fontSize: 18)),
-                        ),
-                        Spacer()
-                      ]
-                  ),
+                  Row(children: <Widget>[
+                    Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text(S.of(context).logIn,
+                          style: TextStyle(fontSize: 18)),
+                    ),
+                    Spacer()
+                  ]),
                   Row(children: <Widget>[
                     new Flexible(
                         flex: 4,
@@ -115,9 +106,7 @@ class _MyLogInState extends State<LogInScreen> {
                           child: Row(
                             children: <Widget>[
                               Spacer(),
-                              Text(S
-                                  .of(context)
-                                  .google),
+                              Text(S.of(context).google),
                               SizedBox(width: 10),
                               Image(
                                 image: AssetImage('assets/icons/google.png'),
@@ -133,8 +122,7 @@ class _MyLogInState extends State<LogInScreen> {
                         flex: 1,
                         child: Row(
                           children: <Widget>[SizedBox()],
-                        )
-                    ),
+                        )),
                     new Flexible(
                         flex: 4,
                         child: RawMaterialButton(
@@ -144,9 +132,7 @@ class _MyLogInState extends State<LogInScreen> {
                           child: Row(
                             children: <Widget>[
                               Spacer(),
-                              Text(S
-                                  .of(context)
-                                  .facebook),
+                              Text(S.of(context).facebook),
                               SizedBox(width: 10),
                               Image(
                                 image: AssetImage('assets/icons/facebook.png'),
@@ -163,9 +149,7 @@ class _MyLogInState extends State<LogInScreen> {
                     child: Text(S.of(context).or),
                   ),
                   CustomInputText(
-                    S
-                        .of(context)
-                        .loginPhoneNumber,
+                    S.of(context).loginPhoneNumber,
                     controller: _usernameController,
                     lastTextField: false,
                     // not the last input text
@@ -174,9 +158,7 @@ class _MyLogInState extends State<LogInScreen> {
                     currentNodeFocus: _phoneNumberFocusLogin,
                     nextNodeFocus: _passwordFocusLogin,
                     errorMessage:
-                    _errorUserName ? S
-                        .of(context)
-                        .errorEmptyField : null,
+                        _errorUserName ? S.of(context).errorEmptyField : null,
                   ),
                   SizedBox(height: textFieldsSpacing),
                   Column(
@@ -184,17 +166,15 @@ class _MyLogInState extends State<LogInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       CustomInputText(
-                        S
-                            .of(context)
-                            .password,
+                        S.of(context).password,
                         controller: _passwordController,
                         lastTextField: false,
                         obscure: true,
                         mTextInputAction: TextInputAction.next,
                         currentNodeFocus: _passwordFocusLogin,
-                        errorMessage: _errorPassword ? S
-                            .of(context)
-                            .errorEmptyField : null,
+                        errorMessage: _errorPassword
+                            ? S.of(context).errorEmptyField
+                            : null,
                       ),
                     ],
                   ),
@@ -203,43 +183,35 @@ class _MyLogInState extends State<LogInScreen> {
                       widget.asAService
                           ? Container()
                           : GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed('/home');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            S
-                                .of(context)
-                                .continueAsGuest,
-                            style: TextStyle(
-                                color: Theme
-                                    .of(context)
-                                    .primaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  S.of(context).continueAsGuest,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ),
                       Spacer(),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return ForgotPasswordScreen();
-                              }));
+                            return ForgotPasswordScreen();
+                          }));
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 5),
                           child: Text(
-                            S
-                                .of(context)
-                                .forgotYourPasswordQuestion,
+                            S.of(context).forgotYourPasswordQuestion,
                             style: TextStyle(
-                                color: Theme
-                                    .of(context)
-                                    .primaryColor,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -252,37 +224,31 @@ class _MyLogInState extends State<LogInScreen> {
                       child: CustomizedActiveButton(
                         onPressed: () => _login(context),
                         title: S.of(context).logIn,
-                      )
-                  ),
+                      )),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          S
-                              .of(context)
-                              .doNotHaveAccount,
+                          S.of(context).doNotHaveAccount,
                           style: TextStyle(color: Colors.black45),
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, '/signup',
-                                arguments: widget.asAService)
+                                    arguments: widget.asAService)
                                 .then((signedUp) {
-                              if (widget.asAService) Navigator.of(context).pop(signedUp);
+                              if (widget.asAService)
+                                Navigator.of(context).pop(signedUp);
                             });
                           },
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 5),
                             child: Text(
-                              S
-                                  .of(context)
-                                  .createNewAccount,
+                              S.of(context).createNewAccount,
                               style: TextStyle(
-                                  color: Theme
-                                      .of(context)
-                                      .primaryColor,
+                                  color: Theme.of(context).primaryColor,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -316,18 +282,16 @@ class _MyLogInState extends State<LogInScreen> {
 
     TokenAuthApi authApi = TokenAuthApi();
     ProgressDialog loginDialog = ProgressDialog(context);
-    loginDialog.setMessage(S
-        .of(context)
-        .loggingIn);
+    loginDialog.setMessage(S.of(context).loggingIn);
     loginDialog.show();
     authApi
         .apiTokenAuthAuthenticatePost(
-        model: AuthenticateModel.fromJson({
-          "userNameOrPhoneNumber": _usernameController.text,
-          "password": _passwordController.text,
-          "rememberClient": true,
-          "scope": 1
-        }))
+            model: AuthenticateModel.fromJson({
+      "userNameOrPhoneNumber": _usernameController.text,
+      "password": _passwordController.text,
+      "rememberClient": true,
+      "scope": 1
+    }))
         .then((AuthenticateResultModel authModel) async {
       loginDialog.hide();
       _onSuccessLogin(context, authModel);
@@ -355,9 +319,7 @@ class _MyLogInState extends State<LogInScreen> {
       case FacebookLoginStatus.cancelledByUser:
         break;
       case FacebookLoginStatus.error:
-        PapricaToast.showToast(S
-            .of(context)
-            .errorLogin);
+        PapricaToast.showToast(S.of(context).errorLogin);
         break;
     }
   }
@@ -367,19 +329,20 @@ class _MyLogInState extends State<LogInScreen> {
 
   Future _googleLogin() async {
     try {
-      final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
       _sendTokenToServer(context, 'Google',
-          googleSignInAuthentication.accessToken,
-          googleSignInAccount.id
-      );
+          googleSignInAuthentication.accessToken, googleSignInAccount.id);
     } catch (error) {
       PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
     }
   }
 
-  void _sendTokenToServer(BuildContext context, String provider, String token, String userId) {
+  void _sendTokenToServer(
+      BuildContext context, String provider, String token, String userId) {
     ApiClient client = PapricaApiClient();
     TokenAuthApi api = TokenAuthApi(client);
     ExternalAuthenticateModel data = ExternalAuthenticateModel.fromJson({
@@ -388,9 +351,7 @@ class _MyLogInState extends State<LogInScreen> {
       'providerAccessCode': token
     });
     ProgressDialog dialog = ProgressDialog(context);
-    dialog.setMessage(S
-        .of(context)
-        .loggingIn);
+    dialog.setMessage(S.of(context).loggingIn);
     dialog.show();
     api.apiTokenAuthExternalAuthenticatePost(model: data).then((result) {
       dialog.hide();

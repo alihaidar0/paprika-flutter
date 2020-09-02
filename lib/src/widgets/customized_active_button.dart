@@ -11,7 +11,7 @@ class CustomizedActiveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     //RaisedButton Allows disabling the button by passing null onPressed
     return RaisedButton(
-      color:  Theme.of(context).primaryColor,
+      color: Theme.of(context).primaryColor,
       splashColor: Colors.white30,
       child: Padding(
         padding: const EdgeInsets.symmetric(

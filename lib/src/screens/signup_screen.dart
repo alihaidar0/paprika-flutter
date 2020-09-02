@@ -95,9 +95,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 10),
-                child: Text(S
-                    .of(context)
-                    .createNewAccount, style: TextStyle(fontSize: 18)),
+                child: Text(S.of(context).createNewAccount,
+                    style: TextStyle(fontSize: 18)),
               ),
               CustomInputText(
                 S.of(context).yourName,
@@ -311,14 +310,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   _login(generalContext, _phoneNumberController.text,
                       _passwordController.text, false);
                 },
-                child: Text(S.of(generalContext).skip, style: TextStyle(color: Colors.grey))),
+                child: Text(S.of(generalContext).skip,
+                    style: TextStyle(color: Colors.grey))),
             yesButton: FlatButton(
                 onPressed: () {
                   Navigator.pop(generalContext);
                   Navigator.push(
                           generalContext,
                           MaterialPageRoute(
-                              builder: (context) => ConfirmPhoneNumberScreen(phoneNumber: _phoneNumberController.text)))
+                              builder: (context) => ConfirmPhoneNumberScreen(
+                                  phoneNumber: _phoneNumberController.text)))
                       .then((confirmed) {
                     if (confirmed == null || !confirmed) {
                       PapricaToast.showToast(S

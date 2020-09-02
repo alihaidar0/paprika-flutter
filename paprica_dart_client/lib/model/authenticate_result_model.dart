@@ -1,7 +1,6 @@
 part of swagger.api;
 
 class AuthenticateResultModel {
-  
   String accessToken = null;
   int expireInSeconds = null;
   int userId = null;
@@ -17,21 +16,11 @@ class AuthenticateResultModel {
 
   AuthenticateResultModel.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    accessToken =
-        json['accessToken']
-    ;
-    phoneNumber =
-        json['phoneNumber']
-    ;
-    isPhoneNumberConfirmed =
-      json['isPhoneNumberConfirmed']
-    ;
-    expireInSeconds =
-        json['expireInSeconds']
-    ;
-    userId =
-        json['userId']
-    ;
+    accessToken = json['accessToken'];
+    phoneNumber = json['phoneNumber'];
+    isPhoneNumberConfirmed = json['isPhoneNumberConfirmed'];
+    expireInSeconds = json['expireInSeconds'];
+    userId = json['userId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,19 +30,24 @@ class AuthenticateResultModel {
       'isPhoneNumberConfirmed': isPhoneNumberConfirmed,
       'expireInSeconds': expireInSeconds,
       'userId': userId
-     };
+    };
   }
 
   static List<AuthenticateResultModel> listFromJson(List<dynamic> json) {
-    return json == null ? new List<AuthenticateResultModel>() : json.map((value) => new AuthenticateResultModel.fromJson(value)).toList();
+    return json == null
+        ? new List<AuthenticateResultModel>()
+        : json
+            .map((value) => new AuthenticateResultModel.fromJson(value))
+            .toList();
   }
 
-  static Map<String, AuthenticateResultModel> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, AuthenticateResultModel> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, AuthenticateResultModel>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new AuthenticateResultModel.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new AuthenticateResultModel.fromJson(value));
     }
     return map;
   }
 }
-

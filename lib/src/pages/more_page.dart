@@ -25,7 +25,8 @@ class _MorePageState extends State<MorePage> {
         children: <Widget>[
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) {
               return ProfilePage();
             })),
             child: Padding(
@@ -46,7 +47,8 @@ class _MorePageState extends State<MorePage> {
           Divider(),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Share.share(S.of(context).shareTextApp("https://links.popina.me")),
+            onTap: () => Share.share(
+                S.of(context).shareTextApp("https://links.popina.me")),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Row(
@@ -65,7 +67,8 @@ class _MorePageState extends State<MorePage> {
           Divider(),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) {
               return AboutUsScreen();
             })),
             child: Padding(
@@ -128,7 +131,9 @@ class _MorePageState extends State<MorePage> {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: <Widget>[
-                  Text(ApiTypesHelper().isAuthorized ? S.of(context).logOut : S.of(context).logIn),
+                  Text(ApiTypesHelper().isAuthorized
+                      ? S.of(context).logOut
+                      : S.of(context).logIn),
                   Icon(
                     Localizations.localeOf(context).languageCode == 'en'
                         ? Icons.keyboard_arrow_right
@@ -181,7 +186,9 @@ class _MorePageState extends State<MorePage> {
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).loggingOut);
     dialog.show();
-    api.apiServicesAppNotificationsUnregisterFirebaseNotificationsPost().then((_) {
+    api
+        .apiServicesAppNotificationsUnregisterFirebaseNotificationsPost()
+        .then((_) {
       SharedPreference.removeTokenFromSharedPrefs().then((_) {
         dialog.hide();
         ApiTypesHelper().setAuthorized(false);
@@ -211,7 +218,8 @@ class _LanguageChangerDialogState extends State<LanguageChangerDialog> {
   @override
   Widget build(BuildContext context) {
     String langCode = Localizations.localeOf(context).languageCode;
-    String defaultLang = langCode == 'en' ? S.of(context).english : S.of(context).arabic;
+    String defaultLang =
+        langCode == 'en' ? S.of(context).english : S.of(context).arabic;
 
     return AlertDialog(
       title: Text(
@@ -248,7 +256,8 @@ class _LanguageChangerDialogState extends State<LanguageChangerDialog> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(S.of(context).cancel, style: TextStyle(color: Colors.grey))),
+            child: Text(S.of(context).cancel,
+                style: TextStyle(color: Colors.grey))),
         FlatButton(
             onPressed: () {
               Navigator.of(context).pop(res != null ? res : langCode);

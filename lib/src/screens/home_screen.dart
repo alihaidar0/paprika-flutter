@@ -233,7 +233,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       (context, _) => Container(
                             height: MediaQuery.of(context).size.height - 70,
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, _currentIndex == 0 ? 0 : 60),
+                              padding: EdgeInsets.fromLTRB(
+                                  0, 0, 0, _currentIndex == 0 ? 0 : 60),
                               child: TabBarView(
                                 physics: const NeverScrollableScrollPhysics(),
                                 controller: _tabController,

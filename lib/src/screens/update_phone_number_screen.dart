@@ -8,7 +8,8 @@ import '../../utils.dart';
 
 class UpdatePhoneNumberScreen extends StatefulWidget {
   @override
-  _UpdatePhoneNumberScreenState createState() => _UpdatePhoneNumberScreenState();
+  _UpdatePhoneNumberScreenState createState() =>
+      _UpdatePhoneNumberScreenState();
 }
 
 class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
@@ -45,21 +46,23 @@ class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFaa757f)),
-                        borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                        borderRadius:
+                            const BorderRadius.all(const Radius.circular(3.0)),
                       )),
                 ),
                 Center(
                     child: Padding(
                         padding: const EdgeInsets.only(top: 10),
-                      child: CustomizedActiveButton(
-                        title: S.of(context).update,
-                        onPressed: () => _onUpdateNumberPressed(context),
-                      )
-                    )),
+                        child: CustomizedActiveButton(
+                          title: S.of(context).update,
+                          onPressed: () => _onUpdateNumberPressed(context),
+                        ))),
               ],
             )));
   }
