@@ -123,7 +123,7 @@ class PapricaToast {
       msg: text,
       toastLength: length,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIos: 3,
+      timeInSecForIosWeb: 3,
       backgroundColor: backgroundColor,
       textColor: Colors.white,
       fontSize: 14.0,
@@ -554,7 +554,8 @@ class FullscreenPhoto extends StatelessWidget {
       body: Center(
         child: Container(
             child: PhotoView(
-          loadingChild: Container(),
+          loadingBuilder: (context, progress) => Container(),
+          // loadingChild: Container(),
           backgroundDecoration: BoxDecoration(color: Colors.black87),
           minScale: PhotoViewComputedScale.contained * 0.8,
           imageProvider: provider,
@@ -586,6 +587,7 @@ class PapricaCachedImage extends StatelessWidget {
 
 class HorizontalLineWithWidget extends StatelessWidget {
   final Widget child;
+
   const HorizontalLineWithWidget({this.child});
 
   @override

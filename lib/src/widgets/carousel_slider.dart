@@ -189,7 +189,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                 child: PhotoViewGallery.builder(
               pageController: PageController(initialPage: _current),
               itemCount: widget.urls.length,
-              loadingChild:
+              loadingBuilder: (context, progress) =>
                   SpinKitCubeGrid(color: Theme.of(context).primaryColor),
               builder: (context, index) {
                 return PhotoViewGalleryPageOptions(
@@ -198,7 +198,8 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                       ? AssetImage(widget.urls[index])
                       : NetworkImage(widget.urls[index]),
                   initialScale: PhotoViewComputedScale.contained,
-                  heroTag: widget.urls[index],
+                  heroAttributes: PhotoViewHeroAttributes(tag: widget.urls[index]),
+                  // heroTag: widget.urls[index],
                 );
               },
             )),
