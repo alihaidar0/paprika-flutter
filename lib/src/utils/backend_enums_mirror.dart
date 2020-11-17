@@ -24,6 +24,16 @@ class ApiHelper {
   static const int reservationTypeCanceled = 3;
   static const int reservationTypeApproved = 4;
 
+  static const int pickupTypePending = 1;
+  static const int pickupTypeRejected = 2;
+  static const int pickupTypeCanceled = 3;
+  static const int pickupTypeApproved = 4;
+
+  static const int deliveryTypePending = 1;
+  static const int deliveryTypeRejected = 2;
+  static const int deliveryTypeCanceled = 3;
+  static const int deliveryTypeApproved = 4;
+
   static String toStringOccasionType(BuildContext context, int occasionType) {
     switch (occasionType) {
       case 1:

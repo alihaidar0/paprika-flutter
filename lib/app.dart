@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
 import 'package:paprica/translations.dart';
@@ -76,6 +77,10 @@ class _PapricaAppState extends State<PapricaApp> {
   }
 
   Route handleRoute(RouteSettings settings) {
+    if (settings.name == '/home') {
+      return _buildRoute(
+          settings, new HomeScreen(action: settings.arguments,initialIndex: settings.arguments));
+    }
     if (settings.name == '/event') {
       return _buildRoute(
           settings, new EventScreen(eventId: settings.arguments));
@@ -87,6 +92,14 @@ class _PapricaAppState extends State<PapricaApp> {
     if (settings.name == '/restaurant') {
       return _buildRoute(
           settings, new RestaurantHome(restaurantId: settings.arguments));
+    }
+    if (settings.name == '/pickup') {
+      return _buildRoute(
+          settings, new PickupScreen(restaurantId: settings.arguments));
+    }
+    if (settings.name == '/delivery') {
+      return _buildRoute(
+          settings, new DeliveryScreen(restaurantId: settings.arguments));
     }
     if (settings.name == '/meal') {
       return _buildRoute(
@@ -100,7 +113,6 @@ class _PapricaAppState extends State<PapricaApp> {
       return _buildRoute(
           settings, new SignUpScreen(asAService: settings.arguments));
     }
-
     return null;
   }
 

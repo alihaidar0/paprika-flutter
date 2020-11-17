@@ -11,3 +11,6 @@ export 'src/screens/restaurants_map_screen.dart';
 export 'src/screens/change_password_screen.dart';
 export 'src/screens/confirm_phone_number_screen.dart';
 export 'src/screens/forget_password_screen.dart';
+export 'src/screens/reservations_screen.dart';
+export 'src/screens/pickup_screen.dart';
+export 'src/screens/delivery_screen.dart';

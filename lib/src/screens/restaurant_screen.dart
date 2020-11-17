@@ -53,6 +53,18 @@ class _RestaurantHomeState extends State<RestaurantHome>
         .isNotEmpty;
   }
 
+  get _pickupable {
+    return !restData.settings.services
+        .where((service) => service.code == 'pickup')
+        .isNotEmpty;
+  }
+
+  get _deliverable {
+    return !restData.settings.services
+        .where((service) => service.code == 'delivery')
+        .isNotEmpty;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -135,7 +147,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
         (widget.mealShare == null ||
             widget.mealShare.restaurantId == null ||
             widget.mealShare.restaurantId <= 0)) {
-      debugPrint(widget.mealShare.toString());
+      // debugPrint(widget.mealShare.toString());
       return Future.value();
     }
     ApiClient client = PapricaApiClient();
@@ -144,6 +156,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       futureRestData = apiInstance.apiServicesAppCustomerRestaurantGetGet(
           id: widget.restaurantId ?? widget.mealShare.restaurantId);
     });
+
   }
 
   @override
@@ -152,7 +165,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
         (widget.mealShare == null ||
             widget.mealShare.restaurantId == null ||
             widget.mealShare.restaurantId <= 0)) {
-      debugPrint(widget.mealShare.toString());
+      // debugPrint(widget.mealShare.toString());
       Navigator.of(context).pop();
     }
     final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
@@ -179,68 +192,138 @@ class _RestaurantHomeState extends State<RestaurantHome>
               widgetLogoImage ??=
                   CachedNetworkImageProvider(restData.logoImage);
               return Scaffold(
-                persistentFooterButtons: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/order.svg",
-                                  width: 30,
-                                  height: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, top: 5.0),
-                                  child: Text("Order Now"),
-                                ),
-                              ],
-                            ),
-                          ),
+                bottomSheet: restData.settings.services.length == 0
+                    ? Container(
+                        height: 0.0,
+                        width: 0.0,
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              top: BorderSide(
+                                  width: 1.0, color: Colors.black12)),
                         ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/reserve.svg",
-                                  width: 25,
-                                  height: 25,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _reservable
+                                ? InkWell(
+                                    onTap: () {_onReservePressed(context);},
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0,
+                                          top: 10.0,
+                                          right: 8.0,
+                                          bottom: 10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/reserve.svg",
+                                            width: 25,
+                                            height: 25,
+                                          ),
+                                          Padding(
+                                            padding: Localizations.localeOf(context)
+                                                .languageCode ==
+                                                'en'
+                                                ? const EdgeInsets.only(
+                                                left: 8.0, top: 5.0)
+                                                : const EdgeInsets.only(
+                                                top: 5.0, right: 8.0),
+                                            child: Text(S.of(context).reserveNow),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0.0,
+                                    width: 0.0,
+                                  ),
+                            (_reservable && ((_pickupable == true && _deliverable == false) || (_pickupable == false && _deliverable == true)))?SizedBox(width: 40,):Container(width: 0,height: 0,),
+                            _pickupable == true
+                                ? InkWell(
+                                    onTap: () {
+                                      _onOrderPickupPressed(context);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0,
+                                          top: 10.0,
+                                          right: 8.0,
+                                          bottom: 10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/order.svg",
+                                            width: 30,
+                                            height: 30,
+                                          ),
+                                          Padding(
+                                            padding: Localizations.localeOf(context)
+                                                .languageCode ==
+                                                'en'
+                                                ? const EdgeInsets.only(
+                                                left: 8.0, top: 5.0)
+                                                : const EdgeInsets.only(
+                                                top: 5.0, right: 8.0),
+                                            child: Text(S.of(context).orderPickup),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0.0,
+                                    width: 0.0,
+                                  ),
+                            ((_reservable == true && _pickupable == false && _deliverable == true) || (_reservable == false && _pickupable == true && _deliverable == true))?SizedBox(width: 40,):Container(width: 0,height: 0,),
+                            _deliverable
+                                ? InkWell(
+                              onTap: () {
+                                _onOrderDeliveryPressed(context);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8.0,
+                                    top: 10.0,
+                                    right: 8.0,
+                                    bottom: 10.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/noun_food_delivery.svg",
+                                      width: 25,
+                                      height: 25,
+                                    ),
+                                    Padding(
+                                      padding: Localizations.localeOf(context)
+                                          .languageCode ==
+                                          'en'
+                                          ? const EdgeInsets.only(
+                                          left: 8.0, top: 5.0)
+                                          : const EdgeInsets.only(
+                                          top: 5.0, right: 8.0),
+                                      child: Text(S.of(context).orderDelivery),
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, top: 5.0),
-                                  child: Text("Reserve Now"),
-                                ),
-                              ],
+                              ),
+                            )
+                                : Container(
+                              height: 0.0,
+                              width: 0.0,
                             ),
-                          ),
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(right: 20),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.more_horiz),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
                 body: NestedScrollView(
                   controller: _scrollController,
                   headerSliverBuilder:
@@ -257,7 +340,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
                                     : TextDirection.rtl,
                           ),
                           onPressed: () {
-                            _screenActivity.add(false);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -524,6 +606,22 @@ class _RestaurantHomeState extends State<RestaurantHome>
     }
   }
 
+  void _onOrderPickupPressed(context) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) {
+          return PickupScreen(
+            restaurantId: widget.restaurantId, restaurantName: restData.name,);
+        }));
+  }
+
+  void _onOrderDeliveryPressed(context) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) {
+          return DeliveryScreen(
+            restaurantId: widget.restaurantId, restaurantName: restData.name, restaurantLongitude:restData.longitude, restaurantLatitude:restData.latitude,);
+        }));
+  }
+
   void _showReservationDialog() {
     showDialog(
         context: context,
@@ -547,10 +645,11 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _viewMyReservations(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
-      return new HomeScreen(action: HomeScreenAction.reservations);
-    }));
+    Navigator.of(context).pop();
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) {
+          return ReservationsScreen();
+        }));
   }
 
   _getRestaurantOpenLabel(RestaurantHomeDto data) {
@@ -1107,7 +1206,7 @@ class _ActionsRowState extends State<ActionsRow> {
       _audioPlayer.setVolume(1);
       _audioPlayer.setReleaseMode(ReleaseMode.LOOP);
       _audioPlayer.onPlayerStateChanged.listen((state) {
-        debugPrint(state.toString());
+        // debugPrint(state.toString());
       });
       _audioPlayer.play(widget.restData.audioTrack).then((status) {
         if (mounted) {

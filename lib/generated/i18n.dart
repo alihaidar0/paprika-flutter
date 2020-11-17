@@ -27,15 +27,21 @@ class S implements WidgetsLocalizations {
   String get actionAddToFavorite => "like a restaurant";
   String get actionRateMeal => "rate a meal";
   String get actionReserve => "reserve";
+  String get actionPickup => "Order Pickup";
+  String get actionDelivery => "Order Delivery";
   String get actionReview => "review";
   String get addComment => "Add your comment";
   String get additionalInformation => "Additional Information";
   String get address => "Address";
+  String get addToPickupList => "Add to pickup list";
+  String get addToDeliveryList => "Add to delivery list";
   String get alcoholFree => "Alcohol Free";
+  String get allServices => "All services";
   String get alreadyHaveAccount => "Already have an account?";
   String get ambiance => "Ambiance";
   String get amenities => "Amenities";
   String get anyOccasion => "Any Occasion?";
+  String get and => "And";
   String get apply => "Apply";
   String get applyFilter => "Custom Search";
   String get approved => "Approved";
@@ -59,11 +65,17 @@ class S implements WidgetsLocalizations {
   String get cancelOrder => "Cancel";
   String get cancelReason => "Type a reason";
   String get cancelReservation => "Cancel Reservation";
+  String get cancelPickup => "Cancel Pickup";
+  String get cancelDelivery => "Cancel Delivery";
   String get cancelUpdate => "Cancel Update";
   String get cancelingUpdate => "Cancelling the update";
   String get cancelled => "Cancelled";
   String get cancelledReservation => "Cancelled";
   String get cancellingReservation => "Cancelling Reservation..";
+  String get cancelledPickup => "Cancelled";
+  String get cancellingPickup => "Cancelling Pickup..";
+  String get cancelledDelivery => "Cancelled";
+  String get cancellingDelivery => "Cancelling Delivery..";
   String get catsNotAvailable => "Menu is currently empty.";
   String get change => "Change";
   String get changeLanguageOffer =>
@@ -79,21 +91,32 @@ class S implements WidgetsLocalizations {
   String get clearing => "Clearing...";
   String get close => "Close";
   String get closed => "Closed";
+  String get clickToLocateYou => "Click to locate you";
   String get comingEvent => "Coming event";
   String get comingEvents => "Coming Events";
   String get confirm => "Confirm";
   String get confirmCancelReservation => "Confirm Cancel Reservation";
-  String get confirmCancelUpdateRequest =>
-      "Do you really want to cancel the update?";
+  String get confirmCancelPickup => "Confirm Cancel Pickup";
+  String get confirmCancelDelivery => "Confirm Cancel Delivery";
+  String get confirmCancelUpdateRequestReservation =>
+      "Do you really want to cancel the update on reservation?";
+  String get confirmCancelUpdateRequestPickup =>
+      "Do you really want to cancel the update on pickup?";
+  String get confirmCancelUpdateRequestDelivery =>
+      "Do you really want to cancel the update on delivery?";
   String get confirmCancellation => "Confirm Cancellation";
   String get confirmPassword => "Confirm Password";
   String get confirmPhoneNumber => "Confirm Phone Number";
   String get confirmReservation => "Reservation Details";
+  String get confirmPickup => "Pickup Details";
+  String get confirmDelivery => "Delivery Details";
   String get confirmationCode => "Confirmation Code";
   String get continueAsGuest => "Continue as a Guest";
   String get country => "Country";
   String get createNewAccount => "Create new account";
   String get creatingReservation => "Creating Reservation...";
+  String get creatingPickup => "Creating Pickup...";
+  String get creatingDelivery => "Creating Delivery...";
   String get cuisines => "Cuisines";
   String get currency => "SYP";
   String get currentPassword => "Current Password";
@@ -103,6 +126,9 @@ class S implements WidgetsLocalizations {
   String get dateAndTimeCannotBeChanged => "Date and Time can't be changed";
   String get delete => "Delete";
   String get deletingFailed => "Deleting process failed!";
+  String get delivery => "Delivery";
+  String get deliveryAt => "Delivery at";
+  String get deliveries => "Deliveries";
   String get description => "Description";
   String get details => "Details";
   String get didNotLoggedIn => "Sorry you are not logged in";
@@ -135,12 +161,15 @@ class S implements WidgetsLocalizations {
       "Couldn't save your rating. Please try again later.";
   String get errorReservationValidation =>
       "Please make sure to provide needed information.";
+  String get errorPickupValidation =>
+      "Please make sure to provide needed information.";
   String get errorToken => "Error identifying you, please log in agian.";
   String get errorUnknown => "Something went wrong. Please try again later.";
   String get errorUnknownWannaTryAgain =>
       "Unknown error has occurred, do you want to try again?";
   String get errorUploadImage =>
       "Something went wrong while trying to upload the image.";
+  String get estimationTime => "Estimation Time";
   String get event => "Event";
   String get events => "Events";
   String get facebook => "Facebook";
@@ -186,6 +215,7 @@ class S implements WidgetsLocalizations {
   String get loadReviews => "Load More Reviews";
   String get loading => "Loading...";
   String get loadingLocation => "Loading location on map...";
+  String get loadingDeliveryRegions => "Loading Delivery Regions...";
   String get loadingRestaurants => "Loading Restaurants...";
   String get location => "Location";
   String get logIn => "Log In";
@@ -201,9 +231,14 @@ class S implements WidgetsLocalizations {
   String get loginPromotionProfile => "Please log in to view your profile";
   String get loginPromotionReservations =>
       "Please log in to view your reservations";
+  String get loginPromotionServices =>
+      "Please log in to view your Services";
   String get low => "Low";
   String get marriage => "Marriage";
   String get menu => "Menu";
+  String get meals => "Meals";
+  String get meal => "Meal";
+  String get mealName => "Meal Name";
   String get messageClearNotification => "Clear All Notification?";
   String get messageEventNotFound => "Restaurant might have removed the event";
   String get messageLocationPermission =>
@@ -216,6 +251,10 @@ class S implements WidgetsLocalizations {
   String get moreInformation => "More Information";
   String get msgCancelReservation =>
       "Let the restaurant know why you want to cancel the reservation (Optional)";
+  String get msgCancelPickup =>
+      "Let the restaurant know why you want to cancel the pickup (Optional)";
+  String get msgCancelDelivery =>
+      "Let the restaurant know why you want to cancel the delivery (Optional)";
   String get music => "Music";
   String get myNotifications => "My Notifications";
   String get myPipina => "My Paprica";
@@ -226,6 +265,7 @@ class S implements WidgetsLocalizations {
   String get nearbyPizza => "Nearby Pizza Stores";
   String get nearbyRestaurants => "Nearby Restaurants";
   String get newPassword => "New Password";
+  String get next => "Next";
   String get ninePlus => "9+";
   String get no => "No";
   String get noAdditionalInfo => "--";
@@ -235,18 +275,26 @@ class S implements WidgetsLocalizations {
   String get noNotifications => "No Notifications";
   String get noOffers => "We couldn't find offers here. Keep looking!";
   String get noOldReservations => "You don't have any old reservation";
+  String get noOldPickups => "You don't have any old pickup";
+  String get noOldDeliveries => "You don't have any old delivery";
   String get noRestaurantsToView => "Sorry, no restaurants here yet";
   String get noRestaurantsToViewMap =>
       "There are no restaurants to view on map";
   String get noSmoking => "No Smoking";
+  String get noUpcomingServices =>
+      "Seems like you don't have any plan for the weekend.";
   String get noUpcomingReservations =>
+      "Seems like you don't have any plan for the weekend.";
+  String get noUpcomingPickups =>
+      "Seems like you don't have any plan for the weekend.";
+  String get noUpcomingDeliveries =>
       "Seems like you don't have any plan for the weekend.";
   String get noiseLevel => "Noise Level";
   String get none => "None";
   String get notes => "Notes";
   String get notificationBody => "3 People at Habak";
   String get numberOfPeople => "Number of People";
-  String get occasion => "No Occasion";
+  String get occasion => "Occasion";
   String get offer => "Offer";
   String get offer4You => "Offers for You";
   String get offline => "Offline";
@@ -254,11 +302,17 @@ class S implements WidgetsLocalizations {
   String get okay => "Ok";
   String get oldEvent => "Old Event";
   String get oldReservations => "Old Reservations";
+  String get oldPickups => "Old Pickups";
+  String get oldDeliveries => "Old Deliveries";
   String get oneMinuteAgo => "1 min ago";
   String get online => "Online";
+  String get onMap => "On Map";
   String get openFullscreen => "Open Fullscreen";
   String get opened => "Open";
   String get or => "Or";
+  String get orderNow => "Order Now";
+  String get orderPickup => "Order Pickup";
+  String get orderDelivery => "Order Delivery";
   String get otherOccasion => "Occasion";
   String get otherWord => "Other";
   String get outdoor => "Outdoor";
@@ -275,17 +329,27 @@ class S implements WidgetsLocalizations {
       "Please enter your phone number:";
   String get phoneNumberIsConfirmed => "Phone number is confirmed";
   String get phoneNumberUpdated => "Updated the Number";
+  String get pickups => "Pickups";
+  String get pickup => "Pickup";
+  String get pickupList => "Pickup List";
+  String get deliveryList => "Delivery List";
+  String get pickupAt => "Pickup at";
+  String get pickupFrom => "Pickup from";
+  String get deliveryFrom => "Delivery from";
   String get placeRate => "Restaurant Rate";
   String get places => "Places";
   String get pleaseEnterTheCodeAndYourNewPassword =>
       "Please enter the received code and your new password.";
   String get pleaseLogIn => "Please log in";
   String get pleaseLoginInOrderToReserve => "Please login to reserve";
+  String get pleaseLoginInOrderToOrderPickup => "Please login to order pickup";
+  String get pleaseLoginInOrderToOrderDelivery => "Please login to order delivery";
   String get pleaseSelectLanguage => "Please select your language";
   String get poweredBy => "Powered by SoftUp";
   String get price => "Price";
   String get processing => "Processing...";
   String get profile => "Profile";
+  String get quantity => "Quantity";
   String get rateMeal => "Rate the meal";
   String get raters => "Raters";
   String get raterss => "Raters";
@@ -293,22 +357,29 @@ class S implements WidgetsLocalizations {
   String get refreshing => "Refreshing..";
   String get region => "Region";
   String get relax => "Relax";
+  String get remove => "Remove";
   String get resendCode => "Resend code";
   String get reservation => "Reservation";
+  String get reservationAt => "Reservation at";
   String get reservationShouldBeInTheFuture =>
       "The reservation should be in the future";
   String get reservationTimeShouldBeInTheFuture =>
       "Reservation time should be in the future";
+  String get pickupTimeShouldBeInTheFuture =>
+      "Pickup time should be in the future";
   String get reservationUpdateDate => "Changed date from";
   String get reservationUpdateInfo => "Changed notes from";
   String get reservationUpdatePeople => "Changed number of people from";
   String get reservationUpdateTime => "Changed time from";
   String get reservationUpdates => "Reservation Updates";
+  String get pickupUpdates => "Pickup Updates";
+  String get deliveryUpdates => "Delivery Updates";
   String get reservations => "Reservations";
   String get reserve => "Reserve";
   String get reserveNow => "Reserve Now";
   String get reset => "Reset";
   String get restaurantsForYou => "Restaurants For You";
+  String get restaurantsLocation => "Restaurants Location";
   String get retry => "Retry";
   String get reviews => "Reviews";
   String get saturday => "Saturday";
@@ -325,6 +396,7 @@ class S implements WidgetsLocalizations {
   String get send => "Send";
   String get sentCode => "The code was sent to your phone";
   String get service => "Service";
+  String get services => "Services";
   String get settings => "Settings";
   String get shisha => "Shisha";
   String get singUp => "Sign Up";
@@ -337,7 +409,13 @@ class S implements WidgetsLocalizations {
   String get successRate => "Thanks for your feedback";
   String get successReservation =>
       "Thank You! You will receive restaurant response soon.";
+  String get successPickup =>
+      "Thank You! You will receive restaurant response soon.";
+  String get successDelivery =>
+      "Thank You! You will receive restaurant response soon.";
   String get successReservationCancel => "Reservation was cancelled";
+  String get successPickupCancel => "Pickup was cancelled";
+  String get successDeliveryCancel => "Delivery was cancelled";
   String get successReservationUpdate =>
       "Reservation updated successfully. Please wait for restaurant approval";
   String get successUpdateProfile => "Profile was updated successfully";
@@ -350,20 +428,28 @@ class S implements WidgetsLocalizations {
   String get thursday => "Thursday";
   String get time => "Time";
   String get timeAM => "AM";
+  String get thereAreNoMeals => "There are no meals";
+  String get thereAreNoMealsInPickupList => "There are no meals ic pickup list";
+  String get thereAreNoMealsInDeliveryList => "There are no meals ic delivery list";
+  String get thereAreNoDeliveryRegions => "There are no delivery regions";
   String get timeHasBeenRoundedToTheNearest15Minutes =>
       "Time has been rounded to the nearest 15 minutes";
   String get timePM => "PM";
   String get title => "Paprica";
   String get to => "To";
   String get total => "Total";
+  String get totalPrice => "Total Price";
   String get tuesday => "Tuesday";
   String get twentyFourSeven => "24/7";
+  String get upcoming => "Upcoming";
   String get undefined => "Undefined";
   String get update => "Update";
   String get updateNumber => "Update Number";
   String get updatePhoneNumber => "Update Phone Number";
   String get updating => "Updating";
   String get updatingReservation => "Updating reservation..";
+  String get updatingPickup => "Updating pickup..";
+  String get updatingDelivery => "Updating delivery..";
   String get username => "Username";
   String get viewAll => "View all";
   String get viewGallery => "View\nGallery";
@@ -371,15 +457,21 @@ class S implements WidgetsLocalizations {
   String get viewMoreEvents => "View more events";
   String get viewOnMap => "View on Map";
   String get viewReservations => "View Reservations";
+  String get viewPickups => "View Pickups";
+  String get viewDeliveries => "View Deliveries";
   String get viewUpdates => "View Updates";
+  String get viewMeals => "View Meals";
   String get wednesday => "Wednesday";
   String get yes => "Yes";
   String get youCouldHearPinDrop =>
       "You could hear a pin drop in here! Get more engaged to get more notifications.";
   String get youHavePending => "You have pending reservation";
-  String get youHaveUpcoming => "You have upcoming reservation";
+  String get youHaveUpcomingReservationAt => "You have upcoming reservation at";
+  String get youHaveUpcomingPickupAt => "You have upcoming Pickup at";
+  String get youHaveUpcomingDeliveryAt => "You have upcoming Delivery at";
   String get yourName => "Your Name";
   String get yourRate => "Your Rate";
+  String get yourLocation => "Your Location";
   String get comma => ",";
   String get youAreAllCaughtUp => "You're All Caught Up";
   String callRestaurant(String restaurantName) => "Wanna call $restaurantName?";
@@ -397,6 +489,10 @@ class S implements WidgetsLocalizations {
   String reservationSummary(String restaurantName, String peopleNumber,
           String suffix, String date, String time) =>
       "A reservation at $restaurantName will be made for $peopleNumber $suffix.\n\nDate: $date\nTime: $time";
+  String pickupSummary(String restaurantName,String date, String time) =>
+      "A pickup at $restaurantName.\n\nDate: $date\nTime: $time";
+  String deliverySummary(String restaurantName) =>
+      "A delivery at $restaurantName";
   String restaurantAddedToFavorites(String restaurant) =>
       "$restaurant was added to your favorites list";
   String restaurantRemovedFromFavorites(String restaurant) =>
@@ -457,7 +553,13 @@ class $ar extends S {
   @override
   String get forgotYourPasswordQuestion => "نسيت كلمة المرور؟";
   @override
+  String get noUpcomingServices => "لا يوجد لديك أي خدمات قادمة";
+  @override
   String get noUpcomingReservations => "لا يوجد لديك أي حجوزات قادمة";
+  @override
+  String get noUpcomingPickups => "لا يوجد لديك أي طلبيات قادمة";
+  @override
+  String get noUpcomingDeliveries => "لا يوجد لديك أي توصيلات قادمة";
   @override
   String get confirmPhoneNumber => "تأكيد رقم الهاتف";
   @override
@@ -487,6 +589,10 @@ class $ar extends S {
   @override
   String get viewReservations => "عرض الحجوزات";
   @override
+  String get viewPickups => "عرض الطلبيات";
+  @override
+  String get viewDeliveries => "عرض التوصيلات";
+  @override
   String get customerName => "اسم الزبون";
   @override
   String get errorUploadImage =>
@@ -503,6 +609,10 @@ class $ar extends S {
   String get at => "في";
   @override
   String get cancelledReservation => "مُلغى";
+  @override
+  String get cancelledPickup => "مُلغى";
+  @override
+  String get cancelledDelivery => "مُلغى";
   @override
   String get enterCode => "أدخل الرمز";
   @override
@@ -542,6 +652,14 @@ class $ar extends S {
   @override
   String get timeAM => "صباحاً";
   @override
+  String get thereAreNoMeals => "لا توجد وجبات";
+  @override
+  String get thereAreNoMealsInPickupList => "لا توجد وجبات بقائمة الطلبية";
+  @override
+  String get thereAreNoMealsInDeliveryList => "لا توجد وجبات بقائمة التوصيلة";
+  @override
+  String get thereAreNoDeliveryRegions => "لا توجد مناطق مخدمة";
+  @override
   String get logInGoogle => "تسجيل الدخول عبر جوجل";
   @override
   String get placeRate => "تقييم المطعم";
@@ -560,7 +678,13 @@ class $ar extends S {
   @override
   String get anyOccasion => "هل يوجد مناسبة خاصة؟";
   @override
+  String get and => "و";
+  @override
   String get address => "العنوان";
+  @override
+  String get addToPickupList => "إضافة إلى قائمة الطلبية";
+  @override
+  String get addToDeliveryList => "إضافة إلى قائمة التوصيلة";
   @override
   String get timePM => "مساءً";
   @override
@@ -585,6 +709,8 @@ class $ar extends S {
   String get filterCleared => "تم مسح عوامل التصفية";
   @override
   String get closed => "مغلق";
+  @override
+  String get clickToLocateYou => "أنقر لتحديد موقعك";
   @override
   String get to => "إلى";
   @override
@@ -614,6 +740,8 @@ class $ar extends S {
   @override
   String get errorReservationValidation =>
       "الرجاء التأكد من تامين المعلومات المطلوبة لعملية الحجز.";
+  String get errorPickupValidation =>
+      "الرجاء التأكد من تامين المعلومات المطلوبة لعملية طلب طلبية.";
   @override
   String get errorChangeLanguage =>
       "لم نستطع تغيير اللغة. الرجاء المحاولة لاحقاً.";
@@ -622,11 +750,19 @@ class $ar extends S {
   @override
   String get noAdditionalInfo => "لا يوجد";
   @override
-  String get youHaveUpcoming => "لديك حجز قادم";
+  String get youHaveUpcomingReservationAt => "لديك حجز قادم في";
+  @override
+  String get youHaveUpcomingPickupAt => "لديك طلبية قادمة في";
+  @override
+  String get youHaveUpcomingDeliveryAt => "لديك توصيلة قادمة في";
   @override
   String get clearFilter => "مسح";
   @override
   String get confirmCancelReservation => "إلغاء الحجز";
+  @override
+  String get confirmCancelPickup => "إلغاء الطلبية";
+  @override
+  String get confirmCancelDelivery => "إلغاء التوصيلة";
   @override
   String get holdTight => "انتظر";
   @override
@@ -675,7 +811,7 @@ class $ar extends S {
   @override
   String get filterCoverSentence => "احجز المكان المناسب لك ولأحبائك";
   @override
-  String get occasion => "لا يوجد مناسبة";
+  String get occasion => "المناسبة";
   @override
   String get submit => "إرسال";
   @override
@@ -724,6 +860,10 @@ class $ar extends S {
   @override
   String get creatingReservation => "يتم الحجز...";
   @override
+  String get creatingPickup => "يتم طلب طلبية...";
+  @override
+  String get creatingDelivery => "يتم طلب توصيلة...";
+  @override
   String get successPasswordChanged => "تم تغيير كلمة المرور";
   @override
   String get cancelingUpdate => "يتم إلغاء التعديل على الحجز";
@@ -734,9 +874,13 @@ class $ar extends S {
   @override
   String get yourRate => "تقييم خاص بك";
   @override
+  String get yourLocation => "موقعك";
+  @override
   String get yes => "نعم";
   @override
   String get relax => "استرخاء";
+  @override
+  String get remove => "إزالة";
   @override
   String get forWord => "لـ";
   @override
@@ -752,6 +896,8 @@ class $ar extends S {
   String get byParking => "نوع موقف السيارات";
   @override
   String get service => "الخدمة";
+  @override
+  String get services => "الخدمات";
   @override
   String get location => "الموقع";
   @override
@@ -773,6 +919,10 @@ class $ar extends S {
   @override
   String get cancellingReservation => "يتم إلغاء الحجز";
   @override
+  String get cancellingPickup => "يتم إلغاء الطلبية";
+  @override
+  String get cancellingDelivery => "يتم إلغاء التوصيلة";
+  @override
   String get changeLanguageOffer => "يمكن تغيير اللغة من المزيد -> اللغة";
   @override
   String get Rejected => "مرفوضة";
@@ -789,6 +939,8 @@ class $ar extends S {
   @override
   String get filterTrySomethingElse => "تحرير البحث";
   @override
+  String get viewMeals => "مشاهدة الوجبات";
+  @override
   String get viewUpdates => "مشاهدة التعديلات";
   @override
   String get errorRateMeal => "تعذر حفظ تقييم الوجبة. الرجاء المحاولة لاحقاً.";
@@ -801,7 +953,13 @@ class $ar extends S {
   @override
   String get cancelReservation => "إلغاء الحجز";
   @override
+  String get cancelPickup => "إلغاء الطلبية";
+  @override
+  String get cancelDelivery => "إلغاء التوصيلة";
+  @override
   String get reservation => "حجز";
+  @override
+  String get reservationAt => "حجز قادم في";
   @override
   String get thisMonth => "الشهر الحالي";
   @override
@@ -809,12 +967,20 @@ class $ar extends S {
   @override
   String get updatingReservation => "يتم تعديل الحجز";
   @override
+  String get updatingPickup => "يتم تعديل الطلبية";
+  @override
+  String get updatingDelivery => "يتم تعديل التوصيلة";
+  @override
   String get messageLocationPermission =>
       "من أجل تجربة أفضل، نحن بحاجة لمعرفة موقعك الحالي";
   @override
   String get gallery => "الصور";
   @override
   String get successReservation => "شكراً لك! ستستلم رد من المطعم قريباً";
+  @override
+  String get successPickup => "شكراً لك! ستستلم رد من المطعم قريباً";
+  @override
+  String get successDelivery => "شكراً لك! ستستلم رد من المطعم قريباً";
   @override
   String get byMusic => "وفق الموسيقى";
   @override
@@ -828,10 +994,17 @@ class $ar extends S {
   @override
   String get newPassword => "كلمة المرور الجديدة";
   @override
+  String get next => "التالي";
+  @override
   String get myNotifications => "إشعاراتي";
   @override
   String get pleaseLoginInOrderToReserve =>
       "الرجاء تسجيل الدخول لتتمكن من الحجز";
+  @override
+  String get pleaseLoginInOrderToOrderPickup =>
+      "الرجاء تسجيل الدخول لتتمكن من طلب طلبية";
+  String get pleaseLoginInOrderToOrderDelivery =>
+      "الرجاء تسجيل الدخول لتتمكن من طلب توصيلة";
   @override
   String get loading => "جاري التحميل...";
   @override
@@ -841,7 +1014,11 @@ class $ar extends S {
   @override
   String get raters => "المقيمون";
   @override
-  String get confirmCancelUpdateRequest => "هل تريد إلغاء التعديلات على الحجز؟";
+  String get confirmCancelUpdateRequestReservation => "هل تريد إلغاء التعديلات على الحجز؟";
+  @override
+  String get confirmCancelUpdateRequestPickup => "هل تريد إلغاء التعديلات على الطلبية؟";
+  @override
+  String get confirmCancelUpdateRequestDelivery => "هل تريد إلغاء التعديلات على التوصيلة؟";
   @override
   String get updatePhoneNumber => "تعديل رقم الهاتف";
   @override
@@ -859,6 +1036,8 @@ class $ar extends S {
   @override
   String get loginPromotionReservations =>
       "الرجاء تسحيل الدخول لمشاهدة حجوزاتك";
+  String get loginPromotionServices =>
+      "الرجاء تسحيل الدخول لمشاهدة خدماتك";
   @override
   String get errorPlayingAudio => "عذراً جهازك لا يدعم هذه الميزة";
   @override
@@ -894,6 +1073,8 @@ class $ar extends S {
   @override
   String get actionRateMeal => "تقيم وجبة";
   @override
+  String get estimationTime => "الوقت المقدر";
+  @override
   String get event => "حدث";
   @override
   String get cancelUpdate => "إلغاء التعديل";
@@ -912,11 +1093,23 @@ class $ar extends S {
   @override
   String get restaurantsForYou => "مطاعم خاصة لك";
   @override
+  String get restaurantsLocation => "موقع المطعم";
+  @override
   String get menu => "القائمة";
+  @override
+  String get meals => "الوجبات";
+  @override
+  String get meal => "الوجبة";
+  @override
+  String get mealName => "اسم الوجبة";
   @override
   String get clearing => "جاري الحذف...";
   @override
   String get oldReservations => "حجوزات سابقة";
+  @override
+  String get oldPickups => "طلبيات سابقة";
+  @override
+  String get oldDeliveries => "توصيلات سابقة";
   @override
   String get filter => "تنقية";
   @override
@@ -924,7 +1117,13 @@ class $ar extends S {
   @override
   String get places => "أماكن";
   @override
+  String get quantity => "الكمية";
+  @override
   String get successReservationCancel => "تم إلغاء التعديل على الحجز";
+  @override
+  String get successPickupCancel => "تم إلغاء التعديل على الطلبية";
+  @override
+  String get successDeliveryCancel => "تم إلغاء التعديل على التوصيلة";
   @override
   String get applyFilter => "بحث مخصص";
   @override
@@ -933,6 +1132,10 @@ class $ar extends S {
   String get date => "التاريخ";
   @override
   String get cancelOrder => "إلغاء";
+  @override
+  String get actionPickup => "تطلب طلبية";
+  @override
+  String get actionDelivery => "تطلب توصيلة";
   @override
   String get actionReserve => "تحجز";
   @override
@@ -946,6 +1149,8 @@ class $ar extends S {
   @override
   String get reservationTimeShouldBeInTheFuture =>
       "يجب أن يكون وقت الحجز في المستقبل";
+  String get PickupTimeShouldBeInTheFuture =>
+      "يجب أن يكون وقت الطلبية في المستقبل";
   @override
   String get high => "مرتفع";
   @override
@@ -981,6 +1186,10 @@ class $ar extends S {
   @override
   String get reservationUpdates => "تعديلات الحجز";
   @override
+  String get pickupUpdates => "تعديلات الطلبية";
+  @override
+  String get deliveryUpdates => "تعديلات التوصيلة";
+  @override
   String get opened => "مفتوح";
   @override
   String get logIn => "تسجيل الدخول";
@@ -991,6 +1200,10 @@ class $ar extends S {
   @override
   String get confirmReservation => "معلومات الحجز";
   @override
+  String get confirmPickup => "معلومات الطلبية";
+  @override
+  String get confirmDelivery => "معلومات التوصيلة";
+  @override
   String get person => "شخص";
   @override
   String get otherOccasion => "مناسبة";
@@ -999,9 +1212,17 @@ class $ar extends S {
   @override
   String get msgCancelReservation => "أي سبب لإلغاء الحجز؟";
   @override
+  String get msgCancelPickup => "أي سبب لإلغاء الطلبية؟";
+  @override
+  String get msgCancelDelivery => "أي سبب لإلغاء التوصيلة؟";
+  @override
   String get send => "إرسال";
   @override
   String get noOldReservations => "لا يوجد حجوزات قديمة";
+  @override
+  String get noOldPickups => "لا يوجد طلبيات قديمة";
+  @override
+  String get noOldDeliveries => "لا يوجد توصيلات قديمة";
   @override
   String get loadingRestaurants => "جاري تحميل لائحة المطاعم...";
   @override
@@ -1019,6 +1240,8 @@ class $ar extends S {
   @override
   String get loadingLocation => "يتم تحميل الموقع على الخريطة...";
   @override
+  String get loadingDeliveryRegions => "يتم تحميل المناطق المخدمة...";
+  @override
   String get errorInternetConnection => "يبدو أنه لست متصل بالانترنت";
   @override
   String get selectCity => "الرجاء اختيار مدينة";
@@ -1030,6 +1253,8 @@ class $ar extends S {
   String get delete => "حذف";
   @override
   String get discoverNewRestaurants => "اكتشف مطاعم جديدة";
+  @override
+  String get totalPrice => "السعر الكلي";
   @override
   String get total => "المجموع";
   @override
@@ -1046,6 +1271,36 @@ class $ar extends S {
   String get nearbyPizza => "مطاعم بيتزا قريبة";
   @override
   String get or => "أو";
+  @override
+  String get orderNow => "اطلب الآن";
+  @override
+  String get orderPickup => "اطلب طلبية";
+  @override
+  String get orderDelivery => "اطلب توصيلة";
+  @override
+  String get delivery => "توصيلة";
+  @override
+  String get deliveryAt => "توصيلة قادمة في";
+  @override
+  String get deliveries => "التوصيلات";
+  @override
+  String get pickups => "الطلبيات";
+  @override
+  String get pickup => "طلبية";
+  @override
+  String get pickupList => "قائمة الطلبية";
+  @override
+  String get deliveryList => "قائمة التوصيلة";
+  @override
+  String get pickupAt => "طلبية قادمة في";
+  @override
+  String get pickupFrom => "طلبية من";
+  @override
+  String get deliveryFrom => "توصيلة من";
+  @override
+  String get upcoming => "القادمة";
+  @override
+  String get allServices => "كل الخدمات";
   @override
   String get pendingChanges => "يوجد تعديلات قيد الانتظار";
   @override
@@ -1082,6 +1337,8 @@ class $ar extends S {
   @override
   String get online => "متصل";
   @override
+  String get onMap => "على الخريطة";
+  @override
   String get viewMoreEvents => "عرض المزيد من الأحداث";
   @override
   String get logOut => "تسجيل خروج";
@@ -1097,6 +1354,10 @@ class $ar extends S {
   String reservationSummary(String restaurantName, String peopleNumber,
           String suffix, String date, String time) =>
       "سيتم الحجز في  $restaurantName لـ $peopleNumber $suffix.\n\nالتاريخ: $date\nالوقت: $time";
+  String pickupSummary(String restaurantName,String date, String time) =>
+      "سيتم طلب طلبية في  $restaurantName.\n\nالتاريخ: $date\nالوقت: $time";
+  String deliverySummary(String restaurantName) =>
+      "سيتم طلب توصيلة في  $restaurantName.";
   @override
   String shareText(String restaurantName, String link) =>
       "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprica على الرابط $link";

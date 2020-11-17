@@ -269,7 +269,8 @@ class RestaurantNamedLink extends StatelessWidget {
           }));
         },
         child: Text(
-          at + restaurantName,
+          // at + restaurantName,
+          restaurantName,
           style: TextStyle(
               color: this.textColor ?? Theme.of(context).primaryColor,
               fontWeight: FontWeight.w500),

@@ -25,7 +25,7 @@ class CustomerUpcomingReservationDto {
 
   String customerAdditionalInfo = null;
 
-  int occasionType = null;
+  String occasionType = null;
 
   int restaurantId = null;
 

@@ -15,8 +15,10 @@ import '../../widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeScreenAction action;
+  final int initialIndex;
 
-  const HomeScreen({this.action});
+  // const HomeScreen({this.action});
+  const HomeScreen({Key key, this.initialIndex, this.action}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -47,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     initUniLinks();
-
     _checkNotificationsCount();
     _refreshStream = StreamController<bool>.broadcast();
     resetScrollPositionStream = StreamController<bool>.broadcast();
@@ -56,11 +57,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))
-      ..add(ReservationsPage(changeHomePageIndexHandler))
+      ..add(ServicePage(changeHomePageIndexHandler))
       ..add(PlacesPage())
       ..add(MorePage());
 
     _tabController = TabController(vsync: this, length: _tabList.length);
+    if (widget.initialIndex != null) _currentIndex = widget.initialIndex;
   }
 
   _handleChildScroll(ScrollDirection direction, double offset) {
@@ -287,8 +289,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   height: 18,
                   width: 18,
                   child: Image.asset("assets/icons/reservation_active.png")),
-              title: Text(S.of(context).reservations,
-                  style: TextStyle(fontSize: 12)),
+              title:
+                  Text(S.of(context).services, style: TextStyle(fontSize: 12)),
               backgroundColor: Theme.of(context).primaryColor,
             ),
             BottomNavigationBarItem(
@@ -349,9 +351,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   changeHomePageIndexHandler(int index) {
     setState(() {
-      _currentIndex = 0;
+      _currentIndex = index;
     });
-    _changeTab(0);
+    _changeTab(index);
 //    _changeTabStream.add(index);
   }
 
