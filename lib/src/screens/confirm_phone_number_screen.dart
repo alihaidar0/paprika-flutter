@@ -13,7 +13,8 @@ class ConfirmPhoneNumberScreen extends StatefulWidget {
   const ConfirmPhoneNumberScreen({Key key, this.phoneNumber}) : super(key: key);
 
   @override
-  _ConfirmPhoneNumberScreenState createState() => _ConfirmPhoneNumberScreenState();
+  _ConfirmPhoneNumberScreenState createState() =>
+      _ConfirmPhoneNumberScreenState();
 }
 
 class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
@@ -22,9 +23,12 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
 
   get _hasCodeChanged => _confirmationCodeController.text != "";
 
-  get _profileHasPhoneNumber => ApiTypesHelper().phoneNumber != null && ApiTypesHelper().phoneNumber != "";
+  get _profileHasPhoneNumber =>
+      ApiTypesHelper().phoneNumber != null &&
+      ApiTypesHelper().phoneNumber != "";
 
-  get _confirmationText => S.of(context).phoneNumberConfirmationText(ApiTypesHelper().phoneNumber);
+  get _confirmationText =>
+      S.of(context).phoneNumberConfirmationText(ApiTypesHelper().phoneNumber);
 
   bool _sealed;
 
@@ -62,7 +66,11 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).confirmPhoneNumber)),
       backgroundColor: Color(0xFFF2F2F2),
-      body: true == _sealed ? true == _profileHasPhoneNumber ? _renderConfirmation() : _renderUpdatePhoneNumber() : EmptyWidget(),
+      body: true == _sealed
+          ? true == _profileHasPhoneNumber
+              ? _renderConfirmation()
+              : _renderUpdatePhoneNumber()
+          : EmptyWidget(),
     );
   }
 
@@ -74,7 +82,8 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Text(_confirmationText, style: Theme.of(context).textTheme.subhead),
+            child: Text(_confirmationText,
+                style: Theme.of(context).textTheme.subhead),
           ),
           Text(
             S.of(context).confirmationCode,
@@ -88,11 +97,14 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFFaa757f)),
-                  borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(3.0)),
                 )),
           ),
           Center(
@@ -100,7 +112,9 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
             padding: const EdgeInsets.only(top: 10),
             child: CustomizedActiveButton(
               title: S.of(context).confirm,
-              onPressed: true == _hasCodeChanged ? () => _onConfirmPressed(context) : null,
+              onPressed: true == _hasCodeChanged
+                  ? () => _onConfirmPressed(context)
+                  : null,
             ),
           )),
           GestureDetector(
@@ -111,7 +125,9 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Text(
                   S.of(context).resendCode,
-                  style: TextStyle(color: Theme.of(context).primaryColor, decoration: TextDecoration.underline),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ),
@@ -129,7 +145,9 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
           children: <Widget>[
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(S.of(context).phoneNumberDoesNotExistPleaseEnterYours, style: Theme.of(context).textTheme.subhead)),
+                child: Text(
+                    S.of(context).phoneNumberDoesNotExistPleaseEnterYours,
+                    style: Theme.of(context).textTheme.subhead)),
             Text(
               S.of(context).phoneNumber,
               style: TextStyle(fontSize: 14, color: Color(0xFF747373)),
@@ -143,11 +161,14 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFFaa757f)),
-                    borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(3.0)),
                   )),
             ),
             Center(
@@ -155,8 +176,10 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                     padding: const EdgeInsets.only(top: 10),
                     child: CustomizedActiveButton(
                       title: S.of(context).confirm,
-                      onPressed:
-                          _phoneNumberController != null && true == _phoneNumberController.text.isNotEmpty ? () => _onUpdateNumberPressed(context) : null,
+                      onPressed: _phoneNumberController != null &&
+                              true == _phoneNumberController.text.isNotEmpty
+                          ? () => _onUpdateNumberPressed(context)
+                          : null,
                     ))),
           ],
         ));

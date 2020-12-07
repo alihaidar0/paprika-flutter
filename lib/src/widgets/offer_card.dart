@@ -62,7 +62,9 @@ class OfferCard extends StatelessWidget {
                           child: Text(
                             offer.restaurantName,
                             style: TextStyle(
-                                fontSize: 18, color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                                fontSize: 18,
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                         Padding(
@@ -193,8 +195,10 @@ class MyPapricaOfferCard extends StatelessWidget {
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                              return RestaurantHome(restaurantId: offer.restaurantId);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return RestaurantHome(
+                                  restaurantId: offer.restaurantId);
                             }));
                           },
                           child: Padding(
@@ -235,7 +239,8 @@ class MyPapricaOfferCard extends StatelessWidget {
               ),
               offer.description != null || offer.description.isNotEmpty
                   ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -244,7 +249,8 @@ class MyPapricaOfferCard extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 offer.description,
-                                style: TextStyle(color: Colors.black, fontSize: 14),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 14),
                               ),
                             ],
                           ),
@@ -257,8 +263,10 @@ class MyPapricaOfferCard extends StatelessWidget {
                 children: <Widget>[
                   Container(
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor, width: 1, style: BorderStyle.solid)),
+                          border: Border.all(
+                              color: Theme.of(context).primaryColor,
+                              width: 1,
+                              style: BorderStyle.solid)),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                         child: Text(
@@ -338,8 +346,10 @@ class OfferCardInList extends StatelessWidget {
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                              return RestaurantHome(restaurantId: offer.restaurantId);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return RestaurantHome(
+                                  restaurantId: offer.restaurantId);
                             }));
                           },
                           child: Padding(
@@ -375,7 +385,8 @@ class OfferCardInList extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[

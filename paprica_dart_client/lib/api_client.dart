@@ -17,7 +17,7 @@ class ApiClient {
   final _RegList = new RegExp(r'^List<(.*)>$');
   final _RegMap = new RegExp(r'^Map<String,(.*)>$');
 
-  ApiClient({this.basePath: "https://prodapi.popina.me"}) {
+  ApiClient({this.basePath: "http://devapi.popina.sy"}) {
     // Setup authentications (key: authentication name, value: authentication).
     _authentications['bearerAuth'] = new ApiKeyAuth("header", "Authorization");
 
@@ -59,6 +59,10 @@ class ApiClient {
           return new AuthenticateResultModel.fromJson(value);
         case 'CancelReservationDto':
           return new CancelReservationDto.fromJson(value);
+        case 'CancelPickupDto':
+          return new CancelPickupDto.fromJson(value);
+        case 'CancelDeliveryDto':
+          return new CancelDeliveryDto.fromJson(value);
         case 'CategoryDto':
           return new CategoryDto.fromJson(value);
         case 'ChangeEventStatusDto':
@@ -105,6 +109,14 @@ class ApiClient {
           return new CreateOfferDto.fromJson(value);
         case 'CreateOrUpdateReviewDto':
           return new CreateOrUpdateReviewDto.fromJson(value);
+        case 'CreatePickupMealDto':
+          return new CreatePickupMealDto.fromJson(value);
+        case 'CreateDeliveryMealDto':
+          return new CreateDeliveryMealDto.fromJson(value);
+        case 'CreatePickupDto':
+          return new CreatePickupDto.fromJson(value);
+        case 'CreateDeliveryDto':
+          return new CreateDeliveryDto.fromJson(value);
         case 'CreateReservationDto':
           return new CreateReservationDto.fromJson(value);
         case 'CreateRestaurantDto':
@@ -125,8 +137,36 @@ class ApiClient {
           return new CustomerDto.fromJson(value);
         case 'CustomerEventDto':
           return new CustomerEventDto.fromJson(value);
+        case 'CustomerNearestPickupDto':
+          return new CustomerNearestPickupDto.fromJson(value);
+        case 'CustomerNearestReservationDto':
+          return new CustomerNearestReservationDto.fromJson(value);
+        case 'CustomerNearestDeliveryDto':
+          return new CustomerNearestDeliveryDto.fromJson(value);
+        case 'CustomerUpcomingServiceDto':
+          return new CustomerUpcomingServiceDto.fromJson(value);
+        case 'CustomerUpcomingPickupMealDto':
+          return new CustomerUpcomingPickupMealDto.fromJson(value);
+        case 'CustomerUpcomingDeliveryMealDto':
+          return new CustomerUpcomingDeliveryMealDto.fromJson(value);
+        case 'CustomerUpcomingPickupDto':
+          return new CustomerUpcomingPickupDto.fromJson(value);
+        case 'CustomerUpcomingDeliveryDto':
+          return new CustomerUpcomingDeliveryDto.fromJson(value);
+        case 'CustomerUpcomingDeliveriesDto':
+          return new CustomerUpcomingDeliveriesDto.fromJson(value);
+        case 'CustomerUpcomingPickupsDto':
+          return new CustomerUpcomingPickupsDto.fromJson(value);
         case 'CustomerOfferDto':
           return new CustomerOfferDto.fromJson(value);
+        case 'CustomerOldPickupDto':
+          return new CustomerOldPickupDto.fromJson(value);
+        case 'CustomerOldPickupsDto':
+          return new CustomerOldPickupsDto.fromJson(value);
+        case 'CustomerOldDeliveryDto':
+          return new CustomerOldDeliveryDto.fromJson(value);
+        case 'CustomerOldDeliveriesDto':
+          return new CustomerOldDeliveriesDto.fromJson(value);
         case 'CustomerOldReservationDto':
           return new CustomerOldReservationDto.fromJson(value);
         case 'CustomerOldReservationsDto':
@@ -306,7 +346,11 @@ class ApiClient {
         case 'SearchResultDto':
           return new SearchResultDto.fromJson(value);
         case 'ServiceDto':
-          return new ServiceDto.fromJson(value);
+        return new ServiceDto.fromJson(value);
+        case 'DeliveryRegionDto':
+          return new DeliveryRegionDto.fromJson(value);
+        case 'DeliveryRegionsDto':
+          return new DeliveryRegionsDto.fromJson(value);
         case 'TenantDto':
           return new TenantDto.fromJson(value);
         case 'TenantLoginInfoDto':
@@ -323,6 +367,22 @@ class ApiClient {
           return new UpdateCustomerProfileDto.fromJson(value);
         case 'UpdateEventDto':
           return new UpdateEventDto.fromJson(value);
+        case 'UpdatePickupMealDto':
+          return new UpdatePickupMealDto.fromJson(value);
+        case 'UpdateDeliveryMealDto':
+          return new UpdateDeliveryMealDto.fromJson(value);
+        case 'UpdatePickupMealRequestDto':
+          return new UpdatePickupMealRequestDto.fromJson(value);
+        case 'UpdateDeliveryMealRequestDto':
+          return new UpdateDeliveryMealRequestDto.fromJson(value);
+        case 'UpdatePickupDto':
+          return new UpdatePickupDto.fromJson(value);
+        case 'UpdateDeliveryDto':
+          return new UpdateDeliveryDto.fromJson(value);
+        case 'UpdatePickupRequestDto':
+          return new UpdatePickupRequestDto.fromJson(value);
+        case 'UpdateDeliveryRequestDto':
+          return new UpdateDeliveryRequestDto.fromJson(value);
         case 'UpdateGalleryItemDto':
           return new UpdateGalleryItemDto.fromJson(value);
         case 'UpdateIsFeaturedDto':

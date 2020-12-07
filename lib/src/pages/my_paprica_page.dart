@@ -142,11 +142,11 @@ class _MyPapricaPageState extends State<MyPapricaPage>
     }
 
     if (restaurantListStamp != null) {
-      PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
-      jsonRestaurantsList.stamp = restaurantListStamp;
-      jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
-      jsonInput.stamps.add(jsonRestaurantsList);
-    }
+          PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
+          jsonRestaurantsList.stamp = restaurantListStamp;
+          jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
+          jsonInput.stamps.add(jsonRestaurantsList);
+        }
 
     if (listOffersStamp != null) {
       PapricaItemStampDto jsonOffersList = PapricaItemStampDto();
@@ -288,7 +288,8 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                   RestaurantsListModel.fromMyPapricaModel(papricaItem.model),
               title: temp.title,
               titleColor: Theme.of(context).primaryColor,
-              filterModel: PapricaFilterModel.apiToFilterModelAdapter(temp.filter, context),
+              filterModel: PapricaFilterModel.apiToFilterModelAdapter(
+                  temp.filter, context),
             ),
             SizedBox(
               height: 5,

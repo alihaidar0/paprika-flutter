@@ -11,7 +11,8 @@ class Firebase {
   static final Firebase _firebase = Firebase._internal();
 
   static var reservationOpenCallback;
-  static final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+  static final FlutterLocalNotificationsPlugin
+      _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
 
   factory Firebase() {
     return _firebase;
@@ -28,15 +29,19 @@ class Firebase {
     buildContext = context;
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-    var android = new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
+    var android =
+        new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
     var ios = new IOSInitializationSettings();
     var platform = new InitializationSettings(android, ios);
-    _flutterLocalNotificationsPlugin.initialize(platform, onSelectNotification: _onNotificationDialogClick);
+    _flutterLocalNotificationsPlugin.initialize(platform,
+        onSelectNotification: _onNotificationDialogClick);
 
     // for iOS only
     _firebaseMessaging.requestNotificationPermissions();
     _firebaseMessaging.configure(
-        onLaunch: _firebaseOnLaunch, onMessage: _firebaseOnMessage, onResume: _firebaseOnResume);
+        onLaunch: _firebaseOnLaunch,
+        onMessage: _firebaseOnMessage,
+        onResume: _firebaseOnResume);
 
     _firebaseMessaging.getToken().then((token) {
       _registerToken(token);
@@ -66,7 +71,11 @@ class Firebase {
   void _registerToken(String token) {
     ApiClient client = PapricaApiClient();
     NotificationsApi api = NotificationsApi(client);
-    api.apiServicesAppNotificationsRegisterFirebaseNotificationsPost(token: token).then((_) {}).catchError((error) {});
+    api
+        .apiServicesAppNotificationsRegisterFirebaseNotificationsPost(
+            token: token)
+        .then((_) {})
+        .catchError((error) {});
   }
 
   void processMessage(model) {
@@ -84,7 +93,8 @@ class Firebase {
       case NotificationType.reservationRejectedInt:
       case NotificationType.reservationUpdateRejectedInt:
       case NotificationType.reservationUpdateApprovedInt:
-        if (reservationOpenCallback is Function && reservationOpenCallback != null) {
+        if (reservationOpenCallback is Function &&
+            reservationOpenCallback != null) {
           reservationOpenCallback();
         }
         break;
@@ -114,18 +124,22 @@ class Firebase {
   }
 
   _defaultOnMessageCallback(Map<String, dynamic> msg) async {
-    final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+        new FlutterLocalNotificationsPlugin();
 
-    if(msg != null && msg.containsKey('notification')){
+    if (msg != null && msg.containsKey('notification')) {
       var notification = Map<String, dynamic>.from(msg['notification']);
-      var title = notification.containsKey('title') ? notification['title'] : '';
+      var title =
+          notification.containsKey('title') ? notification['title'] : '';
       var body = notification.containsKey('body') ? notification['body'] : '';
 
       var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
           'channel id', 'channel name', 'channel description',
-          playSound: false, importance: Importance.Max, priority: Priority.High);
+          playSound: false,
+          importance: Importance.Max,
+          priority: Priority.High);
       var iOSPlatformChannelSpecifics =
-      new IOSNotificationDetails(presentSound: false);
+          new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
       await _flutterLocalNotificationsPlugin.show(
@@ -133,7 +147,7 @@ class Firebase {
     }
   }
 
-  Future<dynamic> _onNotificationDialogClick(String message){
+  Future<dynamic> _onNotificationDialogClick(String message) {
     processMessage(message);
     return Future<dynamic>.value();
   }

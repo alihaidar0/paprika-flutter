@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CustomizedInactiveButton extends StatelessWidget {
-  CustomizedInactiveButton({@required this.onPressed, this.title, this.padding});
+  CustomizedInactiveButton(
+      {@required this.onPressed, this.title, this.padding});
 
   final GestureTapCallback onPressed;
   final String title;
@@ -15,10 +16,11 @@ class CustomizedInactiveButton extends StatelessWidget {
       color: Colors.white,
       splashColor: Colors.white70,
       child: Padding(
-        padding: this.padding??const EdgeInsets.symmetric(
-          vertical: 6.0,
-          horizontal: 10.0,
-        ),
+        padding: this.padding ??
+            const EdgeInsets.symmetric(
+              vertical: 6.0,
+              horizontal: 10.0,
+            ),
         child: Text(
           title,
           style: TextStyle(
@@ -28,7 +30,8 @@ class CustomizedInactiveButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+      shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(8.0)),
     );
   }
 }

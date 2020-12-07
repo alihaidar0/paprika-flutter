@@ -38,13 +38,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     _endOfNotificationsReached = false;
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset &&
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
           !_requestingData &&
           !_endOfNotificationsReached) {
         _getNotifications();
       }
     });
-
     if (ApiTypesHelper().isAuthorized) _getNotifications();
   }
 
@@ -75,13 +75,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             shrinkWrap: true,
                             itemCount: _notifications.length,
                             itemBuilder: (context, index) {
-                              if (_notifications[index] is NotificationInfoDto) {
+                              if (_notifications[index]
+                                  is NotificationInfoDto) {
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () => _onTapNotification(
-                                      context, NotificationModel.fromNotificationDto(_notifications[index])),
+                                      context,
+                                      NotificationModel.fromNotificationDto(
+                                          _notifications[index])),
                                   child: NotificationCard(
-                                      notification: NotificationModel.fromNotificationDto(_notifications[index])),
+                                      notification:
+                                          NotificationModel.fromNotificationDto(
+                                              _notifications[index])),
                                 );
                               } else {
                                 return _notifications[index];
@@ -95,7 +100,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 }
                 return Center(child: CircularProgressIndicator());
               })
-          : LogInPromotion(loginLine: S.of(context).loginPromotionNotifications),
+          : LogInPromotion(
+              loginLine: S.of(context).loginPromotionNotifications),
     );
   }
 
@@ -122,16 +128,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     });
     ApiClient client = PapricaApiClient();
     NotificationsApi api = NotificationsApi(client);
-    _futureNotifications = api.apiServicesAppNotificationsGetNotificationsInfoGet(
+    _futureNotifications =
+        api.apiServicesAppNotificationsGetNotificationsInfoGet(
       skipCount: _notifications?.length ?? 0,
       maxResultCount: 10,
     );
     _futureNotifications.then((data) {
-      print(data);
       if (data != null) {
         setState(() {
           _requestingData = false;
-          if (_notifications.length > 0 && _notifications.last is SpinKitCircle) {
+          if (_notifications.length > 0 &&
+              _notifications.last is SpinKitCircle) {
             _notifications.removeLast();
           }
           if (data.notifications.isEmpty) {
@@ -147,6 +154,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       });
       DefaultErrorHandler.handle(context, err);
     });
+    return null;
   }
 
   _onTapNotification(BuildContext context, NotificationModel notification) {
@@ -158,9 +166,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         Navigator.pop(context, HomeScreenAction.reservations);
         break;
       case NotificationType.newRestaurantAdded:
-        int restId = (notification.data as NotificationRestaurantAdded).restaurantId;
+        int restId =
+            (notification.data as NotificationRestaurantAdded).restaurantId;
         if (restId != null && restId > 0) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return RestaurantHome(restaurantId: restId);
           }));
         }
@@ -168,7 +178,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       case NotificationType.newEventAdded:
         int eventId = (notification.data as NotificationEventAdded).eventId;
         if (eventId != null && eventId > 0) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return EventScreen(eventId: eventId);
           }));
         }
@@ -176,8 +187,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       case NotificationType.newOfferAdded:
         int offerId = (notification.data as NotificationOfferAdded).offerId;
         if (offerId != null && offerId > 0) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-//            return RestaurantHome(restaurantId: restId);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return OfferScreen(
               offerId: offerId,
             );
@@ -217,13 +228,16 @@ class NoNotificationsLayout extends StatelessWidget {
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return DiscoverPage();
                 }));
               },
               child: Text(
                 S.of(context).discoverNewRestaurants,
-                style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ],
@@ -261,15 +275,14 @@ class _NotificationCardState extends State<NotificationCard> {
             children: <Widget>[
               widget.notification.data != null
                   ? ClipRRect(
-                      borderRadius: Localizations.localeOf(context).languageCode == 'en'
-                          ? BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15))
-                          : BorderRadius.only(topRight: Radius.circular(15), bottomRight: Radius.circular(15)),
-//                      child: Image.network(
-//                        widget.notification.data.image ?? "",
-//                        height: _cardHeight,
-//                        width: _cardHeight - 30,
-//                        fit: BoxFit.fill,
-//                      ),
+                      borderRadius:
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15))
+                              : BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
                       child: CachedNetworkImage(
                         imageUrl: widget.notification.data.image,
                         height: _cardHeight,
@@ -293,29 +306,46 @@ class _NotificationCardState extends State<NotificationCard> {
                               Row(
                                 children: <Widget>[
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width - 150,
+                                    width:
+                                        MediaQuery.of(context).size.width - 150,
                                     child: Text(widget.notification.title ?? "",
-                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
                                         overflow: TextOverflow.fade),
                                   ),
                                 ],
                               ),
                               Row(
                                 children: <Widget>[
-                                  widget.notification.data is NotificationReservation && widget.notification.data.reservationTime != null
-                                  ? Text(
-                                    S.of(context).time + ": " + PapricaFormatter.formatDateTime(context, DateTime.parse(widget.notification.data.reservationTime)),
-                                    style: TextStyle(fontStyle: FontStyle.italic)
-                                  )
-                                  : EmptyWidget()
+                                  widget.notification.data
+                                              is NotificationReservation &&
+                                          widget.notification.data
+                                                  .reservationTime !=
+                                              null
+                                      ? Text(
+                                          S.of(context).time +
+                                              ": " +
+                                              PapricaFormatter.formatDateTime(
+                                                  context,
+                                                  DateTime.parse(widget
+                                                      .notification
+                                                      .data
+                                                      .reservationTime)),
+                                          style: TextStyle(
+                                              fontStyle: FontStyle.italic))
+                                      : EmptyWidget()
                                 ],
                               ),
                               Row(
                                 children: <Widget>[
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width - 150,
-                                    child: Text(widget.notification.data.message ?? "",
-                                        style: TextStyle(fontWeight: FontWeight.normal),
+                                    width:
+                                        MediaQuery.of(context).size.width - 150,
+                                    child: Text(
+                                        widget.notification.data.message ?? "",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis),
                                   ),
@@ -328,10 +358,18 @@ class _NotificationCardState extends State<NotificationCard> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(PapricaFormatter.formatDateOnly(context, widget.notification.date ?? DateTime.now()),
-                              style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300)),
-                          Text(PapricaFormatter.formatTimeOnly(context, widget.notification.date ?? DateTime.now()),
-                              style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300)),
+                          Text(
+                              PapricaFormatter.formatDateOnly(context,
+                                  widget.notification.date ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w300)),
+                          Text(
+                              PapricaFormatter.formatTimeOnly(context,
+                                  widget.notification.date ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w300)),
                         ],
                       )
                     ],

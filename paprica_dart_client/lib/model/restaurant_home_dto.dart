@@ -99,10 +99,13 @@ class RestaurantHomeDto {
     noiseLevel = json['noiseLevel'];
     ambianceRate = json['ambianceRate'];
     isFavorite = json['isFavorite'];
-    event = json['event'] == null ? null : new RestaurantEventDto.fromJson(json['event']);
+    event = json['event'] == null
+        ? null
+        : new RestaurantEventDto.fromJson(json['event']);
     openingTimes = OpeningTimeDto.listFromJson(json['openingTimes']);
     galleryItems = GalleryItemDto.listFromJson(json['galleryItems']);
-    restaurantRaters = new RestaurantRatersDto.fromJson(json['restaurantRaters']);
+    restaurantRaters =
+        new RestaurantRatersDto.fromJson(json['restaurantRaters']);
     settings = new RestaurantSettingsDto.fromJson(json['settings']);
     name = json['name'];
     longitude = json['longitude'];
@@ -172,13 +175,17 @@ class RestaurantHomeDto {
   }
 
   static List<RestaurantHomeDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<RestaurantHomeDto>() : json.map((value) => new RestaurantHomeDto.fromJson(value)).toList();
+    return json == null
+        ? new List<RestaurantHomeDto>()
+        : json.map((value) => new RestaurantHomeDto.fromJson(value)).toList();
   }
 
-  static Map<String, RestaurantHomeDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, RestaurantHomeDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, RestaurantHomeDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RestaurantHomeDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new RestaurantHomeDto.fromJson(value));
     }
     return map;
   }

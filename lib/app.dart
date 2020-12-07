@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/utils.dart';
-
 
 class PapricaApp extends StatefulWidget {
   static String defaultLanguage = "ar";
@@ -16,7 +16,8 @@ class PapricaApp extends StatefulWidget {
   _PapricaAppState createState() => _PapricaAppState();
 
   static void setLocale(BuildContext context, String lang) {
-    _PapricaAppState state = context.ancestorStateOfType(TypeMatcher<_PapricaAppState>());
+    _PapricaAppState state =
+        context.ancestorStateOfType(TypeMatcher<_PapricaAppState>());
     state?.setState(() {
       state.locale = Locale(lang);
     });
@@ -46,7 +47,8 @@ class _PapricaAppState extends State<PapricaApp> {
           '/home': (BuildContext context) => new HomeScreen(),
           '/signUp': (BuildContext context) => new SignUpScreen(),
           '/logIn': (BuildContext context) => new LogInScreen(),
-          '/forgotPassword': (BuildContext context) => new ForgotPasswordScreen(),
+          '/forgotPassword': (BuildContext context) =>
+              new ForgotPasswordScreen(),
         },
         locale: this.locale,
         localizationsDelegates: [
@@ -63,7 +65,8 @@ class _PapricaAppState extends State<PapricaApp> {
             accentColor: Color(0xFFAA0025),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
             colorScheme: ColorScheme.light(
-              primary: Color(0xFFAA0025), // -------> This will be your FlatButton's text color
+              primary: Color(
+                  0xFFAA0025), // -------> This will be your FlatButton's text color
               secondary: Color(0xFFAA0025),
             ),
             fontFamily: 'hacen-tunisia',
@@ -74,25 +77,42 @@ class _PapricaAppState extends State<PapricaApp> {
   }
 
   Route handleRoute(RouteSettings settings) {
+    if (settings.name == '/home') {
+      return _buildRoute(
+          settings, new HomeScreen(action: settings.arguments,initialIndex: settings.arguments));
+    }
     if (settings.name == '/event') {
-      return _buildRoute(settings, new EventScreen(eventId: settings.arguments));
+      return _buildRoute(
+          settings, new EventScreen(eventId: settings.arguments));
     }
     if (settings.name == '/offer') {
-      return _buildRoute(settings, new OfferScreen(offerId: settings.arguments));
+      return _buildRoute(
+          settings, new OfferScreen(offerId: settings.arguments));
     }
     if (settings.name == '/restaurant') {
-      return _buildRoute(settings, new RestaurantHome(restaurantId: settings.arguments));
+      return _buildRoute(
+          settings, new RestaurantHome(restaurantId: settings.arguments));
+    }
+    if (settings.name == '/pickup') {
+      return _buildRoute(
+          settings, new PickupScreen(restaurantId: settings.arguments));
+    }
+    if (settings.name == '/delivery') {
+      return _buildRoute(
+          settings, new DeliveryScreen(restaurantId: settings.arguments));
     }
     if (settings.name == '/meal') {
-      return _buildRoute(settings, new RestaurantHome(mealShare: settings.arguments));
+      return _buildRoute(
+          settings, new RestaurantHome(mealShare: settings.arguments));
     }
     if (settings.name == '/login') {
-      return _buildRoute(settings, new LogInScreen(asAService: settings.arguments));
+      return _buildRoute(
+          settings, new LogInScreen(asAService: settings.arguments));
     }
     if (settings.name == '/signup') {
-      return _buildRoute(settings, new SignUpScreen(asAService: settings.arguments));
+      return _buildRoute(
+          settings, new SignUpScreen(asAService: settings.arguments));
     }
-
     return null;
   }
 

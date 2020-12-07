@@ -32,7 +32,12 @@ class _OffersListScreenState extends State<OffersListScreen> {
     offers = [];
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset && !_requestingData && offers.isNotEmpty && context != null && !_endOfOffers) {
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
+          !_requestingData &&
+          offers.isNotEmpty &&
+          context != null &&
+          !_endOfOffers) {
         _getOffers(skipCount: offers.length);
       }
     });
@@ -63,7 +68,9 @@ class _OffersListScreenState extends State<OffersListScreen> {
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: OfferCardInList(
-                                offer: OfferPapricaItemDto.fromCustomerOfferDto(offers[index] /*snapshot.data.items[index]*/),
+                                offer: OfferPapricaItemDto.fromCustomerOfferDto(
+                                    offers[
+                                        index] /*snapshot.data.items[index]*/),
                               ),
                             );
                           } else {
@@ -71,9 +78,7 @@ class _OffersListScreenState extends State<OffersListScreen> {
                           }
                         },
                       )
-                    : Center(
-                        child: NoOffersLayout(
-                      ));
+                    : Center(child: NoOffersLayout());
               }
               return LoadingPlaceHolder(
                 icon: SpinKitFadingCube(
@@ -90,7 +95,8 @@ class _OffersListScreenState extends State<OffersListScreen> {
     });
     ApiClient client = PapricaApiClient();
     CustomerOfferApi api = CustomerOfferApi(client);
-    offerFuture = api.apiServicesAppCustomerOfferGetAllActiveGet(skipCount: skipCount, maxResultCount: maxResult);
+    offerFuture = api.apiServicesAppCustomerOfferGetAllActiveGet(
+        skipCount: skipCount, maxResultCount: maxResult);
     offerFuture.then((data) {
       setState(() {
         if (offers.last is SpinKitCircle) offers.removeLast();
@@ -113,14 +119,16 @@ class _OffersListScreenState extends State<OffersListScreen> {
 //    offerFuture.catchError((_) {});
   }
 }
-class NoOffersLayout extends StatelessWidget {
 
+class NoOffersLayout extends StatelessWidget {
   const NoOffersLayout({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(child: Text(S.of(context).noOffers),));
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(S.of(context).noOffers),
+        ));
   }
 }

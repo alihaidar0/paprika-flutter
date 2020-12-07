@@ -84,7 +84,6 @@ class _ReservationsPageState extends State<ReservationsPage>
   }
 
   void _scrollControllerListener() {
-
     if (scrollController.position.maxScrollExtent - scrollController.offset <=
         0) {
       streamScrollController.add(true);
@@ -1262,7 +1261,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                 child: Builder(builder: (_context) {
                   return PapricaSimpleDialog(
                     title: S.of(context).confirmCancellation,
-                    content: S.of(context).confirmCancelUpdateRequest,
+                    content: S.of(context).confirmCancelUpdateRequestReservation,
                     yesButton: FlatButton(
                       child: Text(S.of(context).confirm),
                       onPressed: () {

@@ -15,9 +15,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool locked = false; // used to prevent build function from calling _checkInitialConfig more that once
+  bool locked =
+      false; // used to prevent build function from calling _checkInitialConfig more that once
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      new FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (lang == null) {
           PapricaApiClient().setLang(PapricaApp.defaultLanguage);
           _init(context);
-        }else{
+        } else {
           _init(context);
         }
       });
@@ -67,7 +69,9 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Image(height: 30, image: AssetImage("assets/images/paprica_white_small.png")),
+              Image(
+                  height: 30,
+                  image: AssetImage("assets/images/paprica_white_small.png")),
               Container(
                 child: DotsLoader(),
               ),
@@ -89,27 +93,33 @@ class _SplashScreenState extends State<SplashScreen> {
   /// [isAuthorized] comes from the server and indicates whether the user has
   /// supplied a valid token in the InitialConfiguration Request
   /// If [tokenSideCheck] is true, a side check on the token would be performed in case the Initial request failed
-  void _checkUserStatus(BuildContext context, bool isAuthorized, [bool tokenSideCheck = false]) async {
+  void _checkUserStatus(BuildContext context, bool isAuthorized,
+      [bool tokenSideCheck = false]) async {
     // In case the Initial request failed
     if (tokenSideCheck) {
       _performTokenSideCheck(context);
       return;
     }
-    Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/splash'));
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/home', ModalRoute.withName('/splash'));
   }
 
   /// Use this method to check if the shared preference has valid token
   void _performTokenSideCheck(BuildContext context) async {
     String token = await SharedPreference.loadTokenFromSharedPref();
     if (token == null) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/logIn', ModalRoute.withName('/splash'));
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/logIn', ModalRoute.withName('/splash'));
     } else {
       PapricaApiClient().setToken(token);
-      CustomerReservationApi reservationApi = CustomerReservationApi(PapricaApiClient());
+      CustomerReservationApi reservationApi =
+          CustomerReservationApi(PapricaApiClient());
       reservationApi.apiServicesAppCustomerReservationGetAllGet().then((_) {
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', ModalRoute.withName('/splash'));
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', ModalRoute.withName('/splash'));
       }).catchError((err) {
-        Navigator.of(context).pushNamedAndRemoveUntil('/logIn', ModalRoute.withName('/splash'));
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/logIn', ModalRoute.withName('/splash'));
       });
     }
   }
@@ -121,8 +131,10 @@ class _SplashScreenState extends State<SplashScreen> {
       ApiTypesHelper().init(context).then((initializationData) {
         if (initializationData != null) {
           _checkUserStatus(context, initializationData.isAuthorized);
-          ApiTypesHelper().setPhoneNumber(initializationData.customerInfo?.phoneNumber);
-          ApiTypesHelper().setIsPhoneNumberConfirmed(initializationData.customerInfo?.isPhoneNumberConfirmed);
+          ApiTypesHelper()
+              .setPhoneNumber(initializationData.customerInfo?.phoneNumber);
+          ApiTypesHelper().setIsPhoneNumberConfirmed(
+              initializationData.customerInfo?.isPhoneNumberConfirmed);
         }
       }).catchError((err) {
         showDialog(
@@ -137,7 +149,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     Navigator.of(context).pop();
                     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                   },
-                  child: Text(S.of(context).close, style: TextStyle(color: Colors.grey)),
+                  child: Text(S.of(context).close,
+                      style: TextStyle(color: Colors.grey)),
                 ),
                 actionHandler: () {
                   Navigator.of(context).pop();
@@ -149,10 +162,10 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-
   _configureFirebase() async {
     print('test 1');
-    var android = new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
+    var android =
+        new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
     var ios = new IOSInitializationSettings();
     var platform = new InitializationSettings(android, ios);
     await flutterLocalNotificationsPlugin.initialize(platform);
@@ -170,28 +183,29 @@ class _SplashScreenState extends State<SplashScreen> {
           _showNotification(msg);
           return;
         },
-        onBackgroundMessage: null
-    );
+        onBackgroundMessage: null);
     print('test 2');
 
     await firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, alert: true, badge: true)
-    );
+        const IosNotificationSettings(sound: true, alert: true, badge: true));
 
     print('test 3');
   }
 
   _showNotification(Map<String, dynamic> msg) async {
-    if(msg != null && msg.containsKey('notification')){
+    if (msg != null && msg.containsKey('notification')) {
       var notification = Map<String, dynamic>.from(msg['notification']);
-      var title = notification.containsKey('title') ? notification['title'] : '';
+      var title =
+          notification.containsKey('title') ? notification['title'] : '';
       var body = notification.containsKey('body') ? notification['body'] : '';
 
       var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
           'channel id', 'channel name', 'channel description',
-          playSound: false, importance: Importance.Max, priority: Priority.High);
+          playSound: false,
+          importance: Importance.Max,
+          priority: Priority.High);
       var iOSPlatformChannelSpecifics =
-      new IOSNotificationDetails(presentSound: false);
+          new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
       await flutterLocalNotificationsPlugin.show(

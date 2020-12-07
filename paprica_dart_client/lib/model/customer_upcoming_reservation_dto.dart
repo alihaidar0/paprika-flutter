@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class CustomerUpcomingReservationDto {
-  int maxPeopleAllowed  = null;
+  int maxPeopleAllowed = null;
 
   String restaurantCoverImage = null;
 
@@ -25,7 +25,7 @@ class CustomerUpcomingReservationDto {
 
   String customerAdditionalInfo = null;
 
-  int occasionType = null;
+  String occasionType = null;
 
   int restaurantId = null;
 
@@ -53,14 +53,17 @@ class CustomerUpcomingReservationDto {
     personPhoneNumber = json['personPhoneNumber'];
     id = json['id'];
     numberOfPeople = json['numberOfPeople'];
-    date = json['date'] == null ? null : DateTime.parse(json['date'].toString());
+    date =
+        json['date'] == null ? null : DateTime.parse(json['date'].toString());
     status = json['status'];
     customerAdditionalInfo = json['customerAdditionalInfo'];
     occasionType = json['occasionType'];
     restaurantId = json['restaurantId'];
     restaurantImage = json['restaurantImage'];
     restaurantName = json['restaurantName'];
-    updateRequest = json['updateRequest'] == null ? null : UpdateReservationRequestDto.fromJson(json['updateRequest']);
+    updateRequest = json['updateRequest'] == null
+        ? null
+        : UpdateReservationRequestDto.fromJson(json['updateRequest']);
   }
 
   Map<String, dynamic> toJson() {
@@ -88,13 +91,17 @@ class CustomerUpcomingReservationDto {
   static List<CustomerUpcomingReservationDto> listFromJson(List<dynamic> json) {
     return json == null
         ? new List<CustomerUpcomingReservationDto>()
-        : json.map((value) => new CustomerUpcomingReservationDto.fromJson(value)).toList();
+        : json
+            .map((value) => new CustomerUpcomingReservationDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, CustomerUpcomingReservationDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, CustomerUpcomingReservationDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, CustomerUpcomingReservationDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new CustomerUpcomingReservationDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CustomerUpcomingReservationDto.fromJson(value));
     }
     return map;
   }

@@ -4,19 +4,19 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class AboutUsScreen extends StatelessWidget {
   String _phoneNumber = "+963 938 086 306";
-  String _email="support@paprica.sy";
+  String _email = "support@paprica.sy";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S
-            .of(context)
-            .aboutUs, style: TextStyle(fontSize: 18)),
+        title: Text(S.of(context).aboutUs, style: TextStyle(fontSize: 18)),
       ),
       body: Container(
-          decoration:
-          BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/background_grey.png'), fit: BoxFit.cover)),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background_grey.png'),
+                  fit: BoxFit.cover)),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -42,7 +42,10 @@ class AboutUsScreen extends StatelessWidget {
                         ),
                         Text(
                           "SoftUp",
-                          style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -55,33 +58,8 @@ class AboutUsScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: GestureDetector(
-                          onTap: () => UrlLauncher.launch('tel://' + this._phoneNumber),
-                          behavior: HitTestBehavior.opaque,
-                          child: Row(mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  height: 32,
-                                  width: 32,
-                                  child: Image.asset("assets/icons/smartphone.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  _phoneNumber,
-                                  textDirection: TextDirection.ltr,
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                                ),
-                              )
-                            ],),
-                        )
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: GestureDetector(
-                          onTap: () => UrlLauncher.launch('mailto:' + this._email),
+                          onTap: () =>
+                              UrlLauncher.launch('tel://' + this._phoneNumber),
                           behavior: HitTestBehavior.opaque,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -91,20 +69,53 @@ class AboutUsScreen extends StatelessWidget {
                                 child: SizedBox(
                                   height: 32,
                                   width: 32,
-                                  child: Image.asset("assets/icons/paper_plane.png"),
+                                  child: Image.asset(
+                                      "assets/icons/smartphone.png"),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  _phoneNumber,
+                                  textDirection: TextDirection.ltr,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: GestureDetector(
+                          onTap: () =>
+                              UrlLauncher.launch('mailto:' + this._email),
+                          behavior: HitTestBehavior.opaque,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: 32,
+                                  width: 32,
+                                  child: Image.asset(
+                                      "assets/icons/paper_plane.png"),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   _email,
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               )
                             ],
                           ),
-                        )
-                    ),
+                        )),
                   ],
                 )
               ],
