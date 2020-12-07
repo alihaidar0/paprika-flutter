@@ -5,21 +5,26 @@ class RestaurantSettingsDto {
 
   List<ServiceDto> services = [];
 
+  // DeliveryRegionsDto deliveryRegions = null;
+  List<DeliveryRegionDto> deliveryRegions = [];
+
   RestaurantSettingsDto();
 
   @override
   String toString() {
-    return 'RestaurantSettingsDto[services=$services, maxPeopleAllowed=$maxPeopleAllowed ]';
+    return 'RestaurantSettingsDto[services=$services, deliveryRegions=$deliveryRegions, maxPeopleAllowed=$maxPeopleAllowed ]';
   }
 
   RestaurantSettingsDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     services = ServiceDto.listFromJson(json['services']);
+    // deliveryRegions = json['deliveryRegions'];
+    deliveryRegions = DeliveryRegionDto.listFromJson(json['deliveryRegions']);
     maxPeopleAllowed = json['maxPeopleAllowed'];
   }
 
   Map<String, dynamic> toJson() {
-    return {'services': services, 'maxPeopleAllowed': maxPeopleAllowed};
+    return {'services': services, 'deliveryRegions': deliveryRegions, 'maxPeopleAllowed': maxPeopleAllowed};
   }
 
   static List<RestaurantSettingsDto> listFromJson(List<dynamic> json) {

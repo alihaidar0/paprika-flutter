@@ -46,9 +46,15 @@ part 'api/customer_offer_api.dart';
 
 part 'api/customer_paprica_item_api.dart';
 
+part 'api/customer_service_api.dart';
+
 part 'api/customer_report_api.dart';
 
 part 'api/customer_reservation_api.dart';
+
+part 'api/customer_pickup_api.dart';
+
+part 'api/customer_delivery_api.dart';
 
 part 'api/customer_restaurant_api.dart';
 
@@ -112,9 +118,29 @@ part 'model/authenticate_result_model.dart';
 
 part 'model/cancel_reservation_dto.dart';
 
+part 'model/cancel_pickup_dto.dart';
+
+part 'model/cancel_delivery_dto.dart';
+
 part 'model/category_dto.dart';
 
 part 'model/change_event_status_dto.dart';
+
+part 'model/update_pickup_meal_request_dto.dart';
+
+part 'model/update_delivery_meal_request_dto.dart';
+
+part 'model/update_pickup_request_dto.dart';
+
+part 'model/update_delivery_request_dto.dart';
+
+part 'model/update_pickup_dto.dart';
+
+part 'model/update_delivery_dto.dart';
+
+part 'model/update_pickup_meal_dto.dart';
+
+part 'model/update_delivery_meal_dto.dart';
 
 part 'model/change_free_space_indicator.dart';
 
@@ -152,6 +178,14 @@ part 'model/create_category_dto.dart';
 
 part 'model/create_customer_dto.dart';
 
+part 'model/create_pickup_meal_dto.dart';
+
+part 'model/create_delivery_meal_dto.dart';
+
+part 'model/create_pickup_dto.dart';
+
+part 'model/create_delivery_dto.dart';
+
 part 'model/create_customer_report_dto.dart';
 
 part 'model/create_event_dto.dart';
@@ -188,6 +222,14 @@ part 'model/customer_event_dto.dart';
 
 part 'model/customer_offer_dto.dart';
 
+part 'model/customer_old_pickup_dto.dart';
+
+part 'model/customer_old_pickups_dto.dart';
+
+part 'model/customer_old_delivery_dto.dart';
+
+part 'model/customer_old_deliveries_dto.dart';
+
 part 'model/customer_old_reservation_dto.dart';
 
 part 'model/customer_old_reservations_dto.dart';
@@ -195,6 +237,26 @@ part 'model/customer_old_reservations_dto.dart';
 part 'model/customer_profile_dto.dart';
 
 part 'model/customer_info_dto.dart';
+
+part 'model/customer_nearest_pickup_dto.dart';
+
+part'model/customer_upcoming_service_dto.dart';
+
+part 'model/customer_nearest_reservation_dto.dart';
+
+part 'model/customer_nearest_delivery_dto.dart';
+
+part 'model/customer_upcoming_pickup_meal_dto.dart';
+
+part 'model/customer_upcoming_delivery_meal_dto.dart';
+
+part 'model/customer_upcoming_pickup_dto.dart';
+
+part 'model/customer_upcoming_delivery_dto.dart';
+
+part 'model/customer_upcoming_pickups_dto.dart';
+
+part 'model/customer_upcoming_deliveries_dto.dart';
 
 part 'model/update_customer_profile_dto.dart';
 
@@ -373,6 +435,10 @@ part 'model/role_list_dto.dart';
 part 'model/search_result_dto.dart';
 
 part 'model/service_dto.dart';
+
+part 'model/delivery_region_dto.dart';
+
+part 'model/delivery_regions_dto.dart';
 
 part 'model/tenant_dto.dart';
 

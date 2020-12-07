@@ -188,7 +188,7 @@ class MyPapricaReservationCard extends StatelessWidget {
                         Text(
                           reservation.status ==
                                   ApiHelper.reservationTypeApproved
-                              ? S.of(context).youHaveUpcoming
+                              ? S.of(context).youHaveUpcomingDeliveryAt
                               : S.of(context).youHavePending,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

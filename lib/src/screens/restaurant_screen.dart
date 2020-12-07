@@ -41,7 +41,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
   TabController _tabController;
   StreamController<bool> _screenActivity;
 
-  //Whether menu categories is shown or the meals list
   MenuState menuState;
   ReviewsState reviewsState;
 
@@ -50,6 +49,18 @@ class _RestaurantHomeState extends State<RestaurantHome>
   get _reservable {
     return restData.settings.services
         .where((service) => service.code == 'reservation')
+        .isNotEmpty;
+  }
+
+  get _pickupable {
+    return restData.settings.services
+        .where((service) => service.code == 'pickup')
+        .isNotEmpty;
+  }
+
+  get _deliverable {
+    return restData.settings.services
+        .where((service) => service.code == 'delivery')
         .isNotEmpty;
   }
 
@@ -81,7 +92,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
     _scrollController.dispose();
     WidgetsBinding.instance.removeObserver(this);
 
-    // Dispose the f
     _isFavorite = null;
     _isMusicPlaying = null;
     _wasMusicPlaying = null;
@@ -135,7 +145,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
         (widget.mealShare == null ||
             widget.mealShare.restaurantId == null ||
             widget.mealShare.restaurantId <= 0)) {
-      debugPrint(widget.mealShare.toString());
       return Future.value();
     }
     ApiClient client = PapricaApiClient();
@@ -144,6 +153,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       futureRestData = apiInstance.apiServicesAppCustomerRestaurantGetGet(
           id: widget.restaurantId ?? widget.mealShare.restaurantId);
     });
+    return null;
   }
 
   @override
@@ -152,14 +162,12 @@ class _RestaurantHomeState extends State<RestaurantHome>
         (widget.mealShare == null ||
             widget.mealShare.restaurantId == null ||
             widget.mealShare.restaurantId <= 0)) {
-      debugPrint(widget.mealShare.toString());
       Navigator.of(context).pop();
     }
     final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
 
     return WillPopScope(
       onWillPop: () {
-        // Close opened menu category
         if (_tabController.index == 1 && !menuState.isGrid) {
           setState(() {
             menuState.isGrid = true;
@@ -175,72 +183,178 @@ class _RestaurantHomeState extends State<RestaurantHome>
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               restData = snapshot.data;
-              // Caching the widget
               widgetLogoImage ??=
                   CachedNetworkImageProvider(restData.logoImage);
               return Scaffold(
-                persistentFooterButtons: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/order.svg",
-                                  width: 30,
-                                  height: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, top: 5.0),
-                                  child: Text("Order Now"),
-                                ),
-                              ],
-                            ),
-                          ),
+                bottomSheet: restData.settings.services.length == 0
+                    ? Container(
+                        height: 0.0,
+                        width: 0.0,
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              top: BorderSide(
+                                  width: 1.0, color: Colors.black12)),
                         ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/reserve.svg",
-                                  width: 25,
-                                  height: 25,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, top: 5.0),
-                                  child: Text("Reserve Now"),
-                                ),
-                              ],
-                            ),
-                          ),
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _reservable
+                                ? InkWell(
+                                    onTap: () {
+                                      _onReservePressed(context);
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: (_pickupable && _deliverable)
+                                          ? MediaQuery.of(context).size.width /
+                                              3
+                                          : ((_pickupable == true &&
+                                                      _deliverable == false) ||
+                                                  (_pickupable == false &&
+                                                      _deliverable == true))
+                                              ? MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2
+                                              : MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/reserve.svg",
+                                            width: 25,
+                                            height: 25,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                Localizations.localeOf(context)
+                                                            .languageCode ==
+                                                        'en'
+                                                    ? const EdgeInsets.only(
+                                                        left: 8.0, top: 5.0)
+                                                    : const EdgeInsets.only(
+                                                        top: 5.0, right: 8.0),
+                                            child:
+                                                Text(S.of(context).reserveNow),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0.0,
+                                    width: 0.0,
+                                  ),
+                            _pickupable
+                                ? InkWell(
+                                    onTap: () {
+                                      _onOrderPickupPressed(context);
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: (_reservable && _deliverable)
+                                          ? MediaQuery.of(context).size.width /
+                                              3
+                                          : ((_reservable == true &&
+                                                      _deliverable == false) ||
+                                                  (_reservable == false &&
+                                                      _deliverable == true))
+                                              ? MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2
+                                              : MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/order.svg",
+                                            width: 30,
+                                            height: 30,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                Localizations.localeOf(context)
+                                                            .languageCode ==
+                                                        'en'
+                                                    ? const EdgeInsets.only(
+                                                        left: 8.0, top: 5.0)
+                                                    : const EdgeInsets.only(
+                                                        top: 5.0, right: 8.0),
+                                            child:
+                                                Text(S.of(context).orderPickup),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0.0,
+                                    width: 0.0,
+                                  ),
+                            _deliverable
+                                ? InkWell(
+                                    onTap: () {
+                                      _onOrderDeliveryPressed(context);
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: (_reservable && _pickupable)
+                                          ? MediaQuery.of(context).size.width /
+                                              3
+                                          : ((_reservable == true &&
+                                                      _pickupable == false) ||
+                                                  (_reservable == false &&
+                                                      _pickupable == true))
+                                              ? MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2
+                                              : MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/noun_food_delivery.svg",
+                                            width: 25,
+                                            height: 25,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                Localizations.localeOf(context)
+                                                            .languageCode ==
+                                                        'en'
+                                                    ? const EdgeInsets.only(
+                                                        left: 8.0, top: 5.0)
+                                                    : const EdgeInsets.only(
+                                                        top: 5.0, right: 8.0),
+                                            child: Text(
+                                                S.of(context).orderDelivery),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0.0,
+                                    width: 0.0,
+                                  ),
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(right: 20),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.more_horiz),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
                 body: NestedScrollView(
                   controller: _scrollController,
                   headerSliverBuilder:
@@ -257,7 +371,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
                                     : TextDirection.rtl,
                           ),
                           onPressed: () {
-                            _screenActivity.add(false);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -524,6 +637,100 @@ class _RestaurantHomeState extends State<RestaurantHome>
     }
   }
 
+  void _onOrderPickupPressed(context) {
+    if (ApiTypesHelper().isAuthorized) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return PickupScreen(
+          restaurantId: widget.restaurantId,
+          restaurantName: restData.name,
+        );
+      }));
+    } else {
+      showDialog(
+          context: context,
+          builder: (_context) {
+            return PapricaSimpleDialog(
+              title: S.of(context).pleaseLoginInOrderToOrderPickup,
+              yesButton: FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
+                      if (loggedIn != null && loggedIn) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (BuildContext context) {
+                          return PickupScreen(
+                            restaurantId: widget.restaurantId,
+                            restaurantName: restData.name,
+                          );
+                        }));
+                      } else {
+                        PapricaToast.showToast(S
+                            .of(context)
+                            .loggingInRequired(S.of(context).actionPickup));
+                      }
+                    });
+                  },
+                  child: Text(S.of(context).logIn)),
+            );
+          });
+    }
+  }
+
+  void _onOrderDeliveryPressed(context) {
+    if (ApiTypesHelper().isAuthorized) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return DeliveryScreen(
+          restaurantId: widget.restaurantId,
+          restaurantName: restData.name,
+          restaurantLongitude: restData.longitude,
+          restaurantLatitude: restData.latitude,
+        );
+      }));
+    } else {
+      showDialog(
+          context: context,
+          builder: (_context) {
+            return PapricaSimpleDialog(
+              title: S.of(context).pleaseLoginInOrderToOrderDelivery,
+              yesButton: FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                LogInScreen(asAService: true)))
+                        .then((loggedIn) {
+                      if (loggedIn != null && loggedIn) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (BuildContext context) {
+                          return DeliveryScreen(
+                            restaurantId: widget.restaurantId,
+                            restaurantName: restData.name,
+                            restaurantLongitude: restData.longitude,
+                            restaurantLatitude: restData.latitude,
+                          );
+                        }));
+                      } else {
+                        PapricaToast.showToast(S
+                            .of(context)
+                            .loggingInRequired(S.of(context).actionDelivery));
+                      }
+                    });
+                  },
+                  child: Text(S.of(context).logIn)),
+            );
+          });
+    }
+  }
+
   void _showReservationDialog() {
     showDialog(
         context: context,
@@ -547,9 +754,10 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _viewMyReservations(BuildContext context) {
+    Navigator.of(context).pop();
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
-      return new HomeScreen(action: HomeScreenAction.reservations);
+      return ReservationsScreen();
     }));
   }
 
@@ -917,7 +1125,6 @@ class _ActionsRowState extends State<ActionsRow> {
 
   get _isFavoriteColor {
     if (isAddingToFavorite)
-      // A disable button color
       return Color(0xffcccccc);
     else
       return _isFavorite != null && _isFavorite
@@ -1107,7 +1314,6 @@ class _ActionsRowState extends State<ActionsRow> {
       _audioPlayer.setVolume(1);
       _audioPlayer.setReleaseMode(ReleaseMode.LOOP);
       _audioPlayer.onPlayerStateChanged.listen((state) {
-        debugPrint(state.toString());
       });
       _audioPlayer.play(widget.restData.audioTrack).then((status) {
         if (mounted) {
@@ -1169,7 +1375,7 @@ class _ActionsRowState extends State<ActionsRow> {
   }
 
   Widget _getMusicIcon() {
-    if (_isMusicPlaying != null && _isMusicPlaying)
+    if (_isMusicPlaying != null && _isMusicPlaying && !downloading)
       return SizedBox(
         height: 24,
         width: 24,
@@ -1187,13 +1393,14 @@ class _ActionsRowState extends State<ActionsRow> {
       return SizedBox(
         height: 24,
         width: 24,
-        child: SpinKitWave(
-          type: SpinKitWaveType.start,
-          size: 16,
-          itemBuilder: (_, index) {
-            return Container(color: Color(0xffcccccc));
-          },
-        ),
+        child: SpinKitThreeBounce(color: Colors.white),
+        // child: SpinKitWave(
+        //   type: SpinKitWaveType.start,
+        //   size: 16,
+        //   itemBuilder: (_, index) {
+        //     return Container(color: Color(0xffcccccc));
+        //   },
+        // ),
       );
     else
       return Icon(Icons.music_note,

@@ -39,13 +39,6 @@ android {
         disable 'InvalidPackage'
     }
 
-    flavorDimensions "version"
-    productFlavors {
-        staging {
-            dimension "version"
-        }
-    }
-
     defaultConfig {
         applicationId "me.paprica"
         minSdkVersion 16
@@ -70,6 +63,14 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    flavorDimensions "staging"
+    productFlavors {
+        staging {
+            dimension "staging"
+        }
+    }
+
 }
 
 flutter {

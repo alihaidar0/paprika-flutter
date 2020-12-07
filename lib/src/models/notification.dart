@@ -56,7 +56,6 @@ class NotificationModel {
     notification = ApiNotification.fromJson(model["Model"]);
     title = model['Title'];
     body = model['Body'];
-//    type = model['Model']["NotificationType"];
     switch (notificationName) {
       case NotificationType.reservationApproved:
         data = NotificationReservationApproved.fromJson(model['Model']);

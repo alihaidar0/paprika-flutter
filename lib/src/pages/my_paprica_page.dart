@@ -142,11 +142,11 @@ class _MyPapricaPageState extends State<MyPapricaPage>
     }
 
     if (restaurantListStamp != null) {
-      PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
-      jsonRestaurantsList.stamp = restaurantListStamp;
-      jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
-      jsonInput.stamps.add(jsonRestaurantsList);
-    }
+          PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
+          jsonRestaurantsList.stamp = restaurantListStamp;
+          jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
+          jsonInput.stamps.add(jsonRestaurantsList);
+        }
 
     if (listOffersStamp != null) {
       PapricaItemStampDto jsonOffersList = PapricaItemStampDto();
