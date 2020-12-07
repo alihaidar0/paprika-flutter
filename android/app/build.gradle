@@ -64,12 +64,6 @@ android {
         }
     }
 
-//    flavorDimensions "version"
-//    productFlavors {
-//        staging {
-//            dimension "version"
-//        }
-//    }
     flavorDimensions "staging"
     productFlavors {
         staging {
