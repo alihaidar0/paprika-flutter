@@ -226,6 +226,7 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
         _isLoading = false;
       });
     });
+    return null;
   }
 
   @override
@@ -283,10 +284,6 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // if (widget.changeHomePageIndexHandler is Function &&
-                      //     widget.changeHomePageIndexHandler != null) {
-                      //   widget.changeHomePageIndexHandler(2);
-                      // }
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>

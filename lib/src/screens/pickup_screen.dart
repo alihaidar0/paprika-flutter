@@ -789,36 +789,7 @@ class _PickupScreenState extends State<PickupScreen> {
   }
 
   void _onOrderPickupPressed(BuildContext context, MealDto meal) {
-    if (ApiTypesHelper().isAuthorized) {
       _showPickupDialog(meal);
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return PapricaSimpleDialog(
-            title: S.of(context).pleaseLoginInOrderToOrderDelivery,
-            yesButton: FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              LogInScreen(asAService: true))).then((loggedIn) {
-                    if (loggedIn != null && loggedIn) {
-                      _showPickupDialog(meal);
-                    } else {
-                      PapricaToast.showToast(S
-                          .of(context)
-                          .loggingInRequired(S.of(context).actionDelivery));
-                    }
-                  });
-                },
-                child: Text(S.of(context).logIn)),
-          );
-        },
-      );
-    }
   }
 
   void _showPickupDialog(MealDto meal) {
@@ -1170,10 +1141,10 @@ class _CategoryCardInMeals extends StatelessWidget {
 }
 
 String _parseIngredients(List<IngredientDto> ingredients) {
-  String ings = "";
+  String ingredientsAsString = "";
   for (int i = 0; i <= ingredients.length - 1; i++) {
-    ings += ingredients[i].name;
-    if (i != ingredients.length - 1) ings += ', ';
+    ingredientsAsString += ingredients[i].name;
+    if (i != ingredients.length - 1) ingredientsAsString += ', ';
   }
-  return ings;
+  return ingredientsAsString;
 }

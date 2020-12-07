@@ -199,7 +199,6 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                       : NetworkImage(widget.urls[index]),
                   initialScale: PhotoViewComputedScale.contained,
                   heroAttributes: PhotoViewHeroAttributes(tag: widget.urls[index]),
-                  // heroTag: widget.urls[index],
                 );
               },
             )),

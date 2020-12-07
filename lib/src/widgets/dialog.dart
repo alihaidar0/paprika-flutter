@@ -2311,7 +2311,9 @@ class DeliveryDialogState extends State<DeliveryDialog> {
             ? MaterialPageRoute(
                 fullscreenDialog: true,
                 builder: (ctx) => MapScreen(
-                  isSelecting: true,
+                  resLatitude: widget.restaurantLatitude,
+                  resLongitude: widget.restaurantLongitude,
+                  isSelecting: false,
                 ),
               )
             : MaterialPageRoute(
@@ -2319,6 +2321,8 @@ class DeliveryDialogState extends State<DeliveryDialog> {
                 builder: (ctx) => MapScreen(
                   initialLatitude: _latitude,
                   initialLongitude: _longitude,
+                  resLatitude: widget.restaurantLatitude,
+                  resLongitude: widget.restaurantLongitude,
                   isSelecting: true,
                 ),
               ));

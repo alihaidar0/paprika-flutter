@@ -118,6 +118,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
         _isLoading = false;
       });
     });
+    return null;
   }
 
   @override

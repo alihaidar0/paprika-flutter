@@ -17,7 +17,6 @@ class HomeScreen extends StatefulWidget {
   final HomeScreenAction action;
   final int initialIndex;
 
-  // const HomeScreen({this.action});
   const HomeScreen({Key key, this.initialIndex, this.action}) : super(key: key);
 
   @override

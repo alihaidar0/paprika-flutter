@@ -45,7 +45,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         _getNotifications();
       }
     });
-
     if (ApiTypesHelper().isAuthorized) _getNotifications();
   }
 
@@ -135,7 +134,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       maxResultCount: 10,
     );
     _futureNotifications.then((data) {
-      print(data);
       if (data != null) {
         setState(() {
           _requestingData = false;
@@ -156,6 +154,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       });
       DefaultErrorHandler.handle(context, err);
     });
+    return null;
   }
 
   _onTapNotification(BuildContext context, NotificationModel notification) {
@@ -190,7 +189,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         if (offerId != null && offerId > 0) {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
-//            return RestaurantHome(restaurantId: restId);
             return OfferScreen(
               offerId: offerId,
             );
@@ -285,12 +283,6 @@ class _NotificationCardState extends State<NotificationCard> {
                               : BorderRadius.only(
                                   topRight: Radius.circular(15),
                                   bottomRight: Radius.circular(15)),
-//                      child: Image.network(
-//                        widget.notification.data.image ?? "",
-//                        height: _cardHeight,
-//                        width: _cardHeight - 30,
-//                        fit: BoxFit.fill,
-//                      ),
                       child: CachedNetworkImage(
                         imageUrl: widget.notification.data.image,
                         height: _cardHeight,

@@ -5,12 +5,16 @@ import 'package:paprica/generated/i18n.dart';
 class MapScreen extends StatefulWidget {
   final double initialLatitude;
   final double initialLongitude;
+  final double resLatitude;
+  final double resLongitude;
   final bool isSelecting;
 
   MapScreen({
     Key key,
     this.initialLatitude,
     this.initialLongitude,
+    this.resLatitude,
+    this.resLongitude,
     this.isSelecting,
   }) : super(key: key);
 
@@ -20,21 +24,10 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
-  double latitude;
-  double longitude;
 
   @override
   void initState() {
-    if(widget.initialLatitude == null)
-      latitude = 33.5;
-    else{
-      latitude = widget.initialLatitude;
-    }
-    if(widget.initialLongitude == null)
-      longitude = 36.3;
-    else{
-      longitude = widget.initialLongitude;
-    }
+    _pickedLocation = null;
     super.initState();
   }
 
@@ -50,40 +43,58 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: Text(S.of(context).clickToLocateYou),
         actions: <Widget>[
-          widget.isSelecting == true ?
-            IconButton(
-              icon: Icon(Icons.check),
-              onPressed: _pickedLocation == null
-                  ? null
-                  : () {
-                      Navigator.of(context).pop(_pickedLocation);
-                    },
-            )
-              :
-              Container(height: 0.0, width: 0.0,),
+          _pickedLocation != null
+              ? IconButton(
+                  icon: Icon(Icons.check),
+                  onPressed: () {
+                          Navigator.of(context).pop(_pickedLocation);
+                        },
+                )
+              : Container(
+                  height: 0.0,
+                  width: 0.0,
+                ),
         ],
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: LatLng(
-            latitude,
-            longitude,
+            widget.resLatitude,
+            widget.resLongitude,
           ),
           zoom: 16,
         ),
-        onTap: widget.isSelecting ? _selectLocation : null,
-        markers: (_pickedLocation == null && widget.isSelecting)
-            ? null
+        onTap: _selectLocation,
+        markers: (_pickedLocation == null && !widget.isSelecting)
+            ? <Marker>[
+                Marker(
+                  markerId: MarkerId('restaurant location'),
+                  infoWindow: InfoWindow(title: "restaurant location"),
+                  position: LatLng(
+                    widget.resLatitude,
+                    widget.resLongitude,
+                  ),
+                ),
+              ].toSet()
             : <Marker>[
-              Marker(
+                Marker(
+                  markerId: MarkerId('restaurant location'),
+                  infoWindow: InfoWindow(title: "restaurant location"),
+                  position: LatLng(
+                    widget.resLatitude,
+                    widget.resLongitude,
+                  ),
+                ),
+                Marker(
                   markerId: MarkerId('your location'),
+                  infoWindow: InfoWindow(title: "your location"),
                   position: _pickedLocation ??
                       LatLng(
-                        latitude,
-                        longitude,
+                        widget.initialLatitude,
+                        widget.initialLongitude,
                       ),
                 ),
-        ].toSet(),
+              ].toSet(),
         rotateGesturesEnabled: false,
       ),
     );

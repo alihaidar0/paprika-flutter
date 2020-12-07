@@ -196,6 +196,7 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
         _isLoading = false;
       });
     });
+    return null;
   }
 
   @override
@@ -1178,7 +1179,7 @@ class NoPickupsLayout extends StatelessWidget {
           Image(
             height: 170,
             width: 170,
-            image: AssetImage('assets/images/no_reservation.png'),
+            image: AssetImage('assets/images/no-data-pickup-and-delivery.png'),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
