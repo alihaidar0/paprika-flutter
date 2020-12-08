@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:paprica/pages.dart';
 import 'package:paprica/src/models/notification.dart';
+import 'package:paprica/src/screens/deliveries_screen.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
+import 'package:paprica/src/screens/pickups_screen.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
@@ -159,12 +161,44 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   _onTapNotification(BuildContext context, NotificationModel notification) {
     switch (notification.notificationName) {
+
+      /// reservation
       case NotificationType.reservationApproved:
       case NotificationType.reservationRejected:
       case NotificationType.reservationUpdateRejected:
       case NotificationType.reservationUpdateApproved:
-        Navigator.pop(context, HomeScreenAction.reservations);
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return ReservationsScreen();
+        }));
         break;
+
+      /// pickup
+      case NotificationType.pickupApproved:
+      case NotificationType.pickupRejected:
+      case NotificationType.pickupUpdateRejected:
+      case NotificationType.pickupUpdateApproved:
+      case NotificationType.pickupIsReady:
+      case NotificationType.pickupResponseMessage:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return PickupsScreen();
+        }));
+        break;
+
+      /// delivery
+      case NotificationType.deliveryApproved:
+      case NotificationType.deliveryRejected:
+      case NotificationType.deliveryUpdateRejected:
+      case NotificationType.deliveryUpdateApproved:
+      case NotificationType.deliveryResponseMessage:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return DeliveriesScreen();
+        }));
+        break;
+
+      /// newRestaurantAdded
       case NotificationType.newRestaurantAdded:
         int restId =
             (notification.data as NotificationRestaurantAdded).restaurantId;
@@ -175,6 +209,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           }));
         }
         break;
+
+      /// newEventAdded
       case NotificationType.newEventAdded:
         int eventId = (notification.data as NotificationEventAdded).eventId;
         if (eventId != null && eventId > 0) {
@@ -184,6 +220,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           }));
         }
         break;
+
+      /// newOfferAdded
       case NotificationType.newOfferAdded:
         int offerId = (notification.data as NotificationOfferAdded).offerId;
         if (offerId != null && offerId > 0) {

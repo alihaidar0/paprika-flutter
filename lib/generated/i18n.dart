@@ -227,7 +227,7 @@ class S implements WidgetsLocalizations {
   String get loggingOut => "Logging Out...";
   String get loginPhoneNumber => "Phone Number or Username";
   String get loginPromotionNotifications =>
-      "Please log in to view your reservations";
+      "Please log in to view your notifications";
   String get loginPromotionProfile => "Please log in to view your profile";
   String get loginPromotionReservations =>
       "Please log in to view your reservations";
