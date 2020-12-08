@@ -167,7 +167,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var android =
         new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
     var ios = new IOSInitializationSettings();
-    var platform = new InitializationSettings(android, ios);
+    var platform = new InitializationSettings(android: android, iOS: ios);
     await flutterLocalNotificationsPlugin.initialize(platform);
 
     firebaseMessaging.configure(
@@ -202,12 +202,12 @@ class _SplashScreenState extends State<SplashScreen> {
       var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
           'channel id', 'channel name', 'channel description',
           playSound: false,
-          importance: Importance.Max,
-          priority: Priority.High);
+          importance: Importance.max,
+          priority: Priority.high);
       var iOSPlatformChannelSpecifics =
           new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
-          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+          android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
       await flutterLocalNotificationsPlugin.show(
           0, title, body, platformChannelSpecifics);
     }

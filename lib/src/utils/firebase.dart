@@ -32,7 +32,7 @@ class Firebase {
     var android =
         new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
     var ios = new IOSInitializationSettings();
-    var platform = new InitializationSettings(android, ios);
+    var platform = new InitializationSettings(android: android, iOS: ios);
     _flutterLocalNotificationsPlugin.initialize(platform,
         onSelectNotification: _onNotificationDialogClick);
 
@@ -136,12 +136,12 @@ class Firebase {
       var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
           'channel id', 'channel name', 'channel description',
           playSound: false,
-          importance: Importance.Max,
-          priority: Priority.High);
+          importance: Importance.max,
+          priority: Priority.high);
       var iOSPlatformChannelSpecifics =
           new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
-          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+          android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
       await _flutterLocalNotificationsPlugin.show(
           0, title, body, platformChannelSpecifics);
     }
