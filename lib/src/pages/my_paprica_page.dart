@@ -208,8 +208,8 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                       child: OnlineStatus(
                         child: IncrementallyLoadingListView(
                             controller: _scrollController,
-                            hasMore: () => !noMorePapricaItems,
-                            itemCount: () => papricaItemsList.length + 1,
+                            hasMore: !noMorePapricaItems,
+                            itemCount: papricaItemsList.length + 1,
                             loadMore: () async {
                               await _loadMoreData(
                                   eventStamp: lastEventsStamp,
