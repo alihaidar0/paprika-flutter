@@ -18,6 +18,8 @@ class ApiHelper {
   static const int MyPapricaTypeEvent = 3;
   static const int MyPapricaTypeOffer = 2;
   static const int MyPapricaTypeListOffers = 7;
+  static const int MyPapricaTypePublishedPoll = 8;
+  static const int MyPapricaTypeOpenPoll = 9;
 
   static const int reservationTypePending = 1;
   static const int reservationTypeRejected = 2;

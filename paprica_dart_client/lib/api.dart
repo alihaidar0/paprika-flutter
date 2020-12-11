@@ -502,6 +502,18 @@ part 'model/reservation_paprica_item_dto.dart';
 
 part 'model/restaurant_in_list_paprica_item.dart';
 
+part 'model/published_poll_in_paprica_item.dart';
+
+part 'model/open_poll_in_paprica_item.dart';
+
+part 'model/published_poll_item.dart';
+
+part 'model/open_poll_item.dart';
+
+part 'model/restaurant_poll_in_paprica_item.dart';
+
+part 'model/meal_in_published_poll_in_paprica_item.dart';
+
 part 'model/list_paprica_item_dto.dart';
 
 part 'model/paged_result_dto_mypaprica_offer_dto.dart';

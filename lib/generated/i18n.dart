@@ -316,7 +316,9 @@ class S implements WidgetsLocalizations {
   String get otherOccasion => "Occasion";
   String get otherWord => "Other";
   String get outdoor => "Outdoor";
+  String get outOff => "out off";
   String get parking => "Parking";
+  String get latestPublishedPoll => "Latest published poll";
   String get password => "Password";
   String get pending => "Pending";
   String get pendingChanges => "This reservation has pending changes";
@@ -461,6 +463,7 @@ class S implements WidgetsLocalizations {
   String get viewDeliveries => "View Deliveries";
   String get viewUpdates => "View Updates";
   String get viewMeals => "View Meals";
+  String get votes => "Votes";
   String get wednesday => "Wednesday";
   String get yes => "Yes";
   String get youCouldHearPinDrop =>
@@ -909,6 +912,8 @@ class $ar extends S {
   @override
   String get parking => "موقف السيارات";
   @override
+  String get latestPublishedPoll => "نشر أخر استطلاع";
+  @override
   String get errorEmptyField => "هذا الحقل مطلوب";
   @override
   String get noRestaurantsToView => "عذراً، ليش هنالك مطاعم لعرضها حالياً";
@@ -940,6 +945,8 @@ class $ar extends S {
   String get filterTrySomethingElse => "تحرير البحث";
   @override
   String get viewMeals => "مشاهدة الوجبات";
+  @override
+  String get votes => "صوت";
   @override
   String get viewUpdates => "مشاهدة التعديلات";
   @override
@@ -1324,6 +1331,8 @@ class $ar extends S {
   String get currentPassword => "كلمة المرور الحالية";
   @override
   String get outdoor => "تراس";
+  @override
+  String get outOff => "من أصل";
   @override
   String get tuesday => "الثلاثاء";
   @override

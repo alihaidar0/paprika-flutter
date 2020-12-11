@@ -10,6 +10,7 @@ import 'package:paprica/src/models/search_item.dart';
 import 'package:paprica/src/widgets/event_card.dart';
 import 'package:paprica/src/widgets/offer_card.dart';
 import 'package:paprica/src/widgets/offers_list_view.dart';
+import 'package:paprica/src/widgets/published_poll_card.dart';
 import 'package:paprica/src/widgets/reservation_card.dart';
 import 'package:paprica/src/widgets/restaurant_list_view.dart';
 import 'package:paprica/widgets.dart';
@@ -199,6 +200,9 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                   return Center(child: CircularProgressIndicator());
                 else if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.hasData) {
+                  debugPrint('------*******------');
+                  debugPrint('${papricaItemsList}');
+                  debugPrint('------*******------');
                   return Container(
                     color: Color(0xFFE5E5E5),
                     height: MediaQuery.of(context).size.height - 60,
@@ -354,6 +358,23 @@ class _MyPapricaPageState extends State<MyPapricaPage>
           ],
         );
         break;
+
+      case ApiHelper.MyPapricaTypePublishedPoll:
+        PublishedPollInPapricaItem temp = papricaItem.model;
+        return Column(
+          children: <Widget>[
+            PublishedPollCard(
+              publishedPollItem: papricaItem.model,
+              title: temp.title,
+              titleColor: Theme.of(context).primaryColor,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        );
+        break;
+
       default:
         return Container();
     }
