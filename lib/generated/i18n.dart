@@ -90,6 +90,7 @@ class S implements WidgetsLocalizations {
   String get clearFilter => "Clear";
   String get clearing => "Clearing...";
   String get close => "Close";
+  String get closeDate => "Close Date";
   String get closed => "Closed";
   String get clickToLocateYou => "Click to locate you";
   String get comingEvent => "Coming event";
@@ -405,6 +406,7 @@ class S implements WidgetsLocalizations {
   String get skip => "Skip";
   String get smokeFree => "Smoke Free";
   String get submit => "Submit";
+  String get submitVote => "Submit Vote";
   String get successConfirmPhoneNumber =>
       "Your phone number was confirmed successfully";
   String get successPasswordChanged => "Your password was changed";
@@ -679,6 +681,8 @@ class $ar extends S {
   @override
   String get close => "إغلاق";
   @override
+  String get closeDate => "وقت الإغلاق";
+  @override
   String get anyOccasion => "هل يوجد مناسبة خاصة؟";
   @override
   String get and => "و";
@@ -817,6 +821,8 @@ class $ar extends S {
   String get occasion => "المناسبة";
   @override
   String get submit => "إرسال";
+  @override
+  String get submitVote => "تصويت";
   @override
   String get reservationUpdateInfo => "تم تغيير المعلومات الإضافية";
   @override

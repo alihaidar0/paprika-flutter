@@ -48,10 +48,7 @@ class PublishedPollCard extends StatelessWidget {
             ),
           ),
           Container(
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              padding: EdgeInsets.all(5.0),
+            child: Column(
               children: widgets,
             ),
           ),

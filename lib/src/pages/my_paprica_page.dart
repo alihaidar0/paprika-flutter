@@ -10,6 +10,7 @@ import 'package:paprica/src/models/search_item.dart';
 import 'package:paprica/src/widgets/event_card.dart';
 import 'package:paprica/src/widgets/offer_card.dart';
 import 'package:paprica/src/widgets/offers_list_view.dart';
+import 'package:paprica/src/widgets/open_poll_card.dart';
 import 'package:paprica/src/widgets/published_poll_card.dart';
 import 'package:paprica/src/widgets/reservation_card.dart';
 import 'package:paprica/src/widgets/restaurant_list_view.dart';
@@ -365,6 +366,22 @@ class _MyPapricaPageState extends State<MyPapricaPage>
           children: <Widget>[
             PublishedPollCard(
               publishedPollItem: papricaItem.model,
+              title: temp.title,
+              titleColor: Theme.of(context).primaryColor,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        );
+        break;
+
+      case ApiHelper.MyPapricaTypeOpenPoll:
+        OpenPollInPapricaItem temp = papricaItem.model;
+        return Column(
+          children: <Widget>[
+            OpenPollCard(
+              openPollItems: papricaItem.model,
               title: temp.title,
               titleColor: Theme.of(context).primaryColor,
             ),
