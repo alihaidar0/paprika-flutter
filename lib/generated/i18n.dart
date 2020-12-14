@@ -37,6 +37,7 @@ class S implements WidgetsLocalizations {
   String get addToDeliveryList => "Add to delivery list";
   String get alcoholFree => "Alcohol Free";
   String get allServices => "All services";
+  String get alert => "Alert";
   String get alreadyHaveAccount => "Already have an account?";
   String get ambiance => "Ambiance";
   String get amenities => "Amenities";
@@ -345,6 +346,7 @@ class S implements WidgetsLocalizations {
       "Please enter the received code and your new password.";
   String get pleaseLogIn => "Please log in";
   String get pleaseLoginInOrderToReserve => "Please login to reserve";
+  String get pleaseLoginInOrderToVote => "Please login to vote";
   String get pleaseLoginInOrderToOrderPickup => "Please login to order pickup";
   String get pleaseLoginInOrderToOrderDelivery => "Please login to order delivery";
   String get pleaseSelectLanguage => "Please select your language";
@@ -382,6 +384,7 @@ class S implements WidgetsLocalizations {
   String get reserveNow => "Reserve Now";
   String get reset => "Reset";
   String get restaurantsForYou => "Restaurants For You";
+  String get restaurant => "Restaurant";
   String get restaurantsLocation => "Restaurants Location";
   String get retry => "Retry";
   String get reviews => "Reviews";
@@ -419,6 +422,7 @@ class S implements WidgetsLocalizations {
       "Thank You! You will receive restaurant response soon.";
   String get successReservationCancel => "Reservation was cancelled";
   String get successPickupCancel => "Pickup was cancelled";
+  String get successVoting => "The voting succeeded";
   String get successDeliveryCancel => "Delivery was cancelled";
   String get successReservationUpdate =>
       "Reservation updated successfully. Please wait for restaurant approval";
@@ -466,11 +470,13 @@ class S implements WidgetsLocalizations {
   String get viewUpdates => "View Updates";
   String get viewMeals => "View Meals";
   String get votes => "Votes";
+  String get voting => "Voting";
   String get wednesday => "Wednesday";
   String get yes => "Yes";
   String get youCouldHearPinDrop =>
       "You could hear a pin drop in here! Get more engaged to get more notifications.";
   String get youHavePending => "You have pending reservation";
+  String get youWillVoteFor => "You will vote for";
   String get youHaveUpcomingReservationAt => "You have upcoming reservation at";
   String get youHaveUpcomingPickupAt => "You have upcoming Pickup at";
   String get youHaveUpcomingDeliveryAt => "You have upcoming Delivery at";
@@ -954,6 +960,8 @@ class $ar extends S {
   @override
   String get votes => "صوت";
   @override
+  String get voting => "تصويت";
+  @override
   String get viewUpdates => "مشاهدة التعديلات";
   @override
   String get errorRateMeal => "تعذر حفظ تقييم الوجبة. الرجاء المحاولة لاحقاً.";
@@ -1013,6 +1021,9 @@ class $ar extends S {
   @override
   String get pleaseLoginInOrderToReserve =>
       "الرجاء تسجيل الدخول لتتمكن من الحجز";
+  @override
+  String get pleaseLoginInOrderToVote =>
+      "الرجاء تسجيل الدخول لتتمكن من التصويت";
   @override
   String get pleaseLoginInOrderToOrderPickup =>
       "الرجاء تسجيل الدخول لتتمكن من طلب طلبية";
@@ -1106,6 +1117,8 @@ class $ar extends S {
   @override
   String get restaurantsForYou => "مطاعم خاصة لك";
   @override
+  String get restaurant => "مطعم";
+  @override
   String get restaurantsLocation => "موقع المطعم";
   @override
   String get menu => "القائمة";
@@ -1137,6 +1150,8 @@ class $ar extends S {
   String get successPickupCancel => "تم إلغاء التعديل على الطلبية";
   @override
   String get successDeliveryCancel => "تم إلغاء التعديل على التوصيلة";
+  @override
+  String get successVoting => "تم التصويت";
   @override
   String get applyFilter => "بحث مخصص";
   @override
@@ -1177,6 +1192,8 @@ class $ar extends S {
   String get noSmoking => "التدخين ممنوع";
   @override
   String get youHavePending => "لديك حجز قيد الانتظار";
+  @override
+  String get youWillVoteFor => "سوف تصوت لصالح";
   @override
   String get find => "ابحث";
   @override
@@ -1314,6 +1331,8 @@ class $ar extends S {
   String get upcoming => "القادمة";
   @override
   String get allServices => "كل الخدمات";
+  @override
+  String get alert => "تنبيه";
   @override
   String get pendingChanges => "يوجد تعديلات قيد الانتظار";
   @override

@@ -54,6 +54,8 @@ part 'api/customer_reservation_api.dart';
 
 part 'api/customer_pickup_api.dart';
 
+part 'api/customer_poll_api.dart';
+
 part 'api/customer_delivery_api.dart';
 
 part 'api/customer_restaurant_api.dart';
@@ -505,6 +507,8 @@ part 'model/restaurant_in_list_paprica_item.dart';
 part 'model/published_poll_in_paprica_item.dart';
 
 part 'model/open_poll_in_paprica_item.dart';
+
+part 'model/poll_add_vote_dto.dart';
 
 part 'model/published_poll_item.dart';
 

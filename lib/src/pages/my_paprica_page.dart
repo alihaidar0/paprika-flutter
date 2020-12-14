@@ -201,9 +201,6 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                   return Center(child: CircularProgressIndicator());
                 else if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.hasData) {
-                  debugPrint('------*******------');
-                  debugPrint('${papricaItemsList}');
-                  debugPrint('------*******------');
                   return Container(
                     color: Color(0xFFE5E5E5),
                     height: MediaQuery.of(context).size.height - 60,

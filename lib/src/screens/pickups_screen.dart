@@ -254,10 +254,6 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // if (widget.changeHomePageIndexHandler is Function &&
-                      //     widget.changeHomePageIndexHandler != null) {
-                      //   widget.changeHomePageIndexHandler(2);
-                      // }
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>

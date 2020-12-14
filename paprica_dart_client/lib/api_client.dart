@@ -423,6 +423,8 @@ class ApiClient {
           return new PublishedPollItem.fromJson(value);
         case 'OpenPollInPapricaItem':
           return new OpenPollInPapricaItem.fromJson(value);
+        case 'PollAddVoteDto':
+          return new PollAddVoteDto.fromJson(value);
         case 'OpenPollItem':
           return new OpenPollItem.fromJson(value);
         case 'RestaurantPollInPapricaItem':
