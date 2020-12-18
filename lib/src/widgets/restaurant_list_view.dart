@@ -215,10 +215,6 @@ class Restaurants extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: new BorderRadius.circular(12.0),
-//                child: FadeInImage.memoryNetwork(
-//                    placeholder: kTransparentImage,
-//                    image: restaurantsList.items[x].logoImage,
-//                    width: MediaQuery.of(context).size.width * 0.23),
                       child: CachedNetworkImage(
                           imageUrl: restaurantsList.items[x].logoImage,
                           placeholder: (context, url) => Image(

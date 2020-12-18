@@ -30,14 +30,6 @@ class OfferCard extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-//                FadeInImage.assetNetwork(
-//                  width: MediaQuery.of(context).size.width * 0.38,
-//                  height: MediaQuery.of(context).size.width * 0.38,
-//                  image: offer.image,
-//                  fit: BoxFit.cover,
-//                  placeholder: "assets/images/placeholder.png",
-//                ),
-
                 CachedNetworkImage(
                   imageUrl: offer.image,
                   placeholder: (context, url) => Image(
@@ -74,57 +66,6 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 4),
-//                        Text(
-//                          offer.description2,
-//                          style: TextStyle(
-//                            color: Colors.black,
-//                            fontWeight: FontWeight.bold,
-//                          ),
-//                        ),
-//                        SizedBox(height: 4),
-//                        Text(
-//                          offer.description3,
-//                          overflow: TextOverflow.ellipsis,
-//                          style: TextStyle(
-//                            color: Colors.black,
-//                            fontSize: 14,
-//                          ),
-//                        ),
-//                        SizedBox(
-//                          height: 10,
-//                        ),
-//                        Container(
-//                          decoration: new BoxDecoration(
-//                              border: new Border.all(
-//                                  color: Colors.black, width: 0.5)),
-//                          child: Padding(
-//                            padding: const EdgeInsets.all(3.0),
-//                            child: Text(
-//                              offer.price,
-//                              style: TextStyle(
-//                                color: Colors.black,
-//                                fontSize: 14,
-//                              ),
-//                            ),
-//                          ),
-//                        ),
-//                        SizedBox(
-//                          height: 4,
-//                        ),
-//                        Text(
-//                          S.of(context).from +
-//                              " " +
-//                              offer.dateFrom +
-//                              " " +
-//                              S.of(context).to +
-//                              " " +
-//                              offer.dateTo,
-//                          softWrap: true,
-//                          style: TextStyle(
-//                            color: Theme.of(context).primaryColor,
-//                            fontSize: 14,
-//                          ),
-//                        ),
                       ],
                     ),
                   ),
@@ -169,13 +110,6 @@ class MyPapricaOfferCard extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 55),
-//                    child: FadeInImage.assetNetwork(
-//                      width: MediaQuery.of(context).size.width,
-//                      height: 250,
-//                      image: offer.image,
-//                      fit: BoxFit.cover,
-//                      placeholder: "assets/images/placeholder.png",
-//                    ),
                     child: CachedNetworkImage(
                       imageUrl: offer.image,
                       placeholder: (context, url) => Image(

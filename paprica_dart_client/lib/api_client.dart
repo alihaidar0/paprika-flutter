@@ -417,6 +417,20 @@ class ApiClient {
           return new VisitorContactInfoDto.fromJson(value);
         case 'PlacesResponse':
           return new PlacesResponse.fromJson(value);
+        case 'PublishedPollInPapricaItem':
+          return new PublishedPollInPapricaItem.fromJson(value);
+        case 'PublishedPollItem':
+          return new PublishedPollItem.fromJson(value);
+        case 'OpenPollInPapricaItem':
+          return new OpenPollInPapricaItem.fromJson(value);
+        case 'PollAddVoteDto':
+          return new PollAddVoteDto.fromJson(value);
+        case 'OpenPollItem':
+          return new OpenPollItem.fromJson(value);
+        case 'RestaurantPollInPapricaItem':
+          return new RestaurantPollInPapricaItem.fromJson(value);
+        case 'MealInPublishedPollInPapricaItem':
+          return new MealInPublishedPollInPapricaItem.fromJson(value);
         default:
           {
             Match match;
