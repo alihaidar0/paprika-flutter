@@ -43,6 +43,8 @@ class ApiClient {
           return value is double ? value : double.parse('$value');
         case 'AddFavoriteRestaurantDto':
           return new AddFavoriteRestaurantDto.fromJson(value);
+        case 'ChangeRestaurantNotificationsDto':
+          return new ChangeRestaurantNotificationsDto.fromJson(value);
         case 'AddRegularCustomerDto':
           return new AddRegularCustomerDto.fromJson(value);
         case 'AdminDashboardDto':

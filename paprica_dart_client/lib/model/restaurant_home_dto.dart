@@ -81,13 +81,15 @@ class RestaurantHomeDto {
 
   bool isOpen = null;
 
+  bool isNotificationsOn = null;
+
   int id = null;
 
   RestaurantHomeDto();
 
   @override
   String toString() {
-    return 'RestaurantHomeDto[restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, noiseLevel=$noiseLevel, ambianceRate=$ambianceRate, isFavorite=$isFavorite, event=$event, openingTimes=$openingTimes, galleryItems=$galleryItems, restaurantRaters=$restaurantRaters, settings=$settings, name=$name, longitude=$longitude, latitude=$latitude, logoImage=$logoImage, coverImage=$coverImage, phoneNumber=$phoneNumber, rank=$rank, address=$address, regionId=$regionId, status=$status, parkingTypes=$parkingTypes, description=$description, ambianceTypes=$ambianceTypes, audioTrack=$audioTrack, musicTypes=$musicTypes, isSmokeFree=$isSmokeFree, isAlcoholFree=$isAlcoholFree, cuisineTypes=$cuisineTypes, amenityTypes=$amenityTypes, hasOutdoor=$hasOutdoor, isFeatured=$isFeatured, is24Hour=$is24Hour, isOpen=$isOpen, id=$id, ]';
+    return 'RestaurantHomeDto[restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, noiseLevel=$noiseLevel, ambianceRate=$ambianceRate, isFavorite=$isFavorite, event=$event, openingTimes=$openingTimes, galleryItems=$galleryItems, restaurantRaters=$restaurantRaters, settings=$settings, name=$name, longitude=$longitude, latitude=$latitude, logoImage=$logoImage, coverImage=$coverImage, phoneNumber=$phoneNumber, rank=$rank, address=$address, regionId=$regionId, status=$status, parkingTypes=$parkingTypes, description=$description, ambianceTypes=$ambianceTypes, audioTrack=$audioTrack, musicTypes=$musicTypes, isSmokeFree=$isSmokeFree, isAlcoholFree=$isAlcoholFree, cuisineTypes=$cuisineTypes, amenityTypes=$amenityTypes, hasOutdoor=$hasOutdoor, isFeatured=$isFeatured, is24Hour=$is24Hour, isOpen=$isOpen, isNotificationsOn=$isNotificationsOn, id=$id, ]';
   }
 
   RestaurantHomeDto.fromJson(Map<String, dynamic> json) {
@@ -130,6 +132,7 @@ class RestaurantHomeDto {
     isFeatured = json['isFeatured'];
     is24Hour = json['is24Hour'];
     isOpen = json['isOpen'];
+    isNotificationsOn = json['isNotificationsOn'];
     id = json['id'];
   }
 
@@ -170,6 +173,7 @@ class RestaurantHomeDto {
       'isFeatured': isFeatured,
       'is24Hour': is24Hour,
       'isOpen': isOpen,
+      'isNotificationsOn': isNotificationsOn,
       'id': id
     };
   }

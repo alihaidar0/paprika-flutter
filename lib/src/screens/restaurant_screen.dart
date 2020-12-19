@@ -93,6 +93,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
     WidgetsBinding.instance.removeObserver(this);
 
     _isFavorite = null;
+    _isNotificationsOn = null;
     _isMusicPlaying = null;
     _wasMusicPlaying = null;
     _audioPlayer = null;
@@ -662,8 +663,8 @@ class _RestaurantHomeState extends State<RestaurantHome>
                                     LogInScreen(asAService: true)))
                         .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (BuildContext context) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
                           return PickupScreen(
                             restaurantId: widget.restaurantId,
                             restaurantName: restData.name,
@@ -703,14 +704,14 @@ class _RestaurantHomeState extends State<RestaurantHome>
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                LogInScreen(asAService: true)))
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
                         .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (BuildContext context) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
                           return DeliveryScreen(
                             restaurantId: widget.restaurantId,
                             restaurantName: restData.name,
@@ -1100,6 +1101,7 @@ bool _isMusicPlaying;
 
 bool _wasMusicPlaying;
 bool _isFavorite;
+bool _isNotificationsOn;
 
 class ActionsRow extends StatefulWidget {
   final ScrollController scrollController;
@@ -1117,6 +1119,8 @@ class ActionsRow extends StatefulWidget {
 class _ActionsRowState extends State<ActionsRow> {
   bool isAddingToFavorite = false;
 
+  bool isAddingToNotificationsOn = false;
+
   bool downloading = false;
 
   bool loadingShareApps = false;
@@ -1132,11 +1136,21 @@ class _ActionsRowState extends State<ActionsRow> {
           : Colors.white;
   }
 
+  get _isNotificationsOnColor {
+    if (isAddingToNotificationsOn)
+      return Color(0xffcccccc);
+    else
+      return _isNotificationsOn != null && _isNotificationsOn
+          ? Colors.redAccent
+          : Colors.white;
+  }
+
   @override
   void initState() {
     super.initState();
     _audioPlayer ??= AudioPlayer();
     _isFavorite ??= widget.restData.isFavorite;
+    _isNotificationsOn ??= widget.restData.isNotificationsOn;
     _isMusicPlaying ??= false;
     if (widget.isExtra) {
       widget.scrollController..addListener(_scrollListener);
@@ -1218,7 +1232,19 @@ class _ActionsRowState extends State<ActionsRow> {
                 ? const EdgeInsets.only(left: 4, right: 8.0)
                 : const EdgeInsets.only(left: 8, right: 4.0),
             child: Icon(Icons.favorite, color: _isFavoriteColor)),
-      )
+      ),
+      _isFavorite
+          ? GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _onTapNotificationsOn,
+              child: Padding(
+                  padding: Localizations.localeOf(context).languageCode == "en"
+                      ? const EdgeInsets.only(left: 4, right: 8.0)
+                      : const EdgeInsets.only(left: 8, right: 4.0),
+                  child: Icon(Icons.notifications,
+                      color: _isNotificationsOnColor)),
+            )
+          : Container(),
     ];
   }
 
@@ -1282,6 +1308,72 @@ class _ActionsRowState extends State<ActionsRow> {
     }
   }
 
+  void _actionChangeRestaurantNotifications() {
+    if (isAddingToNotificationsOn) return;
+
+    setState(() {
+      isAddingToNotificationsOn = true;
+    });
+    ApiClient client = PapricaApiClient();
+    var restaurantApi = CustomerRestaurantApi(client);
+
+    if (_isNotificationsOn) {
+      ChangeRestaurantNotificationsDto input =
+          ChangeRestaurantNotificationsDto.fromJson({
+        "restaurantId": widget.restData?.id,
+        "isNotificationsOn": false
+      });
+      restaurantApi
+          .apiServicesAppCustomerRestaurantChangeRestaurantNotificationsPost(
+              input: input)
+          .then((_) {
+        if (mounted) {
+          setState(() {
+            isAddingToNotificationsOn = false;
+            _isNotificationsOn = false;
+          });
+        }
+        PapricaToast.showToast(
+            S
+                .of(context)
+                .turnOffRestaurantNotifications(widget.restData?.name ?? ""),
+            ToastType.Normal);
+      }).catchError((_) {
+        if (mounted) {
+          setState(() {
+            isAddingToNotificationsOn = false;
+          });
+        }
+      });
+    } else {
+      ChangeRestaurantNotificationsDto input =
+          ChangeRestaurantNotificationsDto.fromJson(
+              {"restaurantId": widget.restData?.id, "isNotificationsOn": true});
+      restaurantApi
+          .apiServicesAppCustomerRestaurantChangeRestaurantNotificationsPost(
+              input: input)
+          .then((_) {
+        if (mounted) {
+          setState(() {
+            isAddingToNotificationsOn = false;
+            _isNotificationsOn = true;
+          });
+        }
+        PapricaToast.showToast(
+            S
+                .of(context)
+                .turnOnRestaurantNotifications(widget.restData?.name ?? ""),
+            ToastType.Normal);
+      }).catchError((_) {
+        if (mounted) {
+          setState(() {
+            isAddingToNotificationsOn = false;
+          });
+        }
+      });
+    }
+  }
+
   void _actionToggleMusic() {
     _isMusicPlaying ? pause() : play();
   }
@@ -1313,8 +1405,7 @@ class _ActionsRowState extends State<ActionsRow> {
     if (_isMusicPlaying != null && !_isMusicPlaying) {
       _audioPlayer.setVolume(1);
       _audioPlayer.setReleaseMode(ReleaseMode.LOOP);
-      _audioPlayer.onPlayerStateChanged.listen((state) {
-      });
+      _audioPlayer.onPlayerStateChanged.listen((state) {});
       _audioPlayer.play(widget.restData.audioTrack).then((status) {
         if (mounted) {
           setState(() {
@@ -1434,6 +1525,40 @@ class _ActionsRowState extends State<ActionsRow> {
                       } else {
                         PapricaToast.showToast(S.of(context).loggingInRequired(
                             S.of(context).actionAddToFavorite));
+                      }
+                    });
+                  },
+                  child: Text(S.of(context).logIn)),
+            );
+          });
+    }
+  }
+
+  void _onTapNotificationsOn() {
+    if (ApiTypesHelper().isAuthorized) {
+      _actionChangeRestaurantNotifications();
+    } else {
+      showDialog(
+          context: context,
+          builder: (_context) {
+            return PapricaSimpleDialog(
+              title: S
+                  .of(context)
+                  .loggingInRequired(S.of(context).actionChangeRestaurantNotifications),
+              yesButton: FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
+                      if (loggedIn != null && loggedIn) {
+                        _actionChangeRestaurantNotifications();
+                      } else {
+                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                            S.of(context).actionChangeRestaurantNotifications));
                       }
                     });
                   },
