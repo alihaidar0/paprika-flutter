@@ -1236,7 +1236,7 @@ class _ActionsRowState extends State<ActionsRow> {
       _isFavorite
           ? GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: _onTapNotificationsOn,
+              onTap: _onTapChangeRestaurantNotifications,
               child: Padding(
                   padding: Localizations.localeOf(context).languageCode == "en"
                       ? const EdgeInsets.only(left: 4, right: 8.0)
@@ -1534,7 +1534,7 @@ class _ActionsRowState extends State<ActionsRow> {
     }
   }
 
-  void _onTapNotificationsOn() {
+  void _onTapChangeRestaurantNotifications() {
     if (ApiTypesHelper().isAuthorized) {
       _actionChangeRestaurantNotifications();
     } else {
