@@ -25,6 +25,7 @@ class S implements WidgetsLocalizations {
   String get Rejected => "Rejected";
   String get aboutUs => "About Us";
   String get actionAddToFavorite => "like a restaurant";
+  String get actionChangeRestaurantNotifications => "turn on or turn off restaurant's notifications";
   String get actionRateMeal => "rate a meal";
   String get actionReserve => "reserve";
   String get actionPickup => "Order Pickup";
@@ -508,6 +509,10 @@ class S implements WidgetsLocalizations {
       "$restaurant was added to your favorites list";
   String restaurantRemovedFromFavorites(String restaurant) =>
       "$restaurant was removed from  your favorites list";
+  String turnOnRestaurantNotifications(String restaurant) =>
+      "Notifications were tuned on for $restaurant";
+  String turnOffRestaurantNotifications(String restaurant) =>
+      "Notifications were tuned off for $restaurant";
   String shareText(String restaurantName, String link) =>
       "Hi,\nCheckout out $restaurantName on Paprica at $link";
   String shareTextApp(String link) => "Hi,\nCheckout out Paprica at $link";
@@ -1085,6 +1090,8 @@ class $ar extends S {
   @override
   String get actionAddToFavorite => "تضيف مطعم إلى المفضلة";
   @override
+  String get actionChangeRestaurantNotifications => "تغيير حالة إشعارات المطعم";
+  @override
   String get low => "منخفض";
   @override
   String get arabic => "العربية";
@@ -1399,6 +1406,9 @@ class $ar extends S {
   String restaurantAddedToFavorites(String restaurant) =>
       "تم إضافة $restaurant إلى قائمة المطاعم المفضلة لديك";
   @override
+  String turnOnRestaurantNotifications(String restaurant) =>
+      "تم تشغيل الإشعارات لمطعم $restaurant";
+  @override
   String reservationDialogHeader(String eventName, String restaurantName) =>
       "$eventName في $restaurantName";
   @override
@@ -1426,6 +1436,9 @@ class $ar extends S {
   @override
   String restaurantRemovedFromFavorites(String restaurant) =>
       "تم إزالة $restaurant من قائمة المطاعم المفضلة لديك";
+  @override
+  String turnOffRestaurantNotifications(String restaurant) =>
+      "تم إطفاء الإشعارات لمطعم $restaurant";
   @override
   String shareTextEvent(String eventName, String link) =>
       "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprica على الرابط $link";

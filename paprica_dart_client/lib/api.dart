@@ -104,6 +104,8 @@ part 'api/user_api.dart';
 
 part 'model/add_favorite_restaurant_dto.dart';
 
+part 'model/change_restaurant_notifications_dto.dart';
+
 part 'model/add_regular_customer_dto.dart';
 
 part 'model/admin_dashboard_dto.dart';
