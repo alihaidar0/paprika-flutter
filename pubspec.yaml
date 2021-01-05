@@ -84,7 +84,6 @@ flutter:
     - assets/images/logo_white.png
     - assets/images/places_background.png
     - assets/images/discover_background.png
-    - assets/images/no-data-pickup-and-delivery.png
     - assets/icons/home_empty.png
     - assets/icons/home_filled.png
     - assets/icons/menu_empty.png
@@ -153,6 +152,8 @@ flutter:
     - assets/images/no_events.png
     - assets/images/no_reservation.png
     - assets/images/no_notifications.png
+    - assets/images/no_pickup.png
+    - assets/images/no_delivery.png
     - assets/images/placeholder.png
     - assets/images/paprica_white.png
     - assets/images/paprica_white_small.png
