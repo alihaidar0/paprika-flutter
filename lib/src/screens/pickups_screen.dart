@@ -1175,7 +1175,7 @@ class NoPickupsLayout extends StatelessWidget {
           Image(
             height: 170,
             width: 170,
-            image: AssetImage('assets/images/no-data-pickup-and-delivery.png'),
+            image: AssetImage('assets/images/no_pickup.png'),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
