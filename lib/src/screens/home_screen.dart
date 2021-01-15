@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -134,194 +135,199 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        body: DefaultTabController(
-          length: 4,
-          child: ScrollConfiguration(
-            behavior: NoGlowScrollBehaviour(),
-            child: CustomScrollView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _scrollController,
-              slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: 40,
-                  title: Text(S.of(context).title,
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-                  backgroundColor: Theme.of(context).primaryColor,
-                  actions: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        showSearch(
-                            context: context, delegate: CustomSearchDelegate());
-                      },
-                    ),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return DiscoverPage();
-                        }));
-                      },
-                      child: Image(
-                        width: 40,
-                        height: 40,
-                        image: AssetImage("assets/icons/filter.png"),
+          body: DefaultTabController(
+            length: 4,
+            child: ScrollConfiguration(
+              behavior: NoGlowScrollBehaviour(),
+              child: CustomScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _scrollController,
+                slivers: <Widget>[
+                  SliverAppBar(
+                    expandedHeight: 40,
+                    title: Text(S.of(context).title,
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w700)),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    actions: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          showSearch(
+                              context: context,
+                              delegate: CustomSearchDelegate());
+                        },
                       ),
-                    ),
-                    Stack(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: IconButton(
-                            icon: Icon(Icons.notifications),
-                            onPressed: () {
-                              setState(() {
-                                _notificationCounts = 0;
-                              });
-                              Navigator.push<HomeScreenAction>(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        NotificationsScreen()),
-                              ).then((HomeScreenAction screenAction) {
-                                _handlerActionRequest(screenAction);
-                              });
-                            },
-                          ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return DiscoverPage();
+                          }));
+                        },
+                        child: Image(
+                          width: 40,
+                          height: 40,
+                          image: AssetImage("assets/icons/filter.png"),
                         ),
-                        _notificationCounts != null &&
-                                _notificationCounts > 0 &&
-                                _notificationCounts < 999
-                            ? Positioned(
-                                right: 4,
-                                left: 4,
-                                child: Padding(
-                                  padding: Localizations.localeOf(context)
-                                              .languageCode ==
-                                          'en'
-                                      ? const EdgeInsets.only(
-                                          top: 10, left: 8.0)
-                                      : const EdgeInsets.only(
-                                          top: 10, right: 8.0),
-                                  child: Container(
-                                    height: _notificationCounts < 99 ? 16 : 20,
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(0.0),
-                                        child: Text(
-                                          _notificationCounts > 9
-                                              ? S.of(context).ninePlus
-                                              : '$_notificationCounts',
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.deepOrangeAccent),
-                                  ),
-                                ),
-                              )
-                            : EmptyWidget(),
-                      ],
-                    ),
-                  ],
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      (context, _) => Container(
-                            height: MediaQuery.of(context).size.height - 70,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  0, 0, 0, _currentIndex == 0 ? 0 : 60),
-                              child: TabBarView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                controller: _tabController,
-                                children: _tabList,
-                              ),
+                      ),
+                      Stack(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: IconButton(
+                              icon: Icon(Icons.notifications),
+                              onPressed: () {
+                                setState(() {
+                                  _notificationCounts = 0;
+                                });
+                                Navigator.push<HomeScreenAction>(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          NotificationsScreen()),
+                                ).then((HomeScreenAction screenAction) {
+                                  _handlerActionRequest(screenAction);
+                                });
+                              },
                             ),
                           ),
-                      childCount: 1),
-                )
-              ],
+                          _notificationCounts != null &&
+                                  _notificationCounts > 0 &&
+                                  _notificationCounts < 999
+                              ? Positioned(
+                                  right: 4,
+                                  left: 4,
+                                  child: Padding(
+                                    padding: Localizations.localeOf(context)
+                                                .languageCode ==
+                                            'en'
+                                        ? const EdgeInsets.only(
+                                            top: 10, left: 8.0)
+                                        : const EdgeInsets.only(
+                                            top: 10, right: 8.0),
+                                    child: Container(
+                                      height:
+                                          _notificationCounts < 99 ? 16 : 20,
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(0.0),
+                                          child: Text(
+                                            _notificationCounts > 9
+                                                ? S.of(context).ninePlus
+                                                : '$_notificationCounts',
+                                            style: TextStyle(fontSize: 10),
+                                          ),
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.deepOrangeAccent),
+                                    ),
+                                  ),
+                                )
+                              : EmptyWidget(),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        (context, _) => Container(
+                              height: MediaQuery.of(context).size.height - 70,
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    0, 0, 0, _currentIndex == 0 ? 0 : 60),
+                                child: TabBarView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  controller: _tabController,
+                                  children: _tabList,
+                                ),
+                              ),
+                            ),
+                        childCount: 1),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (currentIndex) {
-            if (currentIndex != _currentIndex) {
-              setState(() {
-                _currentIndex = currentIndex;
-              });
-              _changeTab(currentIndex);
-            } else {
-              if (currentIndex == 0) {
-                resetScrollPositionStream.add(true);
-                _scrollController.animateTo(0,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    duration: Duration(milliseconds: 500));
+          bottomNavigationBar: ConvexAppBar(
+            // backgroundColor: Colors.grey[500],
+            backgroundColor: Theme.of(context).primaryColor,
+            height: 60,
+            style: TabStyle.react,
+            initialActiveIndex: _currentIndex,
+            onTap: (currentIndex) {
+              if (currentIndex != _currentIndex) {
+                setState(() {
+                  _currentIndex = currentIndex;
+                });
+                _changeTab(currentIndex);
+              } else {
+                if (currentIndex == 0) {
+                  resetScrollPositionStream.add(true);
+                  _scrollController.animateTo(0,
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      duration: Duration(milliseconds: 500));
+                }
               }
-            }
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Image.asset("assets/icons/home_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/home_active.png")),
-              title: Text(S.of(context).home, style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/reservation_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/reservation_active.png")),
-              title:
-                  Text(S.of(context).services, style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/places_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/places_active.png")),
-              title: Text(S.of(context).places, style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/more_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/more_active.png")),
-              title: Text(
-                S.of(context).more,
-                style: TextStyle(fontSize: 12),
+            },
+            items: [
+              TabItem(
+                icon: SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: Image.asset("assets/icons/home_inactive.png")),
+                activeIcon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/home_active.png")),
+                title:
+                    Text(S.of(context).places, style: TextStyle(fontSize: 12))
+                        .data,
               ),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-          ],
-        ),
-      ),
+              TabItem(
+                icon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child:
+                        Image.asset("assets/icons/reservation_inactive.png")),
+                activeIcon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/reservation_active.png")),
+                title:
+                    Text(S.of(context).services, style: TextStyle(fontSize: 12))
+                        .data,
+              ),
+              TabItem(
+                icon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/places_inactive.png")),
+                activeIcon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/places_active.png")),
+                title:
+                    Text(S.of(context).places, style: TextStyle(fontSize: 12))
+                        .data,
+              ),
+              TabItem(
+                icon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/more_inactive.png")),
+                activeIcon: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/icons/more_active.png")),
+                title: Text(S.of(context).more, style: TextStyle(fontSize: 12))
+                    .data,
+              ),
+            ],
+          )),
     );
   }
 
@@ -353,7 +359,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _currentIndex = index;
     });
     _changeTab(index);
-//    _changeTabStream.add(index);
   }
 
   _reservationOpenCallback() {
