@@ -1258,7 +1258,6 @@ class _ActionsRowState extends State<ActionsRow> {
     var restaurantApi = CustomerRestaurantApi(client);
     AddFavoriteRestaurantDto input = AddFavoriteRestaurantDto.fromJson(
         {"restaurantId": widget.restData?.id});
-
     if (_isFavorite) {
       restaurantApi
           .apiServicesAppCustomerRestaurantRemoveFavoriteRestaurantPost(
@@ -1268,6 +1267,7 @@ class _ActionsRowState extends State<ActionsRow> {
           setState(() {
             isAddingToFavorite = false;
             _isFavorite = false;
+            _isNotificationsOn = false;
           });
         }
         PapricaToast.showToast(
