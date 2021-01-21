@@ -253,8 +253,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
           bottomNavigationBar: ConvexAppBar(
-            // backgroundColor: Colors.grey[500],
-            backgroundColor: Theme.of(context).primaryColor,
+            color: Color(0xFFAA0025).withOpacity(0.3),
+            activeColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.white,
             height: 60,
             style: TabStyle.react,
             initialActiveIndex: _currentIndex,
@@ -275,56 +276,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             },
             items: [
               TabItem(
-                icon: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: Image.asset("assets/icons/home_inactive.png")),
-                activeIcon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/home_active.png")),
-                title:
-                    Text(S.of(context).places, style: TextStyle(fontSize: 12))
-                        .data,
+                icon: Image.asset("assets/icons/home_active.png"),
+                activeIcon: Image.asset("assets/icons/home_active.png"),
+                title: Text(S.of(context).home).data,
               ),
               TabItem(
-                icon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child:
-                        Image.asset("assets/icons/reservation_inactive.png")),
-                activeIcon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/reservation_active.png")),
-                title:
-                    Text(S.of(context).services, style: TextStyle(fontSize: 12))
-                        .data,
+                icon: Image.asset("assets/icons/home_active.png"),
+                activeIcon: Image.asset("aassets/icons/home_active.png"),
+                title: Text(S.of(context).services).data,
               ),
               TabItem(
-                icon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/places_inactive.png")),
-                activeIcon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/places_active.png")),
-                title:
-                    Text(S.of(context).places, style: TextStyle(fontSize: 12))
-                        .data,
+                icon: Image.asset("assets/icons/home_active.png"),
+                activeIcon: Image.asset("assets/icons/home_active.png"),
+                title: Text(S.of(context).places).data,
               ),
               TabItem(
-                icon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/more_inactive.png")),
-                activeIcon: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/icons/more_active.png")),
-                title: Text(S.of(context).more, style: TextStyle(fontSize: 12))
-                    .data,
+                icon: Image.asset("assets/icons/home_active.png"),
+                activeIcon: Image.asset("assets/icons/home_active.png"),
+                title: Text(S.of(context).more).data,
               ),
             ],
           )),
