@@ -129,12 +129,13 @@ flutter:
     - assets/icons/avatar_male.png
     - assets/icons/home_active.png
     - assets/icons/home_inactive.png
-    - assets/icons/reservation_active.png
-    - assets/icons/reservation_inactive.png
+    - assets/icons/services_active.png
+    - assets/icons/services_inactive.png
     - assets/icons/profile_active.png
     - assets/icons/profile_inactive.png
     - assets/icons/more_active.png
     - assets/icons/more_inactive.png
+    - assets/icons/more_filled.png
     - assets/icons/restaurants_active.png
     - assets/icons/restaurants_inactive.png
     - assets/icons/coffee_active.png
