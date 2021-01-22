@@ -124,6 +124,9 @@ class PlacesApi {
     }
   }
 
+  ///
+  ///
+  ///
   Future<PagedResultDtoRestaurantLiteDto> apiServicesAppPlacesGetAllLiteGet(
       {int parkingType,
       int ambianceType,
@@ -240,6 +243,9 @@ class PlacesApi {
     }
   }
 
+  ///
+  ///
+  ///
   Future<FeaturedAndNearbyRestaurantDto>
       apiServicesAppPlacesGetFeaturedAndNearbyGet(
           {int parkingType,
@@ -357,6 +363,9 @@ class PlacesApi {
     }
   }
 
+  ///
+  ///
+  ///
   Future<PlacesResponse> getPlacesPage(
       {double longitude, double latitude}) async {
     Object postBody = null;

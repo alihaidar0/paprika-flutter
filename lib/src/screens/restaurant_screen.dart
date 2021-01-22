@@ -298,7 +298,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                                               height: 15,
                                               width: 30,
                                               child: Image.asset(
-                                                  "assets/icons/more_active.png")),
+                                                  "assets/icons/more_filled.png")),
                                           Text(
                                             S.of(context).more,
                                             style: TextStyle(

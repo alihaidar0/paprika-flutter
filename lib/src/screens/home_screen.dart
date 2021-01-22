@@ -276,23 +276,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             },
             items: [
               TabItem(
-                icon: Image.asset("assets/icons/home_active.png"),
+                icon: Image.asset("assets/icons/home_empty.png"),
                 activeIcon: Image.asset("assets/icons/home_active.png"),
                 title: Text(S.of(context).home).data,
               ),
               TabItem(
-                icon: Image.asset("assets/icons/home_active.png"),
-                activeIcon: Image.asset("aassets/icons/home_active.png"),
+                icon: Image.asset("assets/icons/services_inactive.png"),
+                activeIcon: Image.asset("assets/icons/services_active.png"),
                 title: Text(S.of(context).services).data,
               ),
               TabItem(
-                icon: Image.asset("assets/icons/home_active.png"),
-                activeIcon: Image.asset("assets/icons/home_active.png"),
+                icon: Image.asset("assets/icons/places_inactive.png"),
+                activeIcon: Image.asset("assets/icons/places_active.png"),
                 title: Text(S.of(context).places).data,
               ),
               TabItem(
-                icon: Image.asset("assets/icons/home_active.png"),
-                activeIcon: Image.asset("assets/icons/home_active.png"),
+                icon: Image.asset("assets/icons/more_inactive.png"),
+                activeIcon: Image.asset("assets/icons/more_active.png"),
                 title: Text(S.of(context).more).data,
               ),
             ],
