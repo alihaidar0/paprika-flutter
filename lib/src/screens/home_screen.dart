@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
           bottomNavigationBar: ConvexAppBar(
-            color: Color(0xFFAA0025).withOpacity(0.3),
+            color: Theme.of(context).primaryColor,
             activeColor: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             height: 60,
