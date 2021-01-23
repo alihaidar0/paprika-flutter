@@ -175,7 +175,7 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(

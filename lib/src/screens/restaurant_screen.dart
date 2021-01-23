@@ -193,190 +193,149 @@ class _RestaurantHomeState extends State<RestaurantHome>
                         width: 0.0,
                       )
                     : Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                        ),
                         width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        height: 55,
+                        child: Stack(
+                          alignment: Alignment.center,
                           children: [
-                            _reservable
-                                ? InkWell(
-                                    onTap: () {
-                                      _onReservePressed(context);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: (!_pickupable && !_deliverable)
-                                          ? MediaQuery.of(context).size.width
-                                          : MediaQuery.of(context).size.width *
-                                              0.8,
-                                      child: Center(
-                                        child: Text(
-                                          S.of(context).reserveNow,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : _pickupable
-                                    ? InkWell(
-                                        onTap: () {
-                                          _onOrderPickupPressed(context);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: _deliverable
-                                              ? MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.8
-                                              : MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                          child: Center(
-                                              child: Text(
-                                            S.of(context).orderPickup,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          )),
-                                        ),
-                                      )
-                                    : _deliverable
-                                        ? InkWell(
-                                            onTap: () {
-                                              _onOrderDeliveryPressed(context);
-                                            },
-                                            child: Container(
-                                              height: 50,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: Center(
-                                                child: Text(
-                                                  S.of(context).orderDelivery,
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 20),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            height: 0.0,
-                                            width: 0.0,
-                                          ),
-                            restData.settings.services.length > 1
-                                ? PopupMenuButton<int>(
-                              child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Localizations.localeOf(context)
-                                                    .languageCode ==
-                                                'en'
-                                            ? Border(
-                                                left: BorderSide(
-                                                    width: 1.0,
-                                                    color: Colors.white))
-                                            : Border(
-                                                right: BorderSide(
-                                                    width: 1.0,
-                                                    color: Colors.white)),
-                                      ),
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                              height: 7),
-                                          SizedBox(
-                                              height: 15,
-                                              width: 30,
-                                              child: Image.asset(
-                                                  "assets/icons/more_filled.png")),
-                                          Text(
-                                            S.of(context).more,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    itemBuilder: (context) {
-                                      List<PopupMenuItem<int>> items = [];
-                                      if (_reservable && _pickupable)
-                                        items.add(PopupMenuItem(
-                                            value: 1,
-                                            child: Text(S.of(context).orderPickup)));
-                                      if ((_reservable ||
-                                          _pickupable) &&
-                                          _deliverable) {
-                                        items.add(PopupMenuItem(
-                                            value: 2,
-                                            child: Text(
-                                                S.of(context).orderDelivery)));
-                                      }
-                                      return items;
-                                    },
-                                    onSelected: (selection) {
-                                      switch (selection) {
-                                        case 1:
-                                          _onOrderPickupPressed(context);
-                                          break;
-                                        case 2:
-                                          _onOrderDeliveryPressed(context);
-                                          break;
-                                      }
-                                    },
-                                  )
-                                // ? InkWell(
-                                //     onTap: () {
-                                //       _onReservePressed(context);
-                                //     },
-                                //     child: Container(
-                                //       decoration: BoxDecoration(
-                                //         border: Localizations.localeOf(context)
-                                //                     .languageCode ==
-                                //                 'en'
-                                //             ? Border(
-                                //                 left: BorderSide(
-                                //                     width: 1.0,
-                                //                     color: Colors.white))
-                                //             : Border(
-                                //                 right: BorderSide(
-                                //                     width: 1.0,
-                                //                     color: Colors.white)),
-                                //       ),
-                                //       height: 50,
-                                //       width: MediaQuery.of(context).size.width *
-                                //           0.2,
-                                //       child: Column(
-                                //         children: [
-                                //           SizedBox(
-                                //               height: 27,
-                                //               width: 30,
-                                //               child: Image.asset(
-                                //                   "assets/icons/more_active.png")),
-                                //           Text(
-                                //             S.of(context).more,
-                                //             style: TextStyle(
-                                //                 color: Colors.white,
-                                //                 fontSize: 14),
-                                //           ),
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   )
-                                : Container(
+                            Container(
+                              color: Colors.white,
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
                                     height: 0.0,
                                     width: 0.0,
                                   ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    child: _reservable
+                                        ? InkWell(
+                                            onTap: () {
+                                              _onReservePressed(context);
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                S.of(context).reserveNow,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18),
+                                              ),
+                                            ),
+                                          )
+                                        : _pickupable
+                                            ? InkWell(
+                                                onTap: () {
+                                                  _onOrderPickupPressed(
+                                                      context);
+                                                },
+                                                child: Center(
+                                                    child: Text(
+                                                  S.of(context).orderPickup,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                )),
+                                              )
+                                            : _deliverable
+                                                ? InkWell(
+                                                    onTap: () {
+                                                      _onOrderDeliveryPressed(
+                                                          context);
+                                                    },
+                                                    child: Center(
+                                                      child: Text(
+                                                        S
+                                                            .of(context)
+                                                            .orderDelivery,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    height: 0.0,
+                                                    width: 0.0,
+                                                  ),
+                                  ),
+                                  restData.settings.services.length > 1
+                                      ? PopupMenuButton<int>(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[300],
+                                              borderRadius:
+                                                  BorderRadius.circular(4.0),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.15,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(height: 4),
+                                                SizedBox(
+                                                  height: 8,
+                                                  child: Image.asset(
+                                                      "assets/icons/more_filled_black.png"),
+                                                ),
+                                                Text(
+                                                  S.of(context).more,
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          itemBuilder: (context) {
+                                            List<PopupMenuItem<int>> items = [];
+                                            if (_reservable && _pickupable)
+                                              items.add(PopupMenuItem(
+                                                  value: 1,
+                                                  child: Text(S
+                                                      .of(context)
+                                                      .orderPickup)));
+                                            if ((_reservable || _pickupable) &&
+                                                _deliverable) {
+                                              items.add(PopupMenuItem(
+                                                  value: 2,
+                                                  child: Text(S
+                                                      .of(context)
+                                                      .orderDelivery)));
+                                            }
+                                            return items;
+                                          },
+                                          onSelected: (selection) {
+                                            switch (selection) {
+                                              case 1:
+                                                _onOrderPickupPressed(context);
+                                                break;
+                                              case 2:
+                                                _onOrderDeliveryPressed(
+                                                    context);
+                                                break;
+                                            }
+                                          },
+                                        )
+                                      : Container(
+                                          height: 0.0,
+                                          width: 0.0,
+                                        ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),

@@ -200,7 +200,7 @@ class __ListItemState extends State<_ListItem> {
                 width: MediaQuery.of(context).size.width * 0.20,
                 height: MediaQuery.of(context).size.width * 0.25,
                 decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.20 * 0.5),
                     shape: BoxShape.rectangle,
                     color: Colors.white,
                     image: DecorationImage(
