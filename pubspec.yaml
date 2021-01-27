@@ -136,6 +136,7 @@ flutter:
     - assets/icons/more_active.png
     - assets/icons/more_inactive.png
     - assets/icons/more_filled.png
+    - assets/icons/more_filled_black.png
     - assets/icons/restaurants_active.png
     - assets/icons/restaurants_inactive.png
     - assets/icons/coffee_active.png

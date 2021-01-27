@@ -386,6 +386,7 @@ class S implements WidgetsLocalizations {
   String get reset => "Reset";
   String get restaurantsForYou => "Restaurants For You";
   String get restaurant => "Restaurant";
+  String get restaurants => "Restaurants";
   String get restaurantsLocation => "Restaurants Location";
   String get retry => "Retry";
   String get reviews => "Reviews";
@@ -1125,6 +1126,8 @@ class $ar extends S {
   String get restaurantsForYou => "مطاعم خاصة لك";
   @override
   String get restaurant => "مطعم";
+  @override
+  String get restaurants => "مطاعم";
   @override
   String get restaurantsLocation => "موقع المطعم";
   @override

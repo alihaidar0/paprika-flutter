@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))
-      ..add(ServicePage(changeHomePageIndexHandler))
       ..add(PlacesPage())
+      ..add(ServicePage(changeHomePageIndexHandler))
       ..add(MorePage());
 
     _tabController = TabController(vsync: this, length: _tabList.length);
@@ -281,14 +281,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 title: Text(S.of(context).home).data,
               ),
               TabItem(
+                icon: Image.asset("assets/icons/places_inactive.png"),
+                activeIcon: Image.asset("assets/icons/places_active.png"),
+                title: Text(S.of(context).restaurants).data,
+              ),
+              TabItem(
                 icon: Image.asset("assets/icons/services_inactive.png"),
                 activeIcon: Image.asset("assets/icons/services_active.png"),
                 title: Text(S.of(context).services).data,
-              ),
-              TabItem(
-                icon: Image.asset("assets/icons/places_inactive.png"),
-                activeIcon: Image.asset("assets/icons/places_active.png"),
-                title: Text(S.of(context).places).data,
               ),
               TabItem(
                 icon: Image.asset("assets/icons/more_inactive.png"),
