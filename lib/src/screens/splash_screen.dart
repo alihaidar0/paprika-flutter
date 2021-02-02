@@ -6,7 +6,6 @@ import 'package:paprica/translations.dart';
 import 'package:paprica/utils.dart';
 import 'package:swagger/api.dart';
 import '../../app.dart';
-import '../../pages.dart';
 import '../../widgets.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -70,19 +69,11 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Image(
-                  height: 30,
-                  image: AssetImage("assets/images/paprica_white_small.png")),
+                  height: 65,
+                  image: AssetImage("assets/images/paprika_white.png")),
               Container(
                 child: DotsLoader(),
               ),
-              SizedBox(height: 60),
-              Text(
-                S.of(context).poweredBy,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white70,
-                ),
-              )
             ],
           ),
         ),

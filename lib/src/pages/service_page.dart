@@ -65,7 +65,7 @@ class _ServicePageState extends State<ServicePage> {
             refreshStream: streamRefreshController.stream),
       );
     } else {
-      return LogInPromotion(loginLine: S.of(context).loginPromotionServices);
+      return LogInPromotion(loginLine: S.of(context).loginPromotionActivities);
     }
   }
 }

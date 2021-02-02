@@ -236,6 +236,8 @@ class S implements WidgetsLocalizations {
       "Please log in to view your reservations";
   String get loginPromotionServices =>
       "Please log in to view your Services";
+  String get loginPromotionActivities =>
+      "Please log in to view your Activities";
   String get low => "Low";
   String get marriage => "Marriage";
   String get menu => "Menu";
@@ -245,7 +247,7 @@ class S implements WidgetsLocalizations {
   String get messageClearNotification => "Clear All Notification?";
   String get messageEventNotFound => "Restaurant might have removed the event";
   String get messageLocationPermission =>
-      "Paprica needs to access your location.";
+      "Paprika needs to access your location.";
   String get messageOfferNotFound => "Restaurant might have removed the offer";
   String get moderate => "Moderate";
   String get monday => "Monday";
@@ -260,8 +262,8 @@ class S implements WidgetsLocalizations {
       "Let the restaurant know why you want to cancel the delivery (Optional)";
   String get music => "Music";
   String get myNotifications => "My Notifications";
-  String get myPipina => "My Paprica";
-  String get myPaprica => "My Paprica";
+  String get myPipina => "My Paprika";
+  String get myPaprica => "My Paprika";
   String get nearby => "Nearby";
   String get nearbyCafe => "Nearby Cafes";
   String get nearbyFastFood => "Nearby FastFood";
@@ -405,6 +407,7 @@ class S implements WidgetsLocalizations {
   String get sentCode => "The code was sent to your phone";
   String get service => "Service";
   String get services => "Services";
+  String get activities => "Activities";
   String get settings => "Settings";
   String get shisha => "Shisha";
   String get singUp => "Sign Up";
@@ -433,6 +436,7 @@ class S implements WidgetsLocalizations {
   String get sureDelete => "Are you sure you want to delete this item?";
   String get thankYouAdminWillReviewYourFeedback =>
       "Thank you, we will review your comment before it's published.";
+  String get thankYouForVoting => "Thank you for voting";
   String get thisMonth => "This Month";
   String get thisWeek => "This Week";
   String get thursday => "Thursday";
@@ -445,7 +449,7 @@ class S implements WidgetsLocalizations {
   String get timeHasBeenRoundedToTheNearest15Minutes =>
       "Time has been rounded to the nearest 15 minutes";
   String get timePM => "PM";
-  String get title => "Paprica";
+  String get title => "Paprika";
   String get to => "To";
   String get total => "Total";
   String get totalPrice => "Total Price";
@@ -487,6 +491,7 @@ class S implements WidgetsLocalizations {
   String get yourLocation => "Your Location";
   String get comma => ",";
   String get youAreAllCaughtUp => "You're All Caught Up";
+  String get workingHours => "Working Hours";
   String callRestaurant(String restaurantName) => "Wanna call $restaurantName?";
   String eventsListTitle(String restaurantName) => "$restaurantName's Events";
   String loggingInRequired(String action) => "Please log in to $action";
@@ -515,14 +520,14 @@ class S implements WidgetsLocalizations {
   String turnOffRestaurantNotifications(String restaurant) =>
       "Notifications were tuned off for $restaurant";
   String shareText(String restaurantName, String link) =>
-      "Hi,\nCheckout out $restaurantName on Paprica at $link";
-  String shareTextApp(String link) => "Hi,\nCheckout out Paprica at $link";
+      "Hi,\nCheckout out $restaurantName on Paprika at $link";
+  String shareTextApp(String link) => "Hi,\nCheckout out Paprika at $link";
   String shareTextEvent(String eventName, String link) =>
-      "Hi,\nCheckout out event $eventName on Paprica at $link";
+      "Hi,\nCheckout out event $eventName on Paprika at $link";
   String shareTextMeal(String offerName, String restaurantName, String link) =>
-      "Hi,\nCheckout out $offerName at $restaurantName on Paprica at $link";
+      "Hi,\nCheckout out $offerName at $restaurantName on Paprika at $link";
   String shareTextOffer(String offerName, String link) =>
-      "Hi,\nCheckout out offer $offerName on Paprica at $link";
+      "Hi,\nCheckout out offer $offerName on Paprika at $link";
   String successRateMeal(String meal) =>
       "Sharing is Caring! Now people will have a better idea about the $meal";
 }
@@ -850,7 +855,7 @@ class $ar extends S {
   @override
   String get ambiance => "الأجواء";
   @override
-  String get title => "Paprica";
+  String get title => "Paprika";
   @override
   String get selectCountry => "الرجاء اختيار بلد";
   @override
@@ -919,6 +924,8 @@ class $ar extends S {
   String get service => "الخدمة";
   @override
   String get services => "الخدمات";
+  @override
+  String get activities => "النشاطات";
   @override
   String get location => "الموقع";
   @override
@@ -1066,8 +1073,12 @@ class $ar extends S {
   @override
   String get loginPromotionReservations =>
       "الرجاء تسحيل الدخول لمشاهدة حجوزاتك";
+  @override
   String get loginPromotionServices =>
       "الرجاء تسحيل الدخول لمشاهدة خدماتك";
+  @override
+  String get loginPromotionActivities =>
+      "الرجاء تسحيل الدخول لمشاهدة أنشطتك";
   @override
   String get errorPlayingAudio => "عذراً جهازك لا يدعم هذه الميزة";
   @override
@@ -1355,6 +1366,8 @@ class $ar extends S {
   String get thankYouAdminWillReviewYourFeedback =>
       "شكراً لك، سنقوم بتدقيق مراجعتك قبل عرضها ضمن قائمة الآراء.";
   @override
+  String get thankYouForVoting => "شكراً لك على التصويت";
+  @override
   String get rateMeal => "قيّم الوجبة";
   @override
   String get raterss => "Raters";
@@ -1395,6 +1408,8 @@ class $ar extends S {
   @override
   String get youAreAllCaughtUp => "جرى استعراض كافة المحتويات";
   @override
+  String get workingHours => "أوقات الدوام";
+  @override
   String reservationSummary(String restaurantName, String peopleNumber,
           String suffix, String date, String time) =>
       "سيتم الحجز في  $restaurantName لـ $peopleNumber $suffix.\n\nالتاريخ: $date\nالوقت: $time";
@@ -1404,7 +1419,7 @@ class $ar extends S {
       "سيتم طلب توصيلة في  $restaurantName.";
   @override
   String shareText(String restaurantName, String link) =>
-      "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprica على الرابط $link";
+      "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprika على الرابط $link";
   @override
   String restaurantAddedToFavorites(String restaurant) =>
       "تم إضافة $restaurant إلى قائمة المطاعم المفضلة لديك";
@@ -1416,7 +1431,7 @@ class $ar extends S {
       "$eventName في $restaurantName";
   @override
   String shareTextApp(String link) =>
-      "مرحبا،\nجرّب تطبيق Paprica على الرابط $link";
+      "مرحبا،\nجرّب تطبيق Paprika على الرابط $link";
   @override
   String successRateMeal(String meal) =>
       "شكراً! هلأ الناس رح تعرف أكتر عن $meal";
@@ -1427,7 +1442,7 @@ class $ar extends S {
   String loggingInRequired(String action) => "الرجاء تسجيل الدخول لكي $action";
   @override
   String shareTextMeal(String mealName, String restaurantName, String link) =>
-      "مرحبا،\nصار فيك تجرب $mealName in $restaurantName on Paprica at $link";
+      "مرحبا،\nصار فيك تجرب $mealName in $restaurantName on Paprika at $link";
   @override
   String eventsListTitle(String restaurantName) => "أحداث في $restaurantName";
   @override
@@ -1444,12 +1459,12 @@ class $ar extends S {
       "تم إطفاء الإشعارات لمطعم $restaurant";
   @override
   String shareTextEvent(String eventName, String link) =>
-      "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprica على الرابط $link";
+      "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprika على الرابط $link";
   @override
   String menuNoAvailable(String category) => "لايوجد  $category";
   @override
   String shareTextOffer(String offerName, String link) =>
-      "مرحبا،\nصار فيك تشوف العرض $offerName على تطبيق Paprica على الرابط $link";
+      "مرحبا،\nصار فيك تشوف العرض $offerName على تطبيق Paprika على الرابط $link";
   @override
   String noReviews(String restaurantName) =>
       " لا يوجد تقييمات خاصة بـ $restaurantName ";

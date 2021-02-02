@@ -198,9 +198,10 @@ class _MyPapricaPageState extends State<MyPapricaPage>
             builder: (context, snapshot) {
               {
                 if (snapshot.connectionState == ConnectionState.waiting)
-                  return Center(child: CircularProgressIndicator());
+                   return Center(child: CircularProgressIndicator());
                 else if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.hasData) {
+                  if(snapshot.data != null)
                   return Container(
                     color: Color(0xFFE5E5E5),
                     height: MediaQuery.of(context).size.height - 60,
@@ -235,9 +236,28 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                       ),
                     ),
                   );
+                  else{
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image(image: AssetImage('assets/images/application_crash.png'),height: 280,),
+                        SizedBox(height: 20,),
+                        RequestRetry(
+                            message: S.of(context).errorUnknown,
+                            retryCallback: () {
+                              setState(() {
+                                papricaItemsList = [];
+                              });
+                              return _initialLoad();
+                            }),
+                        SizedBox(height: 60,),
+                      ],
+                    );
+                  }
                 }
                 if (snapshot.hasError) {
-                  return RequestRetry(
+                 return RequestRetry(
                       message: S.of(context).errorUnknown,
                       retryCallback: () {
                         setState(() {

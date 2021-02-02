@@ -61,13 +61,13 @@ class _PapricaAppState extends State<PapricaApp> {
             cursorColor: Colors.grey,
             textSelectionColor: Colors.grey,
             textSelectionHandleColor: Colors.grey,
-            primaryColor: Color(0xFFAA0025),
-            accentColor: Color(0xFFAA0025),
+            primaryColor: Color(0xFFB02524),
+            accentColor: Color(0xFFB02524),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
             colorScheme: ColorScheme.light(
               primary: Color(
-                  0xFFAA0025), // -------> This will be your FlatButton's text color
-              secondary: Color(0xFFAA0025),
+                  0xFFB02524), // -------> This will be your FlatButton's text color
+              secondary: Color(0xFFB02524),
             ),
             fontFamily: 'hacen-tunisia',
             textTheme: TextTheme(body1: TextStyle(fontSize: 14))),

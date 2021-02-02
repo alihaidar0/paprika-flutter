@@ -11,7 +11,6 @@ import 'package:paprica/src/widgets/restaurant_infoRow.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
 import 'package:paprica/utils.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantHomePage extends StatefulWidget {
   final RestaurantHomeDto restData;
@@ -142,10 +141,23 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
   }
 }
 
-class InformationSection extends StatelessWidget {
+class InformationSection extends StatefulWidget {
   final RestaurantHomeDto restData;
 
   const InformationSection(this.restData);
+
+  @override
+  _InformationSectionState createState() => _InformationSectionState();
+}
+
+class _InformationSectionState extends State<InformationSection> {
+  bool showWorkingTimes;
+
+  @override
+  void initState() {
+    super.initState();
+    showWorkingTimes = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,98 +165,172 @@ class InformationSection extends StatelessWidget {
     return Container(
       color: Color(0xFFf2f2f2),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(18, 15, 18, 15),
+        padding: const EdgeInsets.only(top: 15, bottom: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Don't draw the row if none of the following information is provided
-            Row(
-              children: <Widget>[
-                Flexible(
-                  child: drawables.length > 0
-                      ? Wrap(
-                          spacing: 24,
-                          children: drawables,
-                        )
-                      : Container(),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 18, right: 18, bottom: 5),
+              child: Row(
+                children: <Widget>[
+                  Flexible(
+                    child: drawables.length > 0
+                        ? Wrap(
+                            spacing: 24,
+                            children: drawables,
+                          )
+                        : Container(),
+                  ),
+                ],
+              ),
             ),
 
             /// Opening Time ///
-            (restData.is24Hour != null && restData.is24Hour) ||
-                    (restData.openingTimes == null ||
-                        restData.openingTimes.length == 0)
+            (widget.restData.is24Hour != null && widget.restData.is24Hour) ||
+                    (widget.restData.openingTimes == null ||
+                        widget.restData.openingTimes.length == 0)
                 ? Container()
-                : Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                          padding:
-                              Localizations.localeOf(context).languageCode ==
-                                      'en'
-                                  ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
-                                  : const EdgeInsets.fromLTRB(8, 8, 0, 8),
-                          child: SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: Image(
-                              image: AssetImage("assets/icons/open_time.png"),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Container(
-                            color: Colors.white,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Table(
-                                    columnWidths: {
-                                      0: FlexColumnWidth(3),
-                                      1: FlexColumnWidth(7)
-                                    },
-                                    children: restData.openingTimes
-                                        .map<TableRow>((ot) {
-                                      return TableRow(children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 2, horizontal: 4),
-                                          child: Text(
-                                            ApiHelper.toStringDayOfWeek(
-                                                context, ot.dayOfWeek),
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                        Text(PapricaFormatter.formatTimeOnly(
-                                                context, ot.fromTime) +
-                                            (Localizations.localeOf(context)
-                                                        .languageCode ==
-                                                    'en'
-                                                ? " → "
-                                                : " ← ") +
-                                            PapricaFormatter.formatTimeOnly(
-                                              context,
-                                              ot.toTime,
-                                            ))
-                                      ]);
-                                    }).toList(),
+                : Card(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 12.0,
+                        right: 12.0,
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: Image(
+                                    image: AssetImage(
+                                        "assets/icons/open_time.png"),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, top: 4.0, right: 5.0),
+                                  child: Text(
+                                    S.of(context).workingHours,
+                                    style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                          showWorkingTimes
+                              ? Column(
+                                  children: List.generate(
+                                    widget.restData.openingTimes.length,
+                                    (index) => Container(
+                                      color: (index % 2 != 0)
+                                          ? Colors.white
+                                          : Color(0xFFE1E1E1),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 5.0, right: 8.0, bottom: 5.0),
+                                        child: Table(
+                                          children: [
+                                            TableRow(children: [
+                                              Text(
+                                                ApiHelper.toStringDayOfWeek(
+                                                    context,
+                                                    widget
+                                                        .restData
+                                                        .openingTimes[index]
+                                                        .dayOfWeek),
+                                                // style: TextStyle(
+                                                //   color: Theme.of(context)
+                                                //       .primaryColor,
+                                                // ),
+                                              ),
+                                              Text(
+                                                PapricaFormatter.formatTimeOnly(
+                                                    context,
+                                                    widget
+                                                        .restData
+                                                        .openingTimes[index]
+                                                        .fromTime),
+                                                // style: TextStyle(
+                                                //   color: Theme.of(context)
+                                                //       .primaryColor,
+                                                // ),
+                                              ),
+                                              Text(
+                                                PapricaFormatter.formatTimeOnly(
+                                                  context,
+                                                  widget.restData
+                                                      .openingTimes[index].toTime,
+                                                ),
+                                                // style: TextStyle(
+                                                //   color: Theme.of(context)
+                                                //       .primaryColor,
+                                                // ),
+                                              )
+                                            ]),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                padding: const EdgeInsets.only(left: 8.0, top: 5.0, right: 8.0, bottom: 5.0),
+                                color: Color(0xFFE1E1E1),
+                                child: Table(
+                                  children: [
+                                    TableRow(children: [
+                                      Text(
+                                        ApiHelper.toStringDayOfWeek(
+                                            context,
+                                            widget
+                                                .restData
+                                                .openingTimes[0]
+                                                .dayOfWeek),
+                                      ),
+                                      Text(
+                                        PapricaFormatter.formatTimeOnly(
+                                            context,
+                                            widget
+                                                .restData
+                                                .openingTimes[0]
+                                                .fromTime),
+                                      ),
+                                      Text(
+                                        PapricaFormatter.formatTimeOnly(
+                                          context,
+                                          widget.restData
+                                              .openingTimes[0].toTime,
+                                        ),
+                                      )
+                                    ]),
+                                  ],
+                                ),
+                              ),
+                          IconButton(
+                            icon: showWorkingTimes
+                                ? Icon(
+                              CupertinoIcons.chevron_up_circle,
+                              color: Theme.of(context).primaryColor,
+                              size: 28.0,
+                            )
+                                : Icon(
+                              CupertinoIcons.chevron_down_circle,
+                              color: Theme.of(context).primaryColor,
+                              size: 28.0,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                showWorkingTimes = !showWorkingTimes;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
           ],
@@ -255,16 +341,16 @@ class InformationSection extends StatelessWidget {
 
   List<Widget> getDrawableInformation(BuildContext context) {
     List<Widget> drawables = List();
-    if (restData.phoneNumber != null) {
+    if (widget.restData.phoneNumber != null) {
       drawables.add(
         InfoRow(
-          title: restData.phoneNumber,
+          title: widget.restData.phoneNumber,
           icon: AssetImage('assets/icons/phone.png'),
           textDirection: TextDirection.ltr,
         ),
       );
     }
-    if (restData.is24Hour != null && restData.is24Hour) {
+    if (widget.restData.is24Hour != null && widget.restData.is24Hour) {
       drawables.add(
         InfoRow(
           title: '24/7',
@@ -272,60 +358,65 @@ class InformationSection extends StatelessWidget {
         ),
       );
     }
-    if (restData.cuisineTypes != null && restData.cuisineTypes != 0) {
+    if (widget.restData.cuisineTypes != null &&
+        widget.restData.cuisineTypes != 0) {
       drawables.add(
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-              restData.cuisineTypes, Type.cuisines,
+              widget.restData.cuisineTypes, Type.cuisines,
               maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/cuisine.png'),
         ),
       );
     }
-    if (restData.musicTypes != null && restData.musicTypes != 0) {
+    if (widget.restData.musicTypes != null && widget.restData.musicTypes != 0) {
       drawables.add(
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-              restData.musicTypes, Type.music,
+              widget.restData.musicTypes, Type.music,
               maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/music.png'),
         ),
       );
     }
-    if (restData.parkingTypes != null && restData.parkingTypes != 0) {
+    if (widget.restData.parkingTypes != null &&
+        widget.restData.parkingTypes != 0) {
       drawables.add(
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-              restData.parkingTypes, Type.parking,
+              widget.restData.parkingTypes, Type.parking,
               maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/parking.png'),
         ),
       );
     }
-    if (restData.ambianceTypes != null && restData.ambianceTypes != 0) {
+    if (widget.restData.ambianceTypes != null &&
+        widget.restData.ambianceTypes != 0) {
       drawables.add(
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-              restData.ambianceTypes, Type.ambiance,
+              widget.restData.ambianceTypes, Type.ambiance,
               maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/ambiance.png'),
         ),
       );
     }
-    if (restData.amenityTypes != null && restData.amenityTypes != 0) {
+    if (widget.restData.amenityTypes != null &&
+        widget.restData.amenityTypes != 0) {
       drawables.add(
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-              restData.amenityTypes, Type.amenities,
+              widget.restData.amenityTypes, Type.amenities,
               maxNumber: 2, separator: S.of(context).comma + ' '),
           icon: AssetImage('assets/icons/amenities.png'),
         ),
       );
     }
-    if (restData.isSmokeFree != null && restData.isSmokeFree) {
+    if (widget.restData.isSmokeFree != null && widget.restData.isSmokeFree) {
       drawables.add(
         InfoRow(
-          title: this.restData.isSmokeFree != null && this.restData.isSmokeFree
+          title: this.widget.restData.isSmokeFree != null &&
+                  this.widget.restData.isSmokeFree
               ? S.of(context).smokeFree
               : S.of(context).noSmoking,
           icon: AssetImage('assets/icons/smoking.png'),
@@ -333,32 +424,19 @@ class InformationSection extends StatelessWidget {
       );
     }
 
-    if (restData.isAlcoholFree != null && restData.isAlcoholFree) {
+    if (widget.restData.isAlcoholFree != null &&
+        widget.restData.isAlcoholFree) {
       drawables.add(
         InfoRow(
-          title:
-              this.restData.isAlcoholFree != null && this.restData.isAlcoholFree
-                  ? S.of(context).alcoholFree
-                  : S.of(context).noAlcohol,
+          title: this.widget.restData.isAlcoholFree != null &&
+                  this.widget.restData.isAlcoholFree
+              ? S.of(context).alcoholFree
+              : S.of(context).noAlcohol,
           icon: AssetImage('assets/icons/alcohol.png'),
         ),
       );
     }
     return drawables;
-  }
-
-  String _getOpeningTimes(
-      BuildContext context, List<OpeningTimeDto> openingTimes) {
-    String openingTime = "";
-    for (OpeningTimeDto ot in openingTimes) {
-      openingTime += ApiHelper.toStringDayOfWeek(context, ot.dayOfWeek) +
-          ": " +
-          PapricaFormatter.formatTimeOnly(context, ot.fromTime) +
-          " → " +
-          PapricaFormatter.formatTimeOnly(context, ot.toTime) +
-          "\n";
-    }
-    return openingTime;
   }
 }
 

@@ -158,19 +158,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               delegate: CustomSearchDelegate());
                         },
                       ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
+                      IconButton(
+                        icon: Icon(Icons.filter_alt),
+                        onPressed: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
                             return DiscoverPage();
                           }));
                         },
-                        child: Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage("assets/icons/filter.png"),
-                        ),
                       ),
                       Stack(
                         children: <Widget>[
@@ -288,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               TabItem(
                 icon: Image.asset("assets/icons/services_inactive.png"),
                 activeIcon: Image.asset("assets/icons/services_active.png"),
-                title: Text(S.of(context).services).data,
+                title: Text(S.of(context).activities).data,
               ),
               TabItem(
                 icon: Image.asset("assets/icons/more_inactive.png"),
