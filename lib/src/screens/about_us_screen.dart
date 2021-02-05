@@ -3,8 +3,15 @@ import 'package:paprica/translations.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class AboutUsScreen extends StatelessWidget {
-  String _phoneNumber = "+963 938 086 306";
-  String _email = "support@paprica.sy";
+  final String _phoneNumber = "+963 987 789 656";
+  final String _email = "support@paprika-sy.com";
+  final String aboutUs =
+      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم الموجودة في دمشق،"
+      " يساعدك على فلترة المطاعم حسب رغباتك وتفضيلاتك،"
+      " وتتعرف على العروض وآخر الأحداث (Events) التي تُقام في المطاعم، والعديد من الميزات الأخرى."
+      "\n"
+      "إضافةً إلى ذلك، يقدم لك بابريكا خدمة Pickup من جميع المطاعم الموجودة في التطبيق،"
+      " وخدمة الحجز في المطعم الذي تحبه بشكل سهل وممتع، مع ضمان حصولك على تجربة مميزة باستخدام بابريكا.";
 
   @override
   Widget build(BuildContext context) {
@@ -21,34 +28,20 @@ class AboutUsScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Card(
-                  elevation: 0,
-                  color: Colors.black12,
-                  shape: CircleBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset(
-                              "assets/images/logo_red_small.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "SoftUp",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    "assets/images/logo_new.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    aboutUs,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                 ),
                 Column(
@@ -82,7 +75,7 @@ class AboutUsScreen extends StatelessWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         )),

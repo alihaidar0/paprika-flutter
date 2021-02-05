@@ -85,10 +85,10 @@ flutter:
     - assets/images/logo_white.png
     - assets/images/places_background.png
     - assets/images/discover_background.png
-    - assets/icons/home_empty.png
-    - assets/icons/home_filled.png
     - assets/icons/menu_empty.png
     - assets/icons/menu_filled.png
+    - assets/icons/home_empty.png
+    - assets/icons/home_filled.png
     - assets/icons/star_empty.png
     - assets/icons/star_filled.png
     - assets/icons/dots_vert.png
@@ -122,15 +122,14 @@ flutter:
     - assets/icons/user.png
     - assets/icons/cake.png
     - assets/icons/comment.png
-    - assets/images/background_grey.png
     - assets/icons/comment.png
     - assets/icons/comment_2.png
     - assets/icons/avatar_female.png
     - assets/icons/avatar_male.png
     - assets/icons/home_active.png
     - assets/icons/home_inactive.png
-    - assets/icons/services_active.png
-    - assets/icons/services_inactive.png
+    - assets/icons/activities_active.png
+    - assets/icons/activities_inactive.png
     - assets/icons/profile_active.png
     - assets/icons/profile_inactive.png
     - assets/icons/more_active.png
@@ -151,6 +150,10 @@ flutter:
     - assets/icons/reserve.svg
     - assets/icons/order.svg
     - assets/icons/noun_food_delivery.svg
+    - assets/icons/ambiance.png
+    - assets/icons/amenities.png
+    - assets/icons/bookmark.png
+    - assets/images/background_grey.png
     - assets/images/no_restaurants.png
     - assets/images/no_events.png
     - assets/images/no_reservation.png
@@ -164,12 +167,8 @@ flutter:
     - assets/images/paprica_white_small.png
     - assets/images/logo_red.png
     - assets/images/logo_red_new.png
+    - assets/images/logo_new.png
     - assets/images/logo_red_small.png
-    - assets/icons/places_active.png
-    - assets/icons/places_inactive.png
-    - assets/icons/ambiance.png
-    - assets/icons/amenities.png
-    - assets/icons/bookmark.png
 
 
 

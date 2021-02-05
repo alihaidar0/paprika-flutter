@@ -3,6 +3,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/models/meal_share.dart';
@@ -135,125 +136,120 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-          body: DefaultTabController(
-            length: 4,
-            child: ScrollConfiguration(
-              behavior: NoGlowScrollBehaviour(),
-              child: CustomScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _scrollController,
-                slivers: <Widget>[
-                  SliverAppBar(
-                    expandedHeight: 40,
-                    title: Text(S.of(context).title,
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w700)),
-                    backgroundColor: Theme.of(context).primaryColor,
-                    actions: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {
-                          showSearch(
-                              context: context,
-                              delegate: CustomSearchDelegate());
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.filter_alt),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return DiscoverPage();
-                          }));
-                        },
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: IconButton(
-                              icon: Icon(Icons.notifications),
-                              onPressed: () {
-                                setState(() {
-                                  _notificationCounts = 0;
-                                });
-                                Navigator.push<HomeScreenAction>(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          NotificationsScreen()),
-                                ).then((HomeScreenAction screenAction) {
-                                  _handlerActionRequest(screenAction);
-                                });
-                              },
-                            ),
+        body: DefaultTabController(
+          length: 4,
+          child: ScrollConfiguration(
+            behavior: NoGlowScrollBehaviour(),
+            child: CustomScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _scrollController,
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: 40,
+                  title: Text(S.of(context).title,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        showSearch(
+                            context: context, delegate: CustomSearchDelegate());
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.filter_alt),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return DiscoverPage();
+                        }));
+                      },
+                    ),
+                    Stack(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: IconButton(
+                            icon: Icon(Icons.notifications),
+                            onPressed: () {
+                              setState(() {
+                                _notificationCounts = 0;
+                              });
+                              Navigator.push<HomeScreenAction>(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        NotificationsScreen()),
+                              ).then((HomeScreenAction screenAction) {
+                                _handlerActionRequest(screenAction);
+                              });
+                            },
                           ),
-                          _notificationCounts != null &&
-                                  _notificationCounts > 0 &&
-                                  _notificationCounts < 999
-                              ? Positioned(
-                                  right: 4,
-                                  left: 4,
-                                  child: Padding(
-                                    padding: Localizations.localeOf(context)
-                                                .languageCode ==
-                                            'en'
-                                        ? const EdgeInsets.only(
-                                            top: 10, left: 8.0)
-                                        : const EdgeInsets.only(
-                                            top: 10, right: 8.0),
-                                    child: Container(
-                                      height:
-                                          _notificationCounts < 99 ? 16 : 20,
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(0.0),
-                                          child: Text(
-                                            _notificationCounts > 9
-                                                ? S.of(context).ninePlus
-                                                : '$_notificationCounts',
-                                            style: TextStyle(fontSize: 10),
-                                          ),
+                        ),
+                        _notificationCounts != null &&
+                                _notificationCounts > 0 &&
+                                _notificationCounts < 999
+                            ? Positioned(
+                                right: 4,
+                                left: 4,
+                                child: Padding(
+                                  padding: Localizations.localeOf(context)
+                                              .languageCode ==
+                                          'en'
+                                      ? const EdgeInsets.only(
+                                          top: 10, left: 8.0)
+                                      : const EdgeInsets.only(
+                                          top: 10, right: 8.0),
+                                  child: Container(
+                                    height: _notificationCounts < 99 ? 16 : 20,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0.0),
+                                        child: Text(
+                                          _notificationCounts > 9
+                                              ? S.of(context).ninePlus
+                                              : '$_notificationCounts',
+                                          style: TextStyle(fontSize: 10),
                                         ),
                                       ),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.deepOrangeAccent),
                                     ),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.deepOrangeAccent),
                                   ),
-                                )
-                              : EmptyWidget(),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context, _) => Container(
-                              height: MediaQuery.of(context).size.height - 70,
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    0, 0, 0, _currentIndex == 0 ? 0 : 60),
-                                child: TabBarView(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  controller: _tabController,
-                                  children: _tabList,
                                 ),
+                              )
+                            : EmptyWidget(),
+                      ],
+                    ),
+                  ],
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, _) => Container(
+                            height: MediaQuery.of(context).size.height - 70,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  0, 0, 0, _currentIndex == 0 ? 0 : 60),
+                              child: TabBarView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: _tabController,
+                                children: _tabList,
                               ),
                             ),
-                        childCount: 1),
-                  )
-                ],
-              ),
+                          ),
+                      childCount: 1),
+                )
+              ],
             ),
           ),
-          bottomNavigationBar: ConvexAppBar(
-            color: Theme.of(context).primaryColor,
-            activeColor: Theme.of(context).primaryColor,
-            backgroundColor: Colors.white,
-            height: 60,
-            style: TabStyle.react,
-            initialActiveIndex: _currentIndex,
+        ),
+        bottomNavigationBar: SizedBox(
+          height: 50.0,
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
             onTap: (currentIndex) {
               if (currentIndex != _currentIndex) {
                 setState(() {
@@ -269,29 +265,80 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 }
               }
             },
+            selectedFontSize: 12.0,
+            showUnselectedLabels: true,
+            selectedItemColor: Theme.of(context).primaryColor,
+            unselectedItemColor: Color(0xFF727272),
+            type: BottomNavigationBarType.fixed,
             items: [
-              TabItem(
-                icon: Image.asset("assets/icons/home_empty.png"),
-                activeIcon: Image.asset("assets/icons/home_active.png"),
-                title: Text(S.of(context).home).data,
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/home_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/home_active.png"),
+                ),
+                title: Text(
+                  S.of(context).home,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
-              TabItem(
-                icon: Image.asset("assets/icons/places_inactive.png"),
-                activeIcon: Image.asset("assets/icons/places_active.png"),
-                title: Text(S.of(context).restaurants).data,
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/restaurants_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/restaurants_active.png"),
+                ),
+                title: Text(
+                  S.of(context).restaurants,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
-              TabItem(
-                icon: Image.asset("assets/icons/services_inactive.png"),
-                activeIcon: Image.asset("assets/icons/services_active.png"),
-                title: Text(S.of(context).activities).data,
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/activities_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/activities_active.png"),
+                ),
+                title: Text(
+                  S.of(context).activities,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
-              TabItem(
-                icon: Image.asset("assets/icons/more_inactive.png"),
-                activeIcon: Image.asset("assets/icons/more_active.png"),
-                title: Text(S.of(context).more).data,
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/more_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/more_active.png"),
+                ),
+                title: Text(
+                  S.of(context).more,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 

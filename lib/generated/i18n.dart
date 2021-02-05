@@ -89,6 +89,7 @@ class S implements WidgetsLocalizations {
   String get checkVersion => "Check Latest Version";
   String get city => "City";
   String get clearAll => "Clear All";
+  String get clearVoting  => "Clear Voting";
   String get clearFilter => "Clear";
   String get clearing => "Clearing...";
   String get close => "Close";
@@ -321,7 +322,7 @@ class S implements WidgetsLocalizations {
   String get otherOccasion => "Occasion";
   String get otherWord => "Other";
   String get outdoor => "Outdoor";
-  String get outOff => "out off";
+  String get outOf => "out of";
   String get parking => "Parking";
   String get latestPublishedPoll => "Latest published poll";
   String get password => "Password";
@@ -437,6 +438,7 @@ class S implements WidgetsLocalizations {
   String get thankYouAdminWillReviewYourFeedback =>
       "Thank you, we will review your comment before it's published.";
   String get thankYouForVoting => "Thank you for voting";
+  String get theVotingHasBeenCleared => "The voting has been cleared";
   String get thisMonth => "This Month";
   String get thisWeek => "This Week";
   String get thursday => "Thursday";
@@ -475,7 +477,8 @@ class S implements WidgetsLocalizations {
   String get viewDeliveries => "View Deliveries";
   String get viewUpdates => "View Updates";
   String get viewMeals => "View Meals";
-  String get votes => "Votes";
+  String get votes => "vote(s)";
+  String get vote => "vote";
   String get voting => "Voting";
   String get wednesday => "Wednesday";
   String get yes => "Yes";
@@ -967,11 +970,15 @@ class $ar extends S {
   @override
   String get clearAll => "مسح الجميع";
   @override
+  String get clearVoting  => "مسح التصويت";
+  @override
   String get filterTrySomethingElse => "تحرير البحث";
   @override
   String get viewMeals => "مشاهدة الوجبات";
   @override
   String get votes => "صوت";
+  @override
+  String get vote => "تصوت";
   @override
   String get voting => "تصويت";
   @override
@@ -1138,7 +1145,7 @@ class $ar extends S {
   @override
   String get restaurant => "مطعم";
   @override
-  String get restaurants => "مطاعم";
+  String get restaurants => "المطاعم";
   @override
   String get restaurantsLocation => "موقع المطعم";
   @override
@@ -1368,6 +1375,8 @@ class $ar extends S {
   @override
   String get thankYouForVoting => "شكراً لك على التصويت";
   @override
+  String get theVotingHasBeenCleared => "تم إلغاء التصويت";
+  @override
   String get rateMeal => "قيّم الوجبة";
   @override
   String get raterss => "Raters";
@@ -1380,7 +1389,7 @@ class $ar extends S {
   @override
   String get outdoor => "تراس";
   @override
-  String get outOff => "من أصل";
+  String get outOf => "من أصل";
   @override
   String get tuesday => "الثلاثاء";
   @override

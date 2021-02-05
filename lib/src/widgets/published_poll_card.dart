@@ -148,7 +148,7 @@ class PublishedPollCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis),
                       Text(
                           "${item.restaurant.votes} " +
-                              S.of(context).outOff +
+                              S.of(context).outOf +
                               " ${item.totalVotes} " +
                               S.of(context).votes,
                           style: TextStyle(
