@@ -61,7 +61,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo_red_new.png"
+  image_path: "assets/images/launcher_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -76,15 +76,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/background_red.png
-    - assets/images/background_white.png
-    - assets/images/background_su.png
-    - assets/images/profile_background.png
-    - assets/images/splash_background.jpg
-    - assets/images/logo_red.png
-    - assets/images/logo_white.png
-    - assets/images/places_background.png
-    - assets/images/discover_background.png
     - assets/icons/menu_empty.png
     - assets/icons/menu_filled.png
     - assets/icons/home_empty.png
@@ -153,7 +144,6 @@ flutter:
     - assets/icons/ambiance.png
     - assets/icons/amenities.png
     - assets/icons/bookmark.png
-    - assets/images/background_grey.png
     - assets/images/no_restaurants.png
     - assets/images/no_events.png
     - assets/images/no_reservation.png
@@ -161,14 +151,18 @@ flutter:
     - assets/images/no_pickup.png
     - assets/images/no_delivery.png
     - assets/images/placeholder.png
-    - assets/images/paprica_white.png
     - assets/images/paprika_white.png
     - assets/images/application_crash.png
-    - assets/images/paprica_white_small.png
-    - assets/images/logo_red.png
-    - assets/images/logo_red_new.png
-    - assets/images/logo_new.png
-    - assets/images/logo_red_small.png
+    - assets/images/launcher_icon.png
+    - assets/images/logo.png
+    - assets/images/background_grey.png
+    - assets/images/background_red.png
+    - assets/images/background_white.png
+    - assets/images/background_su.png
+    - assets/images/profile_background.png
+    - assets/images/splash_background.jpg
+    - assets/images/places_background.png
+    - assets/images/discover_background.png
 
 
 

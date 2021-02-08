@@ -87,9 +87,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 80,
+                height: 120,
                 child: Image(
-                  image: AssetImage('assets/images/logo_red_small.png'),
+                  image: AssetImage('assets/images/logo.png'),
                   fit: BoxFit.contain,
                 ),
               ),

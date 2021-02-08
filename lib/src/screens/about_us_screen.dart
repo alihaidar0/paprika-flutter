@@ -32,7 +32,7 @@ class AboutUsScreen extends StatelessWidget {
                   height: 200,
                   width: 200,
                   child: Image.asset(
-                    "assets/images/logo_new.png",
+                    "assets/images/logo.png",
                     fit: BoxFit.cover,
                   ),
                 ),
