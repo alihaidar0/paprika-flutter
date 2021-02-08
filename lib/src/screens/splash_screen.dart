@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +9,7 @@ import 'package:paprica/utils.dart';
 import 'package:swagger/api.dart';
 import '../../app.dart';
 import '../../widgets.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,6 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
+
+  String version;
 
   @override
   void initState() {
@@ -103,13 +108,20 @@ class _SplashScreenState extends State<SplashScreen> {
                           fontSize: 14.0,
                         ),
                       ),
-                      Text(
-                        'V1.5',
-                        style: TextStyle(
-                          height: 0.8,
-                          color: Colors.white,
-                            fontSize: 12.0
-                        ),
+                      FutureBuilder(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
+                          if(snapshot.hasData)
+                            return Text(
+                                'V ${snapshot.data.version}',
+                                style: TextStyle(
+                                  height: 0.8,
+                                  color: Colors.white,
+                                    fontSize: 12.0
+                                ),
+                              );
+                          return Container();
+                        },
                       ),
                     ],
                   ),
