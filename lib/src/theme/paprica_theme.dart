@@ -4,20 +4,20 @@ final ThemeData papricaThemeData = new ThemeData(
     cursorColor: Colors.grey,
     textSelectionColor: Colors.grey,
     textSelectionHandleColor: Colors.grey,
-    primaryColor: Colors.orange, // Color(0xFFB02524),
-    accentColor: Colors.orange, //Color(0xFFB02524),
+    primaryColor: Colors.orange, // Color(0xFFCE4C42),
+    accentColor: Colors.orange, //Color(0xFFCE4C42),
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.grey,
       textTheme: ButtonTextTheme.primary,
       colorScheme: ColorScheme(
-        secondary: Color(0xFFB02524),
+        secondary: Color(0xFFCE4C42),
       ),
     ));
 
 class CompanyColors {
   CompanyColors._(); // this basically makes it so you can instantiate this class
 
-  static const _blackPrimaryValue = 0xFFB02524;
+  static const _blackPrimaryValue = 0xFFCE4C42;
 
   static const MaterialColor Red = const MaterialColor(
     _blackPrimaryValue,

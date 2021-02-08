@@ -117,6 +117,7 @@ class S implements WidgetsLocalizations {
   String get confirmationCode => "Confirmation Code";
   String get continueAsGuest => "Continue as a Guest";
   String get country => "Country";
+  String get connecting => "Connecting";
   String get createNewAccount => "Create new account";
   String get creatingReservation => "Creating Reservation...";
   String get creatingPickup => "Creating Pickup...";
@@ -746,6 +747,8 @@ class $ar extends S {
   String get offer4You => "عروض من أجلك";
   @override
   String get country => "البلد";
+  @override
+  String get connecting => "جاري الاتصال";
   @override
   String get logOutConfirmation => "هل تريد تسجيل الخروج؟";
   @override

@@ -56,27 +56,67 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     }
     return Material(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/splash_background.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 80),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Image(
-                  height: 65,
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/splash_background.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Image(
+                  height: 180,
                   image: AssetImage("assets/images/paprika_white.png")),
-              Container(
-                child: DotsLoader(),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    backgroundColor: Colors.transparent,
+                    valueColor:
+                        new AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                  SizedBox(
+                    width: 25.0,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        S.of(context).connecting,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        'V1.5',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height/6,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -198,7 +238,8 @@ class _SplashScreenState extends State<SplashScreen> {
       var iOSPlatformChannelSpecifics =
           new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
-          android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+          android: androidPlatformChannelSpecifics,
+          iOS: iOSPlatformChannelSpecifics);
       await flutterLocalNotificationsPlugin.show(
           0, title, body, platformChannelSpecifics);
     }

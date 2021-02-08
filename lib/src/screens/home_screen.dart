@@ -572,7 +572,9 @@ class CustomSearchDelegate extends SearchDelegate<SearchItem> {
         }
         return Center(
             child: SizedBox(
-                height: 24, width: 24, child: CircularProgressIndicator()));
+                height: 24, width: 24, child: CircularProgressIndicator(
+              backgroundColor: Theme.of(context).primaryColor,
+            )));
       },
     );
   }

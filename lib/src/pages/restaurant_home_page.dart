@@ -167,21 +167,21 @@ class _InformationSectionState extends State<InformationSection> {
       child: Padding(
         padding: const EdgeInsets.only(top: 15, bottom: 15),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 18, right: 18, bottom: 5),
-              child: Row(
-                children: <Widget>[
-                  Flexible(
-                    child: drawables.length > 0
-                        ? Wrap(
-                            spacing: 24,
-                            children: drawables,
-                          )
-                        : Container(),
-                  ),
-                ],
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Flexible(
+                  child: drawables.length > 0
+                      ? Wrap(
+                          spacing: 24,
+                          children: drawables,
+                        )
+                      : Container(),
+                ),
               ),
             ),
 
