@@ -79,13 +79,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(
-                    backgroundColor: Colors.transparent,
-                    valueColor:
-                        new AlwaysStoppedAnimation<Color>(Colors.white),
+                  SizedBox(
+                    height: 18.0,
+                    width: 18.0,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                      backgroundColor: Colors.transparent,
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
                   ),
                   SizedBox(
-                    width: 25.0,
+                    width: 10.0,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -95,25 +100,22 @@ class _SplashScreenState extends State<SplashScreen> {
                         S.of(context).connecting,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16.0
+                          fontSize: 14.0,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
                       ),
                       Text(
                         'V1.5',
                         style: TextStyle(
+                          height: 0.8,
                           color: Colors.white,
+                            fontSize: 12.0
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height/6,
-              ),
+              SizedBox(height: 10.0,)
             ],
           ),
         ],

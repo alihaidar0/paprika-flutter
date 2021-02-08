@@ -106,7 +106,7 @@ class _PollItemState extends State<PollItem> {
           ),
           Container(
             padding: EdgeInsets.only(
-                left: 12.0, top: 12.0, right: 12.0, bottom: 5.0),
+                left: 12.0, top: 12.0, right: 12.0),
             child: Text(widget.openPollItem.pollText,
                 style: TextStyle(
                     color: Colors.black,
@@ -141,13 +141,6 @@ class _PollItemState extends State<PollItem> {
                   context, widget.openPollItem.restaurants[index]);
             },
           ),
-          // Column(
-          //   children:
-          //       List.generate(widget.openPollItem.restaurants.length, (index) {
-          //     return _restaurant(
-          //         context, widget.openPollItem.restaurants[index]);
-          //   }),
-          // ),
           SizedBox(
             height: 10.0,
           ),
@@ -230,62 +223,69 @@ class _PollItemState extends State<PollItem> {
             ),
           ],
         ),
-        CircularCheckBox(
-            activeColor: Colors.green,
-            value: _checkBoxValues[_idRestaurants.indexOf(restaurant.id)],
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            onChanged: (bool newValue) {
-              setState(() {
-                if (ApiTypesHelper().isAuthorized) {
-                  if (_checkBoxValues.indexOf(true) != -1) {
-                    if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
-                        restaurant.id) {
-                      _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                          newValue;
-                      _onClearVote(context);
+        Column(
+          children: [
+            SizedBox(
+              height: 28.0,
+            ),
+            CircularCheckBox(
+                activeColor: Theme.of(context).primaryColor,
+                value: _checkBoxValues[_idRestaurants.indexOf(restaurant.id)],
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                onChanged: (bool newValue) {
+                  setState(() {
+                    if (ApiTypesHelper().isAuthorized) {
+                      if (_checkBoxValues.indexOf(true) != -1) {
+                        if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
+                            restaurant.id) {
+                          _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
+                              newValue;
+                          _onClearVote(context);
+                        } else {
+                          _checkBoxValues[_checkBoxValues.indexOf(true)] = false;
+                          _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
+                              newValue;
+                          _onAddVote(context,
+                              _idRestaurants[_checkBoxValues.indexOf(true)]);
+                        }
+                      } else {
+                        _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
+                            newValue;
+                        _onAddVote(
+                            context, _idRestaurants[_checkBoxValues.indexOf(true)]);
+                      }
                     } else {
-                      _checkBoxValues[_checkBoxValues.indexOf(true)] = false;
-                      _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                          newValue;
-                      _onAddVote(context,
-                          _idRestaurants[_checkBoxValues.indexOf(true)]);
+                      showDialog(
+                          context: context,
+                          builder: (_context) {
+                            return PapricaSimpleDialog(
+                              title: S.of(context).pleaseLoginInOrderToVote,
+                              yesButton: FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            LogInScreen(asAService: true),
+                                      ),
+                                    ).then((loggedIn) {
+                                      if (loggedIn != null && loggedIn) {
+                                      } else {
+                                        PapricaToast.showToast(S
+                                            .of(context)
+                                            .loggingInRequired(S.of(context).vote));
+                                      }
+                                    });
+                                  },
+                                  child: Text(S.of(context).logIn)),
+                            );
+                          });
                     }
-                  } else {
-                    _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                        newValue;
-                    _onAddVote(
-                        context, _idRestaurants[_checkBoxValues.indexOf(true)]);
-                  }
-                } else {
-                  showDialog(
-                      context: context,
-                      builder: (_context) {
-                        return PapricaSimpleDialog(
-                          title: S.of(context).pleaseLoginInOrderToVote,
-                          yesButton: FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        LogInScreen(asAService: true),
-                                  ),
-                                ).then((loggedIn) {
-                                  if (loggedIn != null && loggedIn) {
-                                  } else {
-                                    PapricaToast.showToast(S
-                                        .of(context)
-                                        .loggingInRequired(S.of(context).vote));
-                                  }
-                                });
-                              },
-                              child: Text(S.of(context).logIn)),
-                        );
-                      });
-                }
-              });
-            }),
+                  });
+                }),
+          ],
+        ),
       ],
     );
   }
