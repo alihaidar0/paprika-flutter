@@ -280,23 +280,12 @@ class _RestaurantHomeState extends State<RestaurantHome>
                                                     .size
                                                     .width *
                                                 0.15,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SizedBox(height: 4),
-                                                SizedBox(
-                                                  height: 8,
-                                                  child: Image.asset(
-                                                      "assets/icons/more_filled_black.png"),
-                                                ),
-                                                Text(
-                                                  S.of(context).more,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14.0),
-                                                ),
-                                              ],
+                                            child: Center(
+                                              child: SizedBox(
+                                                height: 8,
+                                                child: Image.asset(
+                                                    "assets/icons/more_filled_black.png"),
+                                              ),
                                             ),
                                           ),
                                           itemBuilder: (context) {

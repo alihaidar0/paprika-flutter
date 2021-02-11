@@ -14,11 +14,13 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
+    throw new FileNotFoundException("versionCode not found. Define flutter.versionCode in the local.properties file.")
     flutterVersionCode = '1'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
+    throw new FileNotFoundException("versionName not found. Define flutter.versionName in the local.properties file.")
     flutterVersionName = '1.0'
 }
 
@@ -78,6 +80,7 @@ flutter {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3' //enter the latest version
     implementation 'com.facebook.android:facebook-login:5.8.0'
     implementation 'com.android.support:support-annotations:28.0.0'
     testImplementation 'junit:junit:4.12'

@@ -38,9 +38,9 @@ class _MyPapricaPageState extends State<MyPapricaPage>
 
   Future<PapricaItemsDto> futureRestData;
   Future<PapricaItemsDto> futureLoadMoreData;
-  List<dynamic> papricaItemsList;
+  List<dynamic> paprikaItemsList;
 
-  bool noMorePapricaItems = false;
+  bool noMorePaprikaItems = false;
   int lastOffersStamp = 0,
       lastEventsStamp = 0,
       lastReservationStamp = 0,
@@ -52,19 +52,35 @@ class _MyPapricaPageState extends State<MyPapricaPage>
       new GlobalKey<RefreshIndicatorState>();
 
   Future onRefresh() {
-    papricaItemsList.clear();
+    futureRestData = null;
+    futureLoadMoreData = null;
+    restaurantsList = null;
+    _notificationCounts = null;
+    paprikaItemsList.clear();
     lastOffersStamp = null;
     lastEventsStamp = null;
     lastRestaurantsListStamp = null;
     lastOffersListStamp = null;
     lastReservationStamp = null;
-    noMorePapricaItems = false;
+    noMorePaprikaItems = false;
     return _initialLoad();
   }
 
   @override
   void initState() {
+    futureRestData = null;
+    futureLoadMoreData = null;
+    restaurantsList = null;
+    _notificationCounts = null;
+    lastOffersStamp = null;
+    lastEventsStamp = null;
+    lastRestaurantsListStamp = null;
+    lastOffersListStamp = null;
+    lastReservationStamp = null;
+    noMorePaprikaItems = false;
+
     super.initState();
+    _initialLoad();
     _checkNotificationsCount();
     widget.resetScrollPositionStream?.listen((reset) {
       if (reset != null && reset) {
@@ -73,9 +89,8 @@ class _MyPapricaPageState extends State<MyPapricaPage>
             curve: Curves.fastOutSlowIn);
       }
     });
-    papricaItemsList = [];
+    paprikaItemsList = [];
     _scrollController = new ScrollController()..addListener(_scrollListener);
-    _initialLoad();
   }
 
   @override
@@ -100,7 +115,7 @@ class _MyPapricaPageState extends State<MyPapricaPage>
     setState(() {
       futureRestData.then((onValue) {
         _updateStamps(onValue.papricaItems);
-        papricaItemsList.addAll(onValue.papricaItems);
+        paprikaItemsList.addAll(onValue.papricaItems);
       });
     });
 
@@ -165,16 +180,16 @@ class _MyPapricaPageState extends State<MyPapricaPage>
     return futureLoadMoreData.then((onValue) {
       _updateStamps(onValue.papricaItems);
       if (onValue.papricaItems == null || onValue.papricaItems.length == 0) {
-        noMorePapricaItems = true;
+        noMorePaprikaItems = true;
       }
-      if (!noMorePapricaItems) {
-        papricaItemsList.addAll(onValue.papricaItems);
+      if (!noMorePaprikaItems) {
+        paprikaItemsList.addAll(onValue.papricaItems);
       }
       return Future.value();
     }).catchError((err) {
-      if (papricaItemsList != null &&
-          papricaItemsList.length > 0 &&
-          papricaItemsList.last is SpinKitCircle) papricaItemsList.removeLast();
+      if (paprikaItemsList != null &&
+          paprikaItemsList.length > 0 &&
+          paprikaItemsList.last is SpinKitCircle) paprikaItemsList.removeLast();
       return Future.value();
     });
   }
@@ -198,9 +213,10 @@ class _MyPapricaPageState extends State<MyPapricaPage>
             builder: (context, snapshot) {
               {
                 if (snapshot.connectionState == ConnectionState.waiting)
-                  return Center(child: CircularProgressIndicator());
+                   return Center(child: CircularProgressIndicator());
                 else if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.hasData) {
+                  if(snapshot.data != null)
                   return Container(
                     color: Color(0xFFE5E5E5),
                     height: MediaQuery.of(context).size.height - 60,
@@ -210,8 +226,8 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                       child: OnlineStatus(
                         child: IncrementallyLoadingListView(
                             controller: _scrollController,
-                            hasMore: !noMorePapricaItems,
-                            itemCount: papricaItemsList.length + 1,
+                            hasMore: !noMorePaprikaItems,
+                            itemCount: paprikaItemsList.length + 1,
                             loadMore: () async {
                               await _loadMoreData(
                                   eventStamp: lastEventsStamp,
@@ -223,11 +239,11 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                             },
                             loadMoreOffsetFromBottom: 2,
                             itemBuilder: (context, index) {
-                              if (index < papricaItemsList.length)
+                              if (index < paprikaItemsList.length)
                                 return _buildMyPapricaItem(
-                                    context, papricaItemsList[index]);
-                              else if (noMorePapricaItems &&
-                                  index == papricaItemsList.length)
+                                    context, paprikaItemsList[index]);
+                              else if (noMorePaprikaItems &&
+                                  index == paprikaItemsList.length)
                                 return _buildYouAreAllCaughtUp();
                               else
                                 return EmptyWidget();
@@ -235,13 +251,32 @@ class _MyPapricaPageState extends State<MyPapricaPage>
                       ),
                     ),
                   );
+                  else{
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image(image: AssetImage('assets/images/application_crash.png'),height: 280,),
+                        SizedBox(height: 20,),
+                        RequestRetry(
+                            message: S.of(context).errorUnknown,
+                            retryCallback: () {
+                              setState(() {
+                                paprikaItemsList = [];
+                              });
+                              return _initialLoad();
+                            }),
+                        SizedBox(height: 60,),
+                      ],
+                    );
+                  }
                 }
                 if (snapshot.hasError) {
-                  return RequestRetry(
+                 return RequestRetry(
                       message: S.of(context).errorUnknown,
                       retryCallback: () {
                         setState(() {
-                          papricaItemsList = [];
+                          paprikaItemsList = [];
                         });
                         return _initialLoad();
                       });

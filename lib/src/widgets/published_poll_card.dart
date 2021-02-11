@@ -30,12 +30,21 @@ class PublishedPollCard extends StatelessWidget {
       );
     }
 
-    return Container(
+    return Padding(
       padding: EdgeInsets.only(bottom: 5),
+      child: Column(
+        children: widgets,
+      ),
+    );
+  }
+
+  Widget _pollItem(BuildContext context, item) {
+    return Card(
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
+        children: [
           Padding(
             padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
             child: Text(
@@ -47,21 +56,6 @@ class PublishedPollCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            child: Column(
-              children: widgets,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _pollItem(BuildContext context, item) {
-    return Card(
-      color: Colors.white,
-      child: Column(
-        children: [
           Container(
             width: MediaQuery.of(context).size.width,
             height: 200,
@@ -154,7 +148,7 @@ class PublishedPollCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis),
                       Text(
                           "${item.restaurant.votes} " +
-                              S.of(context).outOff +
+                              S.of(context).outOf +
                               " ${item.totalVotes} " +
                               S.of(context).votes,
                           style: TextStyle(
@@ -169,15 +163,21 @@ class PublishedPollCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          Padding(
             padding: EdgeInsets.only(bottom: 12.0),
-            child: Text(item.resaultText,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(item.resaultText,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
+              ],
+            ),
           ),
         ],
       ),

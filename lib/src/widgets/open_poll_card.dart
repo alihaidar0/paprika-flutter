@@ -6,6 +6,7 @@ import 'package:paprica/src/utils/paprica_api_client.dart';
 import 'package:paprica/src/utils/paprica_formatter.dart';
 import 'package:paprica/src/widgets/accessories.dart';
 import 'package:paprica/src/widgets/dialog.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:swagger/api.dart';
 import 'package:circular_check_box/circular_check_box.dart';
 import 'package:paprica/src/utils/api_types_helper.dart';
@@ -24,7 +25,6 @@ class OpenPollCard extends StatefulWidget {
 }
 
 class _OpenPollCardState extends State<OpenPollCard> {
-
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgets = [];
@@ -32,33 +32,17 @@ class _OpenPollCardState extends State<OpenPollCard> {
       _widgets.add(
         Container(
           width: MediaQuery.of(context).size.width,
-          child: PollItem(openPollItem: widget.openPollItems.items[x]),
+          child: PollItem(
+            openPollItem: widget.openPollItems.items[x],
+            title: widget.title,
+          ),
         ),
       );
     }
-    return Container(
+    return Padding(
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
-            child: Text(
-              widget.title,
-              style: TextStyle(
-                fontSize: 16,
-                color: widget.titleColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            child: Column(
-              children: _widgets,
-            ),
-          ),
-        ],
+        children: _widgets,
       ),
     );
   }
@@ -81,6 +65,8 @@ class _PollItemState extends State<PollItem> {
   List<int> _idRestaurants = [];
   List<String> _nameOfRestaurants = [];
   List<Widget> _widgets = [];
+  List<int> _restaurantVotes = [];
+  int _totalVotes;
 
   @override
   void initState() {
@@ -89,16 +75,19 @@ class _PollItemState extends State<PollItem> {
     _idRestaurants.clear();
     _nameOfRestaurants.clear();
     _widgets.clear();
+    _restaurantVotes.clear();
     for (var x = 0; x < widget.openPollItem.restaurants.length; x++) {
       if (widget.openPollItem.selectedRestaurant ==
-          widget.openPollItem.restaurants[x].id){
-        _checkBoxValues.add(true);}
-      else {
+          widget.openPollItem.restaurants[x].id) {
+        _checkBoxValues.add(true);
+      } else {
         _checkBoxValues.add(false);
       }
       _idRestaurants.add(widget.openPollItem.restaurants[x].id);
+      _restaurantVotes.add(widget.openPollItem.restaurants[x].votes);
       _nameOfRestaurants.add(widget.openPollItem.restaurants[x].name);
     }
+    _totalVotes = widget.openPollItem.totalVotes;
   }
 
   @override
@@ -106,132 +95,58 @@ class _PollItemState extends State<PollItem> {
     return Card(
       color: Colors.white,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                    left: 12.0, top: 12.0, right: 12.0, bottom: 5.0),
-                child: Text(widget.openPollItem.pollText,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
               ),
-              Container(
-                padding: EdgeInsets.only(left: 12.0, right: 12.0, bottom: 5.0),
-                child: Text(
-                    S.of(context).closeDate +
-                        ": " +
-                        PapricaFormatter.formatDateOnly(
-                            context, widget.openPollItem.closeDate) +
-                        "  " +
-                        PapricaFormatter.formatTimeOnly(
-                            context, widget.openPollItem.closeDate),
-                    style: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-              ),
-              Column(
-                // children: _widgets,
-                children: List.generate(widget.openPollItem.restaurants.length,
-                    (index) {
-                  return _restaurant(
-                      context, widget.openPollItem.restaurants[index]);
-                }),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
+            ),
           ),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(offset: Offset(3, 6), color: Colors.black38)
-              ],
-              border: Border.all(
-                color: Colors.black,
-                width: 2.0,
-              ),
-            ),
-            width: MediaQuery.of(context).size.width * 0.7,
-            height: 40,
-            child: InkWell(
-              onTap: () {
-                if (ApiTypesHelper().isAuthorized) {
-                  if (_checkBoxValues.indexOf(true) != -1) {
-                    _onSubmitVoteSelected(
-                        context,
-                        _nameOfRestaurants[_checkBoxValues.indexOf(true)],
-                        _idRestaurants[_checkBoxValues.indexOf(true)]);
-                    // _onConfirmSubmit(context, _idRestaurants[_checkBoxValues.indexOf(true)]);
-                  } else {
-                    debugPrint('852255658');
-                  }
-                } else {
-                  showDialog(
-                      context: context,
-                      builder: (_context) {
-                        return PapricaSimpleDialog(
-                          title: S.of(context).pleaseLoginInOrderToVote,
-                          yesButton: FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LogInScreen(asAService: true)))
-                                    .then((loggedIn) {
-                                  if (loggedIn != null && loggedIn) {
-                                    if (_checkBoxValues.indexOf(true) != -1) {
-                                      _onSubmitVoteSelected(
-                                          context,
-                                          _nameOfRestaurants[_checkBoxValues.indexOf(true)],
-                                          _idRestaurants[_checkBoxValues.indexOf(true)],);
-                                    } else {
-                                      debugPrint('852255658');
-                                    }
-                                  } else {
-                                    PapricaToast.showToast(S
-                                        .of(context)
-                                        .loggingInRequired(S.of(context).actionReserve));
-                                  }
-                                });
-                              },
-                              child: Text(S.of(context).logIn)),
-                        );
-                      });
-                }
-              },
-              child: Padding(
-                padding: Localizations.localeOf(context).languageCode == 'en'
-                    ? const EdgeInsets.only(left: 8.0, top: 5.0)
-                    : const EdgeInsets.only(top: 5.0, right: 8.0),
-                child: Center(
-                    child: Text(
-                  S.of(context).submitVote,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                )),
-              ),
-            ),
+            padding: EdgeInsets.only(left: 12.0, top: 12.0, right: 12.0),
+            child: Text(widget.openPollItem.pollText,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 12.0, right: 12.0, bottom: 5.0),
+            child: Text(
+                S.of(context).closeDate +
+                    ": " +
+                    PapricaFormatter.formatDateOnly(
+                        context, widget.openPollItem.closeDate) +
+                    "  " +
+                    PapricaFormatter.formatTimeOnly(
+                        context, widget.openPollItem.closeDate),
+                style: TextStyle(
+                    color: Colors.black45,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: widget.openPollItem.restaurants.length,
+            itemBuilder: (context, index) {
+              return _restaurant(
+                  context, widget.openPollItem.restaurants[index]);
+            },
           ),
           SizedBox(
-            height: 30,
+            height: 10.0,
           ),
         ],
       ),
@@ -240,181 +155,193 @@ class _PollItemState extends State<PollItem> {
 
   Widget _restaurant(
       BuildContext context, RestaurantPollInPapricaItem restaurant) {
-    double _percent = restaurant.votes / widget.openPollItem.totalVotes;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CircularCheckBox(
-            activeColor: Colors.green,
-            value: _checkBoxValues[_idRestaurants.indexOf(restaurant.id)],
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            onChanged: (bool newValue) {
-              setState(() {
-                if (_checkBoxValues.indexOf(true) != -1) {
-                  _checkBoxValues[_checkBoxValues.indexOf(true)] = false;
-                }
-                _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                    newValue;
-              });
-            }),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-            borderRadius: new BorderRadius.circular(
-                MediaQuery.of(context).size.width * 0.23 * 0.5),
-            child: CachedNetworkImage(
-                imageUrl: restaurant.logoImage,
-                placeholder: (context, url) => Image(
-                      image: AssetImage("assets/images/placeholder.png"),
-                      width: MediaQuery.of(context).size.width * 0.23,
-                    ),
-                width: MediaQuery.of(context).size.width * 0.23),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _Slider(
-            title: restaurant.name,
-            height: 50,
-            width: MediaQuery.of(context).size.width * 0.5,
-            totalValue: widget.openPollItem.totalVotes,
-            value: restaurant.votes,
-            positiveColor: Colors.black26,
-            negativeColor: Colors.transparent,
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _onSubmitVoteSelected(
-      BuildContext context, String restName, int idRestaurant) {
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).alert),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(S.of(context).youWillVoteFor),
-                Text(S.of(context).restaurant + ': ' + restName),
-              ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 5.0,
             ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(S.of(context).ok),
-              onPressed: () {
-                _onConfirmSubmit(context, idRestaurant);
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(S.of(context).cancel),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  _onConfirmSubmit(BuildContext context, int idRestaurant) {
-    ApiClient client = PapricaApiClient();
-    CustomerPollApi api = CustomerPollApi(client);
-    PollAddVoteDto data = PollAddVoteDto.fromJson(
-        {'pollId': widget.openPollItem.id, 'restaurantId': idRestaurant});
-    ProgressDialog dialog = ProgressDialog(context);
-    dialog.setMessage(S.of(context).voting);
-    dialog.show();
-    api.apiServicesAppCustomerPollAddVotePost(input: data).then((_)
-    {
-      dialog.hide();
-      PapricaToast.showToast(S.of(context).successVoting);
-
-    }).catchError((err) {
-      dialog.hide();
-      DefaultErrorHandler.handle(context, err);
-    });
-  }
-}
-
-class _Slider extends StatelessWidget {
-  String title;
-  double height;
-  double width;
-  int totalValue;
-  int value;
-  Color positiveColor;
-  Color negativeColor;
-
-  _Slider(
-      {this.title,
-      this.height,
-      this.width,
-      this.totalValue,
-      this.value,
-      this.positiveColor,
-      this.negativeColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      child: Stack(
-        children: [
-          Container(
-            width: width,
-            decoration: BoxDecoration(
-              color: negativeColor,
-              border: Border.all(
-                color: Colors.black,
-                width: 2,
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ClipRRect(
+                borderRadius: new BorderRadius.circular(
+                    MediaQuery.of(context).size.width * 0.19 * 0.5),
+                child: CachedNetworkImage(
+                    imageUrl: restaurant.logoImage,
+                    placeholder: (context, url) => Image(
+                          image: AssetImage("assets/images/placeholder.png"),
+                          width: MediaQuery.of(context).size.width * 0.19,
+                        ),
+                    width: MediaQuery.of(context).size.width * 0.19),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(2),
-            width: totalValue == 0 ? 0 : width * value / totalValue,
-            decoration: BoxDecoration(
-              color: positiveColor,
-            ),
-          ),
-          Container(
-            padding: Localizations.localeOf(context).languageCode == 'en'
-                ? EdgeInsets.only(left: 10, top: 2)
-                : EdgeInsets.only(right: 10, top: 2),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 3.0,
+                top: 8.0,
+                bottom: 8.0,
+                right: 3.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    restaurant.name,
                     style: TextStyle(
+                        height: 0.5,
                         color: Colors.black,
-                        fontSize: 17,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-                Text(
-                    "${value} " +
-                        S.of(context).outOff +
-                        " ${totalValue} " +
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "${_restaurantVotes[_idRestaurants.indexOf(restaurant.id)]} " +
+                        S.of(context).outOf +
+                        " $_totalVotes " +
                         S.of(context).votes,
                     style: TextStyle(
                         color: Colors.black54,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-              ],
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  LinearPercentIndicator(
+                    padding: EdgeInsets.only(left: 2.0, right: 2.0),
+                    alignment: MainAxisAlignment.start,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    lineHeight: 8.0,
+                    percent: _totalVotes == 0
+                        ? 0
+                        : _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)] /
+                            _totalVotes,
+                    progressColor: Theme.of(context).primaryColor,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        Column(
+          children: [
+            SizedBox(
+              height: 28.0,
+            ),
+            CircularCheckBox(
+                activeColor: Theme.of(context).primaryColor,
+                value: _checkBoxValues[_idRestaurants.indexOf(restaurant.id)],
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                onChanged: (bool newValue) {
+                  setState(() {
+                    if (ApiTypesHelper().isAuthorized) {
+                      if (_checkBoxValues.indexOf(true) != -1) {
+                        if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
+                            restaurant.id) {
+                            _checkBoxValues[_idRestaurants
+                                .indexOf(restaurant.id)] = newValue;
+                            setState(() {
+                              _totalVotes--;
+                              _restaurantVotes[
+                                  _idRestaurants.indexOf(restaurant.id)]--;
+                            });
+                          _onClearVote(context);
+                        } else {
+                            setState(() {
+                              _restaurantVotes[
+                                  _idRestaurants.indexOf(restaurant.id)]++;
+                              _restaurantVotes[_checkBoxValues.indexOf(true)]--;
+                            });
+                            _checkBoxValues[_checkBoxValues.indexOf(true)] =
+                                false;
+                            _checkBoxValues[_idRestaurants
+                                .indexOf(restaurant.id)] = newValue;
+                          _onAddVote(context, restaurant.id);
+                        }
+                      } else {
+                          _checkBoxValues[
+                              _idRestaurants.indexOf(restaurant.id)] = newValue;
+                          setState(() {
+                            _totalVotes++;
+                            _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)]++;
+                          });
+                        _onAddVote(context, restaurant.id);
+                      }
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_context) {
+                            return PapricaSimpleDialog(
+                              title: S.of(context).pleaseLoginInOrderToVote,
+                              yesButton: FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            LogInScreen(asAService: true),
+                                      ),
+                                    ).then((loggedIn) {
+                                      if (loggedIn != null && loggedIn) {
+                                      } else {
+                                        PapricaToast.showToast(S
+                                            .of(context)
+                                            .loggingInRequired(
+                                                S.of(context).vote));
+                                      }
+                                    });
+                                  },
+                                  child: Text(S.of(context).logIn)),
+                            );
+                          });
+                    }
+                  });
+                }),
+          ],
+        ),
+      ],
     );
+  }
+
+  _onAddVote(BuildContext context, int idRestaurant) {
+    ApiClient client = PapricaApiClient();
+    CustomerPollApi api = CustomerPollApi(client);
+    PollAddVoteDto _data = PollAddVoteDto.fromJson(
+        {'pollId': widget.openPollItem.id, 'restaurantId': idRestaurant});
+    ProgressDialog dialog = ProgressDialog(context);
+    dialog.setMessage(S.of(context).voting);
+    dialog.show();
+    api.apiServicesAppCustomerPollAddVotePost(input: _data).then((_) {
+      dialog.hide();
+      PapricaToast.showToast(S.of(context).thankYouForVoting);
+    }).catchError((err) {
+      dialog.hide();
+      DefaultErrorHandler.handle(context, err);
+    });
+  }
+
+  _onClearVote(BuildContext context) {
+    ApiClient client = PapricaApiClient();
+    CustomerPollApi api = CustomerPollApi(client);
+    ProgressDialog dialog = ProgressDialog(context);
+    dialog.setMessage(S.of(context).clearVoting);
+    dialog.show();
+    api
+        .apiServicesAppCustomerPollClearVotePost(pollId: widget.openPollItem.id)
+        .then((_) {
+      dialog.hide();
+      PapricaToast.showToast(S.of(context).theVotingHasBeenCleared);
+    }).catchError((err) {
+      dialog.hide();
+      DefaultErrorHandler.handle(context, err);
+    });
   }
 }

@@ -60,7 +60,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   Widget build(BuildContext context) {
     _loadTypes(context);
-
     return Scaffold(
       appBar: AppBar(),
       body: NestedScrollView(

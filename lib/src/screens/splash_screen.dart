@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,8 +8,8 @@ import 'package:paprica/translations.dart';
 import 'package:paprica/utils.dart';
 import 'package:swagger/api.dart';
 import '../../app.dart';
-import '../../pages.dart';
 import '../../widgets.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -20,6 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
+
+  String version;
 
   @override
   void initState() {
@@ -57,35 +61,76 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     }
     return Material(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/splash_background.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 80),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Image(
-                  height: 30,
-                  image: AssetImage("assets/images/paprica_white_small.png")),
-              Container(
-                child: DotsLoader(),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/splash_background.png"),
+                fit: BoxFit.cover,
               ),
-              SizedBox(height: 60),
-              Text(
-                S.of(context).poweredBy,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white70,
-                ),
-              )
+            ),
+            child: Center(
+              child: Image(
+                  height: 180,
+                  image: AssetImage("assets/images/paprika_white.png")),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 18.0,
+                    width: 18.0,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                      backgroundColor: Colors.transparent,
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        S.of(context).connecting,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      FutureBuilder(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
+                          if(snapshot.hasData)
+                            return Text(
+                                'V ${snapshot.data.version}',
+                                style: TextStyle(
+                                  height: 0.8,
+                                  color: Colors.white,
+                                    fontSize: 12.0
+                                ),
+                              );
+                          return Container();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.0,)
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -207,7 +252,8 @@ class _SplashScreenState extends State<SplashScreen> {
       var iOSPlatformChannelSpecifics =
           new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
-          android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+          android: androidPlatformChannelSpecifics,
+          iOS: iOSPlatformChannelSpecifics);
       await flutterLocalNotificationsPlugin.show(
           0, title, body, platformChannelSpecifics);
     }

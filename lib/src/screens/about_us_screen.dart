@@ -3,8 +3,8 @@ import 'package:paprica/translations.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class AboutUsScreen extends StatelessWidget {
-  String _phoneNumber = "+963 938 086 306";
-  String _email = "support@paprica.sy";
+  final String _phoneNumber = "+963 987 789 656";
+  final String _email = "support@paprika-sy.com";
 
   @override
   Widget build(BuildContext context) {
@@ -13,42 +13,32 @@ class AboutUsScreen extends StatelessWidget {
         title: Text(S.of(context).aboutUs, style: TextStyle(fontSize: 18)),
       ),
       body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/background_grey.png'),
-                  fit: BoxFit.cover)),
-          child: Center(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/background_grey.png'),
+                fit: BoxFit.cover)),
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Card(
-                  elevation: 0,
-                  color: Colors.black12,
-                  shape: CircleBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset(
-                              "assets/images/logo_red_small.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "SoftUp",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    S.of(context).aboutUsInfo,
+                    textDirection:
+                        Localizations.localeOf(context).languageCode == 'en'
+                            ? TextDirection.ltr
+                            : TextDirection.rtl,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                 ),
                 Column(
@@ -82,7 +72,7 @@ class AboutUsScreen extends StatelessWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         )),
@@ -120,7 +110,9 @@ class AboutUsScreen extends StatelessWidget {
                 )
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
