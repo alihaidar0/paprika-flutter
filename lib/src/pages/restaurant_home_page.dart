@@ -243,10 +243,6 @@ class _InformationSectionState extends State<InformationSection> {
                                                         .restData
                                                         .openingTimes[index]
                                                         .dayOfWeek),
-                                                // style: TextStyle(
-                                                //   color: Theme.of(context)
-                                                //       .primaryColor,
-                                                // ),
                                               ),
                                               Text(
                                                 PapricaFormatter.formatTimeOnly(
@@ -255,10 +251,6 @@ class _InformationSectionState extends State<InformationSection> {
                                                         .restData
                                                         .openingTimes[index]
                                                         .fromTime),
-                                                // style: TextStyle(
-                                                //   color: Theme.of(context)
-                                                //       .primaryColor,
-                                                // ),
                                               ),
                                               Text(
                                                 PapricaFormatter.formatTimeOnly(
@@ -266,10 +258,6 @@ class _InformationSectionState extends State<InformationSection> {
                                                   widget.restData
                                                       .openingTimes[index].toTime,
                                                 ),
-                                                // style: TextStyle(
-                                                //   color: Theme.of(context)
-                                                //       .primaryColor,
-                                                // ),
                                               )
                                             ]),
                                           ],

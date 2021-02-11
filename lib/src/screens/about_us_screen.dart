@@ -5,13 +5,6 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 class AboutUsScreen extends StatelessWidget {
   final String _phoneNumber = "+963 987 789 656";
   final String _email = "support@paprika-sy.com";
-  final String aboutUs =
-      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم الموجودة في دمشق،"
-      " يساعدك على فلترة المطاعم حسب رغباتك وتفضيلاتك،"
-      " وتتعرف على العروض وآخر الأحداث (Events) التي تُقام في المطاعم، والعديد من الميزات الأخرى."
-      "\n"
-      "إضافةً إلى ذلك، يقدم لك بابريكا خدمة Pickup من جميع المطاعم الموجودة في التطبيق،"
-      " وخدمة الحجز في المطعم الذي تحبه بشكل سهل وممتع، مع ضمان حصولك على تجربة مميزة باستخدام بابريكا.";
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +33,11 @@ class AboutUsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    aboutUs,
-                    textDirection: TextDirection.rtl,
+                    S.of(context).aboutUsInfo,
+                    textDirection:
+                        Localizations.localeOf(context).languageCode == 'en'
+                            ? TextDirection.ltr
+                            : TextDirection.rtl,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                 ),
@@ -63,8 +59,8 @@ class AboutUsScreen extends StatelessWidget {
                                 child: SizedBox(
                                   height: 32,
                                   width: 32,
-                                  child:
-                                      Image.asset("assets/icons/smartphone.png"),
+                                  child: Image.asset(
+                                      "assets/icons/smartphone.png"),
                                 ),
                               ),
                               Padding(
@@ -73,7 +69,8 @@ class AboutUsScreen extends StatelessWidget {
                                   _phoneNumber,
                                   textDirection: TextDirection.ltr,
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w400),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ),
                             ],
@@ -93,8 +90,8 @@ class AboutUsScreen extends StatelessWidget {
                                 child: SizedBox(
                                   height: 32,
                                   width: 32,
-                                  child:
-                                      Image.asset("assets/icons/paper_plane.png"),
+                                  child: Image.asset(
+                                      "assets/icons/paper_plane.png"),
                                 ),
                               ),
                               Padding(
@@ -102,7 +99,8 @@ class AboutUsScreen extends StatelessWidget {
                                 child: Text(
                                   _email,
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w400),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               )
                             ],

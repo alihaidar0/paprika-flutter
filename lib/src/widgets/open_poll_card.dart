@@ -65,6 +65,8 @@ class _PollItemState extends State<PollItem> {
   List<int> _idRestaurants = [];
   List<String> _nameOfRestaurants = [];
   List<Widget> _widgets = [];
+  List<int> _restaurantVotes = [];
+  int _totalVotes;
 
   @override
   void initState() {
@@ -73,6 +75,7 @@ class _PollItemState extends State<PollItem> {
     _idRestaurants.clear();
     _nameOfRestaurants.clear();
     _widgets.clear();
+    _restaurantVotes.clear();
     for (var x = 0; x < widget.openPollItem.restaurants.length; x++) {
       if (widget.openPollItem.selectedRestaurant ==
           widget.openPollItem.restaurants[x].id) {
@@ -81,8 +84,10 @@ class _PollItemState extends State<PollItem> {
         _checkBoxValues.add(false);
       }
       _idRestaurants.add(widget.openPollItem.restaurants[x].id);
+      _restaurantVotes.add(widget.openPollItem.restaurants[x].votes);
       _nameOfRestaurants.add(widget.openPollItem.restaurants[x].name);
     }
+    _totalVotes = widget.openPollItem.totalVotes;
   }
 
   @override
@@ -105,8 +110,7 @@ class _PollItemState extends State<PollItem> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(
-                left: 12.0, top: 12.0, right: 12.0),
+            padding: EdgeInsets.only(left: 12.0, top: 12.0, right: 12.0),
             child: Text(widget.openPollItem.pollText,
                 style: TextStyle(
                     color: Colors.black,
@@ -197,9 +201,9 @@ class _PollItemState extends State<PollItem> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "${restaurant.votes} " +
+                    "${_restaurantVotes[_idRestaurants.indexOf(restaurant.id)]} " +
                         S.of(context).outOf +
-                        " ${widget.openPollItem.totalVotes} " +
+                        " $_totalVotes " +
                         S.of(context).votes,
                     style: TextStyle(
                         color: Colors.black54,
@@ -213,9 +217,11 @@ class _PollItemState extends State<PollItem> {
                     alignment: MainAxisAlignment.start,
                     width: MediaQuery.of(context).size.width * 0.6,
                     lineHeight: 8.0,
-                    percent: widget.openPollItem.totalVotes == 0
+                    percent: _totalVotes == 0
                         ? 0
-                        : restaurant.votes / widget.openPollItem.totalVotes,
+                        : _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)] /
+                            _totalVotes,
                     progressColor: Theme.of(context).primaryColor,
                   ),
                 ],
@@ -238,21 +244,35 @@ class _PollItemState extends State<PollItem> {
                       if (_checkBoxValues.indexOf(true) != -1) {
                         if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
                             restaurant.id) {
-                          _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                              newValue;
+                            _checkBoxValues[_idRestaurants
+                                .indexOf(restaurant.id)] = newValue;
+                            setState(() {
+                              _totalVotes--;
+                              _restaurantVotes[
+                                  _idRestaurants.indexOf(restaurant.id)]--;
+                            });
                           _onClearVote(context);
                         } else {
-                          _checkBoxValues[_checkBoxValues.indexOf(true)] = false;
-                          _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                              newValue;
-                          _onAddVote(context,
-                              _idRestaurants[_checkBoxValues.indexOf(true)]);
+                            setState(() {
+                              _restaurantVotes[
+                                  _idRestaurants.indexOf(restaurant.id)]++;
+                              _restaurantVotes[_checkBoxValues.indexOf(true)]--;
+                            });
+                            _checkBoxValues[_checkBoxValues.indexOf(true)] =
+                                false;
+                            _checkBoxValues[_idRestaurants
+                                .indexOf(restaurant.id)] = newValue;
+                          _onAddVote(context, restaurant.id);
                         }
                       } else {
-                        _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
-                            newValue;
-                        _onAddVote(
-                            context, _idRestaurants[_checkBoxValues.indexOf(true)]);
+                          _checkBoxValues[
+                              _idRestaurants.indexOf(restaurant.id)] = newValue;
+                          setState(() {
+                            _totalVotes++;
+                            _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)]++;
+                          });
+                        _onAddVote(context, restaurant.id);
                       }
                     } else {
                       showDialog(
@@ -274,7 +294,8 @@ class _PollItemState extends State<PollItem> {
                                       } else {
                                         PapricaToast.showToast(S
                                             .of(context)
-                                            .loggingInRequired(S.of(context).vote));
+                                            .loggingInRequired(
+                                                S.of(context).vote));
                                       }
                                     });
                                   },
@@ -313,7 +334,9 @@ class _PollItemState extends State<PollItem> {
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).clearVoting);
     dialog.show();
-    api.apiServicesAppCustomerPollClearVotePost(pollId: widget.openPollItem.id).then((_) {
+    api
+        .apiServicesAppCustomerPollClearVotePost(pollId: widget.openPollItem.id)
+        .then((_) {
       dialog.hide();
       PapricaToast.showToast(S.of(context).theVotingHasBeenCleared);
     }).catchError((err) {
