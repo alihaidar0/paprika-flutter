@@ -1,21 +1,17 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
-import 'package:intl/intl.dart';
 import 'package:paprica/src/models/create_delivery_meal_model.dart';
 import 'package:paprica/src/models/delivery_model.dart';
 import 'package:paprica/src/models/delivery_list_meal_model.dart';
 import 'package:paprica/src/screens/deliveries_screen.dart';
 import 'package:swagger/api.dart';
 
-import '../../screens.dart';
 import '../../translations.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
-import 'pickups_screen.dart';
 
 class DeliveryScreen extends StatefulWidget {
   final int restaurantId;

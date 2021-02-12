@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _refreshStream = StreamController<bool>.broadcast();
     resetScrollPositionStream = StreamController<bool>.broadcast();
     _tabList
-      ..add(MyPapricaPage(
+      ..add(MyPaprikaPage(
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))

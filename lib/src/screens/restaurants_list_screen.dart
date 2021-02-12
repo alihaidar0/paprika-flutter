@@ -88,11 +88,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                 return GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => _openFilterSheet(context),
-                  child: Image(
-                    width: 40,
-                    height: 40,
-                    image: AssetImage("assets/icons/filter.png"),
-                  ),
+                  child: Icon(Icons.filter_alt),
                 );
               },
             ),

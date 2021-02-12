@@ -16,7 +16,6 @@ import 'package:paprica/src/widgets/reservation_card.dart';
 import 'package:paprica/src/widgets/slider.dart';
 import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -24,9 +23,7 @@ import '../../widgets.dart';
 
 class ReservationsScreen extends StatefulWidget {
   final Stream<bool> refreshStream;
-  // final changeHomePageIndexHandler;
 
-  // const ReservationsPage(this.changeHomePageIndexHandler,{this.refreshStream});
   const ReservationsScreen({this.refreshStream});
 
   @override
@@ -37,14 +34,14 @@ class _ReservationsScreenState extends State<ReservationsScreen>
     with WidgetsBindingObserver {
   ScrollController scrollController;
   StreamController<bool> streamScrollController;
-  StreamController<bool> streamRefreshController;
+  StreamController<bool> _streamRefreshController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     streamScrollController = StreamController<bool>.broadcast();
-    streamRefreshController = StreamController<bool>.broadcast();
+    _streamRefreshController = StreamController<bool>.broadcast();
     scrollController = ScrollController();
     scrollController.addListener(_scrollControllerListener);
     widget.refreshStream?.listen((refresh) {
@@ -71,7 +68,7 @@ class _ReservationsScreenState extends State<ReservationsScreen>
 
   Future refreshData() {
     try {
-      streamRefreshController.add(true);
+      _streamRefreshController.add(true);
     } catch (e) {}
     return Future.value();
   }
@@ -80,7 +77,7 @@ class _ReservationsScreenState extends State<ReservationsScreen>
   void dispose() {
     scrollController.removeListener(_scrollControllerListener);
     streamScrollController.close();
-    streamRefreshController.close();
+    _streamRefreshController.close();
     super.dispose();
   }
 
@@ -113,7 +110,7 @@ class _ReservationsScreenState extends State<ReservationsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   UpcomingReservationsSection(
-                      refreshStream: streamRefreshController.stream),
+                      refreshStream: _streamRefreshController.stream),
                   OldReservationSection(
                     loadMoreStream: streamScrollController.stream,
                   ),
@@ -163,6 +160,7 @@ class NoReservationsLayout extends StatelessWidget {
 
 class UpcomingReservationsSection extends StatefulWidget {
   final Stream<bool> refreshStream;
+
   // final changeHomePageIndexHandler;
 
   // const UpcomingReservationsSection(this.changeHomePageIndexHandler,{this.refreshStream});
@@ -660,7 +658,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                             }));
                           },
                           child: CircleAvatar(
-//                            backgroundImage: NetworkImage(widget.reservation.restaurantImage),
                             backgroundImage: CachedNetworkImageProvider(
                                 widget.reservation.restaurantImage),
                             radius: MediaQuery.of(context).size.width * 0.08,
@@ -766,6 +763,30 @@ class _NewReservationCardState extends State<NewReservationCard>
                                 ],
                               ),
                               _reservationStatus(widget.reservation.status),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 1.0),
+                                child: Text(
+                                  S.of(context).date + ":",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Text(
+                                  PapricaFormatter.formatDateOnly(
+                                      context, widget.reservation.date) +
+                                      "  " +
+                                      PapricaFormatter.formatTimeOnly(
+                                          context, widget.reservation.date),
+                                ),
+                              ),
                             ],
                           ),
                           SizedBox(height: 10),
@@ -1260,7 +1281,8 @@ class _NewReservationCardState extends State<NewReservationCard>
                 child: Builder(builder: (_context) {
                   return PapricaSimpleDialog(
                     title: S.of(context).confirmCancellation,
-                    content: S.of(context).confirmCancelUpdateRequestReservation,
+                    content:
+                        S.of(context).confirmCancelUpdateRequestReservation,
                     yesButton: FlatButton(
                       child: Text(S.of(context).confirm),
                       onPressed: () {

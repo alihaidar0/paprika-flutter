@@ -66,6 +66,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              automaticallyImplyLeading: false,
               expandedHeight: 138,
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
@@ -73,6 +74,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   children: <Widget>[
                     Image.asset(
                       "assets/images/discover_background.png",
+                      fit: BoxFit.fill,
                     ),
                     Container(
                       decoration: BoxDecoration(

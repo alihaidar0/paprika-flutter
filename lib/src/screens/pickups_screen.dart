@@ -16,7 +16,6 @@ import 'package:paprica/src/widgets/pickup_card.dart';
 import 'package:paprica/src/widgets/slider.dart';
 import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';

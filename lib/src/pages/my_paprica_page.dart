@@ -20,18 +20,18 @@ import 'package:swagger/api.dart';
 import '../../screens.dart';
 import '../../utils.dart';
 
-class MyPapricaPage extends StatefulWidget {
+class MyPaprikaPage extends StatefulWidget {
   final Stream<bool> resetScrollPositionStream;
   final parentScrollNotifier;
 
-  MyPapricaPage({this.resetScrollPositionStream, this.parentScrollNotifier});
+  MyPaprikaPage({this.resetScrollPositionStream, this.parentScrollNotifier});
 
   @override
   _MyPapricaPageState createState() => _MyPapricaPageState();
 }
 
-class _MyPapricaPageState extends State<MyPapricaPage>
-    with AutomaticKeepAliveClientMixin<MyPapricaPage> {
+class _MyPapricaPageState extends State<MyPaprikaPage>
+    with AutomaticKeepAliveClientMixin<MyPaprikaPage> {
   Future<FeaturedAndNearbyRestaurantDto> placesFutureRestData;
   PagedResultDtoRestaurantLiteDto restaurantsList;
   int _notificationCounts;

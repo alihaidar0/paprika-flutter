@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/screens/deliveries_screen.dart';
-import 'package:paprica/src/screens/home_screen.dart';
 import 'package:paprica/src/screens/pickups_screen.dart';
 import 'package:paprica/src/screens/reservations_screen.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
@@ -27,12 +26,12 @@ class ServicePage extends StatefulWidget {
 }
 
 class _ServicePageState extends State<ServicePage> {
-  StreamController<bool> streamRefreshController;
+  StreamController<bool> _streamRefreshController;
 
   @override
   void initState() {
     super.initState();
-    streamRefreshController = StreamController<bool>.broadcast();
+    _streamRefreshController = StreamController<bool>.broadcast();
     widget.refreshStream?.listen((refresh) {
       if (refresh) {
         refreshData();
@@ -42,13 +41,13 @@ class _ServicePageState extends State<ServicePage> {
 
   @override
   void dispose() {
-    streamRefreshController.close();
+    _streamRefreshController.close();
     super.dispose();
   }
 
   Future refreshData() {
     try {
-      streamRefreshController.add(true);
+      _streamRefreshController.add(true);
     } catch (e) {}
     return Future.value();
   }
@@ -62,7 +61,7 @@ class _ServicePageState extends State<ServicePage> {
         key: _refreshIndicatorKey,
         onRefresh: refreshData,
         child: UpcomingService(widget.changeHomePageIndexHandler,
-            refreshStream: streamRefreshController.stream),
+            refreshStream: _streamRefreshController.stream),
       );
     } else {
       return LogInPromotion(loginLine: S.of(context).loginPromotionActivities);

@@ -9,7 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/models/delivery_model.dart';
-import 'package:paprica/src/theme/paprica_theme.dart';
 import 'package:paprica/src/utils/map_utils.dart';
 import 'package:paprica/src/widgets/carousel_slider.dart';
 import 'package:paprica/src/widgets/delivery_card.dart';
@@ -17,7 +16,6 @@ import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/src/widgets/slider.dart';
 import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
