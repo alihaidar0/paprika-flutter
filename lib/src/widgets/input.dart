@@ -143,7 +143,5 @@ class _PasswordInputTextState extends State<PasswordInputText> {
         )
       ],
     );
-
-    ;
   }
 }

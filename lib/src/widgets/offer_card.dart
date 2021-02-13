@@ -2,15 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/event_model.dart';
 import 'package:paprica/src/models/offer_model.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
-import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../screens.dart';
-import '../../utils.dart';
 
 class OfferCard extends StatelessWidget {
   final CustomerOfferDto offer;

@@ -16,8 +16,7 @@ class PlacesPage extends StatefulWidget {
   _PlacesPageState createState() => _PlacesPageState();
 }
 
-class _PlacesPageState extends State<PlacesPage>{
-
+class _PlacesPageState extends State<PlacesPage> {
   Future<PagedResultDtoRestaurantSummaryDto> futureRestData;
   List<RestaurantSummaryDto> restaurants;
   ScrollController _scrollController;
@@ -84,13 +83,13 @@ class _PlacesPageState extends State<PlacesPage>{
             );
           } else {
             return RequestRetry(
-                  message: S.of(context).errorUnknown,
-                  retryCallback: _getPlacesDataAsync);
+                message: S.of(context).errorUnknown,
+                retryCallback: _getPlacesDataAsync);
           }
         } else if (snapshot.connectionState == ConnectionState.none) {
           return RequestRetry(
-                message: S.of(context).errorUnknown,
-                retryCallback: _getPlacesDataAsync);
+              message: S.of(context).errorUnknown,
+              retryCallback: _getPlacesDataAsync);
         } else
           return _PlacesPagePlaceHolder(
             Column(
@@ -175,7 +174,8 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.25 * 0.5),
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(

@@ -5,5 +5,6 @@ class DeliveryListMealModel {
   int quantity;
   String notes;
 
-  DeliveryListMealModel(this.id, this.name, this.price, this.quantity, this.notes);
+  DeliveryListMealModel(
+      this.id, this.name, this.price, this.quantity, this.notes);
 }

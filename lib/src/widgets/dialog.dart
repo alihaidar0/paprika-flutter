@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:paprica/src/erro_handlers/api_error_handler.dart';
 import 'package:paprica/src/models/create_delivery_meal_model.dart';
@@ -11,11 +12,9 @@ import 'package:paprica/src/models/event_model.dart';
 import 'package:paprica/src/models/pickup_model.dart';
 import 'package:paprica/src/models/reservation_model.dart';
 import 'package:paprica/src/screens/map_screen.dart';
-import 'package:paprica/src/utils/map_utils.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/utils.dart';
 import 'package:paprica/widgets.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 import 'package:swagger/api.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -1398,9 +1397,7 @@ class PapricaInputDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            content != null
-                ? Row(children: <Widget>[Text(content)])
-                : Container(),
+            content != null ? Text(content) : Container(),
             TextFormField(
               maxLines: 5,
               minLines: 1,
@@ -1438,7 +1435,6 @@ class PapricaInputDialog extends StatelessWidget {
     );
   }
 }
-
 
 /// Pickup
 

@@ -1,16 +1,13 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
-import 'package:intl/intl.dart';
 import 'package:paprica/src/models/create_pickup_meal_model.dart';
 import 'package:paprica/src/models/pickup_list_meal_model.dart';
 import 'package:paprica/src/models/pickup_model.dart';
 import 'package:swagger/api.dart';
 
-import '../../screens.dart';
 import '../../translations.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
@@ -388,8 +385,7 @@ class _PickupScreenState extends State<PickupScreen> {
                                                             HitTestBehavior
                                                                 .translucent,
                                                         onTap: () {
-                                                          _onOkPressed(
-                                                              context);
+                                                          _onOkPressed(context);
                                                         },
                                                         child: Text(
                                                             S.of(context).ok,
@@ -424,7 +420,9 @@ class _PickupScreenState extends State<PickupScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     _selectedMeals.length > 0
                         ? Column(
                             children: List.generate(
@@ -789,7 +787,7 @@ class _PickupScreenState extends State<PickupScreen> {
   }
 
   void _onOrderPickupPressed(BuildContext context, MealDto meal) {
-      _showPickupDialog(meal);
+    _showPickupDialog(meal);
   }
 
   void _showPickupDialog(MealDto meal) {

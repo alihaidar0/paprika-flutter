@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/models/meal_share.dart';
@@ -12,6 +11,7 @@ import 'package:paprica/src/pages/my_paprica_page.dart';
 import 'package:paprica/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
+
 import '../../utils.dart';
 import '../../widgets.dart';
 
@@ -572,9 +572,11 @@ class CustomSearchDelegate extends SearchDelegate<SearchItem> {
         }
         return Center(
             child: SizedBox(
-                height: 24, width: 24, child: CircularProgressIndicator(
-              backgroundColor: Theme.of(context).primaryColor,
-            )));
+                height: 24,
+                width: 24,
+                child: CircularProgressIndicator(
+                  backgroundColor: Theme.of(context).primaryColor,
+                )));
       },
     );
   }

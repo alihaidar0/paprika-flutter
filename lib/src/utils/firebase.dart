@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:paprica/src/models/notification.dart';
 import 'package:swagger/api.dart';
+
 import '../../utils.dart';
 
 class Firebase {
@@ -141,7 +142,8 @@ class Firebase {
       var iOSPlatformChannelSpecifics =
           new IOSNotificationDetails(presentSound: false);
       var platformChannelSpecifics = new NotificationDetails(
-          android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+          android: androidPlatformChannelSpecifics,
+          iOS: iOSPlatformChannelSpecifics);
       await _flutterLocalNotificationsPlugin.show(
           0, title, body, platformChannelSpecifics);
     }

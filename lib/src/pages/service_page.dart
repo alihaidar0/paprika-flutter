@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/screens/deliveries_screen.dart';
 import 'package:paprica/src/screens/pickups_screen.dart';
 import 'package:paprica/src/screens/reservations_screen.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:swagger/api.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../utils.dart';
 import '../../widgets.dart';
@@ -93,7 +93,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
     widget.refreshStream?.listen(_listener);
   }
 
-  void _listener(bool refresh) {
+  _listener(bool refresh) {
     if (refresh != null && refresh && !_isLoading) {
       _getUpcomingServiceAsync();
     }

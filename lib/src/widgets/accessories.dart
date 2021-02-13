@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:paprica/translations.dart';
+import 'package:photo_view/photo_view.dart';
+
 import '../../screens.dart';
-import 'package:connectivity/connectivity.dart';
 
 class CircularAvatar extends StatelessWidget {
   final String path;
@@ -258,7 +259,6 @@ class RestaurantNamedLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var at = Localizations.localeOf(context).languageCode == 'en' ? "@" : "";
     return Padding(
       padding: this.padding ?? const EdgeInsets.all(2.0),
       child: GestureDetector(

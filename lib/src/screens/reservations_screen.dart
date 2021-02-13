@@ -52,6 +52,14 @@ class _ReservationsScreenState extends State<ReservationsScreen>
   }
 
   @override
+  void dispose() {
+    scrollController.removeListener(_scrollControllerListener);
+    streamScrollController.close();
+    _streamRefreshController.close();
+    super.dispose();
+  }
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.paused:
@@ -73,14 +81,6 @@ class _ReservationsScreenState extends State<ReservationsScreen>
     return Future.value();
   }
 
-  @override
-  void dispose() {
-    scrollController.removeListener(_scrollControllerListener);
-    streamScrollController.close();
-    _streamRefreshController.close();
-    super.dispose();
-  }
-
   void _scrollControllerListener() {
     if (scrollController.position.maxScrollExtent - scrollController.offset <=
         0) {
@@ -95,8 +95,10 @@ class _ReservationsScreenState extends State<ReservationsScreen>
     if (ApiTypesHelper().isAuthorized) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).reservations,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+          title: Text(
+            S.of(context).reservations,
+            style: TextStyle(fontSize: 18),
+          ),
         ),
         body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -161,9 +163,6 @@ class NoReservationsLayout extends StatelessWidget {
 class UpcomingReservationsSection extends StatefulWidget {
   final Stream<bool> refreshStream;
 
-  // final changeHomePageIndexHandler;
-
-  // const UpcomingReservationsSection(this.changeHomePageIndexHandler,{this.refreshStream});
   const UpcomingReservationsSection({this.refreshStream});
 
   @override
@@ -770,7 +769,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             children: <Widget>[
                               Padding(
                                 padding:
-                                const EdgeInsets.symmetric(vertical: 1.0),
+                                    const EdgeInsets.symmetric(vertical: 1.0),
                                 child: Text(
                                   S.of(context).date + ":",
                                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -778,10 +777,10 @@ class _NewReservationCardState extends State<NewReservationCard>
                               ),
                               Padding(
                                 padding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: Text(
                                   PapricaFormatter.formatDateOnly(
-                                      context, widget.reservation.date) +
+                                          context, widget.reservation.date) +
                                       "  " +
                                       PapricaFormatter.formatTimeOnly(
                                           context, widget.reservation.date),

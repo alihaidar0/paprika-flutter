@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
 import 'package:paprica/translations.dart';
@@ -27,6 +24,7 @@ class PapricaApp extends StatefulWidget {
 
 class _PapricaAppState extends State<PapricaApp> {
   Locale locale;
+
   @override
   void initState() {
     super.initState();
@@ -65,8 +63,8 @@ class _PapricaAppState extends State<PapricaApp> {
             accentColor: Color(0xFFCE4C42),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
             colorScheme: ColorScheme.light(
-              primary: Color(
-                  0xFFCE4C42), // -------> This will be your FlatButton's text color
+              primary: Color(0xFFCE4C42),
+              // -------> This will be your FlatButton's text color
               secondary: Color(0xFFCE4C42),
             ),
             fontFamily: 'hacen-tunisia',
@@ -79,7 +77,9 @@ class _PapricaAppState extends State<PapricaApp> {
   Route handleRoute(RouteSettings settings) {
     if (settings.name == '/home') {
       return _buildRoute(
-          settings, new HomeScreen(action: settings.arguments,initialIndex: settings.arguments));
+          settings,
+          new HomeScreen(
+              action: settings.arguments, initialIndex: settings.arguments));
     }
     if (settings.name == '/event') {
       return _buildRoute(

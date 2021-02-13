@@ -159,11 +159,11 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
     }
 
     if (restaurantListStamp != null) {
-          PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
-          jsonRestaurantsList.stamp = restaurantListStamp;
-          jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
-          jsonInput.stamps.add(jsonRestaurantsList);
-        }
+      PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
+      jsonRestaurantsList.stamp = restaurantListStamp;
+      jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
+      jsonInput.stamps.add(jsonRestaurantsList);
+    }
 
     if (listOffersStamp != null) {
       PapricaItemStampDto jsonOffersList = PapricaItemStampDto();
@@ -213,51 +213,57 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
             builder: (context, snapshot) {
               {
                 if (snapshot.connectionState == ConnectionState.waiting)
-                   return Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 else if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.hasData) {
-                  if(snapshot.data != null)
-                  return Container(
-                    color: Color(0xFFE5E5E5),
-                    height: MediaQuery.of(context).size.height - 60,
-                    child: RefreshIndicator(
-                      onRefresh: onRefresh,
-                      key: _refreshIndicatorKey,
-                      child: OnlineStatus(
-                        child: IncrementallyLoadingListView(
-                            controller: _scrollController,
-                            hasMore: !noMorePaprikaItems,
-                            itemCount: paprikaItemsList.length + 1,
-                            loadMore: () async {
-                              await _loadMoreData(
-                                  eventStamp: lastEventsStamp,
-                                  listOffersStamp: lastOffersListStamp,
-                                  offerStamp: lastOffersStamp,
-                                  reservationsStamp: lastReservationStamp,
-                                  restaurantListStamp:
-                                      lastRestaurantsListStamp);
-                            },
-                            loadMoreOffsetFromBottom: 2,
-                            itemBuilder: (context, index) {
-                              if (index < paprikaItemsList.length)
-                                return _buildMyPapricaItem(
-                                    context, paprikaItemsList[index]);
-                              else if (noMorePaprikaItems &&
-                                  index == paprikaItemsList.length)
-                                return _buildYouAreAllCaughtUp();
-                              else
-                                return EmptyWidget();
-                            }),
+                  if (snapshot.data != null)
+                    return Container(
+                      color: Color(0xFFE5E5E5),
+                      height: MediaQuery.of(context).size.height - 60,
+                      child: RefreshIndicator(
+                        onRefresh: onRefresh,
+                        key: _refreshIndicatorKey,
+                        child: OnlineStatus(
+                          child: IncrementallyLoadingListView(
+                              controller: _scrollController,
+                              hasMore: !noMorePaprikaItems,
+                              itemCount: paprikaItemsList.length + 1,
+                              loadMore: () async {
+                                await _loadMoreData(
+                                    eventStamp: lastEventsStamp,
+                                    listOffersStamp: lastOffersListStamp,
+                                    offerStamp: lastOffersStamp,
+                                    reservationsStamp: lastReservationStamp,
+                                    restaurantListStamp:
+                                        lastRestaurantsListStamp);
+                              },
+                              loadMoreOffsetFromBottom: 2,
+                              itemBuilder: (context, index) {
+                                if (index < paprikaItemsList.length)
+                                  return _buildMyPapricaItem(
+                                      context, paprikaItemsList[index]);
+                                else if (noMorePaprikaItems &&
+                                    index == paprikaItemsList.length)
+                                  return _buildYouAreAllCaughtUp();
+                                else
+                                  return EmptyWidget();
+                              }),
+                        ),
                       ),
-                    ),
-                  );
-                  else{
+                    );
+                  else {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage('assets/images/application_crash.png'),height: 280,),
-                        SizedBox(height: 20,),
+                        Image(
+                          image:
+                              AssetImage('assets/images/application_crash.png'),
+                          height: 280,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         RequestRetry(
                             message: S.of(context).errorUnknown,
                             retryCallback: () {
@@ -266,13 +272,15 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
                               });
                               return _initialLoad();
                             }),
-                        SizedBox(height: 60,),
+                        SizedBox(
+                          height: 60,
+                        ),
                       ],
                     );
                   }
                 }
                 if (snapshot.hasError) {
-                 return RequestRetry(
+                  return RequestRetry(
                       message: S.of(context).errorUnknown,
                       retryCallback: () {
                         setState(() {

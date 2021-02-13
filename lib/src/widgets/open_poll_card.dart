@@ -1,15 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/erro_handlers/api_error_handler.dart';
+import 'package:paprica/src/utils/api_types_helper.dart';
 import 'package:paprica/src/utils/paprica_api_client.dart';
 import 'package:paprica/src/utils/paprica_formatter.dart';
 import 'package:paprica/src/widgets/accessories.dart';
 import 'package:paprica/src/widgets/dialog.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:swagger/api.dart';
-import 'package:circular_check_box/circular_check_box.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
+
 import '../../screens.dart';
 
 class OpenPollCard extends StatefulWidget {
@@ -244,34 +245,34 @@ class _PollItemState extends State<PollItem> {
                       if (_checkBoxValues.indexOf(true) != -1) {
                         if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
                             restaurant.id) {
-                            _checkBoxValues[_idRestaurants
-                                .indexOf(restaurant.id)] = newValue;
-                            setState(() {
-                              _totalVotes--;
-                              _restaurantVotes[
-                                  _idRestaurants.indexOf(restaurant.id)]--;
-                            });
-                          _onClearVote(context);
-                        } else {
-                            setState(() {
-                              _restaurantVotes[
-                                  _idRestaurants.indexOf(restaurant.id)]++;
-                              _restaurantVotes[_checkBoxValues.indexOf(true)]--;
-                            });
-                            _checkBoxValues[_checkBoxValues.indexOf(true)] =
-                                false;
-                            _checkBoxValues[_idRestaurants
-                                .indexOf(restaurant.id)] = newValue;
-                          _onAddVote(context, restaurant.id);
-                        }
-                      } else {
                           _checkBoxValues[
                               _idRestaurants.indexOf(restaurant.id)] = newValue;
                           setState(() {
-                            _totalVotes++;
+                            _totalVotes--;
+                            _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)]--;
+                          });
+                          _onClearVote(context);
+                        } else {
+                          setState(() {
                             _restaurantVotes[
                                 _idRestaurants.indexOf(restaurant.id)]++;
+                            _restaurantVotes[_checkBoxValues.indexOf(true)]--;
                           });
+                          _checkBoxValues[_checkBoxValues.indexOf(true)] =
+                              false;
+                          _checkBoxValues[
+                              _idRestaurants.indexOf(restaurant.id)] = newValue;
+                          _onAddVote(context, restaurant.id);
+                        }
+                      } else {
+                        _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
+                            newValue;
+                        setState(() {
+                          _totalVotes++;
+                          _restaurantVotes[
+                              _idRestaurants.indexOf(restaurant.id)]++;
+                        });
                         _onAddVote(context, restaurant.id);
                       }
                     } else {

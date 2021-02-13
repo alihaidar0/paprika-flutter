@@ -7,7 +7,6 @@ import 'package:paprica/src/models/offer_model.dart';
 import 'package:paprica/src/screens/offer_screen.dart';
 import 'package:paprica/src/screens/offers_list_screen.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class OffersListInMyPaprica extends StatelessWidget {
   final PagedResultDtoMyPapricaOfferDto offersList;

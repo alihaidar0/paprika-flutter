@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
-import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
-import '../../error_handlers.dart';
-import '../../utils.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:paprica/screens.dart';
+import 'package:paprica/translations.dart';
+import 'package:paprica/utils.dart';
+import 'package:paprica/widgets.dart';
+import 'package:swagger/api.dart';
+
+import '../../error_handlers.dart';
+import '../../utils.dart';
 
 class LogInScreen extends StatefulWidget {
   final bool asAService;

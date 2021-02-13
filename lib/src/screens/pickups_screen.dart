@@ -95,8 +95,7 @@ class _PickupsScreenState extends State<PickupsScreen>
     if (ApiTypesHelper().isAuthorized) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).pickups,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+          title: Text(S.of(context).pickups, style: TextStyle(fontSize: 18)),
         ),
         body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -721,25 +720,25 @@ class _NewPickupCardState extends State<NewPickupCard>
               ),
               widget.pickup.updateRequest != null
                   ? GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _showUpdateRequest(context),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        S.of(context).pendingChanges,
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => _showUpdateRequest(context),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              S.of(context).pendingChanges,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
+                          )
+                        ],
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 12,
                     )
-                  ],
-                ),
-              )
                   : Container(),
               FutureBuilder(
                 future: _getMapWidget(),
@@ -918,7 +917,7 @@ class _NewPickupCardState extends State<NewPickupCard>
           /// Date
           if (widget.pickup.updateRequest.time != null &&
               (widget.pickup.date.year !=
-                  widget.pickup.updateRequest.time.year ||
+                      widget.pickup.updateRequest.time.year ||
                   widget.pickup.date.month !=
                       widget.pickup.updateRequest.time.month ||
                   widget.pickup.date.day !=
@@ -950,7 +949,7 @@ class _NewPickupCardState extends State<NewPickupCard>
           /// Time
           if (widget.pickup.updateRequest.time != null &&
               (widget.pickup.date.hour !=
-                  widget.pickup.updateRequest.time.hour ||
+                      widget.pickup.updateRequest.time.hour ||
                   widget.pickup.date.minute !=
                       widget.pickup.updateRequest.time.minute))
             updates.add(
@@ -979,8 +978,7 @@ class _NewPickupCardState extends State<NewPickupCard>
 
           /// Price
           if (widget.pickup.updateRequest.price != null &&
-              widget.pickup.price !=
-                  widget.pickup.updateRequest.price)
+              widget.pickup.price != widget.pickup.updateRequest.price)
             updates.add(
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -998,8 +996,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(widget.pickup.updateRequest.price
-                        .toString())
+                    Text(widget.pickup.updateRequest.price.toString())
                   ],
                 ),
               ),
@@ -1055,30 +1052,30 @@ class _NewPickupCardState extends State<NewPickupCard>
 
   _onCancelUpdateRequest(BuildContext context) {
     showGeneralDialog(
-        context: context,
-        pageBuilder: (BuildContext buildContext,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return SafeArea(
-            child: Builder(builder: (_context) {
-              return PapricaSimpleDialog(
-                title: S.of(context).confirmCancellation,
-                content: S.of(context).confirmCancelUpdateRequestPickup,
-                yesButton: FlatButton(
-                  child: Text(S.of(context).confirm),
-                  onPressed: () {
-                    _onConfirmCancelUpdateRequest(context);
-                  },
-                ),
+            context: context,
+            pageBuilder: (BuildContext buildContext,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return SafeArea(
+                child: Builder(builder: (_context) {
+                  return PapricaSimpleDialog(
+                    title: S.of(context).confirmCancellation,
+                    content: S.of(context).confirmCancelUpdateRequestPickup,
+                    yesButton: FlatButton(
+                      child: Text(S.of(context).confirm),
+                      onPressed: () {
+                        _onConfirmCancelUpdateRequest(context);
+                      },
+                    ),
+                  );
+                }),
               );
-            }),
-          );
-        },
-        barrierDismissible: true,
-        barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: null,
-        transitionDuration: const Duration(milliseconds: 150))
+            },
+            barrierDismissible: true,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierColor: null,
+            transitionDuration: const Duration(milliseconds: 150))
         .then((cancelled) {
       if (cancelled != null && cancelled) {
         Navigator.of(context).pop(cancelled);
@@ -1094,8 +1091,7 @@ class _NewPickupCardState extends State<NewPickupCard>
     dialog.show();
     EntityDtoInt64 data = EntityDtoInt64(widget.pickup.id);
     api
-        .apiServicesAppCustomerPickupCancelPickupUpdateRequestPost(
-        input: data)
+        .apiServicesAppCustomerPickupCancelPickupUpdateRequestPost(input: data)
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);

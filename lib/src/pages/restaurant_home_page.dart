@@ -156,7 +156,7 @@ class _InformationSectionState extends State<InformationSection> {
   @override
   void initState() {
     super.initState();
-    showWorkingTimes = true;
+    showWorkingTimes = false;
   }
 
   @override
@@ -174,14 +174,12 @@ class _InformationSectionState extends State<InformationSection> {
               color: Colors.white,
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: Flexible(
-                  child: drawables.length > 0
-                      ? Wrap(
-                          spacing: 24,
-                          children: drawables,
-                        )
-                      : Container(),
-                ),
+                child: drawables.length > 0
+                    ? Wrap(
+                        spacing: 24,
+                        children: drawables,
+                      )
+                    : Container(),
               ),
             ),
 
@@ -199,7 +197,8 @@ class _InformationSectionState extends State<InformationSection> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                            padding:
+                                const EdgeInsets.only(top: 8.0, bottom: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -217,7 +216,9 @@ class _InformationSectionState extends State<InformationSection> {
                                       left: 5.0, top: 4.0, right: 5.0),
                                   child: Text(
                                     S.of(context).workingHours,
-                                    style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
@@ -232,7 +233,11 @@ class _InformationSectionState extends State<InformationSection> {
                                           ? Colors.white
                                           : Color(0xFFE1E1E1),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 8.0, top: 5.0, right: 8.0, bottom: 5.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0,
+                                            top: 5.0,
+                                            right: 8.0,
+                                            bottom: 5.0),
                                         child: Table(
                                           children: [
                                             TableRow(children: [
@@ -255,8 +260,10 @@ class _InformationSectionState extends State<InformationSection> {
                                               Text(
                                                 PapricaFormatter.formatTimeOnly(
                                                   context,
-                                                  widget.restData
-                                                      .openingTimes[index].toTime,
+                                                  widget
+                                                      .restData
+                                                      .openingTimes[index]
+                                                      .toTime,
                                                 ),
                                               )
                                             ]),
@@ -267,50 +274,50 @@ class _InformationSectionState extends State<InformationSection> {
                                   ),
                                 )
                               : Container(
-                                padding: const EdgeInsets.only(left: 8.0, top: 5.0, right: 8.0, bottom: 5.0),
-                                color: Color(0xFFE1E1E1),
-                                child: Table(
-                                  children: [
-                                    TableRow(children: [
-                                      Text(
-                                        ApiHelper.toStringDayOfWeek(
-                                            context,
-                                            widget
-                                                .restData
-                                                .openingTimes[0]
-                                                .dayOfWeek),
-                                      ),
-                                      Text(
-                                        PapricaFormatter.formatTimeOnly(
-                                            context,
-                                            widget
-                                                .restData
-                                                .openingTimes[0]
-                                                .fromTime),
-                                      ),
-                                      Text(
-                                        PapricaFormatter.formatTimeOnly(
-                                          context,
-                                          widget.restData
-                                              .openingTimes[0].toTime,
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0,
+                                      top: 5.0,
+                                      right: 8.0,
+                                      bottom: 5.0),
+                                  color: Color(0xFFE1E1E1),
+                                  child: Table(
+                                    children: [
+                                      TableRow(children: [
+                                        Text(
+                                          ApiHelper.toStringDayOfWeek(
+                                              context,
+                                              widget.restData.openingTimes[0]
+                                                  .dayOfWeek),
                                         ),
-                                      )
-                                    ]),
-                                  ],
+                                        Text(
+                                          PapricaFormatter.formatTimeOnly(
+                                              context,
+                                              widget.restData.openingTimes[0]
+                                                  .fromTime),
+                                        ),
+                                        Text(
+                                          PapricaFormatter.formatTimeOnly(
+                                            context,
+                                            widget.restData.openingTimes[0]
+                                                .toTime,
+                                          ),
+                                        )
+                                      ]),
+                                    ],
+                                  ),
                                 ),
-                              ),
                           IconButton(
                             icon: showWorkingTimes
                                 ? Icon(
-                              CupertinoIcons.chevron_up_circle,
-                              color: Theme.of(context).primaryColor,
-                              size: 28.0,
-                            )
+                                    CupertinoIcons.chevron_up_circle,
+                                    color: Theme.of(context).primaryColor,
+                                    size: 28.0,
+                                  )
                                 : Icon(
-                              CupertinoIcons.chevron_down_circle,
-                              color: Theme.of(context).primaryColor,
-                              size: 28.0,
-                            ),
+                                    CupertinoIcons.chevron_down_circle,
+                                    color: Theme.of(context).primaryColor,
+                                    size: 28.0,
+                                  ),
                             onPressed: () {
                               setState(() {
                                 showWorkingTimes = !showWorkingTimes;

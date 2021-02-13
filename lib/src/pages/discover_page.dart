@@ -9,6 +9,7 @@ import 'package:paprica/src/models/paprica_filter_model.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../screens.dart';
 import '../../utils.dart';
 //import 'package:app_settings/app_settings.dart';
@@ -61,20 +62,27 @@ class _DiscoverPageState extends State<DiscoverPage> {
   Widget build(BuildContext context) {
     _loadTypes(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          S.of(context).discover,
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
               automaticallyImplyLeading: false,
-              expandedHeight: 138,
+              expandedHeight: 100,
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
-                    Image.asset(
-                      "assets/images/discover_background.png",
-                      fit: BoxFit.fill,
+                    Container(
+                      child: Image.asset(
+                        "assets/images/background.png",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(

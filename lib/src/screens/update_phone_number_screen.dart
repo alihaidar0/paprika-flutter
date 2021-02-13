@@ -3,7 +3,6 @@ import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
 import '../../error_handlers.dart';
-import '../../screens.dart';
 import '../../utils.dart';
 
 class UpdatePhoneNumberScreen extends StatefulWidget {

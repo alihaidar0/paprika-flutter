@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:paprica/translations.dart';
+import 'package:paprica/utils.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';

@@ -1,4 +1,3 @@
-import 'package:paprica/src/models/offer_model.dart';
 import 'package:swagger/api.dart';
 
 class EventModel {

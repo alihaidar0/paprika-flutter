@@ -6,10 +6,8 @@ import 'package:paprica/src/models/event_model.dart';
 import 'package:paprica/src/screens/event_screen.dart';
 import 'package:paprica/translations.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../utils.dart';
-import '../../widgets.dart';
 
 class EventCardThemeData {
   Color backgroundColor, titleColor, actionTextColor;

@@ -3,10 +3,9 @@ import 'package:paprica/app.dart';
 import 'package:paprica/error_handlers.dart';
 import 'package:paprica/pages.dart';
 import 'package:paprica/screens.dart';
-import 'package:paprica/src/screens/update_phone_number_screen.dart';
 import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
 import 'package:paprica/utils.dart';
+import 'package:paprica/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 

@@ -85,6 +85,7 @@ class PapricaFilterModel {
   }
 
   get longitude => null;
+
   get latitude => null;
 
   @override

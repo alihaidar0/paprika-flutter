@@ -11,10 +11,10 @@ import 'package:paprica/screens.dart';
 import 'package:paprica/src/models/delivery_model.dart';
 import 'package:paprica/src/utils/map_utils.dart';
 import 'package:paprica/src/widgets/carousel_slider.dart';
+import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:paprica/src/widgets/delivery_card.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -95,8 +95,7 @@ class _DeliveriesScreenState extends State<DeliveriesScreen>
     if (ApiTypesHelper().isAuthorized) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).deliveries,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+          title: Text(S.of(context).deliveries, style: TextStyle(fontSize: 18)),
         ),
         body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -254,10 +253,6 @@ class _UpcomingDeliveriesSection extends State<UpcomingDeliveriesSection> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // if (widget.changeHomePageIndexHandler is Function &&
-                      //     widget.changeHomePageIndexHandler != null) {
-                      //   widget.changeHomePageIndexHandler(2);
-                      // }
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>
@@ -417,10 +412,8 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                                       width:
                                           MediaQuery.of(context).size.width / 6,
                                       child: Center(
-                                          child: Text(widget
-                                                  .delivery
-                                                  .deliveryMeals[index]
-                                                  .mealName))),
+                                          child: Text(widget.delivery
+                                              .deliveryMeals[index].mealName))),
                                   Container(
                                       width:
                                           MediaQuery.of(context).size.width / 6,
@@ -666,8 +659,8 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                             children: <Widget>[
                               Padding(
                                 padding: Localizations.localeOf(context)
-                                    .languageCode ==
-                                    'en'
+                                            .languageCode ==
+                                        'en'
                                     ? const EdgeInsets.symmetric(vertical: 4.0)
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(
@@ -677,8 +670,8 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                               ),
                               Padding(
                                 padding: Localizations.localeOf(context)
-                                    .languageCode ==
-                                    'en'
+                                            .languageCode ==
+                                        'en'
                                     ? const EdgeInsets.symmetric(vertical: 4.0)
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(widget.delivery.customerAddress),
@@ -750,25 +743,26 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
               ),
               widget.delivery.updateRequest != null
                   ? GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _showUpdateRequest(context),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0,top: 5.0,right: 8.0,bottom: 5.0),
-                      child: Text(
-                        S.of(context).pendingChanges,
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => _showUpdateRequest(context),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, top: 5.0, right: 8.0, bottom: 5.0),
+                            child: Text(
+                              S.of(context).pendingChanges,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
+                          )
+                        ],
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 12,
                     )
-                  ],
-                ),
-              )
                   : Container(),
               FutureBuilder(
                 future: _getMapWidget(),
@@ -914,8 +908,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
     dialog.setMessage(S.of(context).cancellingDelivery);
     dialog.show();
     api
-        .apiServicesAppCustomerDeliveryCancelDeliveryPost(
-        delivery: data)
+        .apiServicesAppCustomerDeliveryCancelDeliveryPost(delivery: data)
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
@@ -933,7 +926,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
       return DeliveryScreen(
         restaurantId: widget.delivery.restaurantId,
         restaurantName: widget.delivery.restaurantName,
-          restaurantLongitude: widget.delivery.restaurantLongitude,
+        restaurantLongitude: widget.delivery.restaurantLongitude,
         restaurantLatitude: widget.delivery.restaurantLatitude,
         oldDelivery: widget.delivery.updateRequest == null
             ? DeliveryModel.fromUpcoming(widget.delivery)
@@ -951,8 +944,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
 
           /// Price
           if (widget.delivery.updateRequest.price != null &&
-              widget.delivery.price !=
-                  widget.delivery.updateRequest.price)
+              widget.delivery.price != widget.delivery.updateRequest.price)
             updates.add(
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -965,8 +957,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(widget.delivery.updateRequest.price
-                        .toString())
+                    Text(widget.delivery.updateRequest.price.toString())
                   ],
                 ),
               ),
@@ -988,13 +979,11 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(widget.delivery.updateRequest.address
-                        .toString())
+                    Text(widget.delivery.updateRequest.address.toString())
                   ],
                 ),
               ),
             );
-
 
           return Scaffold(
             appBar: AppBar(
@@ -1047,30 +1036,30 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
 
   _onCancelUpdateRequest(BuildContext context) {
     showGeneralDialog(
-        context: context,
-        pageBuilder: (BuildContext buildContext,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return SafeArea(
-            child: Builder(builder: (_context) {
-              return PapricaSimpleDialog(
-                title: S.of(context).confirmCancellation,
-                content: S.of(context).confirmCancelUpdateRequestDelivery,
-                yesButton: FlatButton(
-                  child: Text(S.of(context).confirm),
-                  onPressed: () {
-                    _onConfirmCancelUpdateRequest(context);
-                  },
-                ),
+            context: context,
+            pageBuilder: (BuildContext buildContext,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return SafeArea(
+                child: Builder(builder: (_context) {
+                  return PapricaSimpleDialog(
+                    title: S.of(context).confirmCancellation,
+                    content: S.of(context).confirmCancelUpdateRequestDelivery,
+                    yesButton: FlatButton(
+                      child: Text(S.of(context).confirm),
+                      onPressed: () {
+                        _onConfirmCancelUpdateRequest(context);
+                      },
+                    ),
+                  );
+                }),
               );
-            }),
-          );
-        },
-        barrierDismissible: true,
-        barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: null,
-        transitionDuration: const Duration(milliseconds: 150))
+            },
+            barrierDismissible: true,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierColor: null,
+            transitionDuration: const Duration(milliseconds: 150))
         .then((cancelled) {
       if (cancelled != null && cancelled) {
         Navigator.of(context).pop(cancelled);
@@ -1087,7 +1076,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
     EntityDtoInt64 data = EntityDtoInt64(widget.delivery.id);
     api
         .apiServicesAppCustomerDeliveryCancelDeliveryUpdateRequestPost(
-        input: data)
+            input: data)
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);

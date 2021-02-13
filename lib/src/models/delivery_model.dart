@@ -46,7 +46,8 @@ class DeliveryModel {
     upcomingDeliveryMeals = upcomingDelivery.deliveryMeals;
   }
 
-  DeliveryModel.fromUpdateRequest(CustomerUpcomingDeliveryDto upcomingDelivery) {
+  DeliveryModel.fromUpdateRequest(
+      CustomerUpcomingDeliveryDto upcomingDelivery) {
     restaurantName = upcomingDelivery.restaurantName;
     id = upcomingDelivery.updateRequest.deliveryId;
     restaurantId = upcomingDelivery.restaurantId;

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ImagesGallery extends StatefulWidget {
   final List<String> thumbnails;

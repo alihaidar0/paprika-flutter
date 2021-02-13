@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
 

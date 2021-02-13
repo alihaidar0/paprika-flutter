@@ -1,21 +1,20 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprica/pages.dart';
 import 'package:paprica/src/models/meal_share.dart';
 import 'package:paprica/src/models/menu_state.dart';
 import 'package:paprica/src/models/reviews_state.dart';
 import 'package:paprica/src/utils/api_types_helper.dart';
 import 'package:paprica/src/utils/paprica_api_client.dart';
 import 'package:paprica/translations.dart';
-import 'package:paprica/pages.dart';
 import 'package:paprica/widgets.dart';
 import 'package:share/share.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:swagger/api.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:swagger/api.dart';
 
 import '../../screens.dart';
 

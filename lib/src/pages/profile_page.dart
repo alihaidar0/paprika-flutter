@@ -1,20 +1,22 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
+import 'package:async/async.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:paprica/src/models/countries_model.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:path/path.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../screens.dart';
 import '../../utils.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage();
@@ -181,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Container(
                                           height: 140,
                                           child: Image.asset(
-                                            "assets/images/profile_background.png",
+                                            "assets/images/background.png",
                                             fit: BoxFit.cover,
                                           ),
                                         ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-final ThemeData papricaThemeData = new ThemeData(
+final ThemeData paprikaThemeData = new ThemeData(
     cursorColor: Colors.grey,
     textSelectionColor: Colors.grey,
     textSelectionHandleColor: Colors.grey,
-    primaryColor: Colors.orange, // Color(0xFFCE4C42),
-    accentColor: Colors.orange, //Color(0xFFCE4C42),
+    primaryColor: Colors.orange,
+    // Color(0xFFCE4C42),
+    accentColor: Colors.orange,
+    //Color(0xFFCE4C42),
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.grey,
       textTheme: ButtonTextTheme.primary,

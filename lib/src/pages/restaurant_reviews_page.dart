@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/models/reviews_state.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
 

@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,6 +10,7 @@ import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../screens.dart';
 import '../../utils.dart';

@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:paprica/error_handlers.dart';
 import 'package:paprica/generated/i18n.dart';
+import 'package:paprica/src/widgets/accessories.dart' show LoadingPlaceHolder;
 import 'package:paprica/src/widgets/offer_card.dart';
 import 'package:swagger/api.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../../utils.dart';
-import 'package:paprica/src/widgets/accessories.dart' show LoadingPlaceHolder;
 
 class OffersListScreen extends StatefulWidget {
   const OffersListScreen();

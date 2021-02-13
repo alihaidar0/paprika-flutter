@@ -14,9 +14,10 @@ class AboutUsScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/background_grey.png'),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+              image: AssetImage('assets/images/background_grey.png'),
+              fit: BoxFit.cover),
+        ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(

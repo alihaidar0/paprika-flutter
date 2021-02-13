@@ -7,9 +7,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:paprica/src/models/paprica_filter_model.dart';
 import 'package:paprica/src/widgets/rating_bar.dart';
 import 'package:paprica/translations.dart';
+import 'package:paprica/utils.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
 
 import '../../screens.dart';
 
@@ -914,7 +914,8 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.25 * 0.5),
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(

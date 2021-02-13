@@ -7,7 +7,6 @@ import 'package:paprica/src/models/paprica_filter_model.dart';
 import 'package:paprica/src/models/restaurants_list_model.dart';
 import 'package:paprica/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
