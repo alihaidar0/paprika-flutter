@@ -433,6 +433,6 @@ class _EventScreenState extends State<EventScreen> {
   void _actionShare() {
     Share.share(S.of(context).shareTextEvent(
         widget.event?.eventName ?? eventName ?? "",
-        "https://links.popina.me/event/" + _eventId));
+        "https://links.paprika-sy.com/event/" + _eventId));
   }
 }

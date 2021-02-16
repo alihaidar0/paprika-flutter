@@ -15,6 +15,7 @@ import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/src/widgets/pickup_card.dart';
 import 'package:paprica/src/widgets/slider.dart';
 import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -255,11 +256,11 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  HomeScreen(initialIndex: 2)),
+                                  HomeScreen(initialIndex: 1)),
                           ModalRoute.withName('/splash'));
                     },
                     child: Text(
-                      S.of(context).goToPlaces,
+                      S.of(context).goToRestaurants,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                   ),
@@ -600,8 +601,6 @@ class _NewPickupCardState extends State<NewPickupCard>
                                         vertical: 1.0),
                                     child: Text(
                                       S.of(context).time + ":",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Padding(
@@ -620,7 +619,6 @@ class _NewPickupCardState extends State<NewPickupCard>
                               _pickupStatus(widget.pickup.status),
                             ],
                           ),
-                          SizedBox(height: 10),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -632,7 +630,6 @@ class _NewPickupCardState extends State<NewPickupCard>
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(
                                   S.of(context).totalPrice + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Padding(
@@ -656,61 +653,31 @@ class _NewPickupCardState extends State<NewPickupCard>
                               ),
                             ],
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: Localizations.localeOf(context)
-                                            .languageCode ==
-                                        'en'
-                                    ? const EdgeInsets.symmetric(vertical: 4.0)
-                                    : const EdgeInsets.symmetric(vertical: 0.0),
-                                child: Text(
-                                  S.of(context).meals + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () => _openMealsSheet(context),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  S.of(context).pressToViewMeals,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
                                 ),
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                                SizedBox(width: 8.0,),
+                                FaIcon(
+                                  Localizations.localeOf(context)
+                                      .languageCode ==
+                                      'en'
+                                      ? (FontAwesomeIcons.angleDoubleRight)
+                                      : (FontAwesomeIcons.angleDoubleLeft),
+                                  color: Theme.of(context).primaryColor,
+                                  size: 12.0,
                                 ),
-                                color: Colors.white,
-                                elevation: 2.0,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  onTap: () {
-                                    _openMealsSheet(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 5.0, top: 2.0, right: 5.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8.0, right: 0.8),
-                                          child: Text(
-                                            S.of(context).viewMeals + "    ",
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              fontSize: 16.0,
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 12.0,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -417,7 +417,6 @@ class _ReviewFormState extends State<ReviewForm> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.customerProfileImage);
     var isLocalProfileImage = widget.customerProfileImage == null ||
         widget.customerProfileImage == '';
 

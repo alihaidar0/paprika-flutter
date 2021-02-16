@@ -12,7 +12,6 @@ import 'package:swagger/api.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';
-//import 'package:app_settings/app_settings.dart';
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage();
@@ -339,6 +338,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 //        debugPrint(err.toString());
 //      });
 //    }
+
     dialog.show();
     api
         .apiServicesAppPlacesGetAllGet(

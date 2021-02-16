@@ -577,6 +577,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onReservePressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       _showReservationDialog();
     } else {
@@ -610,6 +611,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onOrderPickupPressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -655,6 +657,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onOrderDeliveryPressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -1197,7 +1200,12 @@ class _ActionsRowState extends State<ActionsRow> {
           : Container(),
       GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: _onTapAddToFavorite,
+        onTap: (){
+          _onTapAddToFavorite();
+          if(!ApiTypesHelper().isAuthorized) {
+            _actionToggleMusic();
+          }
+        },
         child: Padding(
             padding: Localizations.localeOf(context).languageCode == "en"
                 ? const EdgeInsets.only(left: 4, right: 8.0)
@@ -1364,7 +1372,7 @@ class _ActionsRowState extends State<ActionsRow> {
 
   void _actionShare() {
     Share.share(S.of(context).shareText(widget.restData.name,
-        "https://links.popina.me/restaurant/" + widget.restData.id.toString()));
+        "https://links.paprika-sy.com/restaurant/" + widget.restData.id.toString()));
   }
 
   Future<void> play() async {
@@ -1456,13 +1464,6 @@ class _ActionsRowState extends State<ActionsRow> {
         height: 24,
         width: 24,
         child: SpinKitThreeBounce(color: Colors.white),
-        // child: SpinKitWave(
-        //   type: SpinKitWaveType.start,
-        //   size: 16,
-        //   itemBuilder: (_, index) {
-        //     return Container(color: Color(0xffcccccc));
-        //   },
-        // ),
       );
     else
       return Icon(Icons.music_note,

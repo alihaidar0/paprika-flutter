@@ -814,7 +814,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
     Share.share(S.of(context).shareTextMeal(
         widget.meal.name,
         widget.restaurantName,
-        "https://links.popina.me/meal/" +
+        "https://links.paprika-sy.com/meal/" +
             widget.restaurantId.toString() +
             "/" +
             widget.categoryId.toString() +

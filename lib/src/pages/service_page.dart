@@ -1,25 +1,25 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/screens/deliveries_screen.dart';
 import 'package:paprica/src/screens/pickups_screen.dart';
 import 'package:paprica/src/screens/reservations_screen.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:swagger/api.dart';
 
+import '../../screens.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
 
 class ServicePage extends StatefulWidget {
   final Stream<bool> refreshStream;
-  final changeHomePageIndexHandler;
 
-  const ServicePage(this.changeHomePageIndexHandler, {this.refreshStream});
+  const ServicePage({this.refreshStream});
 
   @override
   _ServicePageState createState() => _ServicePageState();
@@ -60,8 +60,7 @@ class _ServicePageState extends State<ServicePage> {
       return RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: refreshData,
-        child: UpcomingService(widget.changeHomePageIndexHandler,
-            refreshStream: _streamRefreshController.stream),
+        child: UpcomingService(refreshStream: _streamRefreshController.stream),
       );
     } else {
       return LogInPromotion(loginLine: S.of(context).loginPromotionActivities);
@@ -71,9 +70,8 @@ class _ServicePageState extends State<ServicePage> {
 
 class UpcomingService extends StatefulWidget {
   final Stream<bool> refreshStream;
-  final changeHomePageIndexHandler;
 
-  const UpcomingService(this.changeHomePageIndexHandler, {this.refreshStream});
+  const UpcomingService({this.refreshStream});
 
   @override
   _UpcomingServiceState createState() => _UpcomingServiceState();
@@ -130,7 +128,8 @@ class _UpcomingServiceState extends State<UpcomingService> {
               backgroundColor: Color(0xFFFCFAF8),
               body: ListView(
                 children: [
-                  Padding(
+                  (snapshot.data.nearestReservation != null && snapshot.data.nearestPickup != null)
+                  ?Padding(
                     padding:
                         Localizations.localeOf(context).languageCode == 'en'
                             ? const EdgeInsets.only(left: 35.0)
@@ -142,38 +141,41 @@ class _UpcomingServiceState extends State<UpcomingService> {
                         fontSize: 20.0,
                       ),
                     ),
-                  ),
+                  )
+                  :Container(),
                   snapshot.data.nearestReservation != null
                       ? _nearestReservation(snapshot.data.nearestReservation)
                       : snapshot.data.nearestPickup != null
                           ? _nearestPickup(snapshot.data.nearestPickup)
-                          : snapshot.data.nearestDelivery != null
-                              ? _nearestDelivery(snapshot.data.nearestDelivery)
-                              : Column(
-                                  children: <Widget>[
-                                    Center(
-                                      child: NoServicesLayout(
-                                          mTitle:
-                                              S.of(context).noUpcomingServices),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        if (widget.changeHomePageIndexHandler
-                                                is Function &&
-                                            widget.changeHomePageIndexHandler !=
-                                                null) {
-                                          widget.changeHomePageIndexHandler(2);
-                                        }
-                                      },
-                                      child: Text(
-                                        S.of(context).goToPlaces,
-                                        style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                          : Container(),
+                  /// remove delivery
+                  // snapshot.data.nearestDelivery != null
+                  //             ? _nearestDelivery(snapshot.data.nearestDelivery)
+                  //             : Column(
+                  //                 children: <Widget>[
+                  //                   Center(
+                  //                     child: NoServicesLayout(
+                  //                         mTitle:
+                  //                             S.of(context).noUpcomingServices),
+                  //                   ),
+                  //                   GestureDetector(
+                  //                     onTap: () {
+                  //                       if (widget.changeHomePageIndexHandler
+                  //                               is Function &&
+                  //                           widget.changeHomePageIndexHandler !=
+                  //                               null) {
+                  //                         widget.changeHomePageIndexHandler(2);
+                  //                       }
+                  //                     },
+                  //                     child: Text(
+                  //                       S.of(context).goToPlaces,
+                  //                       style: TextStyle(
+                  //                           color:
+                  //                               Theme.of(context).primaryColor),
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
                   Padding(
                     padding:
                         Localizations.localeOf(context).languageCode == 'en'
@@ -389,102 +391,103 @@ class _UpcomingServiceState extends State<UpcomingService> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? const EdgeInsets.only(left: 15.0, right: 30.0)
-                            : const EdgeInsets.only(right: 15.0, left: 30.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      color: Colors.white,
-                      elevation: 2.0,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12.0),
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return DeliveriesScreen();
-                          }));
-                        },
-                        child: Padding(
-                          padding:
-                              Localizations.localeOf(context).languageCode ==
-                                      'en'
-                                  ? const EdgeInsets.only(
-                                      left: 25.0,
-                                      top: 18.0,
-                                      right: 20.0,
-                                      bottom: 18.0)
-                                  : const EdgeInsets.only(
-                                      right: 25.0,
-                                      top: 18.0,
-                                      left: 20.0,
-                                      bottom: 18.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/noun_food_delivery.svg",
-                                    width: 35.0,
-                                    height: 35.0,
-                                  ),
-                                  Padding(
-                                    padding: Localizations.localeOf(context)
-                                                .languageCode ==
-                                            'en'
-                                        ? const EdgeInsets.only(left: 18.0)
-                                        : const EdgeInsets.only(right: 18.0),
-                                    child: Text(
-                                      S.of(context).deliveries,
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  snapshot.data.deliveriesTotalCount == 0
-                                      ? Container()
-                                      : Container(
-                                          width: 18.0,
-                                          height: 18.0,
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(9.0)),
-                                          child: Center(
-                                            child: Text(
-                                              "${snapshot.data.deliveriesTotalCount}",
-                                              style: TextStyle(
-                                                fontSize: 13.0,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                  SizedBox(
-                                    width: 15.0,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 25.0,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  /// remove delivery
+                  // Padding(
+                  //   padding:
+                  //       Localizations.localeOf(context).languageCode == 'en'
+                  //           ? const EdgeInsets.only(left: 15.0, right: 30.0)
+                  //           : const EdgeInsets.only(right: 15.0, left: 30.0),
+                  //   child: Card(
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(12.0),
+                  //     ),
+                  //     color: Colors.white,
+                  //     elevation: 2.0,
+                  //     child: InkWell(
+                  //       borderRadius: BorderRadius.circular(12.0),
+                  //       onTap: () {
+                  //         Navigator.of(context).push(MaterialPageRoute(
+                  //             builder: (BuildContext context) {
+                  //           return DeliveriesScreen();
+                  //         }));
+                  //       },
+                  //       child: Padding(
+                  //         padding:
+                  //             Localizations.localeOf(context).languageCode ==
+                  //                     'en'
+                  //                 ? const EdgeInsets.only(
+                  //                     left: 25.0,
+                  //                     top: 18.0,
+                  //                     right: 20.0,
+                  //                     bottom: 18.0)
+                  //                 : const EdgeInsets.only(
+                  //                     right: 25.0,
+                  //                     top: 18.0,
+                  //                     left: 20.0,
+                  //                     bottom: 18.0),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Row(
+                  //               children: [
+                  //                 SvgPicture.asset(
+                  //                   "assets/icons/noun_food_delivery.svg",
+                  //                   width: 35.0,
+                  //                   height: 35.0,
+                  //                 ),
+                  //                 Padding(
+                  //                   padding: Localizations.localeOf(context)
+                  //                               .languageCode ==
+                  //                           'en'
+                  //                       ? const EdgeInsets.only(left: 18.0)
+                  //                       : const EdgeInsets.only(right: 18.0),
+                  //                   child: Text(
+                  //                     S.of(context).deliveries,
+                  //                     style: TextStyle(
+                  //                       fontSize: 18.0,
+                  //                     ),
+                  //                   ),
+                  //                 )
+                  //               ],
+                  //             ),
+                  //             Row(
+                  //               children: [
+                  //                 snapshot.data.deliveriesTotalCount == 0
+                  //                     ? Container()
+                  //                     : Container(
+                  //                         width: 18.0,
+                  //                         height: 18.0,
+                  //                         decoration: BoxDecoration(
+                  //                             color: Theme.of(context)
+                  //                                 .primaryColor,
+                  //                             borderRadius:
+                  //                                 BorderRadius.circular(9.0)),
+                  //                         child: Center(
+                  //                           child: Text(
+                  //                             "${snapshot.data.deliveriesTotalCount}",
+                  //                             style: TextStyle(
+                  //                               fontSize: 13.0,
+                  //                               color: Colors.white,
+                  //                             ),
+                  //                           ),
+                  //                         ),
+                  //                       ),
+                  //                 SizedBox(
+                  //                   width: 15.0,
+                  //                 ),
+                  //                 Icon(
+                  //                   Icons.arrow_forward_ios,
+                  //                   size: 25.0,
+                  //                   color: Colors.grey,
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 40,
                   ),
@@ -538,48 +541,34 @@ class _UpcomingServiceState extends State<UpcomingService> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      data.restaurantName,
-                      style: TextStyle(
-                        color: Colors.red.shade900,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     SizedBox(
                       height: 4.0,
                     ),
-                    Text(
-                      S.of(context).youHaveUpcomingReservationAt +
+                    Row(
+                      children: [
+                        Text(
+                          S.of(context).youHaveUpcomingReservationAt,
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
+                        ),
+                        Text(
                           " ${data.restaurantName} ",
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       PapricaFormatter.formatDateOnly(context, data.date) +
                           "    " +
                           PapricaFormatter.formatTimeOnly(context, data.date),
                       style: TextStyle(
-                        color: Colors.red.shade200,
-                        fontSize: 16.0,
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "#" + S.of(context).people + ":",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        Text(
-                          "${data.numberOfPeople}",
-                          style: TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.bold),
-                        ),
-                      ],
                     ),
                     data.occasionType == null || data.occasionType == ""
                         ? Container(
@@ -600,26 +589,6 @@ class _UpcomingServiceState extends State<UpcomingService> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
-                          ),
-                    data.customerAdditionalInfo == ''
-                        ? Row(
-                            children: [
-                              Text(
-                                S.of(context).moreInfo + ":",
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              Text(
-                                "Might be late 5 mins",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )
-                        : Container(
-                            height: 0.0,
                           ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -666,23 +635,27 @@ class _UpcomingServiceState extends State<UpcomingService> {
               ),
             ),
           ),
-          Padding(
-            padding: Localizations.localeOf(context).languageCode == 'en'
-                ? const EdgeInsets.only(left: 36.0)
-                : const EdgeInsets.only(right: 36.0),
-            child: Container(
-              width: 60.0,
-              height: 60.0,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(data.restaurantImage)),
-                  ),
-                ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return RestaurantHome(restaurantId: data.restaurantId);
+              }));
+            },
+            child: Padding(
+              padding: Localizations.localeOf(context).languageCode == 'en'
+                  ? const EdgeInsets.only(left: 36.0)
+                  : const EdgeInsets.only(right: 36.0),
+              child:
+              ClipRRect(
+                borderRadius: new BorderRadius.circular(30),
+                child: CachedNetworkImage(
+                    imageUrl: data.restaurantImage,
+                    placeholder: (context, url) => Image(
+                      image: AssetImage("assets/images/placeholder.png"),
+                      width: 60,
+                    ),
+                    width: 60),
               ),
             ),
           ),
@@ -709,32 +682,32 @@ class _UpcomingServiceState extends State<UpcomingService> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      data.restaurantName,
-                      style: TextStyle(
-                        color: Colors.red.shade900,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     SizedBox(
                       height: 4.0,
                     ),
-                    Text(
-                      S.of(context).youHaveUpcomingPickupAt +
-                          " ${data.restaurantName} ",
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          S.of(context).youHaveUpcomingPickupAt,
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
+                        ),
+                        Text(" ${data.restaurantName} ",
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       PapricaFormatter.formatDateOnly(context, data.date) +
                           "    " +
                           PapricaFormatter.formatTimeOnly(context, data.date),
                       style: TextStyle(
-                        color: Colors.red.shade200,
-                        fontSize: 16.0,
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Row(
@@ -785,23 +758,27 @@ class _UpcomingServiceState extends State<UpcomingService> {
               ),
             ),
           ),
-          Padding(
-            padding: Localizations.localeOf(context).languageCode == 'en'
-                ? const EdgeInsets.only(left: 36.0)
-                : const EdgeInsets.only(right: 36.0),
-            child: Container(
-              width: 60.0,
-              height: 60.0,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(data.restaurantImage)),
-                  ),
-                ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return RestaurantHome(restaurantId: data.restaurantId);
+              }));
+            },
+            child: Padding(
+              padding: Localizations.localeOf(context).languageCode == 'en'
+                  ? const EdgeInsets.only(left: 36.0)
+                  : const EdgeInsets.only(right: 36.0),
+              child:
+              ClipRRect(
+                borderRadius: new BorderRadius.circular(30),
+                child: CachedNetworkImage(
+                    imageUrl: data.restaurantImage,
+                    placeholder: (context, url) => Image(
+                      image: AssetImage("assets/images/placeholder.png"),
+                      width: 60,
+                    ),
+                    width: 60),
               ),
             ),
           ),
@@ -810,156 +787,157 @@ class _UpcomingServiceState extends State<UpcomingService> {
     );
   }
 
-  Widget _nearestDelivery(CustomerNearestDeliveryDto data) {
-    return Padding(
-      padding: Localizations.localeOf(context).languageCode == 'en'
-          ? const EdgeInsets.only(left: 12.0, top: 4.0, right: 24.0)
-          : const EdgeInsets.only(left: 24.0, top: 4.0, right: 12.0),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 25.0),
-            child: Card(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: Localizations.localeOf(context).languageCode == 'en'
-                    ? const EdgeInsets.only(left: 42.0, top: 32.0)
-                    : const EdgeInsets.only(right: 42.0, top: 32.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      data.restaurantName,
-                      style: TextStyle(
-                        color: Colors.red.shade900,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 4.0,
-                    ),
-                    Text(
-                      S.of(context).youHaveUpcomingDeliveryAt +
-                          " ${data.restaurantName} ",
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "${PapricaFormatter.formatDateOnly(context, data.estimationTime)}  ${PapricaFormatter.formatTimeOnly(context, data.estimationTime)}",
-                      style: TextStyle(
-                        color: Colors.red.shade200,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "${S.of(context).price}:   ",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              PapricaFormatter.formatNumber(data.price.floor()),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              S.of(context).currency,
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: Localizations.localeOf(context)
-                                      .languageCode ==
-                                  'en'
-                              ? const EdgeInsets.only(right: 12.0, bottom: 10.0)
-                              : const EdgeInsets.only(left: 12.0, bottom: 10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return DeliveriesScreen();
-                              }));
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  S.of(context).viewDeliveries,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                FaIcon(
-                                  Localizations.localeOf(context)
-                                              .languageCode ==
-                                          'en'
-                                      ? (FontAwesomeIcons.angleDoubleRight)
-                                      : (FontAwesomeIcons.angleDoubleLeft),
-                                  color: Theme.of(context).primaryColor,
-                                  size: 16.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: Localizations.localeOf(context).languageCode == 'en'
-                ? const EdgeInsets.only(left: 36.0)
-                : const EdgeInsets.only(right: 36.0),
-            child: Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 0.5,
-                    blurRadius: 5,
-                  ),
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30.0),
-                border: Border.all(color: Colors.black12, width: 1.2),
-                image: DecorationImage(
-                    image: NetworkImage(data.restaurantImage),
-                    fit: BoxFit.cover),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  /// remove delivery
+  // Widget _nearestDelivery(CustomerNearestDeliveryDto data) {
+  //   return Padding(
+  //     padding: Localizations.localeOf(context).languageCode == 'en'
+  //         ? const EdgeInsets.only(left: 12.0, top: 4.0, right: 24.0)
+  //         : const EdgeInsets.only(left: 24.0, top: 4.0, right: 12.0),
+  //     child: Stack(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(top: 25.0),
+  //           child: Card(
+  //             child: Container(
+  //               width: MediaQuery.of(context).size.width,
+  //               padding: Localizations.localeOf(context).languageCode == 'en'
+  //                   ? const EdgeInsets.only(left: 42.0, top: 32.0)
+  //                   : const EdgeInsets.only(right: 42.0, top: 32.0),
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     data.restaurantName,
+  //                     style: TextStyle(
+  //                       color: Colors.red.shade900,
+  //                       fontSize: 18.0,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     height: 4.0,
+  //                   ),
+  //                   Text(
+  //                     S.of(context).youHaveUpcomingDeliveryAt +
+  //                         " ${data.restaurantName} ",
+  //                     style: TextStyle(
+  //                       fontSize: 17.0,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   Text(
+  //                     "${PapricaFormatter.formatDateOnly(context, data.estimationTime)}  ${PapricaFormatter.formatTimeOnly(context, data.estimationTime)}",
+  //                     style: TextStyle(
+  //                       color: Colors.red.shade200,
+  //                       fontSize: 16.0,
+  //                     ),
+  //                   ),
+  //                   Row(
+  //                     children: [
+  //                       Text(
+  //                         "${S.of(context).price}:   ",
+  //                         style: TextStyle(
+  //                           fontSize: 16.0,
+  //                           fontWeight: FontWeight.bold,
+  //                         ),
+  //                       ),
+  //                       Row(
+  //                         children: [
+  //                           Text(
+  //                             PapricaFormatter.formatNumber(data.price.floor()),
+  //                             style: TextStyle(
+  //                               fontSize: 16.0,
+  //                             ),
+  //                           ),
+  //                           SizedBox(
+  //                             width: 4,
+  //                           ),
+  //                           Text(
+  //                             S.of(context).currency,
+  //                             style: TextStyle(
+  //                               fontSize: 16.0,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.end,
+  //                     children: [
+  //                       Padding(
+  //                         padding: Localizations.localeOf(context)
+  //                                     .languageCode ==
+  //                                 'en'
+  //                             ? const EdgeInsets.only(right: 12.0, bottom: 10.0)
+  //                             : const EdgeInsets.only(left: 12.0, bottom: 10.0),
+  //                         child: GestureDetector(
+  //                           onTap: () {
+  //                             Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (BuildContext context) {
+  //                               return DeliveriesScreen();
+  //                             }));
+  //                           },
+  //                           child: Row(
+  //                             children: [
+  //                               Text(
+  //                                 S.of(context).viewDeliveries,
+  //                                 style: TextStyle(
+  //                                   fontSize: 15.0,
+  //                                   color: Theme.of(context).primaryColor,
+  //                                 ),
+  //                               ),
+  //                               SizedBox(
+  //                                 width: 8.0,
+  //                               ),
+  //                               FaIcon(
+  //                                 Localizations.localeOf(context)
+  //                                             .languageCode ==
+  //                                         'en'
+  //                                     ? (FontAwesomeIcons.angleDoubleRight)
+  //                                     : (FontAwesomeIcons.angleDoubleLeft),
+  //                                 color: Theme.of(context).primaryColor,
+  //                                 size: 16.0,
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context)
+  //                 .push(MaterialPageRoute(builder: (BuildContext context) {
+  //               return RestaurantHome(restaurantId: data.restaurantId);
+  //             }));
+  //           },
+  //           child: Padding(
+  //             padding: Localizations.localeOf(context).languageCode == 'en'
+  //                 ? const EdgeInsets.only(left: 36.0)
+  //                 : const EdgeInsets.only(right: 36.0),
+  //             child:
+  //             ClipRRect(
+  //               borderRadius: new BorderRadius.circular(30),
+  //               child: CachedNetworkImage(
+  //                   imageUrl: data.restaurantImage,
+  //                   placeholder: (context, url) => Image(
+  //                     image: AssetImage("assets/images/placeholder.png"),
+  //                     width: 60,
+  //                   ),
+  //                   width: 60),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
 
 class NoServicesLayout extends StatelessWidget {

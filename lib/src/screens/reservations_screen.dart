@@ -16,6 +16,7 @@ import 'package:paprica/src/widgets/reservation_card.dart';
 import 'package:paprica/src/widgets/slider.dart';
 import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -288,7 +289,7 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
                           ModalRoute.withName('/splash'));
                     },
                     child: Text(
-                      S.of(context).goToPlaces,
+                      S.of(context).goToRestaurants,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                   ),
@@ -630,7 +631,7 @@ class _NewReservationCardState extends State<NewReservationCard>
   Widget build(BuildContext context) {
     super.build(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 115, 8, 8),
+      padding: const EdgeInsets.fromLTRB(8.0, 100, 8, 8),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         child: Padding(
@@ -667,12 +668,16 @@ class _NewReservationCardState extends State<NewReservationCard>
                           child: Row(
                             children: [
                               Text(
-                                S.of(context).reservationAt,
+                                S.of(context).reservationAt+" ",
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                ),
                               ),
-                              RestaurantNamedLink(
-                                restaurantName:
-                                    widget.reservation.restaurantName,
-                                restaurantId: widget.reservation.restaurantId,
+                              Text(widget.reservation.restaurantName,
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -724,9 +729,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                   ),
                 ],
               ),
-              SizedBox(
-                height: 5,
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -747,8 +749,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                                         vertical: 1.0),
                                     child: Text(
                                       "#" + S.of(context).people + ":",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Padding(
@@ -764,7 +764,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                               _reservationStatus(widget.reservation.status),
                             ],
                           ),
-                          SizedBox(height: 10),
                           Row(
                             children: <Widget>[
                               Padding(
@@ -772,7 +771,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                                     const EdgeInsets.symmetric(vertical: 1.0),
                                 child: Text(
                                   S.of(context).date + ":",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Padding(
@@ -788,7 +786,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
                           Row(
                             crossAxisAlignment:
                                 widget.reservation.customerAdditionalInfo !=
@@ -806,7 +803,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(
                                   S.of(context).moreInfo + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Flexible(
@@ -837,17 +833,22 @@ class _NewReservationCardState extends State<NewReservationCard>
                       child: Row(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.only(left:8.0 , right: 8.0),
                             child: Text(
                               S.of(context).pendingChanges,
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor),
                             ),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                          )
+                          FaIcon(
+                            Localizations.localeOf(context)
+                                .languageCode ==
+                                'en'
+                                ? (FontAwesomeIcons.angleDoubleRight)
+                                : (FontAwesomeIcons.angleDoubleLeft),
+                            color: Theme.of(context).primaryColor,
+                            size: 12.0,
+                          ),
                         ],
                       ),
                     )
@@ -1355,13 +1356,6 @@ class _ReservationCoverImageState extends State<ReservationCoverImage> {
 
   @override
   Widget build(BuildContext context) {
-//    return FadeInImage.assetNetwork(
-//      image: (this.url),
-//      width: MediaQuery.of(context).size.width,
-//      height: 180,
-//      fit: BoxFit.cover,
-//      placeholder: "assets/images/placeholder.png",
-//    );
 
     return CachedNetworkImage(
       imageUrl: (this.url),

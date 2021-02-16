@@ -2086,9 +2086,6 @@ class _PickupConfirmationDialogState extends State<PickupConfirmationDialog> {
       'time': widget.date.toString(),
       'pickupMeals': _meals,
     });
-    debugPrint("--------********-------");
-    debugPrint("${model.time}");
-    debugPrint("--------********-------");
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).creatingPickup);
     dialog.show();

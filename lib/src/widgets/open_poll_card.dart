@@ -166,18 +166,26 @@ class _PollItemState extends State<PollItem> {
             SizedBox(
               width: 5.0,
             ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: ClipRRect(
-                borderRadius: new BorderRadius.circular(
-                    MediaQuery.of(context).size.width * 0.19 * 0.5),
-                child: CachedNetworkImage(
-                    imageUrl: restaurant.logoImage,
-                    placeholder: (context, url) => Image(
-                          image: AssetImage("assets/images/placeholder.png"),
-                          width: MediaQuery.of(context).size.width * 0.19,
-                        ),
-                    width: MediaQuery.of(context).size.width * 0.19),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return RestaurantHome(restaurantId: restaurant.id);
+                }));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: new BorderRadius.circular(
+                      MediaQuery.of(context).size.width * 0.19 * 0.5),
+                  child: CachedNetworkImage(
+                      imageUrl: restaurant.logoImage,
+                      placeholder: (context, url) => Image(
+                            image: AssetImage("assets/images/placeholder.png"),
+                            width: MediaQuery.of(context).size.width * 0.19,
+                          ),
+                      width: MediaQuery.of(context).size.width * 0.19),
+                ),
               ),
             ),
             Padding(
@@ -214,6 +222,7 @@ class _PollItemState extends State<PollItem> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   LinearPercentIndicator(
+                    isRTL: Localizations.localeOf(context).languageCode == 'ar',
                     padding: EdgeInsets.only(left: 2.0, right: 2.0),
                     alignment: MainAxisAlignment.start,
                     width: MediaQuery.of(context).size.width * 0.6,

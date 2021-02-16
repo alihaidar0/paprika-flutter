@@ -6,6 +6,8 @@ import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
 
+import '../../screens.dart';
+
 class PublishedPollCard extends StatelessWidget {
   final PublishedPollInPapricaItem publishedPollItem;
   final String title;
@@ -117,19 +119,27 @@ class PublishedPollCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: new BorderRadius.circular(
-                        MediaQuery.of(context).size.width * 0.23 * 0.5),
-                    child: CachedNetworkImage(
-                        imageUrl: item.restaurant.logoImage,
-                        placeholder: (context, url) => Image(
-                              image:
-                                  AssetImage("assets/images/placeholder.png"),
-                              width: MediaQuery.of(context).size.width * 0.23,
-                            ),
-                        width: MediaQuery.of(context).size.width * 0.23),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (BuildContext context) {
+                      return RestaurantHome(restaurantId: item.restaurant.id);
+                    }));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(
+                          MediaQuery.of(context).size.width * 0.23 * 0.5),
+                      child: CachedNetworkImage(
+                          imageUrl: item.restaurant.logoImage,
+                          placeholder: (context, url) => Image(
+                                image:
+                                    AssetImage("assets/images/placeholder.png"),
+                                width: MediaQuery.of(context).size.width * 0.23,
+                              ),
+                          width: MediaQuery.of(context).size.width * 0.23),
+                    ),
                   ),
                 ),
                 Padding(

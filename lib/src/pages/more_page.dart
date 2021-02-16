@@ -47,7 +47,7 @@ class _MorePageState extends State<MorePage> {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => Share.share(
-                S.of(context).shareTextApp("https://links.popina.me")),
+                S.of(context).shareTextApp("https://links.paprika-sy.com")),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Row(

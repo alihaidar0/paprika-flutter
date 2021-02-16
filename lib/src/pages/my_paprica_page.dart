@@ -111,7 +111,6 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
     futureRestData = apiInstance.apiServicesAppCustomerPapricaItemLoadItemsPost(
       input: PapricaItemQueryDto.init(),
     );
-
     setState(() {
       futureRestData.then((onValue) {
         _updateStamps(onValue.papricaItems);
@@ -172,12 +171,15 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
       jsonInput.stamps.add(jsonOffersList);
     }
 
+    print(jsonInput);
     futureLoadMoreData =
         apiInstance.apiServicesAppCustomerPapricaItemLoadItemsPost(
       input: jsonInput,
     );
 
     return futureLoadMoreData.then((onValue) {
+      print(onValue);
+      print(noMorePaprikaItems);
       _updateStamps(onValue.papricaItems);
       if (onValue.papricaItems == null || onValue.papricaItems.length == 0) {
         noMorePaprikaItems = true;

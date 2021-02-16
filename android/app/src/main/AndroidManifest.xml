@@ -72,7 +72,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="links.popina.me"
+                    android:host="https://links.paprika-sy.com"
                     android:pathPrefix="/"
                     android:scheme="https" />
             </intent-filter>
@@ -84,7 +84,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="links.popina.me"
+                    android:host="https://links.paprika-sy.com"
                     android:scheme="paprica" />
             </intent-filter>
         </activity>

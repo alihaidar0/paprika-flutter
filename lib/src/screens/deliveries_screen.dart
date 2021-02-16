@@ -260,7 +260,7 @@ class _UpcomingDeliveriesSection extends State<UpcomingDeliveriesSection> {
                           ModalRoute.withName('/splash'));
                     },
                     child: Text(
-                      S.of(context).goToPlaces,
+                      S.of(context).goToRestaurants,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                   ),

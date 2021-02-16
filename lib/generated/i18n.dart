@@ -389,7 +389,7 @@ class S implements WidgetsLocalizations {
 
   String get goBack => "Go Back";
 
-  String get goToPlaces => "Go to places";
+  String get goToRestaurants => "Go to restaurants";
 
   String get google => "Google";
 
@@ -906,6 +906,8 @@ class S implements WidgetsLocalizations {
 
   String get viewMeals => "View Meals";
 
+  String get pressToViewMeals => "Press to view meals";
+
   String get votes => "vote(s)";
 
   String get vote => "vote";
@@ -1173,7 +1175,7 @@ class $ar extends S {
       "حدث خطأ أثناء محاولة تسجيل الدخول. الرجاء المحاولة أخرى.";
 
   @override
-  String get goToPlaces => "اذهب إلى صفحة الأماكن";
+  String get goToRestaurants => "اذهب إلى صفحة المطاعم";
 
   @override
   String get otherWord => "أخرى";
@@ -1656,6 +1658,9 @@ class $ar extends S {
   String get viewMeals => "مشاهدة الوجبات";
 
   @override
+  String get pressToViewMeals => "إضغط لمشاهدة الوجبات";
+
+  @override
   String get votes => "صوت";
 
   @override
@@ -1997,7 +2002,7 @@ class $ar extends S {
   String get reservationTimeShouldBeInTheFuture =>
       "يجب أن يكون وقت الحجز في المستقبل";
 
-  String get PickupTimeShouldBeInTheFuture =>
+  String get pickupTimeShouldBeInTheFuture =>
       "يجب أن يكون وقت الطلبية في المستقبل";
 
   @override

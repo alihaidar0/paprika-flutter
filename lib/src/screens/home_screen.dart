@@ -27,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   BuildContext buildContext;
-  int _currentIndex = 0;
+  int _currentIndex;
   bool _actionHandled = false;
 
   List<Widget> _tabList = [];
@@ -59,11 +59,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         parentScrollNotifier: _handleChildScroll,
       ))
       ..add(PlacesPage())
-      ..add(ServicePage(changeHomePageIndexHandler))
+      ..add(ServicePage())
       ..add(MorePage());
 
     _tabController = TabController(vsync: this, length: _tabList.length);
-    if (widget.initialIndex != null) _currentIndex = widget.initialIndex;
+    if (widget.initialIndex != null) {
+      _currentIndex = widget.initialIndex;
+    } else {
+      _currentIndex = 0;
+    }
   }
 
   _handleChildScroll(ScrollDirection direction, double offset) {
@@ -109,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         return Future.value(false);
       }
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-
       return Future.value(false);
     }
   }
@@ -126,6 +129,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _actionHandled = true;
       });
     }
+
+    if(widget.initialIndex != null)
+      _tabController.animateTo(widget.initialIndex);
 
     buildContext = context;
     if (!_firebaseInitiatedWithContext) {
@@ -365,13 +371,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _changeTab(1);
   }
 
-  changeHomePageIndexHandler(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    _changeTab(index);
-  }
-
   _reservationOpenCallback() {
     Navigator.popUntil(context, ModalRoute.withName('/home'));
     _goToReservationsPage();
@@ -419,7 +418,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     //Event
     if (domain == "event") {
-      openEventcreen(id);
+      openEventScreen(id);
       return;
     }
     //Offer
@@ -455,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Navigator.pushNamed(buildContext, '/restaurant', arguments: restaurantId);
   }
 
-  void openEventcreen(int eventId) {
+  void openEventScreen(int eventId) {
     if (buildContext == null) return;
     Navigator.pushNamed(buildContext, '/event', arguments: eventId);
   }
