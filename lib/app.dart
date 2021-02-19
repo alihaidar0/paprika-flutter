@@ -14,7 +14,8 @@ class PapricaApp extends StatefulWidget {
 
   static void setLocale(BuildContext context, String lang) {
     _PapricaAppState state =
-        context.ancestorStateOfType(TypeMatcher<_PapricaAppState>());
+        context.findAncestorStateOfType<_PapricaAppState>();
+    // ignore: invalid_use_of_protected_member
     state?.setState(() {
       state.locale = Locale(lang);
     });
@@ -68,7 +69,7 @@ class _PapricaAppState extends State<PapricaApp> {
               secondary: Color(0xFFCE4C42),
             ),
             fontFamily: 'hacen-tunisia',
-            textTheme: TextTheme(body1: TextStyle(fontSize: 14))),
+            textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14))),
         home: Builder(builder: (BuildContext context) {
           return SplashScreen();
         }));

@@ -302,7 +302,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     showDialog(
         context: generalContext,
         builder: (_context) {
-          return PapricaSimpleDialog(
+          return PaprikaSimpleDialog(
             title: S.of(generalContext).confirmPhoneNumber,
             noButton: FlatButton(
                 onPressed: () {

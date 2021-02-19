@@ -55,7 +55,7 @@ class StringRadioButton extends StatelessWidget {
                   value,
                   style: Theme.of(context)
                       .textTheme
-                      .body1
+                      .bodyText2
                       .copyWith(fontSize: 13.0, color: animValues[2]),
                 ),
               ),

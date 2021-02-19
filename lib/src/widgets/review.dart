@@ -811,7 +811,7 @@ class _ReviewFormState extends State<ReviewForm> {
         showDialog(
             context: context,
             builder: (_context) {
-              return PapricaSimpleDialog(
+              return PaprikaSimpleDialog(
                 title:
                     S.of(context).loggingInRequired(S.of(context).actionReview),
                 yesButton: FlatButton(

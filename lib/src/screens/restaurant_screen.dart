@@ -164,8 +164,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
             widget.mealShare.restaurantId <= 0)) {
       Navigator.of(context).pop();
     }
-    final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
-
     return WillPopScope(
       onWillPop: () {
         if (_tabController.index == 1 && !menuState.isGrid) {
@@ -584,7 +582,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToReserve,
               yesButton: FlatButton(
                   onPressed: () {
@@ -624,7 +622,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToOrderPickup,
               yesButton: FlatButton(
                   onPressed: () {
@@ -672,7 +670,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToOrderDelivery,
               yesButton: FlatButton(
                   onPressed: () {
@@ -1479,7 +1477,7 @@ class _ActionsRowState extends State<ActionsRow> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S
                   .of(context)
                   .loggingInRequired(S.of(context).actionAddToFavorite),
@@ -1513,7 +1511,7 @@ class _ActionsRowState extends State<ActionsRow> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).loggingInRequired(
                   S.of(context).actionChangeRestaurantNotifications),
               yesButton: FlatButton(

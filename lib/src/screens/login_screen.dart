@@ -77,7 +77,7 @@ class _MyLogInState extends State<LogInScreen> {
             reverse: true,
             child: Form(
               key: _formKey,
-              autovalidate: true,
+              autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

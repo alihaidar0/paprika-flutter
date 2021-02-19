@@ -522,7 +522,7 @@ class _OldReservationSectionState extends State<OldReservationSection> {
                                     final bool res = await showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return PapricaSimpleDialog(
+                                          return PaprikaSimpleDialog(
                                             title: S.of(context).confirm,
                                             content: (S.of(context).sureDelete),
                                             yesButton: FlatButton(
@@ -1008,7 +1008,7 @@ class _NewReservationCardState extends State<NewReservationCard>
     showDialog(
         context: context,
         builder: (context) {
-          return PapricaInputDialog(
+          return PaprikaInputDialog(
             title: S.of(context).confirmCancelReservation,
             content: S.of(context).msgCancelReservation,
             confirmCallback: (text) {
@@ -1272,7 +1272,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                 Animation<double> secondaryAnimation) {
               return SafeArea(
                 child: Builder(builder: (_context) {
-                  return PapricaSimpleDialog(
+                  return PaprikaSimpleDialog(
                     title: S.of(context).confirmCancellation,
                     content:
                         S.of(context).confirmCancelUpdateRequestReservation,

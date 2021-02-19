@@ -883,7 +883,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
     showDialog(
         context: context,
         builder: (context) {
-          return PapricaInputDialog(
+          return PaprikaInputDialog(
             title: S.of(context).confirmCancelDelivery,
             content: S.of(context).msgCancelDelivery,
             confirmCallback: (text) {
@@ -1042,7 +1042,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                 Animation<double> secondaryAnimation) {
               return SafeArea(
                 child: Builder(builder: (_context) {
-                  return PapricaSimpleDialog(
+                  return PaprikaSimpleDialog(
                     title: S.of(context).confirmCancellation,
                     content: S.of(context).confirmCancelUpdateRequestDelivery,
                     yesButton: FlatButton(
@@ -1321,7 +1321,7 @@ class _OldDeliverySectionState extends State<OldDeliverySection> {
                                     final bool res = await showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return PapricaSimpleDialog(
+                                          return PaprikaSimpleDialog(
                                             title: S.of(context).confirm,
                                             content: (S.of(context).sureDelete),
                                             yesButton: FlatButton(

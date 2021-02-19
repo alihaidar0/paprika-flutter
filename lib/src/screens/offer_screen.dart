@@ -6,7 +6,6 @@ import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';

@@ -288,6 +288,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/home_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).home,
                   style: TextStyle(fontSize: 12),
@@ -304,6 +305,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/restaurants_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).restaurants,
                   style: TextStyle(fontSize: 12),
@@ -320,6 +322,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/activities_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).activities,
                   style: TextStyle(fontSize: 12),
@@ -336,6 +339,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/more_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).more,
                   style: TextStyle(fontSize: 12),

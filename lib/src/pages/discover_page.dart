@@ -782,7 +782,7 @@ class _ByLocationFilterState extends State<ByLocationFilter> {
                                                       showDialog(
                                                           context: context,
                                                           builder: (context) {
-                                                            return PapricaErrorDialog(
+                                                            return PaprikaErrorDialog(
                                                               title: S
                                                                   .of(context)
                                                                   .errorPermissionLocation,

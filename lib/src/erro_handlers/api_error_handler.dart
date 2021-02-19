@@ -17,7 +17,7 @@ class DefaultErrorHandler {
       showDialog(
           context: context,
           builder: (context) {
-            return PapricaErrorDialog(
+            return PaprikaErrorDialog(
                 title: S.of(context).attention,
                 content: message,
                 extraButton: err.code < 500 &&

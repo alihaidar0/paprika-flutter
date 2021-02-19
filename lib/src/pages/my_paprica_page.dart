@@ -169,8 +169,6 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
       jsonOffersList.type = ApiHelper.MyPapricaTypeListOffers;
       jsonInput.stamps.add(jsonOffersList);
     }
-    print('jsonInput');
-    print(jsonInput);
     futureLoadMoreData =
         apiInstance.apiServicesAppCustomerPapricaItemLoadItemsPost(
       input: jsonInput,

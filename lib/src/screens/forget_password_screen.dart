@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Text(S.of(context).pleaseEnterTheCodeAndYourNewPassword,
-                style: Theme.of(context).textTheme.subhead),
+                style: Theme.of(context).textTheme.subtitle1),
           ),
           Text(
             S.of(context).confirmationCode,
@@ -168,7 +168,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(S.of(context).enterPhoneNumber,
-                    style: Theme.of(context).textTheme.subhead)),
+                    style: Theme.of(context).textTheme.subtitle1)),
             Text(
               S.of(context).phoneNumber,
               style: TextStyle(fontSize: 14, color: Color(0xFF747373)),

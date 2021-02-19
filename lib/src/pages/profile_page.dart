@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:async/async.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
@@ -843,16 +842,17 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   void _onTapChangeProfile(BuildContext context) async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
     setState(() {
-      if (image != null) _image = image;
+      if (image != null) _image = File(image.path);
     });
   }
 
   _onTapUploadImage(BuildContext context) async {
     if (_image == null) return;
     ApiClient client = PapricaApiClient();
-    var stream = http.ByteStream(DelegatingStream.typed(_image.openRead()));
+    var stream = http.ByteStream(_image.openRead());
+    stream.cast();
     var length = await _image.length();
     var multipartFile = http.MultipartFile('file', stream, length,
         filename: basename(_image.path));
@@ -982,7 +982,7 @@ class _ProfilePageState extends State<ProfilePage>
     showDialog(
         context: context,
         builder: (_context) {
-          return PapricaSimpleDialog(
+          return PaprikaSimpleDialog(
             title: S.of(context).phoneNumberConfirmationNeeded,
             yesButton: FlatButton(
                 onPressed: () {

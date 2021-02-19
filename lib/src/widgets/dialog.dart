@@ -864,7 +864,7 @@ void _handleUnconfirmedPhoneNumber(BuildContext context) {
   showDialog(
       context: context,
       builder: (_context) {
-        return PapricaSimpleDialog(
+        return PaprikaSimpleDialog(
           title: S.of(context).phoneNumberConfirmationNeeded,
           yesButton: FlatButton(
               onPressed: () {
@@ -1135,13 +1135,13 @@ class MessageDialogState extends State<MessageDialog>
   }
 }
 
-class PapricaSimpleDialog extends StatelessWidget {
+class PaprikaSimpleDialog extends StatelessWidget {
   final String title, content;
   final Widget yesButton, noButton;
 
 //  final GestureTapCallback onYesPressed;
 
-  const PapricaSimpleDialog({
+  const PaprikaSimpleDialog({
     @required this.title,
     this.content,
     this.yesButton,
@@ -1152,6 +1152,7 @@ class PapricaSimpleDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(this.title ?? S.of(context).confirm,
+          // ignore: deprecated_member_use
           style: Theme.of(context).textTheme.subhead),
       content: this.content != null ? Text(this.content) : null,
       actions: <Widget>[
@@ -1177,7 +1178,8 @@ bool _isShowing = false;
 class ProgressDialog {
   _ProgressDialog _dialog;
 
-  BuildContext _buildContext, _context;
+  BuildContext _buildContext;
+  BuildContext _context;
 
   ProgressDialog(BuildContext buildContext) {
     _buildContext = buildContext;
@@ -1343,12 +1345,12 @@ class CallRestaurantDialog extends StatelessWidget {
   }
 }
 
-class PapricaErrorDialog extends StatelessWidget {
+class PaprikaErrorDialog extends StatelessWidget {
   final String title, content;
   final Widget extraButton;
   final VoidCallback actionHandler;
 
-  const PapricaErrorDialog(
+  const PaprikaErrorDialog(
       {@required this.title,
       this.content,
       this.extraButton,
@@ -1374,7 +1376,7 @@ class PapricaErrorDialog extends StatelessWidget {
 
 typedef StringCallback(String str);
 
-class PapricaInputDialog extends StatelessWidget {
+class PaprikaInputDialog extends StatelessWidget {
   final String title;
   final String content;
   final StringCallback confirmCallback;
@@ -1382,7 +1384,7 @@ class PapricaInputDialog extends StatelessWidget {
   final String cancelText;
   final String confirmText;
 
-  PapricaInputDialog(
+  PaprikaInputDialog(
       {this.title,
       this.content,
       this.confirmCallback,

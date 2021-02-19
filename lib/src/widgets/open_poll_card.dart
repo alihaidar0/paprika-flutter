@@ -288,7 +288,7 @@ class _PollItemState extends State<PollItem> {
                       showDialog(
                           context: context,
                           builder: (_context) {
-                            return PapricaSimpleDialog(
+                            return PaprikaSimpleDialog(
                               title: S.of(context).pleaseLoginInOrderToVote,
                               yesButton: FlatButton(
                                   onPressed: () {

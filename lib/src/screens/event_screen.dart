@@ -361,7 +361,7 @@ class _EventScreenState extends State<EventScreen> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToReserve,
               yesButton: FlatButton(
                   onPressed: () {

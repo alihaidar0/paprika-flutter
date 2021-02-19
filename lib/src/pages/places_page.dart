@@ -120,9 +120,6 @@ class _PlacesPagePlaceHolder extends StatefulWidget {
 }
 
 class __PlacesPagePlaceHolderState extends State<_PlacesPagePlaceHolder> {
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
-
   @override
   void initState() {
     super.initState();
@@ -148,12 +145,9 @@ class _RestaurantItem extends StatelessWidget {
   final RestaurantSummaryDto restaurant;
 
   _RestaurantItem(this.restaurant);
-
-  CachedNetworkImageProvider _widgetLogoImage;
-
+  
   @override
   Widget build(BuildContext context) {
-    _widgetLogoImage ??= CachedNetworkImageProvider(this.restaurant.logoImage);
 
     return GestureDetector(
       onTap: () {
@@ -179,7 +173,7 @@ class _RestaurantItem extends StatelessWidget {
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(
-                              image: _widgetLogoImage, fit: BoxFit.scaleDown)),
+                              image: CachedNetworkImageProvider(this.restaurant.logoImage), fit: BoxFit.scaleDown)),
                     ),
                   ),
                   Padding(

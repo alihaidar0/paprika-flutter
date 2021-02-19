@@ -112,7 +112,7 @@ class _MorePageState extends State<MorePage> {
                 showDialog(
                     context: context,
                     builder: (_context) {
-                      return PapricaSimpleDialog(
+                      return PaprikaSimpleDialog(
                         title: S.of(context).logOutConfirmation,
                         yesButton: FlatButton(
                             onPressed: () {
@@ -169,7 +169,7 @@ class _MorePageState extends State<MorePage> {
           showDialog(
               context: context,
               builder: (context) {
-                return PapricaErrorDialog(
+                return PaprikaErrorDialog(
                   title: S.of(context).error,
                   content: S.of(context).errorChangeLanguage,
                 );
@@ -223,7 +223,7 @@ class _LanguageChangerDialogState extends State<LanguageChangerDialog> {
     return AlertDialog(
       title: Text(
         S.of(context).pleaseSelectLanguage,
-        style: Theme.of(context).textTheme.subhead,
+        style: Theme.of(context).textTheme.subtitle1,
       ),
       content: Row(
         children: <Widget>[

@@ -773,7 +773,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title:
                   S.of(context).loggingInRequired(S.of(context).actionRateMeal),
               yesButton: FlatButton(
