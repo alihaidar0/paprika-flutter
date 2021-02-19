@@ -151,13 +151,6 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
   StreamController<int> moveController;
 
   @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      fn();
-    }
-  }
-
-  @override
   void initState() {
     super.initState();
     moveController = StreamController<int>.broadcast();

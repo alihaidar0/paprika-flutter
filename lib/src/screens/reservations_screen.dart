@@ -5,18 +5,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:paprica/generated/i18n.dart';
 import 'package:paprica/screens.dart';
 import 'package:paprica/src/models/reservation_model.dart';
 import 'package:paprica/src/utils/map_utils.dart';
 import 'package:paprica/src/widgets/carousel_slider.dart';
+import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:paprica/src/widgets/login_promotion.dart';
 import 'package:paprica/src/widgets/reservation_card.dart';
 import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
 import 'package:swagger/api.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -180,18 +180,11 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
   StreamController<int> moveController;
 
   @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      fn();
-    }
-  }
-
-  @override
   void initState() {
     super.initState();
     moveController = StreamController<int>.broadcast();
-    _getUpcomingReservationsAsync();
     widget.refreshStream?.listen(_listener);
+    _getUpcomingReservationsAsync();
   }
 
   @override
@@ -214,7 +207,6 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
           api.apiServicesAppCustomerReservationGetAllUpcomingGet();
       _isLoading = true;
     });
-
     _upcomingReservationsFuture.then((_) {
       setState(() {
         _isLoading = false;
@@ -230,94 +222,95 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<CustomerUpcomingReservationsDto>(
-        future: _upcomingReservationsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data.upcoming != null &&
-                snapshot.data.upcoming.length > 0) {
-              _upcomingReservations = snapshot.data.upcoming;
-              _coverImage ??= ReservationCoverImage(
-                  snapshot.data.upcoming[0].restaurantCoverImage);
-              _reservationsListWidget = map<Widget>(
-                _upcomingReservations,
-                (index, reservation) {
-                  return NewReservationCard(reservation: reservation);
-                },
-              ).toList();
-              return Stack(
-                children: <Widget>[
-                  _coverImage,
-                  CarouselSlider(
-                    items: _reservationsListWidget,
-                    height: 500,
-                    viewportFraction: 1.0,
-                    initialPage: 0,
-                    autoPlay: false,
-                    enableInfiniteScroll: false,
-                    onPageChanged: (index) {
-                      _coverImage.state.updateCover(
-                          _upcomingReservations[index].restaurantCoverImage);
-                      moveController.add(index);
-                    },
-                  ),
-                  Positioned(
-                      bottom: 0,
-                      right: 0,
-                      left: 0,
-                      child: DotsPart(
-                        count: _reservationsListWidget.length,
-                        moveStream: moveController.stream,
-                      ))
-                ],
-              );
-            } else {
-              return Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                    child: NoReservationsLayout(
-                        mTitle: S.of(context).noUpcomingReservations),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomeScreen(initialIndex: 2)),
-                          ModalRoute.withName('/splash'));
-                    },
-                    child: Text(
-                      S.of(context).goToRestaurants,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              );
-            }
-          } else if (snapshot.hasError) {
+      future: _upcomingReservationsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data.upcoming != null &&
+              snapshot.data.upcoming.length > 0) {
+            _upcomingReservations = snapshot.data.upcoming;
+            _coverImage ??= ReservationCoverImage(
+                snapshot.data.upcoming[0].restaurantCoverImage);
+            _reservationsListWidget = map<Widget>(
+              _upcomingReservations,
+              (index, reservation) {
+                return NewReservationCard(reservation: reservation);
+              },
+            ).toList();
+            return Stack(
+              children: <Widget>[
+                _coverImage,
+                CarouselSlider(
+                  items: _reservationsListWidget,
+                  height: 500,
+                  viewportFraction: 1.0,
+                  initialPage: 0,
+                  autoPlay: false,
+                  enableInfiniteScroll: false,
+                  onPageChanged: (index) {
+                    _coverImage.state.updateCover(
+                        _upcomingReservations[index].restaurantCoverImage);
+                    moveController.add(index);
+                  },
+                ),
+                Positioned(
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: DotsPart(
+                      count: _reservationsListWidget.length,
+                      moveStream: moveController.stream,
+                    ))
+              ],
+            );
+          } else {
             return Column(
               children: <Widget>[
-                RequestRetry(
-                    message: S.of(context).errorUnknown,
-                    retryCallback: _getUpcomingReservationsAsync),
+                SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: NoReservationsLayout(
+                      mTitle: S.of(context).noUpcomingReservations),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => HomeScreen(initialIndex: 1)),
+                        ModalRoute.withName('/splash'));
+                  },
+                  child: Text(
+                    S.of(context).goToRestaurants,
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             );
           }
-          return Center(
-              child: Column(
+        } else if (snapshot.hasError) {
+          return Column(
+            children: <Widget>[
+              RequestRetry(
+                  message: S.of(context).errorUnknown,
+                  retryCallback: _getUpcomingReservationsAsync),
+            ],
+          );
+        }
+        return Center(
+          child: Column(
             children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
               CircularProgressIndicator(),
             ],
-          ));
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -668,12 +661,13 @@ class _NewReservationCardState extends State<NewReservationCard>
                           child: Row(
                             children: [
                               Text(
-                                S.of(context).reservationAt+" ",
+                                S.of(context).reservationAt + " ",
                                 style: TextStyle(
                                   fontSize: 17.0,
                                 ),
                               ),
-                              Text(widget.reservation.restaurantName,
+                              Text(
+                                widget.reservation.restaurantName,
                                 style: TextStyle(
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.bold,
@@ -833,7 +827,8 @@ class _NewReservationCardState extends State<NewReservationCard>
                       child: Row(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0 , right: 8.0),
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Text(
                               S.of(context).pendingChanges,
                               style: TextStyle(
@@ -841,9 +836,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             ),
                           ),
                           FaIcon(
-                            Localizations.localeOf(context)
-                                .languageCode ==
-                                'en'
+                            Localizations.localeOf(context).languageCode == 'en'
                                 ? (FontAwesomeIcons.angleDoubleRight)
                                 : (FontAwesomeIcons.angleDoubleLeft),
                             color: Theme.of(context).primaryColor,
@@ -1356,7 +1349,6 @@ class _ReservationCoverImageState extends State<ReservationCoverImage> {
 
   @override
   Widget build(BuildContext context) {
-
     return CachedNetworkImage(
       imageUrl: (this.url),
       width: MediaQuery.of(context).size.width,

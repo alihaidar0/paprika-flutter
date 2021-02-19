@@ -132,10 +132,10 @@ class ReservationCard extends StatelessWidget {
   }
 }
 
-class MyPapricaReservationCard extends StatelessWidget {
+class MyPaprikaReservationCard extends StatelessWidget {
   final ReservationPapricaItemDto reservation;
 
-  MyPapricaReservationCard({
+  MyPaprikaReservationCard({
     this.reservation,
   });
 
@@ -169,11 +169,6 @@ class MyPapricaReservationCard extends StatelessWidget {
                           restaurantId: reservation.restaurantId);
                     }));
                   },
-//                  child: FadeInImage.memoryNetwork(
-//                    image: reservation.restaurantLogo,
-//                    fit: BoxFit.cover,
-//                    placeholder: kTransparentImage,
-//                  ),
                   child: PapricaCachedImage(
                     imageUrl: reservation.restaurantLogo,
                   ),

@@ -27,10 +27,10 @@ class MyPaprikaPage extends StatefulWidget {
   MyPaprikaPage({this.resetScrollPositionStream, this.parentScrollNotifier});
 
   @override
-  _MyPapricaPageState createState() => _MyPapricaPageState();
+  _MyPaprikaPageState createState() => _MyPaprikaPageState();
 }
 
-class _MyPapricaPageState extends State<MyPaprikaPage>
+class _MyPaprikaPageState extends State<MyPaprikaPage>
     with AutomaticKeepAliveClientMixin<MyPaprikaPage> {
   Future<FeaturedAndNearbyRestaurantDto> placesFutureRestData;
   PagedResultDtoRestaurantLiteDto restaurantsList;
@@ -146,7 +146,6 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
     if (eventStamp != null) {
       jsonEvent.stamp = eventStamp;
       jsonEvent.type = ApiHelper.MyPapricaTypeEvent;
-
       jsonInput.stamps.add(jsonEvent);
     }
 
@@ -170,7 +169,7 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
       jsonOffersList.type = ApiHelper.MyPapricaTypeListOffers;
       jsonInput.stamps.add(jsonOffersList);
     }
-
+    print('jsonInput');
     print(jsonInput);
     futureLoadMoreData =
         apiInstance.apiServicesAppCustomerPapricaItemLoadItemsPost(
@@ -178,11 +177,11 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
     );
 
     return futureLoadMoreData.then((onValue) {
-      print(onValue);
-      print(noMorePaprikaItems);
       _updateStamps(onValue.papricaItems);
       if (onValue.papricaItems == null || onValue.papricaItems.length == 0) {
-        noMorePaprikaItems = true;
+        setState(() {
+          noMorePaprikaItems = true;
+        });
       }
       if (!noMorePaprikaItems) {
         paprikaItemsList.addAll(onValue.papricaItems);
@@ -208,92 +207,92 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
   Widget build(BuildContext context) {
     super.build(context);
     return MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: FutureBuilder(
-            future: futureRestData,
-            builder: (context, snapshot) {
-              {
-                if (snapshot.connectionState == ConnectionState.waiting)
-                  return Center(child: CircularProgressIndicator());
-                else if (snapshot.connectionState == ConnectionState.done ||
-                    snapshot.hasData) {
-                  if (snapshot.data != null)
-                    return Container(
-                      color: Color(0xFFE5E5E5),
-                      height: MediaQuery.of(context).size.height - 60,
-                      child: RefreshIndicator(
-                        onRefresh: onRefresh,
-                        key: _refreshIndicatorKey,
-                        child: OnlineStatus(
-                          child: IncrementallyLoadingListView(
-                              controller: _scrollController,
-                              hasMore: !noMorePaprikaItems,
-                              itemCount: paprikaItemsList.length + 1,
-                              loadMore: () async {
-                                await _loadMoreData(
-                                    eventStamp: lastEventsStamp,
-                                    listOffersStamp: lastOffersListStamp,
-                                    offerStamp: lastOffersStamp,
-                                    reservationsStamp: lastReservationStamp,
-                                    restaurantListStamp:
-                                        lastRestaurantsListStamp);
-                              },
-                              loadMoreOffsetFromBottom: 2,
-                              itemBuilder: (context, index) {
-                                if (index < paprikaItemsList.length)
-                                  return _buildMyPapricaItem(
-                                      context, paprikaItemsList[index]);
-                                else if (noMorePaprikaItems &&
-                                    index == paprikaItemsList.length)
-                                  return _buildYouAreAllCaughtUp();
-                                else
-                                  return EmptyWidget();
-                              }),
-                        ),
-                      ),
-                    );
-                  else {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image(
-                          image:
-                              AssetImage('assets/images/application_crash.png'),
-                          height: 280,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        RequestRetry(
-                            message: S.of(context).errorUnknown,
-                            retryCallback: () {
-                              setState(() {
-                                paprikaItemsList = [];
-                              });
-                              return _initialLoad();
-                            }),
-                        SizedBox(
-                          height: 60,
-                        ),
-                      ],
-                    );
-                  }
-                }
-                if (snapshot.hasError) {
-                  return RequestRetry(
-                      message: S.of(context).errorUnknown,
-                      retryCallback: () {
-                        setState(() {
-                          paprikaItemsList = [];
-                        });
-                        return _initialLoad();
-                      });
-                }
-                return EmptyWidget();
+      context: context,
+      removeTop: true,
+      child: FutureBuilder(
+        future: futureRestData,
+        builder: (context, snapshot) {
+          {
+            if (snapshot.connectionState == ConnectionState.waiting)
+              return Center(child: CircularProgressIndicator());
+            else if (snapshot.connectionState == ConnectionState.done ||
+                snapshot.hasData) {
+              if (snapshot.data != null)
+                return Container(
+                  color: Color(0xFFE5E5E5),
+                  height: MediaQuery.of(context).size.height - 60,
+                  child: RefreshIndicator(
+                    onRefresh: onRefresh,
+                    key: _refreshIndicatorKey,
+                    child: OnlineStatus(
+                      child: IncrementallyLoadingListView(
+                          controller: _scrollController,
+                          hasMore: !noMorePaprikaItems,
+                          itemCount: paprikaItemsList.length + 1,
+                          loadMore: () async {
+                            await _loadMoreData(
+                                eventStamp: lastEventsStamp,
+                                listOffersStamp: lastOffersListStamp,
+                                offerStamp: lastOffersStamp,
+                                reservationsStamp: lastReservationStamp,
+                                restaurantListStamp: lastRestaurantsListStamp);
+                          },
+                          loadMoreOffsetFromBottom: 2,
+                          itemBuilder: (context, index) {
+                            if (index < paprikaItemsList.length)
+                              return _buildMyPaprikaItem(
+                                  context, paprikaItemsList[index]);
+                            else if (noMorePaprikaItems &&
+                                index == paprikaItemsList.length)
+                              return _buildYouAreAllCaughtUp();
+                            else
+                              return EmptyWidget();
+                          }),
+                    ),
+                  ),
+                );
+              else {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image(
+                      image: AssetImage('assets/images/application_crash.png'),
+                      height: 280,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    RequestRetry(
+                        message: S.of(context).errorUnknown,
+                        retryCallback: () {
+                          setState(() {
+                            paprikaItemsList = [];
+                          });
+                          return _initialLoad();
+                        }),
+                    SizedBox(
+                      height: 60,
+                    ),
+                  ],
+                );
               }
-            }));
+            }
+            if (snapshot.hasError) {
+              return RequestRetry(
+                  message: S.of(context).errorUnknown,
+                  retryCallback: () {
+                    setState(() {
+                      paprikaItemsList = [];
+                    });
+                    return _initialLoad();
+                  });
+            }
+            return EmptyWidget();
+          }
+        },
+      ),
+    );
   }
 
   @override
@@ -323,7 +322,7 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
     });
   }
 
-  Widget _buildMyPapricaItem(BuildContext context, PapricaItemDto papricaItem) {
+  Widget _buildMyPaprikaItem(BuildContext context, PapricaItemDto papricaItem) {
     switch (papricaItem.type) {
       case ApiHelper.MyPapricaTypeRestaurants:
         ListPapricaItemDto temp = papricaItem.model;
@@ -366,7 +365,7 @@ class _MyPapricaPageState extends State<MyPaprikaPage>
       case ApiHelper.MyPapricaTypeReservation:
         return Column(
           children: <Widget>[
-            MyPapricaReservationCard(
+            MyPaprikaReservationCard(
               reservation: papricaItem.model,
             ),
             SizedBox(
