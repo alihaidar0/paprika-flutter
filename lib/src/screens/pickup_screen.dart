@@ -346,11 +346,9 @@ class _PickupScreenState extends State<PickupScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successPickup,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior
@@ -375,11 +373,9 @@ class _PickupScreenState extends State<PickupScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successPickup,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior

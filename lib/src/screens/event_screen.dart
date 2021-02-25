@@ -400,8 +400,7 @@ class _EventScreenState extends State<EventScreen> {
         showDialog(
           context: context,
           builder: (BuildContext context) => MessageDialog(
-            S.of(context).successReservation,
-            duration: Duration(seconds: 1),
+            message: S.of(context).successReservation,
           ),
         );
     });

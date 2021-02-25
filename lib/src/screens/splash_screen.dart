@@ -209,55 +209,55 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   /// not used
-  // _configureFirebase() async {
-  //   print('test 1');
-  //   var android =
-  //       new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
-  //   var ios = new IOSInitializationSettings();
-  //   var platform = new InitializationSettings(android: android, iOS: ios);
-  //   await flutterLocalNotificationsPlugin.initialize(platform);
-  //
-  //   firebaseMessaging.configure(
-  //       onMessage: (Map<String, dynamic> msg) {
-  //         _showNotification(msg);
-  //         return;
-  //       },
-  //       onResume: (Map<String, dynamic> msg) {
-  //         _showNotification(msg);
-  //         return;
-  //       },
-  //       onLaunch: (Map<String, dynamic> msg) {
-  //         _showNotification(msg);
-  //         return;
-  //       },
-  //       onBackgroundMessage: null);
-  //   print('test 2');
-  //
-  //   await firebaseMessaging.requestNotificationPermissions(
-  //       const IosNotificationSettings(sound: true, alert: true, badge: true));
-  //
-  //   print('test 3');
-  // }
+// _configureFirebase() async {
+//   print('test 1');
+//   var android =
+//       new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
+//   var ios = new IOSInitializationSettings();
+//   var platform = new InitializationSettings(android: android, iOS: ios);
+//   await flutterLocalNotificationsPlugin.initialize(platform);
+//
+//   firebaseMessaging.configure(
+//       onMessage: (Map<String, dynamic> msg) {
+//         _showNotification(msg);
+//         return;
+//       },
+//       onResume: (Map<String, dynamic> msg) {
+//         _showNotification(msg);
+//         return;
+//       },
+//       onLaunch: (Map<String, dynamic> msg) {
+//         _showNotification(msg);
+//         return;
+//       },
+//       onBackgroundMessage: null);
+//   print('test 2');
+//
+//   await firebaseMessaging.requestNotificationPermissions(
+//       const IosNotificationSettings(sound: true, alert: true, badge: true));
+//
+//   print('test 3');
+// }
 
-  // _showNotification(Map<String, dynamic> msg) async {
-  //   if (msg != null && msg.containsKey('notification')) {
-  //     var notification = Map<String, dynamic>.from(msg['notification']);
-  //     var title =
-  //         notification.containsKey('title') ? notification['title'] : '';
-  //     var body = notification.containsKey('body') ? notification['body'] : '';
-  //
-  //     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-  //         'channel id', 'channel name', 'channel description',
-  //         playSound: false,
-  //         importance: Importance.max,
-  //         priority: Priority.high);
-  //     var iOSPlatformChannelSpecifics =
-  //         new IOSNotificationDetails(presentSound: false);
-  //     var platformChannelSpecifics = new NotificationDetails(
-  //         android: androidPlatformChannelSpecifics,
-  //         iOS: iOSPlatformChannelSpecifics);
-  //     await flutterLocalNotificationsPlugin.show(
-  //         0, title, body, platformChannelSpecifics);
-  //   }
-  // }
+// _showNotification(Map<String, dynamic> msg) async {
+//   if (msg != null && msg.containsKey('notification')) {
+//     var notification = Map<String, dynamic>.from(msg['notification']);
+//     var title =
+//         notification.containsKey('title') ? notification['title'] : '';
+//     var body = notification.containsKey('body') ? notification['body'] : '';
+//
+//     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+//         'channel id', 'channel name', 'channel description',
+//         playSound: false,
+//         importance: Importance.max,
+//         priority: Priority.high);
+//     var iOSPlatformChannelSpecifics =
+//         new IOSNotificationDetails(presentSound: false);
+//     var platformChannelSpecifics = new NotificationDetails(
+//         android: androidPlatformChannelSpecifics,
+//         iOS: iOSPlatformChannelSpecifics);
+//     await flutterLocalNotificationsPlugin.show(
+//         0, title, body, platformChannelSpecifics);
+//   }
+// }
 }

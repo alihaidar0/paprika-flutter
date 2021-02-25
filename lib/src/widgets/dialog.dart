@@ -1001,132 +1001,94 @@ class DialogCloseButton extends StatelessWidget {
   }
 }
 
-class MessageDialog extends StatefulWidget {
+class MessageDialog extends StatelessWidget {
   final String message;
-  final Duration duration;
   final Widget footer;
 
-  const MessageDialog(this.message, {this.duration, this.footer});
-
-  @override
-  State<StatefulWidget> createState() => MessageDialogState();
-}
-
-class MessageDialogState extends State<MessageDialog>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> scaleAnimation;
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = AnimationController(
-      vsync: this,
-      duration: widget.duration != null
-          ? widget.duration
-          : Duration(milliseconds: 450),
-    );
-    scaleAnimation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.elasticInOut,
-    );
-
-    controller.addListener(() {
-      setState(() {});
-    });
-
-    controller.forward();
-  }
+  const MessageDialog({Key key, this.message, this.footer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Material(
         color: Colors.transparent,
-        child: ScaleTransition(
-          scale: scaleAnimation,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Container(
-              height: widget.footer == null ? 100 : 116,
-              width: MediaQuery.of(context).size.width * .9,
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
-                      child: Container(
-                        decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0))),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 16.0, 16.0, 8),
-                              child: Text(
-                                widget.message,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Container(
+            height: footer == null ? 100 : 116,
+            width: MediaQuery.of(context).size.width * .9,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8),
+                            child: Text(
+                              message,
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
-                            null == widget.footer ? EmptyWidget() : Spacer(),
-                            null == widget.footer
-                                ? EmptyWidget()
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      EmptyWidget(),
-                                      Spacer(),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(30, 0, 30, 16),
-                                        child: widget.footer,
-                                      )
-                                    ],
-                                  )
-                          ],
-                        ),
+                          ),
+                          null == footer ? EmptyWidget() : Spacer(),
+                          null == footer
+                              ? EmptyWidget()
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    EmptyWidget(),
+                                    Spacer(),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(30, 0, 30, 16),
+                                      child: footer,
+                                    )
+                                  ],
+                                )
+                        ],
                       ),
                     ),
                   ),
-                  Positioned(
-                      right:
-                          Localizations.localeOf(context).languageCode == 'en'
-                              ? 0
-                              : null,
-                      top: 0,
-                      child: Container(
-                        transform: Matrix4.translationValues(0.0, -20, 0.0),
-                        child: RawMaterialButton(
-                          onPressed: () => Navigator.pop(context),
-                          fillColor: Colors.white,
-                          child: Icon(
-                            Icons.close,
-                            color: Colors.black38,
-                            size: 20.0,
-                          ),
-                          constraints: BoxConstraints(
-                            minHeight: 24,
-                            minWidth: 24,
-                          ),
-                          shape: CircleBorder(
-                              side: BorderSide(color: Colors.white30)),
-                          elevation: 2.0,
-                        ),
-                      ))
-                ],
-              ),
+                ),
+                Positioned(
+                  right: Localizations.localeOf(context).languageCode == 'en'
+                      ? 0
+                      : null,
+                  top: 0,
+                  child: Container(
+                    transform: Matrix4.translationValues(0.0, -20, 0.0),
+                    child: RawMaterialButton(
+                      onPressed: () => Navigator.pop(context),
+                      fillColor: Colors.white,
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.black38,
+                        size: 20.0,
+                      ),
+                      constraints: BoxConstraints(
+                        minHeight: 24,
+                        minWidth: 24,
+                      ),
+                      shape: CircleBorder(
+                        side: BorderSide(color: Colors.white30),
+                      ),
+                      elevation: 2.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

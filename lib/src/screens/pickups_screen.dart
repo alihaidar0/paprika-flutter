@@ -659,11 +659,13 @@ class _NewPickupCardState extends State<NewPickupCard>
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),
-                                SizedBox(width: 8.0,),
+                                SizedBox(
+                                  width: 8.0,
+                                ),
                                 FaIcon(
                                   Localizations.localeOf(context)
-                                      .languageCode ==
-                                      'en'
+                                              .languageCode ==
+                                          'en'
                                       ? (FontAwesomeIcons.angleDoubleRight)
                                       : (FontAwesomeIcons.angleDoubleLeft),
                                   color: Theme.of(context).primaryColor,

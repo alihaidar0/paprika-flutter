@@ -28,7 +28,7 @@ class S implements WidgetsLocalizations {
   String get aboutUs => "About Us";
 
   String get aboutUsInfo =>
-      "Paprika is your complete guide to restaurants in Damascus;"
+      "Paprika is your complete guide to restaurants in Syria;"
       " it helps you discover and filter restaurants based on your desire and preferences."
       "\n"
       "Paprika keeps you updated about new offers and events in restaurants near you and more."
@@ -2129,7 +2129,7 @@ class $ar extends S {
 
   @override
   String get aboutUsInfo =>
-      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم الموجودة في دمشق،"
+      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم الموجودة في سوريا،"
       " يساعدك على فلترة المطاعم حسب رغباتك وتفضيلاتك،"
       " وتتعرف على العروض وآخر الأحداث (Events) التي تُقام في المطاعم، والعديد من الميزات الأخرى."
       "\n"

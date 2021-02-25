@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))
-      ..add(PlacesPage())
+      ..add(RestaurantsPage())
       ..add(ServicePage())
       ..add(MorePage());
 
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       });
     }
 
-    if(widget.initialIndex != null)
+    if (widget.initialIndex != null)
       _tabController.animateTo(widget.initialIndex);
 
     buildContext = context;

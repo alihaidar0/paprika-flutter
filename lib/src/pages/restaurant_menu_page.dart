@@ -902,8 +902,8 @@ class _RateMealDialogState extends State<RateMealDialog> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => MessageDialog(
-                        S.of(context).successRateMeal(widget.meal.name),
-                        duration: Duration(seconds: 1),
+                        message:
+                            S.of(context).successRateMeal(widget.meal.name),
                       ),
                     );
                   }).catchError((error) {

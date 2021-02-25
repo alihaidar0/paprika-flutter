@@ -713,8 +713,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
         showDialog(
           context: context,
           builder: (BuildContext context) => MessageDialog(
-            S.of(context).successReservation,
-            duration: Duration(seconds: 1),
+            message: S.of(context).successReservation,
             footer: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () => _viewMyReservations(context),
@@ -1198,9 +1197,9 @@ class _ActionsRowState extends State<ActionsRow> {
           : Container(),
       GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: (){
+        onTap: () {
           _onTapAddToFavorite();
-          if(!ApiTypesHelper().isAuthorized) {
+          if (!ApiTypesHelper().isAuthorized) {
             _actionToggleMusic();
           }
         },
@@ -1369,8 +1368,10 @@ class _ActionsRowState extends State<ActionsRow> {
   }
 
   void _actionShare() {
-    Share.share(S.of(context).shareText(widget.restData.name,
-        "https://links.paprika-sy.com/restaurant/" + widget.restData.id.toString()));
+    Share.share(S.of(context).shareText(
+        widget.restData.name,
+        "https://links.paprika-sy.com/restaurant/" +
+            widget.restData.id.toString()));
   }
 
   Future<void> play() async {

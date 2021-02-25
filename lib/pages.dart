@@ -1,7 +1,7 @@
 export 'src/pages/discover_page.dart';
 export 'src/pages/more_page.dart';
 export 'src/pages/my_paprica_page.dart';
-export 'src/pages/places_page.dart';
+export 'src/pages/restaurants_page.dart';
 export 'src/pages/profile_page.dart';
 export 'src/pages/restaurant_home_page.dart';
 export 'src/pages/restaurant_menu_page.dart';

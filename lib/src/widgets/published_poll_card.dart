@@ -121,8 +121,8 @@ class PublishedPollCard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (BuildContext context) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
                       return RestaurantHome(restaurantId: item.restaurant.id);
                     }));
                   },

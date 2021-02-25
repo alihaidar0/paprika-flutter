@@ -739,8 +739,7 @@ class _ReviewFormState extends State<ReviewForm> {
         showDialog(
             context: context,
             builder: (BuildContext context) => MessageDialog(
-                  S.of(context).thankYouAdminWillReviewYourFeedback,
-                  duration: Duration(seconds: 1),
+                  message: S.of(context).thankYouAdminWillReviewYourFeedback,
                 ));
       } else {
         PapricaToast.showToast(S.of(context).successRate);

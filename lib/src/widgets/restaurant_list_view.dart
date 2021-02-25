@@ -316,45 +316,45 @@ class Restaurants extends StatelessWidget {
   }
 
   /// not used
-  // Widget _buildViewMoreCard(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       _onSeeMore(context);
-  //     },
-  //     child: Card(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-  //       child: Stack(
-  //         children: <Widget>[
-  //           Container(
-  //             decoration: BoxDecoration(
-  //               color: Colors.grey.withOpacity(0.5),
-  //               borderRadius: BorderRadius.all(Radius.circular(8)),
-  //             ),
-  //           ),
-  //           Center(
-  //             child: Text(
-  //               S.of(context).seeMore,
-  //               textAlign: TextAlign.center,
-  //               softWrap: true,
-  //               style: TextStyle(
-  //                 fontWeight: FontWeight.bold,
-  //                 fontSize: 19,
-  //                 color: Colors.white,
-  //                 shadows: <Shadow>[
-  //                   Shadow(
-  //                     offset: Offset(2, 2),
-  //                     blurRadius: 8.0,
-  //                     color: Color.fromARGB(255, 0, 0, 0),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+// Widget _buildViewMoreCard(BuildContext context) {
+//   return GestureDetector(
+//     onTap: () {
+//       _onSeeMore(context);
+//     },
+//     child: Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+//       child: Stack(
+//         children: <Widget>[
+//           Container(
+//             decoration: BoxDecoration(
+//               color: Colors.grey.withOpacity(0.5),
+//               borderRadius: BorderRadius.all(Radius.circular(8)),
+//             ),
+//           ),
+//           Center(
+//             child: Text(
+//               S.of(context).seeMore,
+//               textAlign: TextAlign.center,
+//               softWrap: true,
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 19,
+//                 color: Colors.white,
+//                 shadows: <Shadow>[
+//                   Shadow(
+//                     offset: Offset(2, 2),
+//                     blurRadius: 8.0,
+//                     color: Color.fromARGB(255, 0, 0, 0),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 }
 
 class PlacesRestaurantsList extends StatelessWidget {
@@ -656,43 +656,43 @@ class PlacesRestaurantsList extends StatelessWidget {
   }
 
   /// not used
-  // Widget _buildViewMoreCard(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       _onSeeMore(context);
-  //     },
-  //     child: Card(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-  //       child: Stack(
-  //         children: <Widget>[
-  //           Container(
-  //             decoration: BoxDecoration(
-  //               color: Colors.grey.withOpacity(0.5),
-  //               borderRadius: BorderRadius.all(Radius.circular(8)),
-  //             ),
-  //           ),
-  //           Center(
-  //             child: Text(
-  //               S.of(context).seeMore,
-  //               textAlign: TextAlign.center,
-  //               softWrap: true,
-  //               style: TextStyle(
-  //                 fontWeight: FontWeight.bold,
-  //                 fontSize: 19,
-  //                 color: Colors.white,
-  //                 shadows: <Shadow>[
-  //                   Shadow(
-  //                     offset: Offset(2, 2),
-  //                     blurRadius: 8.0,
-  //                     color: Color.fromARGB(255, 0, 0, 0),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+// Widget _buildViewMoreCard(BuildContext context) {
+//   return GestureDetector(
+//     onTap: () {
+//       _onSeeMore(context);
+//     },
+//     child: Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+//       child: Stack(
+//         children: <Widget>[
+//           Container(
+//             decoration: BoxDecoration(
+//               color: Colors.grey.withOpacity(0.5),
+//               borderRadius: BorderRadius.all(Radius.circular(8)),
+//             ),
+//           ),
+//           Center(
+//             child: Text(
+//               S.of(context).seeMore,
+//               textAlign: TextAlign.center,
+//               softWrap: true,
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 19,
+//                 color: Colors.white,
+//                 shadows: <Shadow>[
+//                   Shadow(
+//                     offset: Offset(2, 2),
+//                     blurRadius: 8.0,
+//                     color: Color.fromARGB(255, 0, 0, 0),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 }

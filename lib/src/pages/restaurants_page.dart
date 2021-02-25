@@ -1,22 +1,24 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:paprica/src/screens/restaurant_screen.dart';
 import 'package:paprica/translations.dart';
 import 'package:paprica/widgets.dart';
 import 'package:swagger/api.dart';
-import 'dart:async';
+
 import '../../utils.dart';
 
 int currentTab;
 
-class PlacesPage extends StatefulWidget {
-  const PlacesPage();
+class RestaurantsPage extends StatefulWidget {
+  const RestaurantsPage();
 
   @override
-  _PlacesPageState createState() => _PlacesPageState();
+  _RestaurantsPageState createState() => _RestaurantsPageState();
 }
 
-class _PlacesPageState extends State<PlacesPage> {
+class _RestaurantsPageState extends State<RestaurantsPage> with AutomaticKeepAliveClientMixin<RestaurantsPage> {
   Future<PagedResultDtoRestaurantSummaryDto> futureRestData;
   List<RestaurantSummaryDto> restaurants;
   ScrollController _scrollController;
@@ -41,6 +43,7 @@ class _PlacesPageState extends State<PlacesPage> {
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return FutureBuilder<PagedResultDtoRestaurantSummaryDto>(
       future: futureRestData,
@@ -91,7 +94,7 @@ class _PlacesPageState extends State<PlacesPage> {
               message: S.of(context).errorUnknown,
               retryCallback: _getPlacesDataAsync);
         } else
-          return _PlacesPagePlaceHolder(
+          return _RestaurantsPagePlaceHolder(
             Column(
               children: <Widget>[
                 SizedBox(
@@ -105,21 +108,24 @@ class _PlacesPageState extends State<PlacesPage> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 typedef Future RetryCallback();
 
-class _PlacesPagePlaceHolder extends StatefulWidget {
+class _RestaurantsPagePlaceHolder extends StatefulWidget {
   final Widget child;
   final RetryCallback getData;
 
-  _PlacesPagePlaceHolder(this.child, {this.getData});
+  _RestaurantsPagePlaceHolder(this.child, {this.getData});
 
   @override
-  __PlacesPagePlaceHolderState createState() => __PlacesPagePlaceHolderState();
+  __RestaurantsPagePlaceHolderState createState() => __RestaurantsPagePlaceHolderState();
 }
 
-class __PlacesPagePlaceHolderState extends State<_PlacesPagePlaceHolder> {
+class __RestaurantsPagePlaceHolderState extends State<_RestaurantsPagePlaceHolder> {
   @override
   void initState() {
     super.initState();
@@ -145,10 +151,9 @@ class _RestaurantItem extends StatelessWidget {
   final RestaurantSummaryDto restaurant;
 
   _RestaurantItem(this.restaurant);
-  
+
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
@@ -173,7 +178,9 @@ class _RestaurantItem extends StatelessWidget {
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(
-                              image: CachedNetworkImageProvider(this.restaurant.logoImage), fit: BoxFit.scaleDown)),
+                              image: CachedNetworkImageProvider(
+                                  this.restaurant.logoImage),
+                              fit: BoxFit.scaleDown)),
                     ),
                   ),
                   Padding(

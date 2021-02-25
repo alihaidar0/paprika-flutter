@@ -365,11 +365,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successDelivery,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior
@@ -394,11 +392,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successDelivery,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior

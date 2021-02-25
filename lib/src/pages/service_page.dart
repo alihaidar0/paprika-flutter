@@ -128,26 +128,29 @@ class _UpcomingServiceState extends State<UpcomingService> {
               backgroundColor: Color(0xFFFCFAF8),
               body: ListView(
                 children: [
-                  (snapshot.data.nearestReservation != null && snapshot.data.nearestPickup != null)
-                  ?Padding(
-                    padding:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? const EdgeInsets.only(left: 35.0)
-                            : const EdgeInsets.only(right: 35.0),
-                    child: Text(
-                      S.of(context).upcoming,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  )
-                  :Container(),
+                  (snapshot.data.nearestReservation != null &&
+                          snapshot.data.nearestPickup != null)
+                      ? Padding(
+                          padding:
+                              Localizations.localeOf(context).languageCode ==
+                                      'en'
+                                  ? const EdgeInsets.only(left: 35.0)
+                                  : const EdgeInsets.only(right: 35.0),
+                          child: Text(
+                            S.of(context).upcoming,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        )
+                      : Container(),
                   snapshot.data.nearestReservation != null
                       ? _nearestReservation(snapshot.data.nearestReservation)
                       : snapshot.data.nearestPickup != null
                           ? _nearestPickup(snapshot.data.nearestPickup)
                           : Container(),
+
                   /// remove delivery
                   // snapshot.data.nearestDelivery != null
                   //             ? _nearestDelivery(snapshot.data.nearestDelivery)
@@ -192,10 +195,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? const EdgeInsets.only(left: 15.0, right: 30.0)
-                            : const EdgeInsets.only(right: 15.0, left: 30.0),
+                    padding: EdgeInsets.only(right: 20.0, left: 20.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -288,10 +288,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? const EdgeInsets.only(left: 15.0, right: 30.0)
-                            : const EdgeInsets.only(right: 15.0, left: 30.0),
+                    padding: EdgeInsets.only(right: 20.0, left: 20.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -391,6 +388,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
                       ),
                     ),
                   ),
+
                   /// remove delivery
                   // Padding(
                   //   padding:
@@ -646,15 +644,14 @@ class _UpcomingServiceState extends State<UpcomingService> {
               padding: Localizations.localeOf(context).languageCode == 'en'
                   ? const EdgeInsets.only(left: 36.0)
                   : const EdgeInsets.only(right: 36.0),
-              child:
-              ClipRRect(
+              child: ClipRRect(
                 borderRadius: new BorderRadius.circular(30),
                 child: CachedNetworkImage(
                     imageUrl: data.restaurantImage,
                     placeholder: (context, url) => Image(
-                      image: AssetImage("assets/images/placeholder.png"),
-                      width: 60,
-                    ),
+                          image: AssetImage("assets/images/placeholder.png"),
+                          width: 60,
+                        ),
                     width: 60),
               ),
             ),
@@ -693,7 +690,8 @@ class _UpcomingServiceState extends State<UpcomingService> {
                             fontSize: 17.0,
                           ),
                         ),
-                        Text(" ${data.restaurantName} ",
+                        Text(
+                          " ${data.restaurantName} ",
                           style: TextStyle(
                             fontSize: 17.0,
                             fontWeight: FontWeight.bold,
@@ -769,15 +767,14 @@ class _UpcomingServiceState extends State<UpcomingService> {
               padding: Localizations.localeOf(context).languageCode == 'en'
                   ? const EdgeInsets.only(left: 36.0)
                   : const EdgeInsets.only(right: 36.0),
-              child:
-              ClipRRect(
+              child: ClipRRect(
                 borderRadius: new BorderRadius.circular(30),
                 child: CachedNetworkImage(
                     imageUrl: data.restaurantImage,
                     placeholder: (context, url) => Image(
-                      image: AssetImage("assets/images/placeholder.png"),
-                      width: 60,
-                    ),
+                          image: AssetImage("assets/images/placeholder.png"),
+                          width: 60,
+                        ),
                     width: 60),
               ),
             ),
@@ -788,156 +785,156 @@ class _UpcomingServiceState extends State<UpcomingService> {
   }
 
   /// remove delivery
-  // Widget _nearestDelivery(CustomerNearestDeliveryDto data) {
-  //   return Padding(
-  //     padding: Localizations.localeOf(context).languageCode == 'en'
-  //         ? const EdgeInsets.only(left: 12.0, top: 4.0, right: 24.0)
-  //         : const EdgeInsets.only(left: 24.0, top: 4.0, right: 12.0),
-  //     child: Stack(
-  //       children: [
-  //         Padding(
-  //           padding: const EdgeInsets.only(top: 25.0),
-  //           child: Card(
-  //             child: Container(
-  //               width: MediaQuery.of(context).size.width,
-  //               padding: Localizations.localeOf(context).languageCode == 'en'
-  //                   ? const EdgeInsets.only(left: 42.0, top: 32.0)
-  //                   : const EdgeInsets.only(right: 42.0, top: 32.0),
-  //               child: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     data.restaurantName,
-  //                     style: TextStyle(
-  //                       color: Colors.red.shade900,
-  //                       fontSize: 18.0,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                   SizedBox(
-  //                     height: 4.0,
-  //                   ),
-  //                   Text(
-  //                     S.of(context).youHaveUpcomingDeliveryAt +
-  //                         " ${data.restaurantName} ",
-  //                     style: TextStyle(
-  //                       fontSize: 17.0,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                   Text(
-  //                     "${PapricaFormatter.formatDateOnly(context, data.estimationTime)}  ${PapricaFormatter.formatTimeOnly(context, data.estimationTime)}",
-  //                     style: TextStyle(
-  //                       color: Colors.red.shade200,
-  //                       fontSize: 16.0,
-  //                     ),
-  //                   ),
-  //                   Row(
-  //                     children: [
-  //                       Text(
-  //                         "${S.of(context).price}:   ",
-  //                         style: TextStyle(
-  //                           fontSize: 16.0,
-  //                           fontWeight: FontWeight.bold,
-  //                         ),
-  //                       ),
-  //                       Row(
-  //                         children: [
-  //                           Text(
-  //                             PapricaFormatter.formatNumber(data.price.floor()),
-  //                             style: TextStyle(
-  //                               fontSize: 16.0,
-  //                             ),
-  //                           ),
-  //                           SizedBox(
-  //                             width: 4,
-  //                           ),
-  //                           Text(
-  //                             S.of(context).currency,
-  //                             style: TextStyle(
-  //                               fontSize: 16.0,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   Row(
-  //                     mainAxisAlignment: MainAxisAlignment.end,
-  //                     children: [
-  //                       Padding(
-  //                         padding: Localizations.localeOf(context)
-  //                                     .languageCode ==
-  //                                 'en'
-  //                             ? const EdgeInsets.only(right: 12.0, bottom: 10.0)
-  //                             : const EdgeInsets.only(left: 12.0, bottom: 10.0),
-  //                         child: GestureDetector(
-  //                           onTap: () {
-  //                             Navigator.of(context).push(MaterialPageRoute(
-  //                                 builder: (BuildContext context) {
-  //                               return DeliveriesScreen();
-  //                             }));
-  //                           },
-  //                           child: Row(
-  //                             children: [
-  //                               Text(
-  //                                 S.of(context).viewDeliveries,
-  //                                 style: TextStyle(
-  //                                   fontSize: 15.0,
-  //                                   color: Theme.of(context).primaryColor,
-  //                                 ),
-  //                               ),
-  //                               SizedBox(
-  //                                 width: 8.0,
-  //                               ),
-  //                               FaIcon(
-  //                                 Localizations.localeOf(context)
-  //                                             .languageCode ==
-  //                                         'en'
-  //                                     ? (FontAwesomeIcons.angleDoubleRight)
-  //                                     : (FontAwesomeIcons.angleDoubleLeft),
-  //                                 color: Theme.of(context).primaryColor,
-  //                                 size: 16.0,
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //         GestureDetector(
-  //           onTap: () {
-  //             Navigator.of(context)
-  //                 .push(MaterialPageRoute(builder: (BuildContext context) {
-  //               return RestaurantHome(restaurantId: data.restaurantId);
-  //             }));
-  //           },
-  //           child: Padding(
-  //             padding: Localizations.localeOf(context).languageCode == 'en'
-  //                 ? const EdgeInsets.only(left: 36.0)
-  //                 : const EdgeInsets.only(right: 36.0),
-  //             child:
-  //             ClipRRect(
-  //               borderRadius: new BorderRadius.circular(30),
-  //               child: CachedNetworkImage(
-  //                   imageUrl: data.restaurantImage,
-  //                   placeholder: (context, url) => Image(
-  //                     image: AssetImage("assets/images/placeholder.png"),
-  //                     width: 60,
-  //                   ),
-  //                   width: 60),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+// Widget _nearestDelivery(CustomerNearestDeliveryDto data) {
+//   return Padding(
+//     padding: Localizations.localeOf(context).languageCode == 'en'
+//         ? const EdgeInsets.only(left: 12.0, top: 4.0, right: 24.0)
+//         : const EdgeInsets.only(left: 24.0, top: 4.0, right: 12.0),
+//     child: Stack(
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.only(top: 25.0),
+//           child: Card(
+//             child: Container(
+//               width: MediaQuery.of(context).size.width,
+//               padding: Localizations.localeOf(context).languageCode == 'en'
+//                   ? const EdgeInsets.only(left: 42.0, top: 32.0)
+//                   : const EdgeInsets.only(right: 42.0, top: 32.0),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     data.restaurantName,
+//                     style: TextStyle(
+//                       color: Colors.red.shade900,
+//                       fontSize: 18.0,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     height: 4.0,
+//                   ),
+//                   Text(
+//                     S.of(context).youHaveUpcomingDeliveryAt +
+//                         " ${data.restaurantName} ",
+//                     style: TextStyle(
+//                       fontSize: 17.0,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                   Text(
+//                     "${PapricaFormatter.formatDateOnly(context, data.estimationTime)}  ${PapricaFormatter.formatTimeOnly(context, data.estimationTime)}",
+//                     style: TextStyle(
+//                       color: Colors.red.shade200,
+//                       fontSize: 16.0,
+//                     ),
+//                   ),
+//                   Row(
+//                     children: [
+//                       Text(
+//                         "${S.of(context).price}:   ",
+//                         style: TextStyle(
+//                           fontSize: 16.0,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                       Row(
+//                         children: [
+//                           Text(
+//                             PapricaFormatter.formatNumber(data.price.floor()),
+//                             style: TextStyle(
+//                               fontSize: 16.0,
+//                             ),
+//                           ),
+//                           SizedBox(
+//                             width: 4,
+//                           ),
+//                           Text(
+//                             S.of(context).currency,
+//                             style: TextStyle(
+//                               fontSize: 16.0,
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.end,
+//                     children: [
+//                       Padding(
+//                         padding: Localizations.localeOf(context)
+//                                     .languageCode ==
+//                                 'en'
+//                             ? const EdgeInsets.only(right: 12.0, bottom: 10.0)
+//                             : const EdgeInsets.only(left: 12.0, bottom: 10.0),
+//                         child: GestureDetector(
+//                           onTap: () {
+//                             Navigator.of(context).push(MaterialPageRoute(
+//                                 builder: (BuildContext context) {
+//                               return DeliveriesScreen();
+//                             }));
+//                           },
+//                           child: Row(
+//                             children: [
+//                               Text(
+//                                 S.of(context).viewDeliveries,
+//                                 style: TextStyle(
+//                                   fontSize: 15.0,
+//                                   color: Theme.of(context).primaryColor,
+//                                 ),
+//                               ),
+//                               SizedBox(
+//                                 width: 8.0,
+//                               ),
+//                               FaIcon(
+//                                 Localizations.localeOf(context)
+//                                             .languageCode ==
+//                                         'en'
+//                                     ? (FontAwesomeIcons.angleDoubleRight)
+//                                     : (FontAwesomeIcons.angleDoubleLeft),
+//                                 color: Theme.of(context).primaryColor,
+//                                 size: 16.0,
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//         GestureDetector(
+//           onTap: () {
+//             Navigator.of(context)
+//                 .push(MaterialPageRoute(builder: (BuildContext context) {
+//               return RestaurantHome(restaurantId: data.restaurantId);
+//             }));
+//           },
+//           child: Padding(
+//             padding: Localizations.localeOf(context).languageCode == 'en'
+//                 ? const EdgeInsets.only(left: 36.0)
+//                 : const EdgeInsets.only(right: 36.0),
+//             child:
+//             ClipRRect(
+//               borderRadius: new BorderRadius.circular(30),
+//               child: CachedNetworkImage(
+//                   imageUrl: data.restaurantImage,
+//                   placeholder: (context, url) => Image(
+//                     image: AssetImage("assets/images/placeholder.png"),
+//                     width: 60,
+//                   ),
+//                   width: 60),
+//             ),
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
 }
 
 class NoServicesLayout extends StatelessWidget {

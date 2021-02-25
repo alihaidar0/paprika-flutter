@@ -190,13 +190,12 @@ class _InformationSectionState extends State<InformationSection> {
                 ? Container()
                 : Container(
                     color: Colors.white,
-                    margin:EdgeInsets.only(top: 15.0),
+                    margin: EdgeInsets.only(top: 15.0),
                     padding: EdgeInsets.only(left: 12, right: 12),
                     child: Column(
                       children: [
                         Padding(
-                          padding:
-                              const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,8 +204,8 @@ class _InformationSectionState extends State<InformationSection> {
                                 height: 20,
                                 width: 20,
                                 child: Image(
-                                  image: AssetImage(
-                                      "assets/icons/open_time.png"),
+                                  image:
+                                      AssetImage("assets/icons/open_time.png"),
                                 ),
                               ),
                               Padding(
@@ -258,10 +257,8 @@ class _InformationSectionState extends State<InformationSection> {
                                             Text(
                                               PapricaFormatter.formatTimeOnly(
                                                 context,
-                                                widget
-                                                    .restData
-                                                    .openingTimes[index]
-                                                    .toTime,
+                                                widget.restData
+                                                    .openingTimes[index].toTime,
                                               ),
                                             )
                                           ]),
@@ -296,8 +293,8 @@ class _InformationSectionState extends State<InformationSection> {
                                       Text(
                                         PapricaFormatter.formatTimeOnly(
                                           context,
-                                          widget.restData.openingTimes[0]
-                                              .toTime,
+                                          widget
+                                              .restData.openingTimes[0].toTime,
                                         ),
                                       )
                                     ]),
