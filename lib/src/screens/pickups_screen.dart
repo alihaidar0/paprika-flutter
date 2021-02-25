@@ -6,15 +6,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/pickup_model.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/src/widgets/pickup_card.dart';
-import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/pickup_model.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/src/widgets/pickup_card.dart';
+import 'package:paprika/src/widgets/slider.dart';
+import 'package:paprika/src/widgets/custom_scroll_behaviour.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:swagger/api.dart';
 
@@ -600,10 +600,10 @@ class _NewPickupCardState extends State<NewPickupCard>
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 4.0),
                                     child: Text(
-                                      PapricaFormatter.formatDateOnly(
+                                      PaprikaFormatter.formatDateOnly(
                                               context, widget.pickup.date) +
                                           "  " +
-                                          PapricaFormatter.formatTimeOnly(
+                                          PaprikaFormatter.formatTimeOnly(
                                               context, widget.pickup.date),
                                     ),
                                   ),
@@ -634,7 +634,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                                 child: Row(
                                   children: [
                                     Text(
-                                      PapricaFormatter.formatNumber(
+                                      PaprikaFormatter.formatNumber(
                                           widget.pickup.price.floor()),
                                     ),
                                     SizedBox(
@@ -848,7 +848,7 @@ class _NewPickupCardState extends State<NewPickupCard>
     api.apiServicesAppCustomerPickupCancelPickupPost(pickup: data).then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successPickupCancel);
+      PaprikaToast.showToast(S.of(context).successPickupCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -901,7 +901,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatDateOnly(
+                    Text(PaprikaFormatter.formatDateOnly(
                         context, widget.pickup.updateRequest.time))
                   ],
                 ),
@@ -931,7 +931,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatTimeOnly(
+                    Text(PaprikaFormatter.formatTimeOnly(
                         context, widget.pickup.updateRequest.time))
                   ],
                 ),
@@ -1057,7 +1057,7 @@ class _NewPickupCardState extends State<NewPickupCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successPickupCancel);
+      PaprikaToast.showToast(S.of(context).successPickupCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1321,7 +1321,7 @@ class _OldPickupSectionState extends State<OldPickupSection> {
                                                     else {
                                                       Navigator.of(context)
                                                           .pop(false);
-                                                      PapricaToast.showToast(
+                                                      PaprikaToast.showToast(
                                                           S
                                                               .of(context)
                                                               .deletingFailed,

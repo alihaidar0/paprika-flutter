@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/screens/events_list_screen.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/event_card.dart';
-import 'package:paprica/src/widgets/images_gallery.dart';
-import 'package:paprica/src/widgets/restaurant_infoRow.dart';
-import 'package:paprica/utils.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/screens/events_list_screen.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/event_card.dart';
+import 'package:paprika/src/widgets/images_gallery.dart';
+import 'package:paprika/src/widgets/restaurant_infoRow.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 class RestaurantHomePage extends StatefulWidget {
@@ -247,7 +247,7 @@ class _InformationSectionState extends State<InformationSection> {
                                                       .dayOfWeek),
                                             ),
                                             Text(
-                                              PapricaFormatter.formatTimeOnly(
+                                              PaprikaFormatter.formatTimeOnly(
                                                   context,
                                                   widget
                                                       .restData
@@ -255,7 +255,7 @@ class _InformationSectionState extends State<InformationSection> {
                                                       .fromTime),
                                             ),
                                             Text(
-                                              PapricaFormatter.formatTimeOnly(
+                                              PaprikaFormatter.formatTimeOnly(
                                                 context,
                                                 widget.restData
                                                     .openingTimes[index].toTime,
@@ -285,13 +285,13 @@ class _InformationSectionState extends State<InformationSection> {
                                                 .dayOfWeek),
                                       ),
                                       Text(
-                                        PapricaFormatter.formatTimeOnly(
+                                        PaprikaFormatter.formatTimeOnly(
                                             context,
                                             widget.restData.openingTimes[0]
                                                 .fromTime),
                                       ),
                                       Text(
-                                        PapricaFormatter.formatTimeOnly(
+                                        PaprikaFormatter.formatTimeOnly(
                                           context,
                                           widget
                                               .restData.openingTimes[0].toTime,

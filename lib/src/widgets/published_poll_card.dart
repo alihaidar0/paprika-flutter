@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';

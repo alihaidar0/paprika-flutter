@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:package_info/package_info.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
 import 'package:swagger/api.dart';
 
 import '../../app.dart';
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       SharedPreference.loadDefaultLangFromSharedPref().then((lang) {
         if (lang == null) {
-          PapricaApiClient().setLang(PapricaApp.defaultLanguage);
+          PapricaApiClient().setLang(PaprikaApp.defaultLanguage);
           _init(context);
         } else {
           _init(context);

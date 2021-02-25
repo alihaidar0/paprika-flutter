@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:paprica/src/models/offer_model.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/offer_model.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -265,7 +265,7 @@ class _OfferScreenState extends State<OfferScreen> {
         });
       }).catchError((err) {
         Navigator.of(context).pop();
-        PapricaToast.showToast(S.of(context).messageOfferNotFound,
+        PaprikaToast.showToast(S.of(context).messageOfferNotFound,
             ToastType.Normal, Toast.LENGTH_LONG);
       });
     }

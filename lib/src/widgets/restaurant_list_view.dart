@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/src/models/restaurants_list_model.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/src/models/restaurants_list_model.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -16,13 +16,13 @@ class Restaurants extends StatelessWidget {
   final RestaurantsListModel restaurantsList;
   final String title;
   final Color titleColor;
-  final bool reversed, isArrowShows, isFromMyPaprica;
-  final PapricaFilterModel filterModel;
+  final bool reversed, isArrowShows, isFromMyPaprika;
+  final PaprikaFilterModel filterModel;
 
   Restaurants(
       {@required this.restaurantsList,
       @required this.title,
-      this.isFromMyPaprica = false,
+      this.isFromMyPaprika = false,
       this.titleColor,
       this.isArrowShows = true,
       this.reversed = false,
@@ -37,7 +37,7 @@ class Restaurants extends StatelessWidget {
       widgets.add(
         Container(
           width: imageWidth,
-          child: isFromMyPaprica
+          child: isFromMyPaprika
               ? _buildMyPaprikaRestaurant(context, x, imageWidth)
               : _buildRestaurant(context, x),
         ),
@@ -45,9 +45,9 @@ class Restaurants extends StatelessWidget {
     }
 
     num parentHeight =
-        isFromMyPaprica ? MediaQuery.of(context).size.height * 0.13 : 90; //103
+        isFromMyPaprika ? MediaQuery.of(context).size.height * 0.13 : 90; //103
     return Container(
-      color: isFromMyPaprica ? Colors.white : Colors.transparent,
+      color: isFromMyPaprika ? Colors.white : Colors.transparent,
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,7 @@ class Restaurants extends StatelessWidget {
 //                  placeholder: kTransparentImage,
 //                  image: restaurantsList.items[x].logoImage ?? "",
 //                ),
-                child: PapricaCachedImage(
+                child: PaprikaCachedImage(
                   imageUrl: restaurantsList.items[x].logoImage,
                 ),
               ),
@@ -361,13 +361,13 @@ class PlacesRestaurantsList extends StatelessWidget {
   final List<PlacesListItem> restaurantsList;
   final String title;
   final Color titleColor;
-  final bool reversed, isArrowShows, isFromMyPaprica;
-  final PapricaFilterModel filterModel;
+  final bool reversed, isArrowShows, isFromMyPaprika;
+  final PaprikaFilterModel filterModel;
 
   PlacesRestaurantsList(
       {@required this.restaurantsList,
       @required this.title,
-      this.isFromMyPaprica = false,
+      this.isFromMyPaprika = false,
       this.titleColor,
       this.isArrowShows = true,
       this.reversed = false,
@@ -382,7 +382,7 @@ class PlacesRestaurantsList extends StatelessWidget {
       widgets.add(
         Container(
           width: imageWidth,
-          child: isFromMyPaprica
+          child: isFromMyPaprika
               ? _buildMyPaprikaRestaurant(context, x, imageWidth)
               : _buildRestaurant(context, x),
         ),
@@ -390,9 +390,9 @@ class PlacesRestaurantsList extends StatelessWidget {
     }
 
     num parentHeight =
-        isFromMyPaprica ? MediaQuery.of(context).size.height * 0.13 : 90; //103
+        isFromMyPaprika ? MediaQuery.of(context).size.height * 0.13 : 90; //103
     return Container(
-      color: isFromMyPaprica ? Colors.white : Colors.transparent,
+      color: isFromMyPaprika ? Colors.white : Colors.transparent,
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,7 +476,7 @@ class PlacesRestaurantsList extends StatelessWidget {
                   topRight: Radius.circular(12.0),
                   topLeft: Radius.circular(12.0),
                 ),
-                child: PapricaCachedImage(
+                child: PaprikaCachedImage(
                   imageUrl: restaurantsList[x].logoImage,
                 ),
               ),

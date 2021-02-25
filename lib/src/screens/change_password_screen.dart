@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -160,7 +160,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       dialog.show();
       api.apiServicesAppCustomerChangePasswordPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).successPasswordChanged);
+        PaprikaToast.showToast(S.of(context).successPasswordChanged);
       }).catchError((err) {
         dialog.hide();
         DefaultErrorHandler.handle(context, err);

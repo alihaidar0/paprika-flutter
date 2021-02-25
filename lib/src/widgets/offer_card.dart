@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/offer_model.dart';
-import 'package:paprica/src/screens/offer_screen.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/offer_model.dart';
+import 'package:paprika/src/screens/offer_screen.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
@@ -75,10 +75,10 @@ class OfferCard extends StatelessWidget {
   }
 }
 
-class MyPapricaOfferCard extends StatelessWidget {
+class MyPaprikaOfferCard extends StatelessWidget {
   final OfferPapricaItemDto offer;
 
-  MyPapricaOfferCard({
+  MyPaprikaOfferCard({
     @required this.offer,
   });
 
@@ -93,7 +93,7 @@ class MyPapricaOfferCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => OfferScreen(
-                offer: OfferModel.fromMyPapricaEventDto(offer),
+                offer: OfferModel.fromMyPaprikaEventDto(offer),
               ),
             ),
           );
@@ -237,7 +237,7 @@ class OfferCardInList extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => OfferScreen(
-                offer: OfferModel.fromMyPapricaEventDto(offer),
+                offer: OfferModel.fromMyPaprikaEventDto(offer),
               ),
             ),
           );

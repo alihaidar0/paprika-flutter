@@ -1,4 +1,4 @@
-package me.paprica;
+package com.paprika_sy.customer;
 
 import io.flutter.embedding.android.FlutterActivity;
 

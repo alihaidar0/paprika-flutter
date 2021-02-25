@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/erro_handlers/api_error_handler.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
-import 'package:paprica/src/utils/paprica_api_client.dart';
-import 'package:paprica/src/utils/paprica_formatter.dart';
-import 'package:paprica/src/widgets/accessories.dart';
-import 'package:paprica/src/widgets/dialog.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/erro_handlers/api_error_handler.dart';
+import 'package:paprika/src/utils/api_types_helper.dart';
+import 'package:paprika/src/utils/paprica_api_client.dart';
+import 'package:paprika/src/utils/paprika_formatter.dart';
+import 'package:paprika/src/widgets/accessories.dart';
+import 'package:paprika/src/widgets/dialog.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:swagger/api.dart';
 
@@ -125,10 +125,10 @@ class _PollItemState extends State<PollItem> {
             child: Text(
                 S.of(context).closeDate +
                     ": " +
-                    PapricaFormatter.formatDateOnly(
+                    PaprikaFormatter.formatDateOnly(
                         context, widget.openPollItem.closeDate) +
                     "  " +
-                    PapricaFormatter.formatTimeOnly(
+                    PaprikaFormatter.formatTimeOnly(
                         context, widget.openPollItem.closeDate),
                 style: TextStyle(
                     color: Colors.black45,
@@ -302,7 +302,7 @@ class _PollItemState extends State<PollItem> {
                                     ).then((loggedIn) {
                                       if (loggedIn != null && loggedIn) {
                                       } else {
-                                        PapricaToast.showToast(S
+                                        PaprikaToast.showToast(S
                                             .of(context)
                                             .loggingInRequired(
                                                 S.of(context).vote));
@@ -331,7 +331,7 @@ class _PollItemState extends State<PollItem> {
     dialog.show();
     api.apiServicesAppCustomerPollAddVotePost(input: _data).then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).thankYouForVoting);
+      PaprikaToast.showToast(S.of(context).thankYouForVoting);
     }).catchError((err) {
       dialog.hide();
       DefaultErrorHandler.handle(context, err);
@@ -348,7 +348,7 @@ class _PollItemState extends State<PollItem> {
         .apiServicesAppCustomerPollClearVotePost(pollId: widget.openPollItem.id)
         .then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).theVotingHasBeenCleared);
+      PaprikaToast.showToast(S.of(context).theVotingHasBeenCleared);
     }).catchError((err) {
       dialog.hide();
       DefaultErrorHandler.handle(context, err);

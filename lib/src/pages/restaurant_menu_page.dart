@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/menu_state.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/menu_state.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -458,7 +458,7 @@ class MenuListItem extends StatelessWidget {
                                 width: 4,
                               ),
                               Text(
-                                  PapricaFormatter.formatNumber(
+                                  PaprikaFormatter.formatNumber(
                                       meal.price.floor()),
                                   style: TextStyle(
                                       fontSize: 15,
@@ -530,7 +530,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               children: <Widget>[
                                 GestureDetector(
                                   onTap: () {
-                                    PapricaToast.showToast(
+                                    PaprikaToast.showToast(
                                         S.of(context).errorRateMeal,
                                         ToastType.Error);
                                     showDialog(
@@ -731,7 +731,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                             width: 4,
                                           ),
                                           Text(
-                                              PapricaFormatter.formatNumber(
+                                              PaprikaFormatter.formatNumber(
                                                   widget.meal.price.floor()),
                                               style: TextStyle(
                                                   fontSize: 18,
@@ -788,7 +788,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                       if (loggedIn != null && loggedIn) {
                         _showUserRateDialog(context);
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionRateMeal));
                       }
@@ -908,7 +908,7 @@ class _RateMealDialogState extends State<RateMealDialog> {
                     );
                   }).catchError((error) {
                     dialog.hide();
-                    PapricaToast.showToast(
+                    PaprikaToast.showToast(
                         S.of(context).errorRateMeal, ToastType.Error);
                   });
                 },

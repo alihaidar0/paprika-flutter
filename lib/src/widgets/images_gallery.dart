@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
 
 class ImagesGallery extends StatefulWidget {
   final List<String> thumbnails;

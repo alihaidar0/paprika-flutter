@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/screens/event_screen.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/screens/event_screen.dart';
+import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 
 import '../../utils.dart';
@@ -129,12 +129,12 @@ class EventCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          PapricaFormatter.formatDateOnly(context, event.date),
+                          PaprikaFormatter.formatDateOnly(context, event.date),
                           style: TextStyle(
                               color: themeData.titleColor, fontSize: 12),
                         ),
                         Text(
-                          PapricaFormatter.formatTimeOnly(context, event.date),
+                          PaprikaFormatter.formatTimeOnly(context, event.date),
                           style: TextStyle(
                               color: themeData.titleColor, fontSize: 12),
                         ),
@@ -171,12 +171,12 @@ class EventCard extends StatelessWidget {
   }
 }
 
-class MyPapricaEventCard extends StatelessWidget {
+class MyPaprikaEventCard extends StatelessWidget {
   final EventPapricaItemDto event;
   final EventCardThemeData cardThemeData;
   final GestureTapCallback onPressed;
 
-  MyPapricaEventCard({
+  MyPaprikaEventCard({
     @required this.event,
     this.cardThemeData,
     this.onPressed,
@@ -198,7 +198,7 @@ class MyPapricaEventCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => EventScreen(
-                  event: EventModel.fromEventPapricaItemDto(event),
+                  event: EventModel.fromEventPaprikaItemDto(event),
                 ),
               ),
             ),
@@ -301,7 +301,7 @@ class MyPapricaEventCard extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            PapricaFormatter.formatDateOnly(
+                            PaprikaFormatter.formatDateOnly(
                                 context, event.time),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -312,7 +312,7 @@ class MyPapricaEventCard extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          PapricaFormatter.formatTimeOnly(context, event.time),
+                          PaprikaFormatter.formatTimeOnly(context, event.time),
                           style: TextStyle(
                               color: themeData.actionTextColor, fontSize: 12),
                         ),

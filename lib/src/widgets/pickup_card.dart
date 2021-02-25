@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/pickup_model.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/pickup_model.dart';
 
 import '../../translations.dart';
 import '../../utils.dart';
@@ -101,10 +101,10 @@ class PickupCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
-                                  PapricaFormatter.formatDateOnly(
+                                  PaprikaFormatter.formatDateOnly(
                                           context, pickup.date) +
                                       "    " +
-                                      PapricaFormatter.formatTimeOnly(
+                                      PaprikaFormatter.formatTimeOnly(
                                           context, pickup.date),
                                   style: TextStyle(
                                     color: Colors.black,

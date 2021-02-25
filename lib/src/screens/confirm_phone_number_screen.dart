@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -200,7 +200,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
 
       api.apiServicesAppCustomerUpdatePhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).phoneNumberUpdated);
+        PaprikaToast.showToast(S.of(context).phoneNumberUpdated);
 
         ApiTypesHelper().setPhoneNumber(_phoneNumberController.text);
         ApiTypesHelper().setIsPhoneNumberConfirmed(false);
@@ -226,7 +226,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
       dialog.show();
       api.apiServicesAppCustomerConfirmPhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).successConfirmPhoneNumber);
+        PaprikaToast.showToast(S.of(context).successConfirmPhoneNumber);
         Navigator.of(context).pop(true);
       }).catchError((err) {
         dialog.hide();
@@ -245,7 +245,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
     dialog.show();
     api.apiServicesAppCustomerResendConfirmationCodePost().then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).sentCode);
+      PaprikaToast.showToast(S.of(context).sentCode);
       setState(() {
         _sealed = true;
       });

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/translations.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class AboutUsScreen extends StatelessWidget {

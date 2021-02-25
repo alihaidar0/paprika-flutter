@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/translations.dart';
 import 'package:photo_view/photo_view.dart';
 
 import '../../screens.dart';
@@ -103,7 +103,7 @@ class Paragraph extends StatelessWidget {
   }
 }
 
-class PapricaToast {
+class PaprikaToast {
   static void showToast(String text,
       [ToastType type = ToastType.Normal, Toast length = Toast.LENGTH_SHORT]) {
     Color backgroundColor;
@@ -209,11 +209,11 @@ class _RequestRetryState extends State<RequestRetry> {
   }
 }
 
-class PapricaVerticalDivider extends StatelessWidget {
+class PaprikaVerticalDivider extends StatelessWidget {
   final double height;
   final Color color;
 
-  const PapricaVerticalDivider(
+  const PaprikaVerticalDivider(
       {Key key, this.height = 12, this.color = Colors.black})
       : super(key: key);
 
@@ -564,10 +564,10 @@ class FullscreenPhoto extends StatelessWidget {
   }
 }
 
-class PapricaCachedImage extends StatelessWidget {
+class PaprikaCachedImage extends StatelessWidget {
   final String imageUrl;
 
-  const PapricaCachedImage({Key key, @required this.imageUrl})
+  const PaprikaCachedImage({Key key, @required this.imageUrl})
       : super(key: key);
 
   @override

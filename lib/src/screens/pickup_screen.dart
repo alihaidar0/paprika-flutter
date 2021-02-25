@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
-import 'package:paprica/src/models/create_pickup_meal_model.dart';
-import 'package:paprica/src/models/pickup_list_meal_model.dart';
-import 'package:paprica/src/models/pickup_model.dart';
+import 'package:paprika/src/models/create_pickup_meal_model.dart';
+import 'package:paprika/src/models/pickup_list_meal_model.dart';
+import 'package:paprika/src/models/pickup_model.dart';
 import 'package:swagger/api.dart';
 
 import '../../translations.dart';
@@ -610,7 +610,7 @@ class _PickupScreenState extends State<PickupScreen> {
                                 width: 4,
                               ),
                               Text(
-                                  PapricaFormatter.formatNumber(
+                                  PaprikaFormatter.formatNumber(
                                       meal.price.floor()),
                                   style: TextStyle(
                                       fontSize: 15,
@@ -700,7 +700,7 @@ class _PickupScreenState extends State<PickupScreen> {
                                           width: 4,
                                         ),
                                         Text(
-                                            PapricaFormatter.formatNumber(
+                                            PaprikaFormatter.formatNumber(
                                                 meal.price.floor()),
                                             style: TextStyle(
                                                 fontSize: 15,

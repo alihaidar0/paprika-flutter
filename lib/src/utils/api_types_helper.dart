@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/countries_model.dart';
+import 'package:paprika/src/models/countries_model.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';

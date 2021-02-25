@@ -16,12 +16,12 @@ class ReservationModel {
       this.personName,
       this.phoneNumber});
 
-  ReservationModel.fromReservationPapricaItemDto(
-      ReservationPapricaItemDto papricaReservation) {
-    numberOfPeople = papricaReservation.numberOfPeople;
-    date = papricaReservation.time;
-    restaurantName = papricaReservation.restaurantName;
-    id = papricaReservation.id;
+  ReservationModel.fromReservationPaprikaItemDto(
+      ReservationPapricaItemDto paprikaReservation) {
+    numberOfPeople = paprikaReservation.numberOfPeople;
+    date = paprikaReservation.time;
+    restaurantName = paprikaReservation.restaurantName;
+    id = paprikaReservation.id;
   }
 
   ReservationModel.fromOld(CustomerOldReservationDto oldReservation) {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/app.dart';
-import 'package:paprica/error_handlers.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/app.dart';
+import 'package:paprika/error_handlers.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -162,7 +162,7 @@ class _MorePageState extends State<MorePage> {
         dialog.show();
         ApiTypesHelper().changeLanguage(context).then((_) {
           dialog.hide();
-          PapricaApp.setLocale(context, lang);
+          PaprikaApp.setLocale(context, lang);
           Navigator.of(context).pushReplacementNamed('/home');
         }).catchError((err) {
           dialog.hide();

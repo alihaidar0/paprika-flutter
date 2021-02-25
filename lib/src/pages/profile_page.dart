@@ -6,10 +6,10 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:paprica/src/models/countries_model.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/countries_model.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:path/path.dart';
 import 'package:swagger/api.dart';
 
@@ -441,7 +441,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                                   Icons.check),
                                                             ),
                                                             onTap: () {
-                                                              PapricaToast.showToast(
+                                                              PaprikaToast.showToast(
                                                                   S
                                                                       .of(
                                                                           context)
@@ -802,7 +802,7 @@ class _ProfilePageState extends State<ProfilePage>
         // Dismiss keyboard
         FocusScope.of(context).requestFocus(FocusNode());
 
-        PapricaToast.showToast(S.of(context).successUpdateProfile);
+        PaprikaToast.showToast(S.of(context).successUpdateProfile);
       }).catchError((err) {
         dialog.hide();
         DefaultErrorHandler.handle(context, err);

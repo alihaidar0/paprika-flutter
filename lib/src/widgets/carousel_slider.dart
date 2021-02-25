@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/slider.dart';
+import 'package:paprika/widgets.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';

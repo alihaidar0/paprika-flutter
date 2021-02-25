@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
+import 'package:paprika/generated/i18n.dart';
 
 class MapScreen extends StatefulWidget {
   final double initialLatitude;

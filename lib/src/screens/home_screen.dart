@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/search_item.dart';
-import 'package:paprica/src/pages/my_paprica_page.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/search_item.dart';
+import 'package:paprika/src/pages/my_paprika_page.dart';
+import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
 

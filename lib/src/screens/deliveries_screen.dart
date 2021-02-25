@@ -6,15 +6,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/delivery_model.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
-import 'package:paprica/src/widgets/delivery_card.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/src/widgets/slider.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/delivery_model.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
+import 'package:paprika/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/src/widgets/delivery_card.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/src/widgets/slider.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -604,10 +604,10 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 4.0),
                                     child: Text(
-                                      PapricaFormatter.formatDateOnly(context,
+                                      PaprikaFormatter.formatDateOnly(context,
                                               widget.delivery.estimationTime) +
                                           "  " +
-                                          PapricaFormatter.formatTimeOnly(
+                                          PaprikaFormatter.formatTimeOnly(
                                               context,
                                               widget.delivery.estimationTime),
                                     ),
@@ -641,7 +641,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
                                 child: Row(
                                   children: [
                                     Text(
-                                      PapricaFormatter.formatNumber(
+                                      PaprikaFormatter.formatNumber(
                                           widget.delivery.price.floor()),
                                     ),
                                     SizedBox(
@@ -912,7 +912,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successDeliveryCancel);
+      PaprikaToast.showToast(S.of(context).successDeliveryCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1080,7 +1080,7 @@ class _NewDeliveryCardState extends State<NewDeliveryCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successDeliveryCancel);
+      PaprikaToast.showToast(S.of(context).successDeliveryCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1344,7 +1344,7 @@ class _OldDeliverySectionState extends State<OldDeliverySection> {
                                                     else {
                                                       Navigator.of(context)
                                                           .pop(false);
-                                                      PapricaToast.showToast(
+                                                      PaprikaToast.showToast(
                                                           S
                                                               .of(context)
                                                               .deletingFailed,

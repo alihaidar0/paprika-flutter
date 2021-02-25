@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/screens/restaurant_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/screens/restaurant_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../utils.dart';
@@ -318,7 +318,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -340,7 +340,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -362,7 +362,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -384,7 +384,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),

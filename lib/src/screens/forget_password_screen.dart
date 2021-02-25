@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -226,7 +226,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           .apiServicesAppCustomerSendForgetPasswordCodePost(input: data)
           .then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).forgotPasswordCodeSent);
+        PaprikaToast.showToast(S.of(context).forgotPasswordCodeSent);
 
         setState(() {
           _requestForgottenPasswordSent = true;
@@ -242,7 +242,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void _onChangePressed(BuildContext context) {
     if (_newPasswordController.text !=
         _newPasswordConfirmationController.text) {
-      PapricaToast.showToast(S.of(context).errorPasswordMatch);
+      PaprikaToast.showToast(S.of(context).errorPasswordMatch);
       return;
     }
     if (_confirmationCodeController.text.isNotEmpty &&
@@ -263,7 +263,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           .apiServicesAppCustomerResetForgottenPasswordPost(input: data)
           .then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).successPasswordChanged);
+        PaprikaToast.showToast(S.of(context).successPasswordChanged);
         _login(
             context, _phoneNumberController.text, _newPasswordController.text);
       }).catchError((err) {
@@ -301,7 +301,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       loginDialog.hide();
       DefaultErrorHandler.handle(context, err);
       Future.delayed(Duration.zero, () {
-        //PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+        //PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
       });
     });
   }

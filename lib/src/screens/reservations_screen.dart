@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/src/widgets/reservation_card.dart';
-import 'package:paprica/src/widgets/slider.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
+import 'package:paprika/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/src/widgets/reservation_card.dart';
+import 'package:paprika/src/widgets/slider.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -546,7 +546,7 @@ class _OldReservationSectionState extends State<OldReservationSection> {
                                                     else {
                                                       Navigator.of(context)
                                                           .pop(false);
-                                                      PapricaToast.showToast(
+                                                      PaprikaToast.showToast(
                                                           S
                                                               .of(context)
                                                               .deletingFailed,
@@ -771,10 +771,10 @@ class _NewReservationCardState extends State<NewReservationCard>
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: Text(
-                                  PapricaFormatter.formatDateOnly(
+                                  PaprikaFormatter.formatDateOnly(
                                           context, widget.reservation.date) +
                                       "  " +
-                                      PapricaFormatter.formatTimeOnly(
+                                      PaprikaFormatter.formatTimeOnly(
                                           context, widget.reservation.date),
                                 ),
                               ),
@@ -999,7 +999,7 @@ class _NewReservationCardState extends State<NewReservationCard>
             });
           }
         });
-        PapricaToast.showToast(S.of(context).successReservationUpdate);
+        PaprikaToast.showToast(S.of(context).successReservationUpdate);
       }
     });
   }
@@ -1038,7 +1038,7 @@ class _NewReservationCardState extends State<NewReservationCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successReservationCancel);
+      PaprikaToast.showToast(S.of(context).successReservationCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1078,7 +1078,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatDateOnly(
+                    Text(PaprikaFormatter.formatDateOnly(
                         context, widget.reservation.updateRequest.time))
                   ],
                 ),
@@ -1108,7 +1108,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatTimeOnly(
+                    Text(PaprikaFormatter.formatTimeOnly(
                         context, widget.reservation.updateRequest.time))
                   ],
                 ),
@@ -1311,7 +1311,7 @@ class _NewReservationCardState extends State<NewReservationCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successReservationCancel);
+      PaprikaToast.showToast(S.of(context).successReservationCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);

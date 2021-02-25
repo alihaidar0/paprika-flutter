@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/src/widgets/custom_radio_button.dart';
+import 'package:paprika/src/widgets/custom_radio_button.dart';
 
 typedef RadioTabCallback(String value);
 

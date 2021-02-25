@@ -4,14 +4,14 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/menu_state.dart';
-import 'package:paprica/src/models/reviews_state.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
-import 'package:paprica/src/utils/paprica_api_client.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/menu_state.dart';
+import 'package:paprika/src/models/reviews_state.dart';
+import 'package:paprika/src/utils/api_types_helper.dart';
+import 'package:paprika/src/utils/paprica_api_client.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:swagger/api.dart';
@@ -596,7 +596,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                       if (loggedIn != null && loggedIn) {
                         _showReservationDialog();
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionReserve));
                       }
@@ -642,7 +642,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                           );
                         }));
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionPickup));
                       }
@@ -692,7 +692,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                           );
                         }));
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionDelivery));
                       }
@@ -1246,7 +1246,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = false;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .restaurantRemovedFromFavorites(widget.restData?.name ?? ""),
@@ -1269,7 +1269,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isFavorite = true;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .restaurantAddedToFavorites(widget.restData?.name ?? ""),
@@ -1309,7 +1309,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = false;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .turnOffRestaurantNotifications(widget.restData?.name ?? ""),
@@ -1335,7 +1335,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = true;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .turnOnRestaurantNotifications(widget.restData?.name ?? ""),
@@ -1396,7 +1396,7 @@ class _ActionsRowState extends State<ActionsRow> {
           downloading = false;
           _isMusicPlaying = false;
         });
-        PapricaToast.showToast(S.of(context).errorPlayingAudio);
+        PaprikaToast.showToast(S.of(context).errorPlayingAudio);
       });
     }
   }
@@ -1494,7 +1494,7 @@ class _ActionsRowState extends State<ActionsRow> {
                       if (loggedIn != null && loggedIn) {
                         _actionAddToFavorite();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                        PaprikaToast.showToast(S.of(context).loggingInRequired(
                             S.of(context).actionAddToFavorite));
                       }
                     });
@@ -1527,7 +1527,7 @@ class _ActionsRowState extends State<ActionsRow> {
                       if (loggedIn != null && loggedIn) {
                         _actionChangeRestaurantNotifications();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                        PaprikaToast.showToast(S.of(context).loggingInRequired(
                             S.of(context).actionChangeRestaurantNotifications));
                       }
                     });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
@@ -62,7 +62,7 @@ class ReviewResult extends StatelessWidget {
                     S.of(context).total +
                         ": " +
                         "(" +
-                        PapricaFormatter.formatNumber(
+                        PaprikaFormatter.formatNumber(
                             _countRater(restaurantRaters)) +
                         ")",
                     style: TextStyle(fontWeight: FontWeight.w300),
@@ -742,7 +742,7 @@ class _ReviewFormState extends State<ReviewForm> {
                   message: S.of(context).thankYouAdminWillReviewYourFeedback,
                 ));
       } else {
-        PapricaToast.showToast(S.of(context).successRate);
+        PaprikaToast.showToast(S.of(context).successRate);
       }
 
       widget.onSubmit(jsonData);
@@ -766,7 +766,7 @@ class _ReviewFormState extends State<ReviewForm> {
       setState(() {
         isSubmitting = false;
       });
-      PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+      PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
     });
   }
 
@@ -825,7 +825,7 @@ class _ReviewFormState extends State<ReviewForm> {
                         if (loggedIn != null && loggedIn) {
                           _onSubmitReview();
                         } else {
-                          PapricaToast.showToast(S
+                          PaprikaToast.showToast(S
                               .of(context)
                               .loggingInRequired(S.of(context).actionReview));
                         }

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/screens/offer_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/screens/offer_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
 
-class PapricaApp extends StatefulWidget {
+class PaprikaApp extends StatefulWidget {
   static String defaultLanguage = "ar";
 
-  // This widget is the root of your application.
   @override
-  _PapricaAppState createState() => _PapricaAppState();
+  _PaprikaAppState createState() => _PaprikaAppState();
 
   static void setLocale(BuildContext context, String lang) {
-    _PapricaAppState state =
-        context.findAncestorStateOfType<_PapricaAppState>();
+    _PaprikaAppState state =
+        context.findAncestorStateOfType<_PaprikaAppState>();
     // ignore: invalid_use_of_protected_member
     state?.setState(() {
       state.locale = Locale(lang);
@@ -23,7 +22,7 @@ class PapricaApp extends StatefulWidget {
   }
 }
 
-class _PapricaAppState extends State<PapricaApp> {
+class _PaprikaAppState extends State<PaprikaApp> {
   Locale locale;
 
   @override
@@ -32,7 +31,7 @@ class _PapricaAppState extends State<PapricaApp> {
 
     SharedPreference.loadLangFromSharedPref().then((lang) {
       setState(() {
-        locale = Locale(lang ?? PapricaApp.defaultLanguage);
+        locale = Locale(lang ?? PaprikaApp.defaultLanguage);
       });
     });
   }

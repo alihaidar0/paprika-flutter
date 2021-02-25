@@ -4,17 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/src/erro_handlers/api_error_handler.dart';
-import 'package:paprica/src/models/create_delivery_meal_model.dart';
-import 'package:paprica/src/models/create_pickup_meal_model.dart';
-import 'package:paprica/src/models/delivery_model.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/models/pickup_model.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/screens/map_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/erro_handlers/api_error_handler.dart';
+import 'package:paprika/src/models/create_delivery_meal_model.dart';
+import 'package:paprika/src/models/create_pickup_meal_model.dart';
+import 'package:paprika/src/models/delivery_model.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/models/pickup_model.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/screens/map_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -161,7 +161,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                     children: <Widget>[
                                       RawMaterialButton(
                                         onPressed: widget.event != null
-                                            ? () => PapricaToast.showToast(
+                                            ? () => PaprikaToast.showToast(
                                                 S
                                                     .of(context)
                                                     .dateAndTimeCannotBeChanged,
@@ -195,7 +195,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                               padding: const EdgeInsets.only(
                                                   top: 7.0),
                                               child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatDateOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -212,7 +212,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                       Container(
                                         child: RawMaterialButton(
                                           onPressed: widget.event != null
-                                              ? () => PapricaToast.showToast(
+                                              ? () => PaprikaToast.showToast(
                                                   S
                                                       .of(context)
                                                       .dateAndTimeCannotBeChanged,
@@ -245,7 +245,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                                 padding: const EdgeInsets.only(
                                                     top: 6.0),
                                                 child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatTimeOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -717,7 +717,7 @@ class ReservationDialogState extends State<ReservationDialog> {
           var roundedDateTime = _roundToNearest15Mins(selectedDateTime);
           date = roundedDateTime;
           if (selectedDateTime != roundedDateTime)
-            PapricaToast.showToast(
+            PaprikaToast.showToast(
                 S.of(context).timeHasBeenRoundedToTheNearest15Minutes,
                 ToastType.Normal);
           this.errorDate = errorDate = date.isBefore(DateTime.now());
@@ -932,8 +932,8 @@ class _ReservationConfirmationDialogState
               widget.restaurantName,
               widget.count.toString(),
               widget.count <= 1 ? S.of(context).person : S.of(context).people,
-              PapricaFormatter.formatDateOnly(context, widget.date),
-              PapricaFormatter.formatTimeOnly(context, widget.date),
+              PaprikaFormatter.formatDateOnly(context, widget.date),
+              PaprikaFormatter.formatTimeOnly(context, widget.date),
             ),
       ),
       actions: <Widget>[
@@ -1541,7 +1541,7 @@ class PickupDialogState extends State<PickupDialog> {
                                               padding: const EdgeInsets.only(
                                                   top: 7.0),
                                               child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatDateOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -1583,7 +1583,7 @@ class PickupDialogState extends State<PickupDialog> {
                                                 padding: const EdgeInsets.only(
                                                     top: 6.0),
                                                 child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatTimeOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -1855,7 +1855,7 @@ class PickupDialogState extends State<PickupDialog> {
           var roundedDateTime = _roundToNearest15Mins(selectedDateTime);
           date = roundedDateTime;
           if (selectedDateTime != roundedDateTime)
-            PapricaToast.showToast(
+            PaprikaToast.showToast(
                 S.of(context).timeHasBeenRoundedToTheNearest15Minutes,
                 ToastType.Normal);
           this.errorDate = errorDate = date.isBefore(DateTime.now());
@@ -2024,8 +2024,8 @@ class _PickupConfirmationDialogState extends State<PickupConfirmationDialog> {
       content: Text(
         S.of(context).pickupSummary(
               widget.restaurantName,
-              PapricaFormatter.formatDateOnly(context, widget.date),
-              PapricaFormatter.formatTimeOnly(context, widget.date),
+              PaprikaFormatter.formatDateOnly(context, widget.date),
+              PaprikaFormatter.formatTimeOnly(context, widget.date),
             ),
       ),
       actions: <Widget>[

@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/src/models/notification.dart';
-import 'package:paprica/src/screens/deliveries_screen.dart';
-import 'package:paprica/src/screens/offer_screen.dart';
-import 'package:paprica/src/screens/pickups_screen.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/src/models/notification.dart';
+import 'package:paprika/src/screens/deliveries_screen.dart';
+import 'package:paprika/src/screens/offer_screen.dart';
+import 'package:paprika/src/screens/pickups_screen.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -365,7 +365,7 @@ class _NotificationCardState extends State<NotificationCard> {
                                       ? Text(
                                           S.of(context).time +
                                               ": " +
-                                              PapricaFormatter.formatDateTime(
+                                              PaprikaFormatter.formatDateTime(
                                                   context,
                                                   DateTime.parse(widget
                                                       .notification
@@ -398,13 +398,13 @@ class _NotificationCardState extends State<NotificationCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                              PapricaFormatter.formatDateOnly(context,
+                              PaprikaFormatter.formatDateOnly(context,
                                   widget.notification.date ?? DateTime.now()),
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.w300)),
                           Text(
-                              PapricaFormatter.formatTimeOnly(context,
+                              PaprikaFormatter.formatTimeOnly(context,
                                   widget.notification.date ?? DateTime.now()),
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,

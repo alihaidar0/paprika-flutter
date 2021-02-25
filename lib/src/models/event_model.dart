@@ -34,7 +34,7 @@ class EventModel {
     restaurantId = dto.restaurantId;
   }
 
-  EventModel.fromEventPapricaItemDto(EventPapricaItemDto dto) {
+  EventModel.fromEventPaprikaItemDto(EventPapricaItemDto dto) {
     id = dto.id;
     imageUrl = dto.image;
     eventName = dto.name;

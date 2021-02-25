@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/src/models/restaurants_list_model.dart';
-import 'package:paprica/src/models/search_item.dart';
-import 'package:paprica/src/widgets/event_card.dart';
-import 'package:paprica/src/widgets/offer_card.dart';
-import 'package:paprica/src/widgets/offers_list_view.dart';
-import 'package:paprica/src/widgets/open_poll_card.dart';
-import 'package:paprica/src/widgets/published_poll_card.dart';
-import 'package:paprica/src/widgets/reservation_card.dart';
-import 'package:paprica/src/widgets/restaurant_list_view.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/src/models/restaurants_list_model.dart';
+import 'package:paprika/src/models/search_item.dart';
+import 'package:paprika/src/widgets/event_card.dart';
+import 'package:paprika/src/widgets/offer_card.dart';
+import 'package:paprika/src/widgets/offers_list_view.dart';
+import 'package:paprika/src/widgets/open_poll_card.dart';
+import 'package:paprika/src/widgets/published_poll_card.dart';
+import 'package:paprika/src/widgets/reservation_card.dart';
+import 'package:paprika/src/widgets/restaurant_list_view.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
@@ -138,35 +138,35 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
     PapricaItemStampDto jsonOffer = PapricaItemStampDto();
     if (offerStamp != null) {
       jsonOffer.stamp = offerStamp;
-      jsonOffer.type = ApiHelper.MyPapricaTypeOffer;
+      jsonOffer.type = ApiHelper.MyPaprikaTypeOffer;
       jsonInput.stamps.add(jsonOffer);
     }
 
     PapricaItemStampDto jsonEvent = PapricaItemStampDto();
     if (eventStamp != null) {
       jsonEvent.stamp = eventStamp;
-      jsonEvent.type = ApiHelper.MyPapricaTypeEvent;
+      jsonEvent.type = ApiHelper.MyPaprikaTypeEvent;
       jsonInput.stamps.add(jsonEvent);
     }
 
     if (reservationsStamp != null) {
       PapricaItemStampDto jsonReservations = PapricaItemStampDto();
       jsonReservations.stamp = reservationsStamp;
-      jsonReservations.type = ApiHelper.MyPapricaTypeReservation;
+      jsonReservations.type = ApiHelper.MyPaprikaTypeReservation;
       jsonInput.stamps.add(jsonReservations);
     }
 
     if (restaurantListStamp != null) {
       PapricaItemStampDto jsonRestaurantsList = PapricaItemStampDto();
       jsonRestaurantsList.stamp = restaurantListStamp;
-      jsonRestaurantsList.type = ApiHelper.MyPapricaTypeRestaurants;
+      jsonRestaurantsList.type = ApiHelper.MyPaprikaTypeRestaurants;
       jsonInput.stamps.add(jsonRestaurantsList);
     }
 
     if (listOffersStamp != null) {
       PapricaItemStampDto jsonOffersList = PapricaItemStampDto();
       jsonOffersList.stamp = listOffersStamp;
-      jsonOffersList.type = ApiHelper.MyPapricaTypeListOffers;
+      jsonOffersList.type = ApiHelper.MyPaprikaTypeListOffers;
       jsonInput.stamps.add(jsonOffersList);
     }
     futureLoadMoreData =
@@ -299,19 +299,19 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
   void _updateStamps(List<PapricaItemDto> loadedItems) {
     loadedItems.forEach((item) {
       switch (item.type) {
-        case ApiHelper.MyPapricaTypeRestaurants:
+        case ApiHelper.MyPaprikaTypeRestaurants:
           lastRestaurantsListStamp = item.stamp;
           break;
-        case ApiHelper.MyPapricaTypeListOffers:
+        case ApiHelper.MyPaprikaTypeListOffers:
           lastOffersListStamp = item.stamp;
           break;
-        case ApiHelper.MyPapricaTypeReservation:
+        case ApiHelper.MyPaprikaTypeReservation:
           lastReservationStamp = item.stamp;
           break;
-        case ApiHelper.MyPapricaTypeEvent:
+        case ApiHelper.MyPaprikaTypeEvent:
           lastEventsStamp = item.stamp;
           break;
-        case ApiHelper.MyPapricaTypeOffer:
+        case ApiHelper.MyPaprikaTypeOffer:
           lastOffersStamp = item.stamp;
           break;
         default:
@@ -322,17 +322,17 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
 
   Widget _buildMyPaprikaItem(BuildContext context, PapricaItemDto papricaItem) {
     switch (papricaItem.type) {
-      case ApiHelper.MyPapricaTypeRestaurants:
+      case ApiHelper.MyPaprikaTypeRestaurants:
         ListPapricaItemDto temp = papricaItem.model;
         return Column(
           children: <Widget>[
             Restaurants(
-              isFromMyPaprica: false,
+              isFromMyPaprika: false,
               restaurantsList:
-                  RestaurantsListModel.fromMyPapricaModel(papricaItem.model),
+                  RestaurantsListModel.fromMyPaprikaModel(papricaItem.model),
               title: temp.title,
               titleColor: Theme.of(context).primaryColor,
-              filterModel: PapricaFilterModel.apiToFilterModelAdapter(
+              filterModel: PaprikaFilterModel.apiToFilterModelAdapter(
                   temp.filter, context),
             ),
             SizedBox(
@@ -342,14 +342,14 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypeListOffers:
+      case ApiHelper.MyPaprikaTypeListOffers:
         PagedResultDtoMyPapricaOfferDto temp = papricaItem.model;
         return Column(
           children: <Widget>[
-            OffersListInMyPaprica(
+            OffersListInMyPaprika(
               titleColor: Theme.of(context).primaryColor,
               isArrowShows: true,
-              isFromMyPaprica: true,
+              isFromMyPaprika: true,
               title: temp.title,
               offersList: papricaItem.model,
             ),
@@ -360,7 +360,7 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypeReservation:
+      case ApiHelper.MyPaprikaTypeReservation:
         return Column(
           children: <Widget>[
             MyPaprikaReservationCard(
@@ -373,10 +373,10 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypeEvent:
+      case ApiHelper.MyPaprikaTypeEvent:
         return Column(
           children: <Widget>[
-            MyPapricaEventCard(
+            MyPaprikaEventCard(
               event: papricaItem.model,
             ),
             SizedBox(
@@ -386,10 +386,10 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypeOffer:
+      case ApiHelper.MyPaprikaTypeOffer:
         return Column(
           children: <Widget>[
-            MyPapricaOfferCard(
+            MyPaprikaOfferCard(
               offer: papricaItem.model,
             ),
             SizedBox(
@@ -399,7 +399,7 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypePublishedPoll:
+      case ApiHelper.MyPaprikaTypePublishedPoll:
         PublishedPollInPapricaItem temp = papricaItem.model;
         return Column(
           children: <Widget>[
@@ -415,7 +415,7 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPapricaTypeOpenPoll:
+      case ApiHelper.MyPaprikaTypeOpenPoll:
         OpenPollInPapricaItem temp = papricaItem.model;
         return Column(
           children: <Widget>[

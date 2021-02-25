@@ -494,9 +494,7 @@ class S implements WidgetsLocalizations {
 
   String get myNotifications => "My Notifications";
 
-  String get myPipina => "My Paprika";
-
-  String get myPaprica => "My Paprika";
+  String get myPaprika => "My Paprika";
 
   String get nearby => "Nearby";
 
@@ -1137,7 +1135,7 @@ class $ar extends S {
   String get enterPhoneNumber => "الرجاء إدخال رقم الهاتف.";
 
   @override
-  String get myPaprica => "الرئيسية";
+  String get myPaprika => "الرئيسية";
 
   @override
   String get successUpdateProfile => "تم تحديث الملف الشخصي";
@@ -1967,9 +1965,6 @@ class $ar extends S {
 
   @override
   String get applyFilter => "بحث مخصص";
-
-  @override
-  String get myPipina => "الرئيسية";
 
   @override
   String get date => "التاريخ";

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/delivery_model.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/delivery_model.dart';
 
 import '../../translations.dart';
 

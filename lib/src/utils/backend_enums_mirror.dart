@@ -4,22 +4,14 @@ import 'package:swagger/api.dart';
 import '../../translations.dart';
 import '../../utils.dart';
 
-//import 'package:paprica/utils.dart';
-//
-//class NoiseLevel {
-//  static const int low = 1;
-//  static const int moderate = 2;
-//  static const int high = 3;
-//}
-
 class ApiHelper {
-  static const int MyPapricaTypeRestaurants = 5;
-  static const int MyPapricaTypeReservation = 1;
-  static const int MyPapricaTypeEvent = 3;
-  static const int MyPapricaTypeOffer = 2;
-  static const int MyPapricaTypeListOffers = 7;
-  static const int MyPapricaTypePublishedPoll = 8;
-  static const int MyPapricaTypeOpenPoll = 9;
+  static const int MyPaprikaTypeRestaurants = 5;
+  static const int MyPaprikaTypeReservation = 1;
+  static const int MyPaprikaTypeEvent = 3;
+  static const int MyPaprikaTypeOffer = 2;
+  static const int MyPaprikaTypeListOffers = 7;
+  static const int MyPaprikaTypePublishedPoll = 8;
+  static const int MyPaprikaTypeOpenPoll = 9;
 
   static const int reservationTypePending = 1;
   static const int reservationTypeRejected = 2;

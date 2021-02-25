@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:location/location.dart';
-import 'package:paprica/src/models/countries_model.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/countries_model.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
@@ -21,7 +21,7 @@ class DiscoverPage extends StatefulWidget {
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
-  PapricaFilterModel filterModel;
+  PaprikaFilterModel filterModel;
 
   StreamController<bool> clearStreamController;
   StreamController<bool> refreshPlacesStreamController;
@@ -45,7 +45,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   void initState() {
     super.initState();
-    filterModel = PapricaFilterModel();
+    filterModel = PaprikaFilterModel();
     clearStreamController = StreamController<bool>.broadcast();
     refreshPlacesStreamController = StreamController<bool>.broadcast();
   }
@@ -299,7 +299,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 )),
             onTap: () {
               if (filterModel.isFilterNotEmpty) {
-                PapricaToast.showToast(
+                PaprikaToast.showToast(
                     S.of(context).filterCleared, ToastType.Normal);
               }
               clearStreamController.add(true);
@@ -332,7 +332,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).findingRestaurants);
 
-    //todo: use isNearby in PapricaFilterModel
+    //todo: use isNearby in PaprikaFilterModel
 //    if (isNearby != null && isNearby) {
 //      currentLocation = await LocationProvider.getLocation().catchError((err) {
 //        debugPrint(err.toString());
@@ -367,7 +367,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
         return RestaurantsListScreen(
           restaurants: restaurantsDto?.items,
           title: S.of(context).discover,
-          filterModel: PapricaFilterModel.deepCopy(filterModel),
+          filterModel: PaprikaFilterModel.deepCopy(filterModel),
         );
       }));
     }).catchError((err) {

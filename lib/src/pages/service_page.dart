@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/screens/pickups_screen.dart';
-import 'package:paprica/src/screens/reservations_screen.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/screens/pickups_screen.dart';
+import 'package:paprika/src/screens/reservations_screen.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
@@ -560,9 +560,9 @@ class _UpcomingServiceState extends State<UpcomingService> {
                       ],
                     ),
                     Text(
-                      PapricaFormatter.formatDateOnly(context, data.date) +
+                      PaprikaFormatter.formatDateOnly(context, data.date) +
                           "    " +
-                          PapricaFormatter.formatTimeOnly(context, data.date),
+                          PaprikaFormatter.formatTimeOnly(context, data.date),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
@@ -700,9 +700,9 @@ class _UpcomingServiceState extends State<UpcomingService> {
                       ],
                     ),
                     Text(
-                      PapricaFormatter.formatDateOnly(context, data.date) +
+                      PaprikaFormatter.formatDateOnly(context, data.date) +
                           "    " +
-                          PapricaFormatter.formatTimeOnly(context, data.date),
+                          PaprikaFormatter.formatTimeOnly(context, data.date),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
@@ -823,7 +823,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
 //                     ),
 //                   ),
 //                   Text(
-//                     "${PapricaFormatter.formatDateOnly(context, data.estimationTime)}  ${PapricaFormatter.formatTimeOnly(context, data.estimationTime)}",
+//                     "${PaprikaFormatter.formatDateOnly(context, data.estimationTime)}  ${PaprikaFormatter.formatTimeOnly(context, data.estimationTime)}",
 //                     style: TextStyle(
 //                       color: Colors.red.shade200,
 //                       fontSize: 16.0,
@@ -841,7 +841,7 @@ class _UpcomingServiceState extends State<UpcomingService> {
 //                       Row(
 //                         children: [
 //                           Text(
-//                             PapricaFormatter.formatNumber(data.price.floor()),
+//                             PaprikaFormatter.formatNumber(data.price.floor()),
 //                             style: TextStyle(
 //                               fontSize: 16.0,
 //                             ),
