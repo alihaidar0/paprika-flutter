@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paprika/translations.dart';
 import 'package:paprika/utils.dart';
@@ -678,16 +679,21 @@ class _ReviewFormState extends State<ReviewForm> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomizedActiveButton(
-                            onPressed: !formEdited
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 8.0),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: !formEdited
                                 ? null
                                 : () => _onSubmitPressed(context),
-                            title: S.of(context).save,
+                            child: Text(S.of(context).save,
+                            style: TextStyle(
+                              color: !formEdited ? Colors.grey : Theme.of(context).primaryColor,
+                            ),
+                            ),
                           ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

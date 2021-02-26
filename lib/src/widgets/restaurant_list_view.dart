@@ -131,30 +131,24 @@ class Restaurants extends StatelessWidget {
                   topRight: Radius.circular(12.0),
                   topLeft: Radius.circular(12.0),
                 ),
-//                child: FadeInImage.memoryNetwork(
-//                  placeholder: kTransparentImage,
-//                  image: restaurantsList.items[x].logoImage ?? "",
-//                ),
                 child: PaprikaCachedImage(
                   imageUrl: restaurantsList.items[x].logoImage,
                 ),
               ),
             ),
             Padding(
-                padding: Localizations.localeOf(context).languageCode == 'en'
-                    ? EdgeInsets.fromLTRB(8, 3, 8, 0)
-                    : EdgeInsets.fromLTRB(8, 0, 8, 0),
-                child: Text(
-                  restaurantsList.items[x].name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? 14
-                            : 14,
-                  ),
-                )),
+              padding: Localizations.localeOf(context).languageCode == 'en'
+                  ? EdgeInsets.fromLTRB(8, 3, 8, 0)
+                  : EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Text(
+                restaurantsList.items[x].name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
             Padding(
               padding: Localizations.localeOf(context).languageCode == 'en'
                   ? EdgeInsets.fromLTRB(6, 2, 6, 0)
@@ -212,16 +206,22 @@ class Restaurants extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: new BorderRadius.circular(12.0),
-                      child: CachedNetworkImage(
-                          imageUrl: restaurantsList.items[x].logoImage,
-                          placeholder: (context, url) => Image(
-                                image:
-                                    AssetImage("assets/images/placeholder.png"),
-                                width: MediaQuery.of(context).size.width * 0.23,
-                              ),
-                          width: MediaQuery.of(context).size.width * 0.23),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.23,
+                      height: MediaQuery.of(context).size.width * 0.23,
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: new BorderRadius.circular(12.0),
+                          child: CachedNetworkImage(
+                            imageUrl: restaurantsList.items[x].logoImage,
+                            placeholder: (context, url) => Image(
+                              image: AssetImage("assets/images/placeholder.png"),
+                              width: MediaQuery.of(context).size.width * 0.23,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.23,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

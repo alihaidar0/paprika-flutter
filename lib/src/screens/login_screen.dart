@@ -185,8 +185,8 @@ class _MyLogInState extends State<LogInScreen> {
                           ? Container()
                           : GestureDetector(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/home',ModalRoute.withName('/splash'));
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -303,8 +303,6 @@ class _MyLogInState extends State<LogInScreen> {
         //PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
       });
     });
-
-    setState(() {});
   }
 
   Future _facebookLogin(BuildContext context) async {
@@ -373,7 +371,8 @@ class _MyLogInState extends State<LogInScreen> {
     if (widget.asAService) {
       Navigator.of(context).pop(true);
     } else {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home',ModalRoute.withName('/splash'));
     }
   }
 }

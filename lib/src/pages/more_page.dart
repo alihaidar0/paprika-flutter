@@ -119,9 +119,11 @@ class _MorePageState extends State<MorePage> {
                               Navigator.of(context).pop();
                               _logOut(context);
                             },
-                            child: Text(S.of(context).yes)),
+                            child: Text(S.of(context).yes),
+                        ),
                       );
-                    });
+                    },
+                );
               } else {
                 Navigator.of(context).pushNamed('/logIn');
               }

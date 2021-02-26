@@ -256,7 +256,7 @@ class _UpcomingDeliveriesSection extends State<UpcomingDeliveriesSection> {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  HomeScreen(initialIndex: 2)),
+                                  HomeScreen(initialIndex: 1)),
                           ModalRoute.withName('/splash'));
                     },
                     child: Text(

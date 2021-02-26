@@ -68,7 +68,6 @@
 
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -80,13 +79,12 @@
             <!-- Accept adb data flag -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="https://links.paprika-sy.com"
-                    android:scheme="paprica" />
+                    android:scheme="paprika" />
             </intent-filter>
         </activity>
         <meta-data

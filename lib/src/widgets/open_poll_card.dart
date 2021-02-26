@@ -202,21 +202,8 @@ class _PollItemState extends State<PollItem> {
                   Text(
                     restaurant.name,
                     style: TextStyle(
-                        height: 0.5,
                         color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    "${_restaurantVotes[_idRestaurants.indexOf(restaurant.id)]} " +
-                        S.of(context).outOf +
-                        " $_totalVotes " +
-                        S.of(context).votes,
-                    style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 13,
                         fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -234,6 +221,18 @@ class _PollItemState extends State<PollItem> {
                             _totalVotes,
                     progressColor: Theme.of(context).primaryColor,
                   ),
+                  Text(
+                    "${_restaurantVotes[_idRestaurants.indexOf(restaurant.id)]} " +
+                        S.of(context).outOf +
+                        " $_totalVotes " +
+                        S.of(context).votes,
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
@@ -242,7 +241,7 @@ class _PollItemState extends State<PollItem> {
         Column(
           children: [
             SizedBox(
-              height: 28.0,
+              height: 2.0,
             ),
             CircularCheckBox(
                 activeColor: Theme.of(context).primaryColor,
@@ -297,7 +296,7 @@ class _PollItemState extends State<PollItem> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            LogInScreen(asAService: true),
+                                            LogInScreen(asAService: false),
                                       ),
                                     ).then((loggedIn) {
                                       if (loggedIn != null && loggedIn) {

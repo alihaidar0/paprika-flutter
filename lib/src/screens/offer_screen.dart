@@ -274,6 +274,6 @@ class _OfferScreenState extends State<OfferScreen> {
   void _actionShare() {
     Share.share(S
         .of(context)
-        .shareTextOffer("", "https://links.paprika-sy.com/offer/" + _offerId));
+        .shareTextOffer(widget.offer.restaurantName ?? '','', "https://links.paprika-sy.com/offer/" + _offerId));
   }
 }

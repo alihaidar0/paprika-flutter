@@ -984,18 +984,29 @@ class S implements WidgetsLocalizations {
       "Notifications were tuned off for $restaurant";
 
   String shareText(String restaurantName, String link) =>
-      "Hi,\nCheckout out $restaurantName on Paprika at $link";
+      'Hello,'
+      'You are invited to $restaurantName on Paprika.'
+      '$link';
 
-  String shareTextApp(String link) => "Hi,\nCheckout out Paprika at $link";
+  String shareTextApp(String link) =>
+      'Hello,'
+      'You are invited to use Paprika, your guide to restaurants in Syria.'
+      '$link';
 
-  String shareTextEvent(String eventName, String link) =>
-      "Hi,\nCheckout out event $eventName on Paprika at $link";
+  String shareTextEvent(String restaurantName, String eventName, String link) =>
+      'Hello,'
+      'You are invited to $eventName at $restaurantName on Paprika.'
+      '$link';
 
-  String shareTextMeal(String offerName, String restaurantName, String link) =>
-      "Hi,\nCheckout out $offerName at $restaurantName on Paprika at $link";
+  String shareTextMeal(String mealName, String restaurantName, String link) =>
+      'Hello,'
+      'You are invited to enjoy $mealName at $restaurantName on Paprika.'
+      '$link';
 
-  String shareTextOffer(String offerName, String link) =>
-      "Hi,\nCheckout out offer $offerName on Paprika at $link";
+  String shareTextOffer(String restaurantName, String offerName, String link) =>
+      'Hello,'
+      'Here is an interesting offer on Paprika.'
+      '$link';
 
   String successRateMeal(String meal) =>
       "Sharing is Caring! Now people will have a better idea about the $meal";
@@ -2337,7 +2348,9 @@ class $ar extends S {
 
   @override
   String shareText(String restaurantName, String link) =>
-      "مرحبا،\nصار فيك تشوف مطعم $restaurantName على تطبيق Paprika على الرابط $link";
+      'مرحبا،'
+      'تمت دعوتك الى مطعم $restaurantName عن طريق تطبيق Paprika.'
+      '$link';
 
   @override
   String restaurantAddedToFavorites(String restaurant) =>
@@ -2353,7 +2366,9 @@ class $ar extends S {
 
   @override
   String shareTextApp(String link) =>
-      "مرحبا،\nجرّب تطبيق Paprika على الرابط $link";
+      'مرحبا،'
+      'تمت دعوتك لتحميل تطبيق Paprika، تطبيق المطاعم الشامل في سورية.'
+      '$link';
 
   @override
   String successRateMeal(String meal) =>
@@ -2368,7 +2383,9 @@ class $ar extends S {
 
   @override
   String shareTextMeal(String mealName, String restaurantName, String link) =>
-      "مرحبا،\nصار فيك تجرب $mealName in $restaurantName on Paprika at $link";
+      'مرحبا،'
+      'تمت دعوتك لتجربة وجبة $mealName في مطعم $restaurantName عن طريق تطبيق Paprika.'
+      '$link';
 
   @override
   String eventsListTitle(String restaurantName) => "أحداث في $restaurantName";
@@ -2390,15 +2407,19 @@ class $ar extends S {
       "تم إطفاء الإشعارات لمطعم $restaurant";
 
   @override
-  String shareTextEvent(String eventName, String link) =>
-      "مرحبا،\nصار فيك تشوف الحدث $eventName على تطبيق Paprika على الرابط $link";
+  String shareTextEvent(String restaurantName, String eventName, String link) =>
+      'مرحبا،'
+      'تم دعوتك للمشاركة في مناسبة $eventName في مطعم $restaurantName عن طريق تطبيق Paprika.'
+      '$link';
 
   @override
   String menuNoAvailable(String category) => "لايوجد  $category";
 
   @override
-  String shareTextOffer(String offerName, String link) =>
-      "مرحبا،\nصار فيك تشوف العرض $offerName على تطبيق Paprika على الرابط $link";
+  String shareTextOffer(String restaurantName, String offerName, String link) =>
+      'مرحبا،'
+      'يوجد عرض قد يهمك في مطعم $restaurantName على تطبيق Paprika.'
+      '$link';
 
   @override
   String noReviews(String restaurantName) =>
