@@ -28,7 +28,7 @@ class S implements WidgetsLocalizations {
   String get aboutUs => "About Us";
 
   String get aboutUsInfo =>
-      "Paprika is your complete guide to restaurants in Syria;"
+      "Paprika is your complete guide to restaurants;"
       " it helps you discover and filter restaurants based on your desire and preferences."
       "\n"
       "Paprika keeps you updated about new offers and events in restaurants near you and more."
@@ -983,29 +983,37 @@ class S implements WidgetsLocalizations {
   String turnOffRestaurantNotifications(String restaurant) =>
       "Notifications were tuned off for $restaurant";
 
-  String shareText(String restaurantName, String link) =>
-      'Hello,'
+  String shareText(String restaurantName, String link) => 'Hello,'
+      "\n"
       'You are invited to $restaurantName on Paprika.'
+      "\n"
       '$link';
 
-  String shareTextApp(String link) =>
-      'Hello,'
+  String shareTextApp(String link) => 'Hello,'
+      "\n"
       'You are invited to use Paprika, your guide to restaurants in Syria.'
+      "\n"
       '$link';
 
   String shareTextEvent(String restaurantName, String eventName, String link) =>
       'Hello,'
+      "\n"
       'You are invited to $eventName at $restaurantName on Paprika.'
+      "\n"
       '$link';
 
   String shareTextMeal(String mealName, String restaurantName, String link) =>
       'Hello,'
+      "\n"
       'You are invited to enjoy $mealName at $restaurantName on Paprika.'
+      "\n"
       '$link';
 
   String shareTextOffer(String restaurantName, String offerName, String link) =>
       'Hello,'
+      "\n"
       'Here is an interesting offer on Paprika.'
+      "\n"
       '$link';
 
   String successRateMeal(String meal) =>
@@ -2135,7 +2143,7 @@ class $ar extends S {
 
   @override
   String get aboutUsInfo =>
-      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم الموجودة في سوريا،"
+      "يضع تطبيق بابريكا بين يديك دليلاً كاملاً للمطاعم،"
       " يساعدك على فلترة المطاعم حسب رغباتك وتفضيلاتك،"
       " وتتعرف على العروض وآخر الأحداث (Events) التي تُقام في المطاعم، والعديد من الميزات الأخرى."
       "\n"
@@ -2347,9 +2355,10 @@ class $ar extends S {
       "سيتم طلب توصيلة في  $restaurantName.";
 
   @override
-  String shareText(String restaurantName, String link) =>
-      'مرحبا،'
+  String shareText(String restaurantName, String link) => 'مرحبا،'
+      "\n"
       'تمت دعوتك الى مطعم $restaurantName عن طريق تطبيق Paprika.'
+      "\n"
       '$link';
 
   @override
@@ -2365,9 +2374,10 @@ class $ar extends S {
       "$eventName في $restaurantName";
 
   @override
-  String shareTextApp(String link) =>
-      'مرحبا،'
+  String shareTextApp(String link) => 'مرحبا،'
+      "\n"
       'تمت دعوتك لتحميل تطبيق Paprika، تطبيق المطاعم الشامل في سورية.'
+      "\n"
       '$link';
 
   @override
@@ -2384,7 +2394,9 @@ class $ar extends S {
   @override
   String shareTextMeal(String mealName, String restaurantName, String link) =>
       'مرحبا،'
+      "\n"
       'تمت دعوتك لتجربة وجبة $mealName في مطعم $restaurantName عن طريق تطبيق Paprika.'
+      "\n"
       '$link';
 
   @override
@@ -2409,7 +2421,9 @@ class $ar extends S {
   @override
   String shareTextEvent(String restaurantName, String eventName, String link) =>
       'مرحبا،'
+      "\n"
       'تم دعوتك للمشاركة في مناسبة $eventName في مطعم $restaurantName عن طريق تطبيق Paprika.'
+      "\n"
       '$link';
 
   @override
@@ -2418,7 +2432,9 @@ class $ar extends S {
   @override
   String shareTextOffer(String restaurantName, String offerName, String link) =>
       'مرحبا،'
+      "\n"
       'يوجد عرض قد يهمك في مطعم $restaurantName على تطبيق Paprika.'
+      "\n"
       '$link';
 
   @override

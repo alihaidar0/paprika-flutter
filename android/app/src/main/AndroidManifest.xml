@@ -54,17 +54,6 @@
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="restaurant.popina.me"
-                    android:scheme="https" />
-                <!--                <data android:scheme="https" />-->
-            </intent-filter>
 
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -72,20 +61,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="https://links.paprika-sy.com"
+                    android:host="links.paprika-sy.com"
                     android:pathPrefix="/"
                     android:scheme="https" />
             </intent-filter>
-            <!-- Accept adb data flag -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="https://links.paprika-sy.com"
-                    android:scheme="paprika" />
-            </intent-filter>
         </activity>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

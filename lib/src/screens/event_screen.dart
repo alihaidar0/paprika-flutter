@@ -266,7 +266,8 @@ class _EventScreenState extends State<EventScreen> {
                                               child: Icon(Icons.share,
                                                   color: Colors.black87),
                                             ),
-                                          )),
+                                          ),
+                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
