@@ -172,7 +172,6 @@ class EventCard extends StatelessWidget {
   }
 }
 
-
 class MyPaprikaEventCard extends StatefulWidget {
   final EventPapricaItemDto event;
   final EventCardThemeData cardThemeData;
@@ -187,11 +186,12 @@ class MyPaprikaEventCard extends StatefulWidget {
 }
 
 class _MyPaprikaEventCardState extends State<MyPaprikaEventCard> {
-  String _eventId;
+  String eventName;
+
+  String get _eventId => widget.event.id.toString();
 
   @override
   void initState() {
-    _eventId = widget.event.id.toString();
     super.initState();
   }
 
@@ -309,13 +309,13 @@ class _MyPaprikaEventCardState extends State<MyPaprikaEventCard> {
                             ),
                           ),
                         ),
-                        // GestureDetector(
-                        //   onTap: _actionShare,
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(4.0),
-                        //     child: Icon(Icons.share, color: Colors.black87),
-                        //   ),
-                        // ),
+                        GestureDetector(
+                          onTap: widget.event.id != null ? _actionShare : () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.share, color: Colors.black87),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
@@ -401,12 +401,12 @@ class _MyPaprikaEventCardState extends State<MyPaprikaEventCard> {
     );
   }
 
-  // void _actionShare() {
-  //   Share.share(S.of(context).shareTextEvent(
-  //       widget.event.restaurantName ?? '',
-  //       widget.event?? "",
-  //       "https://links.paprika-sy.com/event/" + _eventId));
-  // }
+  void _actionShare() {
+    Share.share(S.of(context).shareTextEvent(
+        widget.event.restaurantName ?? '',
+        widget.event.name ?? "",
+        "https://links.paprika-sy.com/event/" + _eventId));
+  }
 }
 
 // class MyPaprikaEventCard extends StatelessWidget {

@@ -991,7 +991,7 @@ class S implements WidgetsLocalizations {
 
   String shareTextApp(String link) => 'Hello,'
       "\n"
-      'You are invited to use Paprika, your guide to restaurants in Syria.'
+      'You are invited to use Paprika, your guide to restaurants.'
       "\n"
       '$link';
 
@@ -2376,7 +2376,7 @@ class $ar extends S {
   @override
   String shareTextApp(String link) => 'مرحبا،'
       "\n"
-      'تمت دعوتك لتحميل تطبيق Paprika، تطبيق المطاعم الشامل في سورية.'
+      'تمت دعوتك لتحميل تطبيق Paprika، تطبيق المطاعم الشامل.'
       "\n"
       '$link';
 

@@ -129,9 +129,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _actionHandled = true;
       });
     }
-
-    if (widget.initialIndex != null)
-      _tabController.animateTo(widget.initialIndex);
+    if (widget.initialIndex != null && !_actionHandled) {
+      setState(() {
+        _tabController.animateTo(widget.initialIndex);
+        _actionHandled = true;
+      });
+    }
 
     buildContext = context;
     if (!_firebaseInitiatedWithContext) {
