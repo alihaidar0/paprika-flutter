@@ -107,23 +107,22 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     );
   }
 
-  /// not used
-  // void _onClearNotifications(BuildContext context) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return PaprikaSimpleDialog(
-  //             title: S.of(context).messageClearNotification,
-  //             yesButton: RaisedButton(
-  //                 child: Text(S.of(context).yes),
-  //                 onPressed: () {
-  //                   setState(() {
-  //                     _notifications = [];
-  //                   });
-  //                   Navigator.of(context).pop();
-  //                 }));
-  //       });
-  // }
+  void _onClearNotifications(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return PaprikaSimpleDialog(
+              title: S.of(context).messageClearNotification,
+              yesButton: RaisedButton(
+                  child: Text(S.of(context).yes),
+                  onPressed: () {
+                    setState(() {
+                      _notifications = [];
+                    });
+                    Navigator.of(context).pop();
+                  }));
+        });
+  }
 
   Future _getNotifications() {
     setState(() {

@@ -11,6 +11,8 @@ class RestaurantHomeDto {
 
   int noiseLevel = null;
 
+  //enum noiseLevelEnum {  1,  2,  3,  };
+
   double ambianceRate = null;
 
   bool isFavorite = null;
@@ -37,8 +39,6 @@ class RestaurantHomeDto {
 
   String phoneNumber = null;
 
-  String tel = null;
-
   int rank = null;
 
   String address = null;
@@ -49,11 +49,13 @@ class RestaurantHomeDto {
 
   int parkingTypes = null;
 
+  //enum parkingTypeEnum {  1,  };
+
   String description = null;
 
   int ambianceTypes = null;
 
-  int restaurantTypes = null;
+  //enum ambianceTypeEnum {  1,  };
 
   String audioTrack = null;
 
@@ -61,14 +63,16 @@ class RestaurantHomeDto {
 
   bool isSmokeFree = null;
 
-  bool hasShisha = null;
-
   bool isAlcoholFree = null;
 
   int cuisineTypes = null;
 
+  //enum cuisineTypesEnum {  1,  2,  };
+
   int amenityTypes = null;
-  
+
+  //enum amenityTypesEnum {  1,  };
+
   bool hasOutdoor = null;
 
   bool isFeatured = null;
@@ -103,7 +107,7 @@ class RestaurantHomeDto {
     openingTimes = OpeningTimeDto.listFromJson(json['openingTimes']);
     galleryItems = GalleryItemDto.listFromJson(json['galleryItems']);
     restaurantRaters =
-        new RestaurantRatersDto.fromJson(json['restaurantRaters']);
+    new RestaurantRatersDto.fromJson(json['restaurantRaters']);
     settings = new RestaurantSettingsDto.fromJson(json['settings']);
     name = json['name'];
     longitude = json['longitude'];
@@ -185,7 +189,7 @@ class RestaurantHomeDto {
     var map = new Map<String, RestaurantHomeDto>();
     if (json != null && json.length > 0) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new RestaurantHomeDto.fromJson(value));
+      map[key] = new RestaurantHomeDto.fromJson(value));
     }
     return map;
   }
