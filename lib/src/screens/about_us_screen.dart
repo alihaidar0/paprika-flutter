@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/translations.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class AboutUsScreen extends StatelessWidget {
@@ -14,9 +14,10 @@ class AboutUsScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/background_grey.png'),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+              image: AssetImage('assets/images/background_grey.png'),
+              fit: BoxFit.cover),
+        ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(

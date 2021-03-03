@@ -3,14 +3,13 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/menu_state.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/menu_state.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';
@@ -80,25 +79,25 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
               if (snapshot.hasData) {
                 return snapshot.data.length > 0
                     ? Container(
-                  color: Color(0xFFF2F2F2),
-                  child: GridView.count(
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    children: snapshot.data.map<Widget>((category) {
-                      if (widget.mealShare != null &&
-                          widget.mealShare.categoryId == category.id &&
-                          !_sharedCatOpened) {
-                        _openSharedCategory(category);
-                      }
-                      return _buildMenuGridItem(category);
-                    }).toList(),
-                    padding: EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 25),
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                  ),
-                )
+                        color: Color(0xFFF2F2F2),
+                        child: GridView.count(
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          children: snapshot.data.map<Widget>((category) {
+                            if (widget.mealShare != null &&
+                                widget.mealShare.categoryId == category.id &&
+                                !_sharedCatOpened) {
+                              _openSharedCategory(category);
+                            }
+                            return _buildMenuGridItem(category);
+                          }).toList(),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 25),
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                        ),
+                      )
                     : Center(child: Text(S.of(context).catsNotAvailable));
               } else if (snapshot.hasError) {
                 return RequestRetry(
@@ -111,62 +110,62 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
             }),
         secondChild: !this.widget.menuState.isGrid
             ? Container(
-            color: Color(0xFFF2F2F2),
-            child: NestedScrollView(
-              controller: scrollController,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: MealListHeaderDelegate(
-                        this.widget.menuState.selectedCategory.name,
-                        _toggleMenuView),
-                  ),
-                ];
-              },
-              body: FutureBuilder<List<MealDto>>(
-                future: meals,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Center(
-                        child: snapshot.data.length > 0
-                            ? ListView.builder(
-                          itemExtent: Localizations.localeOf(context)
-                              .languageCode ==
-                              'en'
-                              ? 124
-                              : 127.4,
-                          itemCount: snapshot.data.length,
-                          padding: EdgeInsets.only(bottom: 60),
-                          itemBuilder: (context, index) {
-                            if (widget.mealShare != null &&
-                                snapshot.data[index].id ==
-                                    widget.mealShare.mealId &&
-                                !_sharedMealOpened) {
-                              _openSharedMeal(snapshot.data[index]);
-                            }
-                            return _buildMenuListItem(
-                                context, snapshot.data[index]);
-                          },
-                          physics: ClampingScrollPhysics(),
-                        )
-                            : Center(
-                            child: Text(S.of(context).menuNoAvailable(
-                                selectedCategory.name))));
-                  } else if (snapshot.hasError) {
-                    return RequestRetry(
-                        message: S.of(context).errorUnknown,
-                        retryCallback: () =>
-                            _getCategoryMealAsync(selectedCategory.id));
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ), // The container is added here to remove meals list permanently when the grid is shown
-            ))
+                color: Color(0xFFF2F2F2),
+                child: NestedScrollView(
+                  controller: scrollController,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverPersistentHeader(
+                        pinned: true,
+                        delegate: MealListHeaderDelegate(
+                            this.widget.menuState.selectedCategory.name,
+                            _toggleMenuView),
+                      ),
+                    ];
+                  },
+                  body: FutureBuilder<List<MealDto>>(
+                    future: meals,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Center(
+                            child: snapshot.data.length > 0
+                                ? ListView.builder(
+                                    itemExtent: Localizations.localeOf(context)
+                                                .languageCode ==
+                                            'en'
+                                        ? 124
+                                        : 127.4,
+                                    itemCount: snapshot.data.length,
+                                    padding: EdgeInsets.only(bottom: 60),
+                                    itemBuilder: (context, index) {
+                                      if (widget.mealShare != null &&
+                                          snapshot.data[index].id ==
+                                              widget.mealShare.mealId &&
+                                          !_sharedMealOpened) {
+                                        _openSharedMeal(snapshot.data[index]);
+                                      }
+                                      return _buildMenuListItem(
+                                          context, snapshot.data[index]);
+                                    },
+                                    physics: ClampingScrollPhysics(),
+                                  )
+                                : Center(
+                                    child: Text(S.of(context).menuNoAvailable(
+                                        selectedCategory.name))));
+                      } else if (snapshot.hasError) {
+                        return RequestRetry(
+                            message: S.of(context).errorUnknown,
+                            retryCallback: () =>
+                                _getCategoryMealAsync(selectedCategory.id));
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ), // The container is added here to remove meals list permanently when the grid is shown
+                ))
             : Container());
   }
 
@@ -459,7 +458,7 @@ class MenuListItem extends StatelessWidget {
                                 width: 4,
                               ),
                               Text(
-                                  PapricaFormatter.formatNumber(
+                                  PaprikaFormatter.formatNumber(
                                       meal.price.floor()),
                                   style: TextStyle(
                                       fontSize: 15,
@@ -531,7 +530,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               children: <Widget>[
                                 GestureDetector(
                                   onTap: () {
-                                    PapricaToast.showToast(
+                                    PaprikaToast.showToast(
                                         S.of(context).errorRateMeal,
                                         ToastType.Error);
                                     showDialog(
@@ -732,7 +731,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                             width: 4,
                                           ),
                                           Text(
-                                              PapricaFormatter.formatNumber(
+                                              PaprikaFormatter.formatNumber(
                                                   widget.meal.price.floor()),
                                               style: TextStyle(
                                                   fontSize: 18,
@@ -774,7 +773,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title:
                   S.of(context).loggingInRequired(S.of(context).actionRateMeal),
               yesButton: FlatButton(
@@ -789,7 +788,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                       if (loggedIn != null && loggedIn) {
                         _showUserRateDialog(context);
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionRateMeal));
                       }
@@ -815,7 +814,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
     Share.share(S.of(context).shareTextMeal(
         widget.meal.name,
         widget.restaurantName,
-        "https://links.popina.me/meal/" +
+        "https://links.paprika-sy.com/meal/" +
             widget.restaurantId.toString() +
             "/" +
             widget.categoryId.toString() +
@@ -903,13 +902,13 @@ class _RateMealDialogState extends State<RateMealDialog> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => MessageDialog(
-                        S.of(context).successRateMeal(widget.meal.name),
-                        duration: Duration(seconds: 1),
+                        message:
+                            S.of(context).successRateMeal(widget.meal.name),
                       ),
                     );
                   }).catchError((error) {
                     dialog.hide();
-                    PapricaToast.showToast(
+                    PaprikaToast.showToast(
                         S.of(context).errorRateMeal, ToastType.Error);
                   });
                 },

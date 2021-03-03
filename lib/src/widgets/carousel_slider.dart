@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/slider.dart';
+import 'package:paprika/widgets.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 final Widget placeholder = Container(color: Colors.grey);
@@ -198,7 +198,8 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                       ? AssetImage(widget.urls[index])
                       : NetworkImage(widget.urls[index]),
                   initialScale: PhotoViewComputedScale.contained,
-                  heroAttributes: PhotoViewHeroAttributes(tag: widget.urls[index]),
+                  heroAttributes:
+                      PhotoViewHeroAttributes(tag: widget.urls[index]),
                 );
               },
             )),

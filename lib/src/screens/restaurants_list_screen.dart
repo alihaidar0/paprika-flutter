@@ -4,12 +4,12 @@ import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
 
 import '../../screens.dart';
 
@@ -18,7 +18,7 @@ class RestaurantsListScreen extends StatefulWidget {
 
   final List<RestaurantSummaryDto> restaurants;
 
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
 
   const RestaurantsListScreen({this.title, this.restaurants, this.filterModel});
 
@@ -27,7 +27,7 @@ class RestaurantsListScreen extends StatefulWidget {
 }
 
 class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
-  PapricaFilterModel filterData;
+  PaprikaFilterModel filterData;
   List<dynamic> restaurants;
 
   ScrollController _scrollController;
@@ -43,7 +43,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
     super.initState();
     _requestingData = false;
     _endOfRestaurants = false;
-    filterData = widget.filterModel ?? PapricaFilterModel();
+    filterData = widget.filterModel ?? PaprikaFilterModel();
     restaurants = []..addAll(widget.restaurants);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
@@ -88,11 +88,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                 return GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => _openFilterSheet(context),
-                  child: Image(
-                    width: 40,
-                    height: 40,
-                    image: AssetImage("assets/icons/filter.png"),
-                  ),
+                  child: Icon(Icons.filter_alt),
                 );
               },
             ),
@@ -107,7 +103,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                         restaurants: _extract(restaurants));
                   }));
                 } else {
-                  PapricaToast.showToast(
+                  PaprikaToast.showToast(
                       S.of(context).noRestaurantsToViewMap, ToastType.Normal);
                 }
               },
@@ -128,7 +124,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                     delegate: _CustomFilterParamsSliverDelegate(
                         minHeight: filterData.isFilterNotEmpty ? 48.0 : 0,
                         maxHeight: filterData.isFilterNotEmpty ? 130 : 0,
-                        filterModel: PapricaFilterModel.deepCopy(filterData),
+                        filterModel: PaprikaFilterModel.deepCopy(filterData),
                         editFilterCallback: (filterData) =>
                             _editFilterCallback(context, filterData)),
                   ),
@@ -201,11 +197,11 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
   }
 
   void _editFilterCallback(
-      BuildContext context, PapricaFilterModel filterModel) {
+      BuildContext context, PaprikaFilterModel filterModel) {
     _requestData(context, filterModel);
   }
 
-  void _requestData(BuildContext context, PapricaFilterModel filter,
+  void _requestData(BuildContext context, PaprikaFilterModel filter,
       {int skipCount, int maxResult = 5}) {
     if (_requestingData) return;
     setState(() {
@@ -282,7 +278,7 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
             maxChildSize: .95,
             builder: (context, scrollController) {
               return QuickFilter(
-                  filterModel: PapricaFilterModel.deepCopy(filterData),
+                  filterModel: PaprikaFilterModel.deepCopy(filterData),
                   scrollController: scrollController);
             },
           );
@@ -314,7 +310,7 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
       @required this.filterModel,
       this.editFilterCallback});
 
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
   final double minHeight;
   final double maxHeight;
 
@@ -510,7 +506,7 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class QuickFilter extends StatefulWidget {
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
 
   final ScrollController scrollController;
 
@@ -521,7 +517,7 @@ class QuickFilter extends StatefulWidget {
 }
 
 class _QuickFilterState extends State<QuickFilter> {
-  PapricaFilterModel filterModel;
+  PaprikaFilterModel filterModel;
   List<String> places;
   List<String> cuisines;
   List<String> amenities;
@@ -536,7 +532,7 @@ class _QuickFilterState extends State<QuickFilter> {
     super.initState();
     clearStreamController = StreamController<bool>.broadcast();
 
-    filterModel ??= widget.filterModel ?? PapricaFilterModel();
+    filterModel ??= widget.filterModel ?? PaprikaFilterModel();
 
     ApiTypesHelper helper = ApiTypesHelper();
     places = helper.getTypeNames(Type.places);
@@ -580,12 +576,12 @@ class _QuickFilterState extends State<QuickFilter> {
                 ),
                 onTap: () {
                   if (filterModel.isFilterNotEmpty) {
-                    PapricaToast.showToast(
+                    PaprikaToast.showToast(
                         S.of(context).filterCleared, ToastType.Normal);
                   }
                   clearStreamController.add(true);
                   setState(() {
-                    filterModel = PapricaFilterModel();
+                    filterModel = PaprikaFilterModel();
                   });
                 }),
             GestureDetector(
@@ -918,7 +914,8 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.25 * 0.5),
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(
@@ -1060,7 +1057,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1082,7 +1079,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1104,7 +1101,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1126,7 +1123,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),

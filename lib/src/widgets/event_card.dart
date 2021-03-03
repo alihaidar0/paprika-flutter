@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/screens/event_screen.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/screens/event_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:share/share.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../utils.dart';
-import '../../widgets.dart';
 
 class EventCardThemeData {
   Color backgroundColor, titleColor, actionTextColor;
@@ -131,12 +130,12 @@ class EventCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          PapricaFormatter.formatDateOnly(context, event.date),
+                          PaprikaFormatter.formatDateOnly(context, event.date),
                           style: TextStyle(
                               color: themeData.titleColor, fontSize: 12),
                         ),
                         Text(
-                          PapricaFormatter.formatTimeOnly(context, event.date),
+                          PaprikaFormatter.formatTimeOnly(context, event.date),
                           style: TextStyle(
                               color: themeData.titleColor, fontSize: 12),
                         ),
@@ -173,37 +172,51 @@ class EventCard extends StatelessWidget {
   }
 }
 
-class MyPapricaEventCard extends StatelessWidget {
+class MyPaprikaEventCard extends StatefulWidget {
   final EventPapricaItemDto event;
   final EventCardThemeData cardThemeData;
   final GestureTapCallback onPressed;
 
-  MyPapricaEventCard({
-    @required this.event,
-    this.cardThemeData,
-    this.onPressed,
-  });
+  const MyPaprikaEventCard(
+      {Key key, this.event, this.cardThemeData, this.onPressed})
+      : super(key: key);
+
+  @override
+  _MyPaprikaEventCardState createState() => _MyPaprikaEventCardState();
+}
+
+class _MyPaprikaEventCardState extends State<MyPaprikaEventCard> {
+  String eventName;
+
+  String get _eventId => widget.event.id.toString();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    EventCardThemeData themeData = cardThemeData ?? /*if not null, else */
-        EventCardThemeData(
-            backgroundColor: Colors.white,
-            titleColor: Colors.black,
-            actionTextColor: Theme.of(context).primaryColor);
+    EventCardThemeData themeData =
+        widget.cardThemeData ?? /*if not null, else */
+            EventCardThemeData(
+                backgroundColor: Colors.white,
+                titleColor: Colors.black,
+                actionTextColor: Theme.of(context).primaryColor);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => this.onPressed != null && this.onPressed is Function
-          ? this.onPressed()
-          : Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => EventScreen(
-                  event: EventModel.fromEventPapricaItemDto(event),
+      onTap: () =>
+          this.widget.onPressed != null && this.widget.onPressed is Function
+              ? this.widget.onPressed()
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EventScreen(
+                      event: EventModel.fromEventPaprikaItemDto(widget.event),
+                    ),
+                  ),
                 ),
-              ),
-            ),
       child: Container(
         color: themeData?.backgroundColor,
         child: Padding(
@@ -216,7 +229,7 @@ class MyPapricaEventCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 55),
                     child: GestureDetector(
                       child: CachedNetworkImage(
-                        imageUrl: event.image,
+                        imageUrl: widget.event.image,
                         placeholder: (context, url) => Image(
                           image: AssetImage("assets/images/placeholder.png"),
                           width: MediaQuery.of(context).size.width,
@@ -238,7 +251,7 @@ class MyPapricaEventCard extends StatelessWidget {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
                               return RestaurantHome(
-                                restaurantId: event.restaurantId,
+                                restaurantId: widget.event.restaurantId,
                               );
                             }));
                           },
@@ -250,7 +263,7 @@ class MyPapricaEventCard extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: 35,
                                 backgroundImage: CachedNetworkImageProvider(
-                                  event.restaurantLogo,
+                                  widget.event.restaurantLogo,
                                 ),
                                 backgroundColor: Colors.grey,
                               ),
@@ -260,7 +273,7 @@ class MyPapricaEventCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: Text(
-                            event.restaurantName,
+                            widget.event.restaurantName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -286,7 +299,7 @@ class MyPapricaEventCard extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            event.name,
+                            widget.event.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -296,6 +309,13 @@ class MyPapricaEventCard extends StatelessWidget {
                             ),
                           ),
                         ),
+                        GestureDetector(
+                          onTap: widget.event.id != null ? _actionShare : () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.share, color: Colors.black87),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
@@ -303,8 +323,8 @@ class MyPapricaEventCard extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            PapricaFormatter.formatDateOnly(
-                                context, event.time),
+                            PaprikaFormatter.formatDateOnly(
+                                context, widget.event.time),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: themeData.actionTextColor, fontSize: 12),
@@ -314,7 +334,8 @@ class MyPapricaEventCard extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          PapricaFormatter.formatTimeOnly(context, event.time),
+                          PaprikaFormatter.formatTimeOnly(
+                              context, widget.event.time),
                           style: TextStyle(
                               color: themeData.actionTextColor, fontSize: 12),
                         ),
@@ -323,13 +344,14 @@ class MyPapricaEventCard extends StatelessWidget {
                     SizedBox(
                       height: 15,
                     ),
-                    event.description != null && event.description.isNotEmpty
+                    widget.event.description != null &&
+                            widget.event.description.isNotEmpty
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  event.description,
+                                  widget.event.description,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -346,38 +368,30 @@ class MyPapricaEventCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: (DateTime.now().isAfter(event.time)
-                                  ? Colors.grey
-                                  : Theme.of(context).primaryColor),
-                              width: 1,
-                              style: BorderStyle.solid)),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                          child: Text(
-                            (DateTime.now().isAfter(event.time)
-                                ? S.of(context).oldEvent.toUpperCase()
-                                : S.of(context).event.toUpperCase()),
-                            style: TextStyle(
-                              letterSpacing: 1.5,
-                              fontSize: 18,
-                              color: (DateTime.now().isAfter(event.time)
-                                  ? Colors.grey
-                                  : Theme.of(context).primaryColor),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-//                        Text(
-//                          S.of(context).event.toUpperCase(),
-//                          style: TextStyle(
-//                            fontSize: 16,
-//                            letterSpacing: 1.5,
-//                            color: themeData.actionTextColor,
-//                            fontWeight: FontWeight.bold,
-//                          ),
-//                        ),
-                          ))
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: (DateTime.now().isAfter(widget.event.time)
+                                ? Colors.grey
+                                : Theme.of(context).primaryColor),
+                            width: 1,
+                            style: BorderStyle.solid)),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                      child: Text(
+                        (DateTime.now().isAfter(widget.event.time)
+                            ? S.of(context).oldEvent.toUpperCase()
+                            : S.of(context).event.toUpperCase()),
+                        style: TextStyle(
+                          letterSpacing: 1.5,
+                          fontSize: 18,
+                          color: (DateTime.now().isAfter(widget.event.time)
+                              ? Colors.grey
+                              : Theme.of(context).primaryColor),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -385,5 +399,12 @@ class MyPapricaEventCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _actionShare() {
+    Share.share(S.of(context).shareTextEvent(
+        widget.event.restaurantName ?? '',
+        widget.event.name ?? "",
+        "https://links.paprika-sy.com/event/" + _eventId));
   }
 }

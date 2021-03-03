@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:location/location.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/utils/api_types_helper.dart';
 import 'package:swagger/api.dart';
 
-class PapricaFilterModel {
+class PaprikaFilterModel {
   bool isFeatured;
   LocationData locationData;
   String hasOutdoorValue;
@@ -22,7 +22,7 @@ class PapricaFilterModel {
   List<String> musicTypesSelections = [];
   List<String> parkingTypesSelections = [];
 
-  PapricaFilterModel(
+  PaprikaFilterModel(
       {this.isFeatured,
       this.locationData,
       this.hasOutdoorValue,
@@ -36,10 +36,10 @@ class PapricaFilterModel {
       this.musicTypesSelections,
       this.parkingTypesSelections});
 
-  PapricaFilterModel.apiToFilterModelAdapter(
+  PaprikaFilterModel.apiToFilterModelAdapter(
       ApiFilterModel filter, BuildContext context) {
     if (filter == null)
-      PapricaFilterModel();
+      PaprikaFilterModel();
     else {
       isFeatured = filter.isFeatured;
       hasOutdoorValue =
@@ -65,9 +65,9 @@ class PapricaFilterModel {
     }
   }
 
-  PapricaFilterModel.deepCopy(PapricaFilterModel filter) {
+  PaprikaFilterModel.deepCopy(PaprikaFilterModel filter) {
     if (filter == null)
-      PapricaFilterModel();
+      PaprikaFilterModel();
     else {
       isFeatured = filter.isFeatured;
       locationData = filter.locationData;
@@ -85,6 +85,7 @@ class PapricaFilterModel {
   }
 
   get longitude => null;
+
   get latitude => null;
 
   @override
@@ -145,7 +146,7 @@ class PapricaFilterModel {
   @override
   bool operator ==(other) {
     Function eq = const ListEquality().equals;
-    return other is PapricaFilterModel &&
+    return other is PaprikaFilterModel &&
         isFeatured == other.isFeatured &&
         locationData?.latitude == other.locationData?.latitude &&
         locationData?.latitude == other.locationData?.longitude &&

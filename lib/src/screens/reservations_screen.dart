@@ -5,18 +5,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/src/widgets/reservation_card.dart';
-import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
+import 'package:paprika/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/src/widgets/reservation_card.dart';
+import 'package:paprika/src/widgets/slider.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -24,9 +24,7 @@ import '../../widgets.dart';
 
 class ReservationsScreen extends StatefulWidget {
   final Stream<bool> refreshStream;
-  // final changeHomePageIndexHandler;
 
-  // const ReservationsPage(this.changeHomePageIndexHandler,{this.refreshStream});
   const ReservationsScreen({this.refreshStream});
 
   @override
@@ -37,14 +35,14 @@ class _ReservationsScreenState extends State<ReservationsScreen>
     with WidgetsBindingObserver {
   ScrollController scrollController;
   StreamController<bool> streamScrollController;
-  StreamController<bool> streamRefreshController;
+  StreamController<bool> _streamRefreshController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     streamScrollController = StreamController<bool>.broadcast();
-    streamRefreshController = StreamController<bool>.broadcast();
+    _streamRefreshController = StreamController<bool>.broadcast();
     scrollController = ScrollController();
     scrollController.addListener(_scrollControllerListener);
     widget.refreshStream?.listen((refresh) {
@@ -52,6 +50,14 @@ class _ReservationsScreenState extends State<ReservationsScreen>
         refreshData();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollControllerListener);
+    streamScrollController.close();
+    _streamRefreshController.close();
+    super.dispose();
   }
 
   @override
@@ -71,17 +77,9 @@ class _ReservationsScreenState extends State<ReservationsScreen>
 
   Future refreshData() {
     try {
-      streamRefreshController.add(true);
+      _streamRefreshController.add(true);
     } catch (e) {}
     return Future.value();
-  }
-
-  @override
-  void dispose() {
-    scrollController.removeListener(_scrollControllerListener);
-    streamScrollController.close();
-    streamRefreshController.close();
-    super.dispose();
   }
 
   void _scrollControllerListener() {
@@ -98,8 +96,10 @@ class _ReservationsScreenState extends State<ReservationsScreen>
     if (ApiTypesHelper().isAuthorized) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).reservations,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+          title: Text(
+            S.of(context).reservations,
+            style: TextStyle(fontSize: 18),
+          ),
         ),
         body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -113,7 +113,7 @@ class _ReservationsScreenState extends State<ReservationsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   UpcomingReservationsSection(
-                      refreshStream: streamRefreshController.stream),
+                      refreshStream: _streamRefreshController.stream),
                   OldReservationSection(
                     loadMoreStream: streamScrollController.stream,
                   ),
@@ -163,9 +163,7 @@ class NoReservationsLayout extends StatelessWidget {
 
 class UpcomingReservationsSection extends StatefulWidget {
   final Stream<bool> refreshStream;
-  // final changeHomePageIndexHandler;
 
-  // const UpcomingReservationsSection(this.changeHomePageIndexHandler,{this.refreshStream});
   const UpcomingReservationsSection({this.refreshStream});
 
   @override
@@ -182,18 +180,11 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
   StreamController<int> moveController;
 
   @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      fn();
-    }
-  }
-
-  @override
   void initState() {
     super.initState();
     moveController = StreamController<int>.broadcast();
-    _getUpcomingReservationsAsync();
     widget.refreshStream?.listen(_listener);
+    _getUpcomingReservationsAsync();
   }
 
   @override
@@ -216,7 +207,6 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
           api.apiServicesAppCustomerReservationGetAllUpcomingGet();
       _isLoading = true;
     });
-
     _upcomingReservationsFuture.then((_) {
       setState(() {
         _isLoading = false;
@@ -232,94 +222,95 @@ class _UpcomingReservationsSection extends State<UpcomingReservationsSection> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<CustomerUpcomingReservationsDto>(
-        future: _upcomingReservationsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data.upcoming != null &&
-                snapshot.data.upcoming.length > 0) {
-              _upcomingReservations = snapshot.data.upcoming;
-              _coverImage ??= ReservationCoverImage(
-                  snapshot.data.upcoming[0].restaurantCoverImage);
-              _reservationsListWidget = map<Widget>(
-                _upcomingReservations,
-                (index, reservation) {
-                  return NewReservationCard(reservation: reservation);
-                },
-              ).toList();
-              return Stack(
-                children: <Widget>[
-                  _coverImage,
-                  CarouselSlider(
-                    items: _reservationsListWidget,
-                    height: 500,
-                    viewportFraction: 1.0,
-                    initialPage: 0,
-                    autoPlay: false,
-                    enableInfiniteScroll: false,
-                    onPageChanged: (index) {
-                      _coverImage.state.updateCover(
-                          _upcomingReservations[index].restaurantCoverImage);
-                      moveController.add(index);
-                    },
-                  ),
-                  Positioned(
-                      bottom: 0,
-                      right: 0,
-                      left: 0,
-                      child: DotsPart(
-                        count: _reservationsListWidget.length,
-                        moveStream: moveController.stream,
-                      ))
-                ],
-              );
-            } else {
-              return Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                    child: NoReservationsLayout(
-                        mTitle: S.of(context).noUpcomingReservations),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomeScreen(initialIndex: 2)),
-                          ModalRoute.withName('/splash'));
-                    },
-                    child: Text(
-                      S.of(context).goToPlaces,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              );
-            }
-          } else if (snapshot.hasError) {
+      future: _upcomingReservationsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data.upcoming != null &&
+              snapshot.data.upcoming.length > 0) {
+            _upcomingReservations = snapshot.data.upcoming;
+            _coverImage ??= ReservationCoverImage(
+                snapshot.data.upcoming[0].restaurantCoverImage);
+            _reservationsListWidget = map<Widget>(
+              _upcomingReservations,
+              (index, reservation) {
+                return NewReservationCard(reservation: reservation);
+              },
+            ).toList();
+            return Stack(
+              children: <Widget>[
+                _coverImage,
+                CarouselSlider(
+                  items: _reservationsListWidget,
+                  height: 500,
+                  viewportFraction: 1.0,
+                  initialPage: 0,
+                  autoPlay: false,
+                  enableInfiniteScroll: false,
+                  onPageChanged: (index) {
+                    _coverImage.state.updateCover(
+                        _upcomingReservations[index].restaurantCoverImage);
+                    moveController.add(index);
+                  },
+                ),
+                Positioned(
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: DotsPart(
+                      count: _reservationsListWidget.length,
+                      moveStream: moveController.stream,
+                    ))
+              ],
+            );
+          } else {
             return Column(
               children: <Widget>[
-                RequestRetry(
-                    message: S.of(context).errorUnknown,
-                    retryCallback: _getUpcomingReservationsAsync),
+                SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: NoReservationsLayout(
+                      mTitle: S.of(context).noUpcomingReservations),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => HomeScreen(initialIndex: 1)),
+                        ModalRoute.withName('/splash'));
+                  },
+                  child: Text(
+                    S.of(context).goToRestaurants,
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             );
           }
-          return Center(
-              child: Column(
+        } else if (snapshot.hasError) {
+          return Column(
+            children: <Widget>[
+              RequestRetry(
+                  message: S.of(context).errorUnknown,
+                  retryCallback: _getUpcomingReservationsAsync),
+            ],
+          );
+        }
+        return Center(
+          child: Column(
             children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
               CircularProgressIndicator(),
             ],
-          ));
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -531,7 +522,7 @@ class _OldReservationSectionState extends State<OldReservationSection> {
                                     final bool res = await showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return PapricaSimpleDialog(
+                                          return PaprikaSimpleDialog(
                                             title: S.of(context).confirm,
                                             content: (S.of(context).sureDelete),
                                             yesButton: FlatButton(
@@ -555,7 +546,7 @@ class _OldReservationSectionState extends State<OldReservationSection> {
                                                     else {
                                                       Navigator.of(context)
                                                           .pop(false);
-                                                      PapricaToast.showToast(
+                                                      PaprikaToast.showToast(
                                                           S
                                                               .of(context)
                                                               .deletingFailed,
@@ -633,7 +624,7 @@ class _NewReservationCardState extends State<NewReservationCard>
   Widget build(BuildContext context) {
     super.build(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 115, 8, 8),
+      padding: const EdgeInsets.fromLTRB(8.0, 100, 8, 8),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         child: Padding(
@@ -660,7 +651,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                             }));
                           },
                           child: CircleAvatar(
-//                            backgroundImage: NetworkImage(widget.reservation.restaurantImage),
                             backgroundImage: CachedNetworkImageProvider(
                                 widget.reservation.restaurantImage),
                             radius: MediaQuery.of(context).size.width * 0.08,
@@ -671,12 +661,17 @@ class _NewReservationCardState extends State<NewReservationCard>
                           child: Row(
                             children: [
                               Text(
-                                S.of(context).reservationAt,
+                                S.of(context).reservationAt + " ",
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                ),
                               ),
-                              RestaurantNamedLink(
-                                restaurantName:
-                                    widget.reservation.restaurantName,
-                                restaurantId: widget.reservation.restaurantId,
+                              Text(
+                                widget.reservation.restaurantName,
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -728,9 +723,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                   ),
                 ],
               ),
-              SizedBox(
-                height: 5,
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -751,8 +743,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                                         vertical: 1.0),
                                     child: Text(
                                       "#" + S.of(context).people + ":",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Padding(
@@ -768,7 +758,28 @@ class _NewReservationCardState extends State<NewReservationCard>
                               _reservationStatus(widget.reservation.status),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 1.0),
+                                child: Text(
+                                  S.of(context).date + ":",
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Text(
+                                  PaprikaFormatter.formatDateOnly(
+                                          context, widget.reservation.date) +
+                                      "  " +
+                                      PaprikaFormatter.formatTimeOnly(
+                                          context, widget.reservation.date),
+                                ),
+                              ),
+                            ],
+                          ),
                           Row(
                             crossAxisAlignment:
                                 widget.reservation.customerAdditionalInfo !=
@@ -786,7 +797,6 @@ class _NewReservationCardState extends State<NewReservationCard>
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(
                                   S.of(context).moreInfo + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Flexible(
@@ -817,17 +827,21 @@ class _NewReservationCardState extends State<NewReservationCard>
                       child: Row(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Text(
                               S.of(context).pendingChanges,
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor),
                             ),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                          )
+                          FaIcon(
+                            Localizations.localeOf(context).languageCode == 'en'
+                                ? (FontAwesomeIcons.angleDoubleRight)
+                                : (FontAwesomeIcons.angleDoubleLeft),
+                            color: Theme.of(context).primaryColor,
+                            size: 12.0,
+                          ),
                         ],
                       ),
                     )
@@ -985,7 +999,7 @@ class _NewReservationCardState extends State<NewReservationCard>
             });
           }
         });
-        PapricaToast.showToast(S.of(context).successReservationUpdate);
+        PaprikaToast.showToast(S.of(context).successReservationUpdate);
       }
     });
   }
@@ -994,7 +1008,7 @@ class _NewReservationCardState extends State<NewReservationCard>
     showDialog(
         context: context,
         builder: (context) {
-          return PapricaInputDialog(
+          return PaprikaInputDialog(
             title: S.of(context).confirmCancelReservation,
             content: S.of(context).msgCancelReservation,
             confirmCallback: (text) {
@@ -1024,7 +1038,7 @@ class _NewReservationCardState extends State<NewReservationCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successReservationCancel);
+      PaprikaToast.showToast(S.of(context).successReservationCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1064,7 +1078,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatDateOnly(
+                    Text(PaprikaFormatter.formatDateOnly(
                         context, widget.reservation.updateRequest.time))
                   ],
                 ),
@@ -1094,7 +1108,7 @@ class _NewReservationCardState extends State<NewReservationCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatTimeOnly(
+                    Text(PaprikaFormatter.formatTimeOnly(
                         context, widget.reservation.updateRequest.time))
                   ],
                 ),
@@ -1258,9 +1272,10 @@ class _NewReservationCardState extends State<NewReservationCard>
                 Animation<double> secondaryAnimation) {
               return SafeArea(
                 child: Builder(builder: (_context) {
-                  return PapricaSimpleDialog(
+                  return PaprikaSimpleDialog(
                     title: S.of(context).confirmCancellation,
-                    content: S.of(context).confirmCancelUpdateRequestReservation,
+                    content:
+                        S.of(context).confirmCancelUpdateRequestReservation,
                     yesButton: FlatButton(
                       child: Text(S.of(context).confirm),
                       onPressed: () {
@@ -1296,7 +1311,7 @@ class _NewReservationCardState extends State<NewReservationCard>
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successReservationCancel);
+      PaprikaToast.showToast(S.of(context).successReservationCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1334,14 +1349,6 @@ class _ReservationCoverImageState extends State<ReservationCoverImage> {
 
   @override
   Widget build(BuildContext context) {
-//    return FadeInImage.assetNetwork(
-//      image: (this.url),
-//      width: MediaQuery.of(context).size.width,
-//      height: 180,
-//      fit: BoxFit.cover,
-//      placeholder: "assets/images/placeholder.png",
-//    );
-
     return CachedNetworkImage(
       imageUrl: (this.url),
       width: MediaQuery.of(context).size.width,

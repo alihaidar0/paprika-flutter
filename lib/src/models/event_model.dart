@@ -1,4 +1,3 @@
-import 'package:paprica/src/models/offer_model.dart';
 import 'package:swagger/api.dart';
 
 class EventModel {
@@ -35,7 +34,7 @@ class EventModel {
     restaurantId = dto.restaurantId;
   }
 
-  EventModel.fromEventPapricaItemDto(EventPapricaItemDto dto) {
+  EventModel.fromEventPaprikaItemDto(EventPapricaItemDto dto) {
     id = dto.id;
     imageUrl = dto.image;
     eventName = dto.name;

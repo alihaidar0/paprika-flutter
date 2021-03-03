@@ -1,21 +1,20 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/menu_state.dart';
-import 'package:paprica/src/models/reviews_state.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
-import 'package:paprica/src/utils/paprica_api_client.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/widgets.dart';
-import 'package:share/share.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:swagger/api.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/menu_state.dart';
+import 'package:paprika/src/models/reviews_state.dart';
+import 'package:paprika/src/utils/api_types_helper.dart';
+import 'package:paprika/src/utils/paprica_api_client.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
+import 'package:share/share.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:swagger/api.dart';
 
 import '../../screens.dart';
 
@@ -165,8 +164,6 @@ class _RestaurantHomeState extends State<RestaurantHome>
             widget.mealShare.restaurantId <= 0)) {
       Navigator.of(context).pop();
     }
-    final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
-
     return WillPopScope(
       onWillPop: () {
         if (_tabController.index == 1 && !menuState.isGrid) {
@@ -578,13 +575,14 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onReservePressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       _showReservationDialog();
     } else {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToReserve,
               yesButton: FlatButton(
                   onPressed: () {
@@ -598,7 +596,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                       if (loggedIn != null && loggedIn) {
                         _showReservationDialog();
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionReserve));
                       }
@@ -611,6 +609,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onOrderPickupPressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -623,7 +622,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToOrderPickup,
               yesButton: FlatButton(
                   onPressed: () {
@@ -643,7 +642,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                           );
                         }));
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionPickup));
                       }
@@ -656,6 +655,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
   }
 
   void _onOrderDeliveryPressed(context) {
+    _screenActivity.add(false);
     if (ApiTypesHelper().isAuthorized) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -670,7 +670,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToOrderDelivery,
               yesButton: FlatButton(
                   onPressed: () {
@@ -692,7 +692,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
                           );
                         }));
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionDelivery));
                       }
@@ -713,8 +713,7 @@ class _RestaurantHomeState extends State<RestaurantHome>
         showDialog(
           context: context,
           builder: (BuildContext context) => MessageDialog(
-            S.of(context).successReservation,
-            duration: Duration(seconds: 1),
+            message: S.of(context).successReservation,
             footer: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () => _viewMyReservations(context),
@@ -1198,7 +1197,12 @@ class _ActionsRowState extends State<ActionsRow> {
           : Container(),
       GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: _onTapAddToFavorite,
+        onTap: () {
+          _onTapAddToFavorite();
+          if (!ApiTypesHelper().isAuthorized) {
+            _actionToggleMusic();
+          }
+        },
         child: Padding(
             padding: Localizations.localeOf(context).languageCode == "en"
                 ? const EdgeInsets.only(left: 4, right: 8.0)
@@ -1242,7 +1246,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = false;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .restaurantRemovedFromFavorites(widget.restData?.name ?? ""),
@@ -1265,7 +1269,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isFavorite = true;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .restaurantAddedToFavorites(widget.restData?.name ?? ""),
@@ -1305,7 +1309,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = false;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .turnOffRestaurantNotifications(widget.restData?.name ?? ""),
@@ -1331,7 +1335,7 @@ class _ActionsRowState extends State<ActionsRow> {
             _isNotificationsOn = true;
           });
         }
-        PapricaToast.showToast(
+        PaprikaToast.showToast(
             S
                 .of(context)
                 .turnOnRestaurantNotifications(widget.restData?.name ?? ""),
@@ -1364,8 +1368,10 @@ class _ActionsRowState extends State<ActionsRow> {
   }
 
   void _actionShare() {
-    Share.share(S.of(context).shareText(widget.restData.name,
-        "https://links.popina.me/restaurant/" + widget.restData.id.toString()));
+    Share.share(S.of(context).shareText(
+        widget.restData.name,
+        "https://links.paprika-sy.com/restaurant/" +
+            widget.restData.id.toString()));
   }
 
   Future<void> play() async {
@@ -1390,7 +1396,7 @@ class _ActionsRowState extends State<ActionsRow> {
           downloading = false;
           _isMusicPlaying = false;
         });
-        PapricaToast.showToast(S.of(context).errorPlayingAudio);
+        PaprikaToast.showToast(S.of(context).errorPlayingAudio);
       });
     }
   }
@@ -1457,13 +1463,6 @@ class _ActionsRowState extends State<ActionsRow> {
         height: 24,
         width: 24,
         child: SpinKitThreeBounce(color: Colors.white),
-        // child: SpinKitWave(
-        //   type: SpinKitWaveType.start,
-        //   size: 16,
-        //   itemBuilder: (_, index) {
-        //     return Container(color: Color(0xffcccccc));
-        //   },
-        // ),
       );
     else
       return Icon(Icons.music_note,
@@ -1479,7 +1478,7 @@ class _ActionsRowState extends State<ActionsRow> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S
                   .of(context)
                   .loggingInRequired(S.of(context).actionAddToFavorite),
@@ -1495,7 +1494,7 @@ class _ActionsRowState extends State<ActionsRow> {
                       if (loggedIn != null && loggedIn) {
                         _actionAddToFavorite();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                        PaprikaToast.showToast(S.of(context).loggingInRequired(
                             S.of(context).actionAddToFavorite));
                       }
                     });
@@ -1513,7 +1512,7 @@ class _ActionsRowState extends State<ActionsRow> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).loggingInRequired(
                   S.of(context).actionChangeRestaurantNotifications),
               yesButton: FlatButton(
@@ -1528,7 +1527,7 @@ class _ActionsRowState extends State<ActionsRow> {
                       if (loggedIn != null && loggedIn) {
                         _actionChangeRestaurantNotifications();
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(
+                        PaprikaToast.showToast(S.of(context).loggingInRequired(
                             S.of(context).actionChangeRestaurantNotifications));
                       }
                     });

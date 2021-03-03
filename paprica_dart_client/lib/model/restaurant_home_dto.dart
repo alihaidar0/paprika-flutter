@@ -107,7 +107,7 @@ class RestaurantHomeDto {
     openingTimes = OpeningTimeDto.listFromJson(json['openingTimes']);
     galleryItems = GalleryItemDto.listFromJson(json['galleryItems']);
     restaurantRaters =
-        new RestaurantRatersDto.fromJson(json['restaurantRaters']);
+    new RestaurantRatersDto.fromJson(json['restaurantRaters']);
     settings = new RestaurantSettingsDto.fromJson(json['settings']);
     name = json['name'];
     longitude = json['longitude'];
@@ -189,7 +189,7 @@ class RestaurantHomeDto {
     var map = new Map<String, RestaurantHomeDto>();
     if (json != null && json.length > 0) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new RestaurantHomeDto.fromJson(value));
+      map[key] = new RestaurantHomeDto.fromJson(value));
     }
     return map;
   }

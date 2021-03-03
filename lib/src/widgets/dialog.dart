@@ -2,20 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/src/erro_handlers/api_error_handler.dart';
-import 'package:paprica/src/models/create_delivery_meal_model.dart';
-import 'package:paprica/src/models/create_pickup_meal_model.dart';
-import 'package:paprica/src/models/delivery_model.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/models/pickup_model.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/screens/map_screen.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
-import 'package:paprica/widgets.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:paprika/src/erro_handlers/api_error_handler.dart';
+import 'package:paprika/src/models/create_delivery_meal_model.dart';
+import 'package:paprika/src/models/create_pickup_meal_model.dart';
+import 'package:paprika/src/models/delivery_model.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/models/pickup_model.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/screens/map_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -162,7 +161,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                     children: <Widget>[
                                       RawMaterialButton(
                                         onPressed: widget.event != null
-                                            ? () => PapricaToast.showToast(
+                                            ? () => PaprikaToast.showToast(
                                                 S
                                                     .of(context)
                                                     .dateAndTimeCannotBeChanged,
@@ -196,7 +195,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                               padding: const EdgeInsets.only(
                                                   top: 7.0),
                                               child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatDateOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -213,7 +212,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                       Container(
                                         child: RawMaterialButton(
                                           onPressed: widget.event != null
-                                              ? () => PapricaToast.showToast(
+                                              ? () => PaprikaToast.showToast(
                                                   S
                                                       .of(context)
                                                       .dateAndTimeCannotBeChanged,
@@ -246,7 +245,7 @@ class ReservationDialogState extends State<ReservationDialog> {
                                                 padding: const EdgeInsets.only(
                                                     top: 6.0),
                                                 child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatTimeOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -718,7 +717,7 @@ class ReservationDialogState extends State<ReservationDialog> {
           var roundedDateTime = _roundToNearest15Mins(selectedDateTime);
           date = roundedDateTime;
           if (selectedDateTime != roundedDateTime)
-            PapricaToast.showToast(
+            PaprikaToast.showToast(
                 S.of(context).timeHasBeenRoundedToTheNearest15Minutes,
                 ToastType.Normal);
           this.errorDate = errorDate = date.isBefore(DateTime.now());
@@ -865,7 +864,7 @@ void _handleUnconfirmedPhoneNumber(BuildContext context) {
   showDialog(
       context: context,
       builder: (_context) {
-        return PapricaSimpleDialog(
+        return PaprikaSimpleDialog(
           title: S.of(context).phoneNumberConfirmationNeeded,
           yesButton: FlatButton(
               onPressed: () {
@@ -933,8 +932,8 @@ class _ReservationConfirmationDialogState
               widget.restaurantName,
               widget.count.toString(),
               widget.count <= 1 ? S.of(context).person : S.of(context).people,
-              PapricaFormatter.formatDateOnly(context, widget.date),
-              PapricaFormatter.formatTimeOnly(context, widget.date),
+              PaprikaFormatter.formatDateOnly(context, widget.date),
+              PaprikaFormatter.formatTimeOnly(context, widget.date),
             ),
       ),
       actions: <Widget>[
@@ -1002,132 +1001,94 @@ class DialogCloseButton extends StatelessWidget {
   }
 }
 
-class MessageDialog extends StatefulWidget {
+class MessageDialog extends StatelessWidget {
   final String message;
-  final Duration duration;
   final Widget footer;
 
-  const MessageDialog(this.message, {this.duration, this.footer});
-
-  @override
-  State<StatefulWidget> createState() => MessageDialogState();
-}
-
-class MessageDialogState extends State<MessageDialog>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> scaleAnimation;
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = AnimationController(
-      vsync: this,
-      duration: widget.duration != null
-          ? widget.duration
-          : Duration(milliseconds: 450),
-    );
-    scaleAnimation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.elasticInOut,
-    );
-
-    controller.addListener(() {
-      setState(() {});
-    });
-
-    controller.forward();
-  }
+  const MessageDialog({Key key, this.message, this.footer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Material(
         color: Colors.transparent,
-        child: ScaleTransition(
-          scale: scaleAnimation,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Container(
-              height: widget.footer == null ? 100 : 116,
-              width: MediaQuery.of(context).size.width * .9,
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
-                      child: Container(
-                        decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0))),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 16.0, 16.0, 8),
-                              child: Text(
-                                widget.message,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Container(
+            height: footer == null ? 100 : 116,
+            width: MediaQuery.of(context).size.width * .9,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8),
+                            child: Text(
+                              message,
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
-                            null == widget.footer ? EmptyWidget() : Spacer(),
-                            null == widget.footer
-                                ? EmptyWidget()
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      EmptyWidget(),
-                                      Spacer(),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(30, 0, 30, 16),
-                                        child: widget.footer,
-                                      )
-                                    ],
-                                  )
-                          ],
-                        ),
+                          ),
+                          null == footer ? EmptyWidget() : Spacer(),
+                          null == footer
+                              ? EmptyWidget()
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    EmptyWidget(),
+                                    Spacer(),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(30, 0, 30, 16),
+                                      child: footer,
+                                    )
+                                  ],
+                                )
+                        ],
                       ),
                     ),
                   ),
-                  Positioned(
-                      right:
-                          Localizations.localeOf(context).languageCode == 'en'
-                              ? 0
-                              : null,
-                      top: 0,
-                      child: Container(
-                        transform: Matrix4.translationValues(0.0, -20, 0.0),
-                        child: RawMaterialButton(
-                          onPressed: () => Navigator.pop(context),
-                          fillColor: Colors.white,
-                          child: Icon(
-                            Icons.close,
-                            color: Colors.black38,
-                            size: 20.0,
-                          ),
-                          constraints: BoxConstraints(
-                            minHeight: 24,
-                            minWidth: 24,
-                          ),
-                          shape: CircleBorder(
-                              side: BorderSide(color: Colors.white30)),
-                          elevation: 2.0,
-                        ),
-                      ))
-                ],
-              ),
+                ),
+                Positioned(
+                  right: Localizations.localeOf(context).languageCode == 'en'
+                      ? 0
+                      : null,
+                  top: 0,
+                  child: Container(
+                    transform: Matrix4.translationValues(0.0, -20, 0.0),
+                    child: RawMaterialButton(
+                      onPressed: () => Navigator.pop(context),
+                      fillColor: Colors.white,
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.black38,
+                        size: 20.0,
+                      ),
+                      constraints: BoxConstraints(
+                        minHeight: 24,
+                        minWidth: 24,
+                      ),
+                      shape: CircleBorder(
+                        side: BorderSide(color: Colors.white30),
+                      ),
+                      elevation: 2.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -1136,13 +1097,13 @@ class MessageDialogState extends State<MessageDialog>
   }
 }
 
-class PapricaSimpleDialog extends StatelessWidget {
+class PaprikaSimpleDialog extends StatelessWidget {
   final String title, content;
   final Widget yesButton, noButton;
 
 //  final GestureTapCallback onYesPressed;
 
-  const PapricaSimpleDialog({
+  const PaprikaSimpleDialog({
     @required this.title,
     this.content,
     this.yesButton,
@@ -1153,6 +1114,7 @@ class PapricaSimpleDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(this.title ?? S.of(context).confirm,
+          // ignore: deprecated_member_use
           style: Theme.of(context).textTheme.subhead),
       content: this.content != null ? Text(this.content) : null,
       actions: <Widget>[
@@ -1178,7 +1140,8 @@ bool _isShowing = false;
 class ProgressDialog {
   _ProgressDialog _dialog;
 
-  BuildContext _buildContext, _context;
+  BuildContext _buildContext;
+  BuildContext _context;
 
   ProgressDialog(BuildContext buildContext) {
     _buildContext = buildContext;
@@ -1344,12 +1307,12 @@ class CallRestaurantDialog extends StatelessWidget {
   }
 }
 
-class PapricaErrorDialog extends StatelessWidget {
+class PaprikaErrorDialog extends StatelessWidget {
   final String title, content;
   final Widget extraButton;
   final VoidCallback actionHandler;
 
-  const PapricaErrorDialog(
+  const PaprikaErrorDialog(
       {@required this.title,
       this.content,
       this.extraButton,
@@ -1375,7 +1338,7 @@ class PapricaErrorDialog extends StatelessWidget {
 
 typedef StringCallback(String str);
 
-class PapricaInputDialog extends StatelessWidget {
+class PaprikaInputDialog extends StatelessWidget {
   final String title;
   final String content;
   final StringCallback confirmCallback;
@@ -1383,7 +1346,7 @@ class PapricaInputDialog extends StatelessWidget {
   final String cancelText;
   final String confirmText;
 
-  PapricaInputDialog(
+  PaprikaInputDialog(
       {this.title,
       this.content,
       this.confirmCallback,
@@ -1398,9 +1361,7 @@ class PapricaInputDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            content != null
-                ? Row(children: <Widget>[Text(content)])
-                : Container(),
+            content != null ? Text(content) : Container(),
             TextFormField(
               maxLines: 5,
               minLines: 1,
@@ -1438,7 +1399,6 @@ class PapricaInputDialog extends StatelessWidget {
     );
   }
 }
-
 
 /// Pickup
 
@@ -1581,7 +1541,7 @@ class PickupDialogState extends State<PickupDialog> {
                                               padding: const EdgeInsets.only(
                                                   top: 7.0),
                                               child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatDateOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -1623,7 +1583,7 @@ class PickupDialogState extends State<PickupDialog> {
                                                 padding: const EdgeInsets.only(
                                                     top: 6.0),
                                                 child: Text(
-                                                  PapricaFormatter
+                                                  PaprikaFormatter
                                                       .formatTimeOnly(
                                                           context, this.date),
                                                   style: TextStyle(
@@ -1895,7 +1855,7 @@ class PickupDialogState extends State<PickupDialog> {
           var roundedDateTime = _roundToNearest15Mins(selectedDateTime);
           date = roundedDateTime;
           if (selectedDateTime != roundedDateTime)
-            PapricaToast.showToast(
+            PaprikaToast.showToast(
                 S.of(context).timeHasBeenRoundedToTheNearest15Minutes,
                 ToastType.Normal);
           this.errorDate = errorDate = date.isBefore(DateTime.now());
@@ -2064,8 +2024,8 @@ class _PickupConfirmationDialogState extends State<PickupConfirmationDialog> {
       content: Text(
         S.of(context).pickupSummary(
               widget.restaurantName,
-              PapricaFormatter.formatDateOnly(context, widget.date),
-              PapricaFormatter.formatTimeOnly(context, widget.date),
+              PaprikaFormatter.formatDateOnly(context, widget.date),
+              PaprikaFormatter.formatTimeOnly(context, widget.date),
             ),
       ),
       actions: <Widget>[
@@ -2090,9 +2050,6 @@ class _PickupConfirmationDialogState extends State<PickupConfirmationDialog> {
       'time': widget.date.toString(),
       'pickupMeals': _meals,
     });
-    debugPrint("--------********-------");
-    debugPrint("${model.time}");
-    debugPrint("--------********-------");
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).creatingPickup);
     dialog.show();

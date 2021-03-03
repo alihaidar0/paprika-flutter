@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -216,7 +216,7 @@ class _EventScreenState extends State<EventScreen> {
                                           child: Row(
                                             children: <Widget>[
                                               Text(
-                                                PapricaFormatter.formatDateOnly(
+                                                PaprikaFormatter.formatDateOnly(
                                                     context,
                                                     snapshot.data.date),
                                                 style: TextStyle(
@@ -226,7 +226,7 @@ class _EventScreenState extends State<EventScreen> {
                                               ),
                                               SizedBox(width: 8),
                                               Text(
-                                                PapricaFormatter.formatTimeOnly(
+                                                PaprikaFormatter.formatTimeOnly(
                                                     context,
                                                     snapshot.data.date),
                                                 style: TextStyle(
@@ -266,7 +266,8 @@ class _EventScreenState extends State<EventScreen> {
                                               child: Icon(Icons.share,
                                                   color: Colors.black87),
                                             ),
-                                          )),
+                                          ),
+                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -361,7 +362,7 @@ class _EventScreenState extends State<EventScreen> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToReserve,
               yesButton: FlatButton(
                   onPressed: () {
@@ -375,7 +376,7 @@ class _EventScreenState extends State<EventScreen> {
                       if (loggedIn != null && loggedIn) {
                         _showReservationDialog(snapshot);
                       } else {
-                        PapricaToast.showToast(S
+                        PaprikaToast.showToast(S
                             .of(context)
                             .loggingInRequired(S.of(context).actionReserve));
                       }
@@ -400,8 +401,7 @@ class _EventScreenState extends State<EventScreen> {
         showDialog(
           context: context,
           builder: (BuildContext context) => MessageDialog(
-            S.of(context).successReservation,
-            duration: Duration(seconds: 1),
+            message: S.of(context).successReservation,
           ),
         );
     });
@@ -424,7 +424,7 @@ class _EventScreenState extends State<EventScreen> {
         });
       }).catchError((err) {
         Navigator.of(context).pop();
-        PapricaToast.showToast(S.of(context).messageEventNotFound,
+        PaprikaToast.showToast(S.of(context).messageEventNotFound,
             ToastType.Normal, Toast.LENGTH_LONG);
       });
     }
@@ -432,7 +432,8 @@ class _EventScreenState extends State<EventScreen> {
 
   void _actionShare() {
     Share.share(S.of(context).shareTextEvent(
+        widget.event.restaurantName ?? '',
         widget.event?.eventName ?? eventName ?? "",
-        "https://links.popina.me/event/" + _eventId));
+        "https://links.paprika-sy.com/event/" + _eventId));
   }
 }

@@ -1,21 +1,17 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
-import 'package:intl/intl.dart';
-import 'package:paprica/src/models/create_delivery_meal_model.dart';
-import 'package:paprica/src/models/delivery_model.dart';
-import 'package:paprica/src/models/delivery_list_meal_model.dart';
-import 'package:paprica/src/screens/deliveries_screen.dart';
+import 'package:paprika/src/models/create_delivery_meal_model.dart';
+import 'package:paprika/src/models/delivery_list_meal_model.dart';
+import 'package:paprika/src/models/delivery_model.dart';
+import 'package:paprika/src/screens/deliveries_screen.dart';
 import 'package:swagger/api.dart';
 
-import '../../screens.dart';
 import '../../translations.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
-import 'pickups_screen.dart';
 
 class DeliveryScreen extends StatefulWidget {
   final int restaurantId;
@@ -65,7 +61,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     _notes = '';
     _quantity = 1;
     if (widget.oldDelivery != null) {
-      if (widget.oldDelivery.updateDeliveryMealsRequest != null && widget.oldDelivery.updateDeliveryMealsRequest.length > 0){
+      if (widget.oldDelivery.updateDeliveryMealsRequest != null &&
+          widget.oldDelivery.updateDeliveryMealsRequest.length > 0) {
         for (var i in widget.oldDelivery.updateDeliveryMealsRequest) {
           _selectedMeal = DeliveryListMealModel(
               i.mealId, i.mealName, i.mealPrice, i.quantity, i.notes);
@@ -75,7 +72,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           _createSelectedMeals.add(_createSelectedMeal);
         }
       } else {
-        if (widget.oldDelivery.upcomingDeliveryMeals != null){
+        if (widget.oldDelivery.upcomingDeliveryMeals != null) {
           for (var i in widget.oldDelivery.upcomingDeliveryMeals) {
             _selectedMeal = DeliveryListMealModel(
                 i.mealId, i.mealName, i.mealPrice, i.quantity, i.notes);
@@ -84,7 +81,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 CreateDeliveryMealModel(i.mealId, i.quantity, i.notes);
             _createSelectedMeals.add(_createSelectedMeal);
           }
-      }
+        }
       }
     }
     super.initState();
@@ -368,11 +365,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successDelivery,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior
@@ -397,11 +392,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         MessageDialog(
-                                                      S
+                                                      message: S
                                                           .of(context)
                                                           .successDelivery,
-                                                      duration:
-                                                          Duration(seconds: 1),
                                                       footer: GestureDetector(
                                                         behavior:
                                                             HitTestBehavior
@@ -636,7 +629,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 width: 4,
                               ),
                               Text(
-                                  PapricaFormatter.formatNumber(
+                                  PaprikaFormatter.formatNumber(
                                       meal.price.floor()),
                                   style: TextStyle(
                                       fontSize: 15,
@@ -726,7 +719,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                           width: 4,
                                         ),
                                         Text(
-                                            PapricaFormatter.formatNumber(
+                                            PaprikaFormatter.formatNumber(
                                                 meal.price.floor()),
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -809,7 +802,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   }
 
   void _onOrderDeliveryPressed(BuildContext context, MealDto meal) {
-      _showDeliveryDialog(meal);
+    _showDeliveryDialog(meal);
   }
 
   void _showDeliveryDialog(MealDto meal) {

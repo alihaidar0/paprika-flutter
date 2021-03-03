@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -302,7 +302,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     showDialog(
         context: generalContext,
         builder: (_context) {
-          return PapricaSimpleDialog(
+          return PaprikaSimpleDialog(
             title: S.of(generalContext).confirmPhoneNumber,
             noButton: FlatButton(
                 onPressed: () {
@@ -322,7 +322,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   phoneNumber: _phoneNumberController.text)))
                       .then((confirmed) {
                     if (confirmed == null || !confirmed) {
-                      PapricaToast.showToast(S
+                      PaprikaToast.showToast(S
                           .of(generalContext)
                           .loggingInRequired(S
                               .of(generalContext)

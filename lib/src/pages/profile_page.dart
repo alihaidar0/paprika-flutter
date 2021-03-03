@@ -1,20 +1,21 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
-import 'package:paprica/src/models/countries_model.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:paprika/src/models/countries_model.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
+import 'package:path/path.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../screens.dart';
 import '../../utils.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage();
@@ -181,7 +182,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Container(
                                           height: 140,
                                           child: Image.asset(
-                                            "assets/images/profile_background.png",
+                                            "assets/images/background.png",
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -440,7 +441,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                                   Icons.check),
                                                             ),
                                                             onTap: () {
-                                                              PapricaToast.showToast(
+                                                              PaprikaToast.showToast(
                                                                   S
                                                                       .of(
                                                                           context)
@@ -801,7 +802,7 @@ class _ProfilePageState extends State<ProfilePage>
         // Dismiss keyboard
         FocusScope.of(context).requestFocus(FocusNode());
 
-        PapricaToast.showToast(S.of(context).successUpdateProfile);
+        PaprikaToast.showToast(S.of(context).successUpdateProfile);
       }).catchError((err) {
         dialog.hide();
         DefaultErrorHandler.handle(context, err);
@@ -841,16 +842,17 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   void _onTapChangeProfile(BuildContext context) async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
     setState(() {
-      if (image != null) _image = image;
+      if (image != null) _image = File(image.path);
     });
   }
 
   _onTapUploadImage(BuildContext context) async {
     if (_image == null) return;
     ApiClient client = PapricaApiClient();
-    var stream = http.ByteStream(DelegatingStream.typed(_image.openRead()));
+    var stream = http.ByteStream(_image.openRead());
+    stream.cast();
     var length = await _image.length();
     var multipartFile = http.MultipartFile('file', stream, length,
         filename: basename(_image.path));
@@ -980,7 +982,7 @@ class _ProfilePageState extends State<ProfilePage>
     showDialog(
         context: context,
         builder: (_context) {
-          return PapricaSimpleDialog(
+          return PaprikaSimpleDialog(
             title: S.of(context).phoneNumberConfirmationNeeded,
             yesButton: FlatButton(
                 onPressed: () {

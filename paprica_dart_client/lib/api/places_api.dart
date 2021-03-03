@@ -382,8 +382,8 @@ class PlacesApi {
       queryParams.addAll(
           _convertParametersForCollectionFormat("", "Latitude", latitude));
     }
-
-    List<String> contentTypes = [];
+    /// not used
+    // List<String> contentTypes = [];
 
     String contentType = "application/json";
     List<String> authNames = [];

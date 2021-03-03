@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class PapricaFormatter {
+class PaprikaFormatter {
   static String formatTimeOnly(BuildContext context, DateTime date) {
     DateFormat dateFormat =
         DateFormat.jm(Localizations.localeOf(context).languageCode);

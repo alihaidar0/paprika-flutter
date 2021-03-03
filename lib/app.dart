@@ -1,23 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/screens/offer_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/screens/offer_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
 
-class PapricaApp extends StatefulWidget {
+class PaprikaApp extends StatefulWidget {
   static String defaultLanguage = "ar";
 
-  // This widget is the root of your application.
   @override
-  _PapricaAppState createState() => _PapricaAppState();
+  _PaprikaAppState createState() => _PaprikaAppState();
 
   static void setLocale(BuildContext context, String lang) {
-    _PapricaAppState state =
-        context.ancestorStateOfType(TypeMatcher<_PapricaAppState>());
+    _PaprikaAppState state =
+        context.findAncestorStateOfType<_PaprikaAppState>();
+    // ignore: invalid_use_of_protected_member
     state?.setState(() {
       state.locale = Locale(lang);
     });
@@ -25,15 +22,16 @@ class PapricaApp extends StatefulWidget {
   }
 }
 
-class _PapricaAppState extends State<PapricaApp> {
+class _PaprikaAppState extends State<PaprikaApp> {
   Locale locale;
+
   @override
   void initState() {
     super.initState();
 
     SharedPreference.loadLangFromSharedPref().then((lang) {
       setState(() {
-        locale = Locale(lang ?? PapricaApp.defaultLanguage);
+        locale = Locale(lang ?? PaprikaApp.defaultLanguage);
       });
     });
   }
@@ -65,12 +63,12 @@ class _PapricaAppState extends State<PapricaApp> {
             accentColor: Color(0xFFCE4C42),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
             colorScheme: ColorScheme.light(
-              primary: Color(
-                  0xFFCE4C42), // -------> This will be your FlatButton's text color
+              primary: Color(0xFFCE4C42),
+              // -------> This will be your FlatButton's text color
               secondary: Color(0xFFCE4C42),
             ),
             fontFamily: 'hacen-tunisia',
-            textTheme: TextTheme(body1: TextStyle(fontSize: 14))),
+            textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14))),
         home: Builder(builder: (BuildContext context) {
           return SplashScreen();
         }));
@@ -79,7 +77,9 @@ class _PapricaAppState extends State<PapricaApp> {
   Route handleRoute(RouteSettings settings) {
     if (settings.name == '/home') {
       return _buildRoute(
-          settings, new HomeScreen(action: settings.arguments,initialIndex: settings.arguments));
+          settings,
+          new HomeScreen(
+              action: settings.arguments, initialIndex: settings.arguments));
     }
     if (settings.name == '/event') {
       return _buildRoute(

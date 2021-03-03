@@ -2,10 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/accessories.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
+
+import '../../screens.dart';
 
 class PublishedPollCard extends StatelessWidget {
   final PublishedPollInPapricaItem publishedPollItem;
@@ -118,19 +119,27 @@ class PublishedPollCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: new BorderRadius.circular(
-                        MediaQuery.of(context).size.width * 0.23 * 0.5),
-                    child: CachedNetworkImage(
-                        imageUrl: item.restaurant.logoImage,
-                        placeholder: (context, url) => Image(
-                              image:
-                                  AssetImage("assets/images/placeholder.png"),
-                              width: MediaQuery.of(context).size.width * 0.23,
-                            ),
-                        width: MediaQuery.of(context).size.width * 0.23),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return RestaurantHome(restaurantId: item.restaurant.id);
+                    }));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(
+                          MediaQuery.of(context).size.width * 0.23 * 0.5),
+                      child: CachedNetworkImage(
+                          imageUrl: item.restaurant.logoImage,
+                          placeholder: (context, url) => Image(
+                                image:
+                                    AssetImage("assets/images/placeholder.png"),
+                                width: MediaQuery.of(context).size.width * 0.23,
+                              ),
+                          width: MediaQuery.of(context).size.width * 0.23),
+                    ),
                   ),
                 ),
                 Padding(

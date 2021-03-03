@@ -5,9 +5,9 @@ class OffersListModel {
 
   OffersListModel({this.items});
 
-  OffersListModel.fromMyPapricaModel(PagedResultDtoMyPapricaOfferDto restList) {
+  OffersListModel.fromMyPaprikaModel(PagedResultDtoMyPapricaOfferDto restList) {
     restList.items.forEach((item) {
-      items.add(OfferModel.fromMyPapricaEventDto(item));
+      items.add(OfferModel.fromMyPaprikaEventDto(item));
     });
   }
 }
@@ -46,7 +46,7 @@ class OfferModel {
     restaurantLogo = dto.restaurantImage;
   }
 
-  OfferModel.fromMyPapricaEventDto(OfferPapricaItemDto dto) {
+  OfferModel.fromMyPaprikaEventDto(OfferPapricaItemDto dto) {
     id = dto.id;
     restaurantName = dto.restaurantName;
     description = dto.description;

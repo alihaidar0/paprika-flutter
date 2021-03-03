@@ -1,4 +1,4 @@
-import 'package:paprica/src/models/create_delivery_meal_model.dart';
+import 'package:paprika/src/models/create_delivery_meal_model.dart';
 import 'package:swagger/api.dart';
 
 class DeliveryModel {
@@ -46,7 +46,8 @@ class DeliveryModel {
     upcomingDeliveryMeals = upcomingDelivery.deliveryMeals;
   }
 
-  DeliveryModel.fromUpdateRequest(CustomerUpcomingDeliveryDto upcomingDelivery) {
+  DeliveryModel.fromUpdateRequest(
+      CustomerUpcomingDeliveryDto upcomingDelivery) {
     restaurantName = upcomingDelivery.restaurantName;
     id = upcomingDelivery.updateRequest.deliveryId;
     restaurantId = upcomingDelivery.restaurantId;

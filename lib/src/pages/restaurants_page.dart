@@ -1,26 +1,30 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/screens/restaurant_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/src/screens/restaurant_screen.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
-import 'dart:async';
+
 import '../../utils.dart';
 
-int currentTab;
-
-class PlacesPage extends StatefulWidget {
-  const PlacesPage();
+class RestaurantsPage extends StatefulWidget {
+  const RestaurantsPage();
 
   @override
-  _PlacesPageState createState() => _PlacesPageState();
+  _RestaurantsPageState createState() => _RestaurantsPageState();
 }
 
-class _PlacesPageState extends State<PlacesPage>{
-
+class _RestaurantsPageState extends State<RestaurantsPage>
+    with AutomaticKeepAliveClientMixin<RestaurantsPage> {
   Future<PagedResultDtoRestaurantSummaryDto> futureRestData;
-  List<RestaurantSummaryDto> restaurants;
   ScrollController _scrollController;
+  bool _endOfRestaurants;
+  bool _requestingData;
+  List<dynamic> restaurants = [];
+  bool _firstTime;
 
   Future _getPlacesDataAsync() {
     ApiClient apiClient = PapricaApiClient();
@@ -35,20 +39,92 @@ class _PlacesPageState extends State<PlacesPage>{
     });
   }
 
+  void _requestData(BuildContext context, {int skipCount, int maxResult = 10}) {
+    if (_requestingData) return;
+    setState(() {
+      _requestingData = true;
+    });
+    ApiClient client = PapricaApiClient();
+    PlacesApi api = PlacesApi(client);
+    api
+        .apiServicesAppPlacesGetAllGet(
+      skipCount: skipCount ?? 0,
+      maxResultCount: maxResult,
+    )
+        .then((restaurantsDto) {
+      setState(() {
+        _requestingData = false;
+        // Load More
+        if (skipCount != null && skipCount > 0) {
+          // Just remove the loader
+          if (restaurants.isNotEmpty && restaurants.last is SpinKitCircle) {
+            restaurants.removeLast();
+          }
+          if (restaurantsDto.items.isNotEmpty) {
+            restaurants.addAll(restaurantsDto.items);
+          } else {
+            _endOfRestaurants = true;
+          }
+        }
+      });
+    }).catchError((err) {
+      setState(() {
+        _requestingData = false;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getPlacesDataAsync();
+    _endOfRestaurants = false;
+    _requestingData = false;
+    _firstTime = true;
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
+          !_requestingData &&
+          restaurants.isNotEmpty &&
+          context != null &&
+          !_endOfRestaurants) {
+        _requestData(context, skipCount: restaurants.length);
+      }
+    });
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
-    return FutureBuilder<PagedResultDtoRestaurantSummaryDto>(
+    return FutureBuilder(
       future: futureRestData,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            restaurants = snapshot.data.items;
+            if (snapshot.data.items != null &&
+                snapshot.data.items.length > 0 &&
+                _firstTime) {
+              for (var item in snapshot.data.items) {
+                restaurants.add(item);
+              }
+              _firstTime = false;
+            }
+            if (_requestingData) {
+              restaurants.add(SpinKitCircle(color: Colors.grey, size: 32));
+            } else {
+              if (restaurants != null &&
+                  restaurants.length > 0 &&
+                  restaurants.last is SpinKitCircle) {
+                restaurants.removeLast();
+              }
+            }
             return Scaffold(
               body: CustomScrollView(
                 controller: _scrollController,
@@ -60,10 +136,10 @@ class _PlacesPageState extends State<PlacesPage>{
                       ? SliverList(
                           delegate: SliverChildListDelegate(
                             restaurants.map<Widget>((item) {
-                                  if (item is RestaurantSummaryDto)
+                                  if (item is RestaurantSummaryDto) {
                                     return _RestaurantItem(item);
-                                  else {
-                                    return null;
+                                  } else {
+                                    return item;
                                   }
                                 })?.toList() ??
                                 [],
@@ -84,15 +160,15 @@ class _PlacesPageState extends State<PlacesPage>{
             );
           } else {
             return RequestRetry(
-                  message: S.of(context).errorUnknown,
-                  retryCallback: _getPlacesDataAsync);
+                message: S.of(context).errorUnknown,
+                retryCallback: _getPlacesDataAsync);
           }
         } else if (snapshot.connectionState == ConnectionState.none) {
           return RequestRetry(
-                message: S.of(context).errorUnknown,
-                retryCallback: _getPlacesDataAsync);
+              message: S.of(context).errorUnknown,
+              retryCallback: _getPlacesDataAsync);
         } else
-          return _PlacesPagePlaceHolder(
+          return _RestaurantsPagePlaceHolder(
             Column(
               children: <Widget>[
                 SizedBox(
@@ -106,24 +182,26 @@ class _PlacesPageState extends State<PlacesPage>{
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 typedef Future RetryCallback();
 
-class _PlacesPagePlaceHolder extends StatefulWidget {
+class _RestaurantsPagePlaceHolder extends StatefulWidget {
   final Widget child;
   final RetryCallback getData;
 
-  _PlacesPagePlaceHolder(this.child, {this.getData});
+  _RestaurantsPagePlaceHolder(this.child, {this.getData});
 
   @override
-  __PlacesPagePlaceHolderState createState() => __PlacesPagePlaceHolderState();
+  __RestaurantsPagePlaceHolderState createState() =>
+      __RestaurantsPagePlaceHolderState();
 }
 
-class __PlacesPagePlaceHolderState extends State<_PlacesPagePlaceHolder> {
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
-
+class __RestaurantsPagePlaceHolderState
+    extends State<_RestaurantsPagePlaceHolder> {
   @override
   void initState() {
     super.initState();
@@ -150,12 +228,8 @@ class _RestaurantItem extends StatelessWidget {
 
   _RestaurantItem(this.restaurant);
 
-  CachedNetworkImageProvider _widgetLogoImage;
-
   @override
   Widget build(BuildContext context) {
-    _widgetLogoImage ??= CachedNetworkImageProvider(this.restaurant.logoImage);
-
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
@@ -175,11 +249,14 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.25 * 0.5),
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
                           image: DecorationImage(
-                              image: _widgetLogoImage, fit: BoxFit.scaleDown)),
+                              image: CachedNetworkImageProvider(
+                                  this.restaurant.logoImage),
+                              fit: BoxFit.scaleDown)),
                     ),
                   ),
                   Padding(
@@ -317,7 +394,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -339,7 +416,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -361,7 +438,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -383,7 +460,7 @@ class _RestaurantItem extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),

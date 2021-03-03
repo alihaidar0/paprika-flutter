@@ -25,7 +25,8 @@ class LogInPromotion extends StatelessWidget {
             child: Text(
               S.of(context).logIn,
               style: TextStyle(color: Theme.of(context).primaryColor),
-            ))
+            ),
+        )
       ],
     ));
   }

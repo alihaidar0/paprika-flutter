@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
+import 'package:flutter/widgets.dart';
+import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
+
 import '../../widgets.dart';
 import 'api_error.dart';
-import 'dart:convert';
-import 'package:flutter/widgets.dart';
 
 class DefaultErrorHandler {
   static void handle(BuildContext context, err, [Function retryCallback]) {
@@ -15,7 +17,7 @@ class DefaultErrorHandler {
       showDialog(
           context: context,
           builder: (context) {
-            return PapricaErrorDialog(
+            return PaprikaErrorDialog(
                 title: S.of(context).attention,
                 content: message,
                 extraButton: err.code < 500 &&

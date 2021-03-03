@@ -1,15 +1,14 @@
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/utils.dart';
+import 'package:package_info/package_info.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
 import 'package:swagger/api.dart';
+
 import '../../app.dart';
 import '../../widgets.dart';
-import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -53,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       SharedPreference.loadDefaultLangFromSharedPref().then((lang) {
         if (lang == null) {
-          PapricaApiClient().setLang(PapricaApp.defaultLanguage);
+          PapricaApiClient().setLang(PaprikaApp.defaultLanguage);
           _init(context);
         } else {
           _init(context);
@@ -66,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/splash_background.png"),
+                image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -110,16 +109,16 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                       FutureBuilder(
                         future: PackageInfo.fromPlatform(),
-                        builder: (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
-                          if(snapshot.hasData)
+                        builder: (BuildContext context,
+                            AsyncSnapshot<PackageInfo> snapshot) {
+                          if (snapshot.hasData)
                             return Text(
-                                'V ${snapshot.data.version}',
-                                style: TextStyle(
+                              'V ${snapshot.data.version}',
+                              style: TextStyle(
                                   height: 0.8,
                                   color: Colors.white,
-                                    fontSize: 12.0
-                                ),
-                              );
+                                  fontSize: 12.0),
+                            );
                           return Container();
                         },
                       ),
@@ -127,7 +126,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 10.0,)
+              SizedBox(
+                height: 10.0,
+              )
             ],
           ),
         ],
@@ -186,7 +187,7 @@ class _SplashScreenState extends State<SplashScreen> {
             context: context,
             barrierDismissible: false,
             builder: (context) {
-              return PapricaErrorDialog(
+              return PaprikaErrorDialog(
                 title: S.of(context).error,
                 content: S.of(context).errorUnknownWannaTryAgain,
                 extraButton: FlatButton(
@@ -207,55 +208,55 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  _configureFirebase() async {
-    print('test 1');
-    var android =
-        new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
-    var ios = new IOSInitializationSettings();
-    var platform = new InitializationSettings(android: android, iOS: ios);
-    await flutterLocalNotificationsPlugin.initialize(platform);
+_configureFirebase() async {
+  print('test 1');
+  var android =
+      new AndroidInitializationSettings('drawable/ic_stat_ic_notification');
+  var ios = new IOSInitializationSettings();
+  var platform = new InitializationSettings(android: android, iOS: ios);
+  await flutterLocalNotificationsPlugin.initialize(platform);
 
-    firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> msg) {
-          _showNotification(msg);
-          return;
-        },
-        onResume: (Map<String, dynamic> msg) {
-          _showNotification(msg);
-          return;
-        },
-        onLaunch: (Map<String, dynamic> msg) {
-          _showNotification(msg);
-          return;
-        },
-        onBackgroundMessage: null);
-    print('test 2');
+  firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> msg) {
+        _showNotification(msg);
+        return;
+      },
+      onResume: (Map<String, dynamic> msg) {
+        _showNotification(msg);
+        return;
+      },
+      onLaunch: (Map<String, dynamic> msg) {
+        _showNotification(msg);
+        return;
+      },
+      onBackgroundMessage: null);
+  print('test 2');
 
-    await firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, alert: true, badge: true));
+  await firebaseMessaging.requestNotificationPermissions(
+      const IosNotificationSettings(sound: true, alert: true, badge: true));
 
-    print('test 3');
+  print('test 3');
+}
+
+_showNotification(Map<String, dynamic> msg) async {
+  if (msg != null && msg.containsKey('notification')) {
+    var notification = Map<String, dynamic>.from(msg['notification']);
+    var title =
+        notification.containsKey('title') ? notification['title'] : '';
+    var body = notification.containsKey('body') ? notification['body'] : '';
+
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'channel id', 'channel name', 'channel description',
+        playSound: false,
+        importance: Importance.max,
+        priority: Priority.high);
+    var iOSPlatformChannelSpecifics =
+        new IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = new NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, title, body, platformChannelSpecifics);
   }
-
-  _showNotification(Map<String, dynamic> msg) async {
-    if (msg != null && msg.containsKey('notification')) {
-      var notification = Map<String, dynamic>.from(msg['notification']);
-      var title =
-          notification.containsKey('title') ? notification['title'] : '';
-      var body = notification.containsKey('body') ? notification['body'] : '';
-
-      var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-          'channel id', 'channel name', 'channel description',
-          playSound: false,
-          importance: Importance.max,
-          priority: Priority.high);
-      var iOSPlatformChannelSpecifics =
-          new IOSNotificationDetails(presentSound: false);
-      var platformChannelSpecifics = new NotificationDetails(
-          android: androidPlatformChannelSpecifics,
-          iOS: iOSPlatformChannelSpecifics);
-      await flutterLocalNotificationsPlugin.show(
-          0, title, body, platformChannelSpecifics);
-    }
-  }
+}
 }

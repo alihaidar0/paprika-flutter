@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 
-final ThemeData papricaThemeData = new ThemeData(
+final ThemeData paprikaThemeData = new ThemeData(
     cursorColor: Colors.grey,
     textSelectionColor: Colors.grey,
     textSelectionHandleColor: Colors.grey,
-    primaryColor: Colors.orange, // Color(0xFFCE4C42),
-    accentColor: Colors.orange, //Color(0xFFCE4C42),
+    primaryColor: Colors.orange,
+    accentColor: Colors.orange,
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.grey,
       textTheme: ButtonTextTheme.primary,
       colorScheme: ColorScheme(
         secondary: Color(0xFFCE4C42),
+        error: null,
+        onPrimary: null,
+        background: null,
+        brightness: null,
+        surface: null,
+        onSecondary: null,
+        onSurface: null,
+        primaryVariant: null,
+        onError: null,
+        onBackground: null,
+        primary: null,
+        secondaryVariant: null,
       ),
     ));
 

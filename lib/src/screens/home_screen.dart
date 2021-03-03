@@ -1,17 +1,17 @@
 import 'dart:async';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/search_item.dart';
-import 'package:paprica/src/pages/my_paprica_page.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/search_item.dart';
+import 'package:paprika/src/pages/my_paprika_page.dart';
+import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
+
 import '../../utils.dart';
 import '../../widgets.dart';
 
@@ -27,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   BuildContext buildContext;
-  int _currentIndex = 0;
+  int _currentIndex;
   bool _actionHandled = false;
 
   List<Widget> _tabList = [];
@@ -54,16 +54,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _refreshStream = StreamController<bool>.broadcast();
     resetScrollPositionStream = StreamController<bool>.broadcast();
     _tabList
-      ..add(MyPapricaPage(
+      ..add(MyPaprikaPage(
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))
-      ..add(PlacesPage())
-      ..add(ServicePage(changeHomePageIndexHandler))
+      ..add(RestaurantsPage())
+      ..add(ServicePage())
       ..add(MorePage());
 
     _tabController = TabController(vsync: this, length: _tabList.length);
-    if (widget.initialIndex != null) _currentIndex = widget.initialIndex;
+    if (widget.initialIndex != null) {
+      _currentIndex = widget.initialIndex;
+    } else {
+      _currentIndex = 0;
+    }
   }
 
   _handleChildScroll(ScrollDirection direction, double offset) {
@@ -109,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         return Future.value(false);
       }
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-
       return Future.value(false);
     }
   }
@@ -123,6 +126,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         widget.action == HomeScreenAction.reservations) {
       setState(() {
         _goToReservationsPage();
+        _actionHandled = true;
+      });
+    }
+    if (widget.initialIndex != null && !_actionHandled) {
+      setState(() {
+        _tabController.animateTo(widget.initialIndex);
         _actionHandled = true;
       });
     }
@@ -282,6 +291,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/home_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).home,
                   style: TextStyle(fontSize: 12),
@@ -298,6 +308,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/restaurants_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).restaurants,
                   style: TextStyle(fontSize: 12),
@@ -314,6 +325,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/activities_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).activities,
                   style: TextStyle(fontSize: 12),
@@ -330,6 +342,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 18,
                   child: Image.asset("assets/icons/more_active.png"),
                 ),
+                // ignore: deprecated_member_use
                 title: Text(
                   S.of(context).more,
                   style: TextStyle(fontSize: 12),
@@ -363,13 +376,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _currentIndex = 1;
     });
     _changeTab(1);
-  }
-
-  changeHomePageIndexHandler(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    _changeTab(index);
   }
 
   _reservationOpenCallback() {
@@ -419,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     //Event
     if (domain == "event") {
-      openEventcreen(id);
+      openEventScreen(id);
       return;
     }
     //Offer
@@ -455,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Navigator.pushNamed(buildContext, '/restaurant', arguments: restaurantId);
   }
 
-  void openEventcreen(int eventId) {
+  void openEventScreen(int eventId) {
     if (buildContext == null) return;
     Navigator.pushNamed(buildContext, '/event', arguments: eventId);
   }
@@ -572,9 +578,11 @@ class CustomSearchDelegate extends SearchDelegate<SearchItem> {
         }
         return Center(
             child: SizedBox(
-                height: 24, width: 24, child: CircularProgressIndicator(
-              backgroundColor: Theme.of(context).primaryColor,
-            )));
+                height: 24,
+                width: 24,
+                child: CircularProgressIndicator(
+                  backgroundColor: Theme.of(context).primaryColor,
+                )));
       },
     );
   }

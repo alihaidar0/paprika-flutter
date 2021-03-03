@@ -6,17 +6,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/pickup_model.dart';
-import 'package:paprica/src/utils/map_utils.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:paprica/src/widgets/login_promotion.dart';
-import 'package:paprica/src/widgets/pickup_card.dart';
-import 'package:paprica/src/widgets/slider.dart';
-import 'package:paprica/src/widgets/custom_scroll_behaviour.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/pickup_model.dart';
+import 'package:paprika/src/utils/map_utils.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
+import 'package:paprika/src/widgets/login_promotion.dart';
+import 'package:paprika/src/widgets/pickup_card.dart';
+import 'package:paprika/src/widgets/slider.dart';
+import 'package:paprika/src/widgets/custom_scroll_behaviour.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -96,8 +96,7 @@ class _PickupsScreenState extends State<PickupsScreen>
     if (ApiTypesHelper().isAuthorized) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).pickups,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+          title: Text(S.of(context).pickups, style: TextStyle(fontSize: 18)),
         ),
         body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -150,13 +149,6 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
   bool _isLoading = false;
 
   StreamController<int> moveController;
-
-  @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      fn();
-    }
-  }
 
   @override
   void initState() {
@@ -257,11 +249,11 @@ class _UpcomingPickupsSection extends State<UpcomingPickupsSection> {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  HomeScreen(initialIndex: 2)),
+                                  HomeScreen(initialIndex: 1)),
                           ModalRoute.withName('/splash'));
                     },
                     child: Text(
-                      S.of(context).goToPlaces,
+                      S.of(context).goToRestaurants,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                   ),
@@ -602,18 +594,16 @@ class _NewPickupCardState extends State<NewPickupCard>
                                         vertical: 1.0),
                                     child: Text(
                                       S.of(context).time + ":",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 4.0),
                                     child: Text(
-                                      PapricaFormatter.formatDateOnly(
+                                      PaprikaFormatter.formatDateOnly(
                                               context, widget.pickup.date) +
                                           "  " +
-                                          PapricaFormatter.formatTimeOnly(
+                                          PaprikaFormatter.formatTimeOnly(
                                               context, widget.pickup.date),
                                     ),
                                   ),
@@ -622,7 +612,6 @@ class _NewPickupCardState extends State<NewPickupCard>
                               _pickupStatus(widget.pickup.status),
                             ],
                           ),
-                          SizedBox(height: 10),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -634,7 +623,6 @@ class _NewPickupCardState extends State<NewPickupCard>
                                     : const EdgeInsets.symmetric(vertical: 0.0),
                                 child: Text(
                                   S.of(context).totalPrice + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Padding(
@@ -646,7 +634,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                                 child: Row(
                                   children: [
                                     Text(
-                                      PapricaFormatter.formatNumber(
+                                      PaprikaFormatter.formatNumber(
                                           widget.pickup.price.floor()),
                                     ),
                                     SizedBox(
@@ -658,61 +646,33 @@ class _NewPickupCardState extends State<NewPickupCard>
                               ),
                             ],
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: Localizations.localeOf(context)
-                                            .languageCode ==
-                                        'en'
-                                    ? const EdgeInsets.symmetric(vertical: 4.0)
-                                    : const EdgeInsets.symmetric(vertical: 0.0),
-                                child: Text(
-                                  S.of(context).meals + ": ",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () => _openMealsSheet(context),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  S.of(context).pressToViewMeals,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
                                 ),
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                                SizedBox(
+                                  width: 8.0,
                                 ),
-                                color: Colors.white,
-                                elevation: 2.0,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  onTap: () {
-                                    _openMealsSheet(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 5.0, top: 2.0, right: 5.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8.0, right: 0.8),
-                                          child: Text(
-                                            S.of(context).viewMeals + "    ",
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              fontSize: 16.0,
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 12.0,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                FaIcon(
+                                  Localizations.localeOf(context)
+                                              .languageCode ==
+                                          'en'
+                                      ? (FontAwesomeIcons.angleDoubleRight)
+                                      : (FontAwesomeIcons.angleDoubleLeft),
+                                  color: Theme.of(context).primaryColor,
+                                  size: 12.0,
                                 ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -722,25 +682,25 @@ class _NewPickupCardState extends State<NewPickupCard>
               ),
               widget.pickup.updateRequest != null
                   ? GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _showUpdateRequest(context),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        S.of(context).pendingChanges,
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => _showUpdateRequest(context),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              S.of(context).pendingChanges,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
+                          )
+                        ],
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 12,
                     )
-                  ],
-                ),
-              )
                   : Container(),
               FutureBuilder(
                 future: _getMapWidget(),
@@ -861,7 +821,7 @@ class _NewPickupCardState extends State<NewPickupCard>
     showDialog(
         context: context,
         builder: (context) {
-          return PapricaInputDialog(
+          return PaprikaInputDialog(
             title: S.of(context).confirmCancelPickup,
             content: S.of(context).msgCancelPickup,
             confirmCallback: (text) {
@@ -888,7 +848,7 @@ class _NewPickupCardState extends State<NewPickupCard>
     api.apiServicesAppCustomerPickupCancelPickupPost(pickup: data).then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successPickupCancel);
+      PaprikaToast.showToast(S.of(context).successPickupCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -919,7 +879,7 @@ class _NewPickupCardState extends State<NewPickupCard>
           /// Date
           if (widget.pickup.updateRequest.time != null &&
               (widget.pickup.date.year !=
-                  widget.pickup.updateRequest.time.year ||
+                      widget.pickup.updateRequest.time.year ||
                   widget.pickup.date.month !=
                       widget.pickup.updateRequest.time.month ||
                   widget.pickup.date.day !=
@@ -941,7 +901,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatDateOnly(
+                    Text(PaprikaFormatter.formatDateOnly(
                         context, widget.pickup.updateRequest.time))
                   ],
                 ),
@@ -951,7 +911,7 @@ class _NewPickupCardState extends State<NewPickupCard>
           /// Time
           if (widget.pickup.updateRequest.time != null &&
               (widget.pickup.date.hour !=
-                  widget.pickup.updateRequest.time.hour ||
+                      widget.pickup.updateRequest.time.hour ||
                   widget.pickup.date.minute !=
                       widget.pickup.updateRequest.time.minute))
             updates.add(
@@ -971,7 +931,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(PapricaFormatter.formatTimeOnly(
+                    Text(PaprikaFormatter.formatTimeOnly(
                         context, widget.pickup.updateRequest.time))
                   ],
                 ),
@@ -980,8 +940,7 @@ class _NewPickupCardState extends State<NewPickupCard>
 
           /// Price
           if (widget.pickup.updateRequest.price != null &&
-              widget.pickup.price !=
-                  widget.pickup.updateRequest.price)
+              widget.pickup.price != widget.pickup.updateRequest.price)
             updates.add(
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -999,8 +958,7 @@ class _NewPickupCardState extends State<NewPickupCard>
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(width: 4),
-                    Text(widget.pickup.updateRequest.price
-                        .toString())
+                    Text(widget.pickup.updateRequest.price.toString())
                   ],
                 ),
               ),
@@ -1056,30 +1014,30 @@ class _NewPickupCardState extends State<NewPickupCard>
 
   _onCancelUpdateRequest(BuildContext context) {
     showGeneralDialog(
-        context: context,
-        pageBuilder: (BuildContext buildContext,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return SafeArea(
-            child: Builder(builder: (_context) {
-              return PapricaSimpleDialog(
-                title: S.of(context).confirmCancellation,
-                content: S.of(context).confirmCancelUpdateRequestPickup,
-                yesButton: FlatButton(
-                  child: Text(S.of(context).confirm),
-                  onPressed: () {
-                    _onConfirmCancelUpdateRequest(context);
-                  },
-                ),
+            context: context,
+            pageBuilder: (BuildContext buildContext,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return SafeArea(
+                child: Builder(builder: (_context) {
+                  return PaprikaSimpleDialog(
+                    title: S.of(context).confirmCancellation,
+                    content: S.of(context).confirmCancelUpdateRequestPickup,
+                    yesButton: FlatButton(
+                      child: Text(S.of(context).confirm),
+                      onPressed: () {
+                        _onConfirmCancelUpdateRequest(context);
+                      },
+                    ),
+                  );
+                }),
               );
-            }),
-          );
-        },
-        barrierDismissible: true,
-        barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: null,
-        transitionDuration: const Duration(milliseconds: 150))
+            },
+            barrierDismissible: true,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierColor: null,
+            transitionDuration: const Duration(milliseconds: 150))
         .then((cancelled) {
       if (cancelled != null && cancelled) {
         Navigator.of(context).pop(cancelled);
@@ -1095,12 +1053,11 @@ class _NewPickupCardState extends State<NewPickupCard>
     dialog.show();
     EntityDtoInt64 data = EntityDtoInt64(widget.pickup.id);
     api
-        .apiServicesAppCustomerPickupCancelPickupUpdateRequestPost(
-        input: data)
+        .apiServicesAppCustomerPickupCancelPickupUpdateRequestPost(input: data)
         .then((_) {
       dialog.hide();
       Navigator.of(context).pop(true);
-      PapricaToast.showToast(S.of(context).successPickupCancel);
+      PaprikaToast.showToast(S.of(context).successPickupCancel);
     }).catchError((err) {
       dialog.hide();
       Navigator.of(context).pop(false);
@@ -1341,7 +1298,7 @@ class _OldPickupSectionState extends State<OldPickupSection> {
                                     final bool res = await showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return PapricaSimpleDialog(
+                                          return PaprikaSimpleDialog(
                                             title: S.of(context).confirm,
                                             content: (S.of(context).sureDelete),
                                             yesButton: FlatButton(
@@ -1364,7 +1321,7 @@ class _OldPickupSectionState extends State<OldPickupSection> {
                                                     else {
                                                       Navigator.of(context)
                                                           .pop(false);
-                                                      PapricaToast.showToast(
+                                                      PaprikaToast.showToast(
                                                           S
                                                               .of(context)
                                                               .deletingFailed,

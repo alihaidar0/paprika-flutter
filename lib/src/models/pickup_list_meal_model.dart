@@ -5,5 +5,6 @@ class PickupListMealModel {
   int quantity;
   String notes;
 
-  PickupListMealModel(this.id, this.name, this.price, this.quantity, this.notes);
+  PickupListMealModel(
+      this.id, this.name, this.price, this.quantity, this.notes);
 }

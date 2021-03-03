@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/widgets/accessories.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/widgets/accessories.dart';
 import 'package:swagger/api.dart';
 
 import '../../translations.dart';
@@ -108,10 +108,10 @@ class ReservationCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
-                                  PapricaFormatter.formatDateOnly(
+                                  PaprikaFormatter.formatDateOnly(
                                           context, reservation.date) +
                                       "    " +
-                                      PapricaFormatter.formatTimeOnly(
+                                      PaprikaFormatter.formatTimeOnly(
                                           context, reservation.date),
                                   style: TextStyle(
                                     color: Colors.black,
@@ -132,10 +132,10 @@ class ReservationCard extends StatelessWidget {
   }
 }
 
-class MyPapricaReservationCard extends StatelessWidget {
+class MyPaprikaReservationCard extends StatelessWidget {
   final ReservationPapricaItemDto reservation;
 
-  MyPapricaReservationCard({
+  MyPaprikaReservationCard({
     this.reservation,
   });
 
@@ -169,12 +169,7 @@ class MyPapricaReservationCard extends StatelessWidget {
                           restaurantId: reservation.restaurantId);
                     }));
                   },
-//                  child: FadeInImage.memoryNetwork(
-//                    image: reservation.restaurantLogo,
-//                    fit: BoxFit.cover,
-//                    placeholder: kTransparentImage,
-//                  ),
-                  child: PapricaCachedImage(
+                  child: PaprikaCachedImage(
                     imageUrl: reservation.restaurantLogo,
                   ),
                 ),
@@ -217,10 +212,10 @@ class MyPapricaReservationCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          PapricaFormatter.formatDateOnly(
+                          PaprikaFormatter.formatDateOnly(
                                   context, reservation.time) +
                               "    " +
-                              PapricaFormatter.formatTimeOnly(
+                              PaprikaFormatter.formatTimeOnly(
                                   context, reservation.time),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

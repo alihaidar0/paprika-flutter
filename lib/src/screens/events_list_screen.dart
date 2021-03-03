@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/widgets/event_card.dart';
-import 'package:swagger/api.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/widgets/accessories.dart' show LoadingPlaceHolder;
+import 'package:paprika/src/widgets/event_card.dart';
+import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
-import 'package:paprica/src/widgets/accessories.dart' show LoadingPlaceHolder;
 
 class EventsListScreen extends StatefulWidget {
   final int restaurantId;

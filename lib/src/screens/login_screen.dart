@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
-import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
-import '../../error_handlers.dart';
-import '../../utils.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
+import 'package:swagger/api.dart';
+
+import '../../error_handlers.dart';
+import '../../utils.dart';
 
 class LogInScreen extends StatefulWidget {
   final bool asAService;
@@ -76,7 +77,7 @@ class _MyLogInState extends State<LogInScreen> {
             reverse: true,
             child: Form(
               key: _formKey,
-              autovalidate: true,
+              autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -184,8 +185,8 @@ class _MyLogInState extends State<LogInScreen> {
                           ? Container()
                           : GestureDetector(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/home',ModalRoute.withName('/splash'));
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -299,11 +300,9 @@ class _MyLogInState extends State<LogInScreen> {
       loginDialog.hide();
       DefaultErrorHandler.handle(context, err);
       Future.delayed(Duration.zero, () {
-        //PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+        //PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
       });
     });
-
-    setState(() {});
   }
 
   Future _facebookLogin(BuildContext context) async {
@@ -319,7 +318,7 @@ class _MyLogInState extends State<LogInScreen> {
       case FacebookLoginStatus.cancelledByUser:
         break;
       case FacebookLoginStatus.error:
-        PapricaToast.showToast(S.of(context).errorLogin);
+        PaprikaToast.showToast(S.of(context).errorLogin);
         break;
     }
   }
@@ -337,7 +336,7 @@ class _MyLogInState extends State<LogInScreen> {
       _sendTokenToServer(context, 'Google',
           googleSignInAuthentication.accessToken, googleSignInAccount.id);
     } catch (error) {
-      PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+      PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
     }
   }
 
@@ -372,7 +371,8 @@ class _MyLogInState extends State<LogInScreen> {
     if (widget.asAService) {
       Navigator.of(context).pop(true);
     } else {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home',ModalRoute.withName('/splash'));
     }
   }
 }

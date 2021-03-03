@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
-import '../../screens.dart';
 import '../../utils.dart';
 
 class UpdatePhoneNumberScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
 
       api.apiServicesAppCustomerUpdatePhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).phoneNumberUpdated);
+        PaprikaToast.showToast(S.of(context).phoneNumberUpdated);
         ApiTypesHelper().setPhoneNumber(_currentController.text);
         ApiTypesHelper().setIsPhoneNumberConfirmed(false);
         Navigator.of(context).pop(_currentController.text);

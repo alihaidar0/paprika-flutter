@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
 
@@ -83,7 +82,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Text(_confirmationText,
-                style: Theme.of(context).textTheme.subhead),
+                style: Theme.of(context).textTheme.subtitle1),
           ),
           Text(
             S.of(context).confirmationCode,
@@ -95,28 +94,29 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
             keyboardType: TextInputType.number,
             style: TextStyle(fontSize: 14),
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFaa757f)),
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(3.0)),
-                )),
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFaa757f)),
+                borderRadius:
+                    const BorderRadius.all(const Radius.circular(3.0)),
+              ),
+            ),
           ),
           Center(
-              child: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: CustomizedActiveButton(
-              title: S.of(context).confirm,
-              onPressed: true == _hasCodeChanged
-                  ? () => _onConfirmPressed(context)
-                  : null,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: CustomizedActiveButton(
+                title: S.of(context).confirm,
+                onPressed: true == _hasCodeChanged
+                    ? () => _onConfirmPressed(context)
+                    : null,
+              ),
             ),
-          )),
+          ),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => _sendCode(context),
@@ -147,7 +147,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                     S.of(context).phoneNumberDoesNotExistPleaseEnterYours,
-                    style: Theme.of(context).textTheme.subhead)),
+                    style: Theme.of(context).textTheme.subtitle1)),
             Text(
               S.of(context).phoneNumber,
               style: TextStyle(fontSize: 14, color: Color(0xFF747373)),
@@ -200,7 +200,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
 
       api.apiServicesAppCustomerUpdatePhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).phoneNumberUpdated);
+        PaprikaToast.showToast(S.of(context).phoneNumberUpdated);
 
         ApiTypesHelper().setPhoneNumber(_phoneNumberController.text);
         ApiTypesHelper().setIsPhoneNumberConfirmed(false);
@@ -226,7 +226,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
       dialog.show();
       api.apiServicesAppCustomerConfirmPhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).successConfirmPhoneNumber);
+        PaprikaToast.showToast(S.of(context).successConfirmPhoneNumber);
         Navigator.of(context).pop(true);
       }).catchError((err) {
         dialog.hide();
@@ -245,7 +245,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
     dialog.show();
     api.apiServicesAppCustomerResendConfirmationCodePost().then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).sentCode);
+      PaprikaToast.showToast(S.of(context).sentCode);
       setState(() {
         _sealed = true;
       });

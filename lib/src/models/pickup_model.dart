@@ -1,4 +1,4 @@
-import 'package:paprica/src/models/create_pickup_meal_model.dart';
+import 'package:paprika/src/models/create_pickup_meal_model.dart';
 import 'package:swagger/api.dart';
 
 class PickupModel {

@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';
@@ -62,7 +63,7 @@ class ReviewResult extends StatelessWidget {
                     S.of(context).total +
                         ": " +
                         "(" +
-                        PapricaFormatter.formatNumber(
+                        PaprikaFormatter.formatNumber(
                             _countRater(restaurantRaters)) +
                         ")",
                     style: TextStyle(fontWeight: FontWeight.w300),
@@ -417,7 +418,6 @@ class _ReviewFormState extends State<ReviewForm> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.customerProfileImage);
     var isLocalProfileImage = widget.customerProfileImage == null ||
         widget.customerProfileImage == '';
 
@@ -679,16 +679,21 @@ class _ReviewFormState extends State<ReviewForm> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomizedActiveButton(
-                            onPressed: !formEdited
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 8.0),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: !formEdited
                                 ? null
                                 : () => _onSubmitPressed(context),
-                            title: S.of(context).save,
+                            child: Text(S.of(context).save,
+                            style: TextStyle(
+                              color: !formEdited ? Colors.grey : Theme.of(context).primaryColor,
+                            ),
+                            ),
                           ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -740,11 +745,10 @@ class _ReviewFormState extends State<ReviewForm> {
         showDialog(
             context: context,
             builder: (BuildContext context) => MessageDialog(
-                  S.of(context).thankYouAdminWillReviewYourFeedback,
-                  duration: Duration(seconds: 1),
+                  message: S.of(context).thankYouAdminWillReviewYourFeedback,
                 ));
       } else {
-        PapricaToast.showToast(S.of(context).successRate);
+        PaprikaToast.showToast(S.of(context).successRate);
       }
 
       widget.onSubmit(jsonData);
@@ -768,7 +772,7 @@ class _ReviewFormState extends State<ReviewForm> {
       setState(() {
         isSubmitting = false;
       });
-      PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+      PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
     });
   }
 
@@ -812,7 +816,7 @@ class _ReviewFormState extends State<ReviewForm> {
         showDialog(
             context: context,
             builder: (_context) {
-              return PapricaSimpleDialog(
+              return PaprikaSimpleDialog(
                 title:
                     S.of(context).loggingInRequired(S.of(context).actionReview),
                 yesButton: FlatButton(
@@ -827,7 +831,7 @@ class _ReviewFormState extends State<ReviewForm> {
                         if (loggedIn != null && loggedIn) {
                           _onSubmitReview();
                         } else {
-                          PapricaToast.showToast(S
+                          PaprikaToast.showToast(S
                               .of(context)
                               .loggingInRequired(S.of(context).actionReview));
                         }

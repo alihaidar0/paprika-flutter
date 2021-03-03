@@ -3,12 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/src/widgets/slider.dart';
+import 'package:paprika/src/widgets/slider.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
 import '../../translations.dart';
-
 import '../../widgets.dart';
 
 GoogleMapController mapController;
@@ -200,7 +199,8 @@ class __ListItemState extends State<_ListItem> {
                 width: MediaQuery.of(context).size.width * 0.20,
                 height: MediaQuery.of(context).size.width * 0.25,
                 decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.20 * 0.5),
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.20 * 0.5),
                     shape: BoxShape.rectangle,
                     color: Colors.white,
                     image: DecorationImage(

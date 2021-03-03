@@ -25,8 +25,7 @@ class InfoRow extends StatelessWidget {
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.34,
-          height: 28,
+          width: MediaQuery.of(context).size.width * 0.36,
           color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

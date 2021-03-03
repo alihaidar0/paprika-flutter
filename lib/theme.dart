@@ -1,1 +1,1 @@
-export 'src/theme/paprica_theme.dart';
+export 'src/theme/paprika_theme.dart';

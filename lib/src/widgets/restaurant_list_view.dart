@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/src/models/restaurants_list_model.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/src/models/restaurants_list_model.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../error_handlers.dart';
 import '../../utils.dart';
@@ -17,13 +16,13 @@ class Restaurants extends StatelessWidget {
   final RestaurantsListModel restaurantsList;
   final String title;
   final Color titleColor;
-  final bool reversed, isArrowShows, isFromMyPaprica;
-  final PapricaFilterModel filterModel;
+  final bool reversed, isArrowShows, isFromMyPaprika;
+  final PaprikaFilterModel filterModel;
 
   Restaurants(
       {@required this.restaurantsList,
       @required this.title,
-      this.isFromMyPaprica = false,
+      this.isFromMyPaprika = false,
       this.titleColor,
       this.isArrowShows = true,
       this.reversed = false,
@@ -38,17 +37,17 @@ class Restaurants extends StatelessWidget {
       widgets.add(
         Container(
           width: imageWidth,
-          child: isFromMyPaprica
-              ? _buildMyPapricaRestaurant(context, x, imageWidth)
+          child: isFromMyPaprika
+              ? _buildMyPaprikaRestaurant(context, x, imageWidth)
               : _buildRestaurant(context, x),
         ),
       );
     }
 
     num parentHeight =
-        isFromMyPaprica ? MediaQuery.of(context).size.height * 0.13 : 90; //103
+        isFromMyPaprika ? MediaQuery.of(context).size.height * 0.13 : 90; //103
     return Container(
-      color: isFromMyPaprica ? Colors.white : Colors.transparent,
+      color: isFromMyPaprika ? Colors.white : Colors.transparent,
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +108,7 @@ class Restaurants extends StatelessWidget {
     );
   }
 
-  Widget _buildMyPapricaRestaurant(BuildContext context, int x, imageHeight) {
+  Widget _buildMyPaprikaRestaurant(BuildContext context, int x, imageHeight) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
@@ -132,30 +131,24 @@ class Restaurants extends StatelessWidget {
                   topRight: Radius.circular(12.0),
                   topLeft: Radius.circular(12.0),
                 ),
-//                child: FadeInImage.memoryNetwork(
-//                  placeholder: kTransparentImage,
-//                  image: restaurantsList.items[x].logoImage ?? "",
-//                ),
-                child: PapricaCachedImage(
+                child: PaprikaCachedImage(
                   imageUrl: restaurantsList.items[x].logoImage,
                 ),
               ),
             ),
             Padding(
-                padding: Localizations.localeOf(context).languageCode == 'en'
-                    ? EdgeInsets.fromLTRB(8, 3, 8, 0)
-                    : EdgeInsets.fromLTRB(8, 0, 8, 0),
-                child: Text(
-                  restaurantsList.items[x].name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize:
-                        Localizations.localeOf(context).languageCode == 'en'
-                            ? 14
-                            : 14,
-                  ),
-                )),
+              padding: Localizations.localeOf(context).languageCode == 'en'
+                  ? EdgeInsets.fromLTRB(8, 3, 8, 0)
+                  : EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Text(
+                restaurantsList.items[x].name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
             Padding(
               padding: Localizations.localeOf(context).languageCode == 'en'
                   ? EdgeInsets.fromLTRB(6, 2, 6, 0)
@@ -213,16 +206,22 @@ class Restaurants extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: new BorderRadius.circular(12.0),
-                      child: CachedNetworkImage(
-                          imageUrl: restaurantsList.items[x].logoImage,
-                          placeholder: (context, url) => Image(
-                                image:
-                                    AssetImage("assets/images/placeholder.png"),
-                                width: MediaQuery.of(context).size.width * 0.23,
-                              ),
-                          width: MediaQuery.of(context).size.width * 0.23),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.23,
+                      height: MediaQuery.of(context).size.width * 0.23,
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: new BorderRadius.circular(12.0),
+                          child: CachedNetworkImage(
+                            imageUrl: restaurantsList.items[x].logoImage,
+                            placeholder: (context, url) => Image(
+                              image: AssetImage("assets/images/placeholder.png"),
+                              width: MediaQuery.of(context).size.width * 0.23,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.23,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -316,58 +315,59 @@ class Restaurants extends StatelessWidget {
     });
   }
 
-  Widget _buildViewMoreCard(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _onSeeMore(context);
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ),
-            Center(
-              child: Text(
-                S.of(context).seeMore,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 19,
-                  color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 8.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  /// not used
+// Widget _buildViewMoreCard(BuildContext context) {
+//   return GestureDetector(
+//     onTap: () {
+//       _onSeeMore(context);
+//     },
+//     child: Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+//       child: Stack(
+//         children: <Widget>[
+//           Container(
+//             decoration: BoxDecoration(
+//               color: Colors.grey.withOpacity(0.5),
+//               borderRadius: BorderRadius.all(Radius.circular(8)),
+//             ),
+//           ),
+//           Center(
+//             child: Text(
+//               S.of(context).seeMore,
+//               textAlign: TextAlign.center,
+//               softWrap: true,
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 19,
+//                 color: Colors.white,
+//                 shadows: <Shadow>[
+//                   Shadow(
+//                     offset: Offset(2, 2),
+//                     blurRadius: 8.0,
+//                     color: Color.fromARGB(255, 0, 0, 0),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 }
 
 class PlacesRestaurantsList extends StatelessWidget {
   final List<PlacesListItem> restaurantsList;
   final String title;
   final Color titleColor;
-  final bool reversed, isArrowShows, isFromMyPaprica;
-  final PapricaFilterModel filterModel;
+  final bool reversed, isArrowShows, isFromMyPaprika;
+  final PaprikaFilterModel filterModel;
 
   PlacesRestaurantsList(
       {@required this.restaurantsList,
       @required this.title,
-      this.isFromMyPaprica = false,
+      this.isFromMyPaprika = false,
       this.titleColor,
       this.isArrowShows = true,
       this.reversed = false,
@@ -382,17 +382,17 @@ class PlacesRestaurantsList extends StatelessWidget {
       widgets.add(
         Container(
           width: imageWidth,
-          child: isFromMyPaprica
-              ? _buildMyPapricaRestaurant(context, x, imageWidth)
+          child: isFromMyPaprika
+              ? _buildMyPaprikaRestaurant(context, x, imageWidth)
               : _buildRestaurant(context, x),
         ),
       );
     }
 
     num parentHeight =
-        isFromMyPaprica ? MediaQuery.of(context).size.height * 0.13 : 90; //103
+        isFromMyPaprika ? MediaQuery.of(context).size.height * 0.13 : 90; //103
     return Container(
-      color: isFromMyPaprica ? Colors.white : Colors.transparent,
+      color: isFromMyPaprika ? Colors.white : Colors.transparent,
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -453,7 +453,7 @@ class PlacesRestaurantsList extends StatelessWidget {
     );
   }
 
-  Widget _buildMyPapricaRestaurant(BuildContext context, int x, imageHeight) {
+  Widget _buildMyPaprikaRestaurant(BuildContext context, int x, imageHeight) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
@@ -476,7 +476,7 @@ class PlacesRestaurantsList extends StatelessWidget {
                   topRight: Radius.circular(12.0),
                   topLeft: Radius.circular(12.0),
                 ),
-                child: PapricaCachedImage(
+                child: PaprikaCachedImage(
                   imageUrl: restaurantsList[x].logoImage,
                 ),
               ),
@@ -655,43 +655,44 @@ class PlacesRestaurantsList extends StatelessWidget {
     });
   }
 
-  Widget _buildViewMoreCard(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _onSeeMore(context);
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ),
-            Center(
-              child: Text(
-                S.of(context).seeMore,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 19,
-                  color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 8.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  /// not used
+// Widget _buildViewMoreCard(BuildContext context) {
+//   return GestureDetector(
+//     onTap: () {
+//       _onSeeMore(context);
+//     },
+//     child: Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+//       child: Stack(
+//         children: <Widget>[
+//           Container(
+//             decoration: BoxDecoration(
+//               color: Colors.grey.withOpacity(0.5),
+//               borderRadius: BorderRadius.all(Radius.circular(8)),
+//             ),
+//           ),
+//           Center(
+//             child: Text(
+//               S.of(context).seeMore,
+//               textAlign: TextAlign.center,
+//               softWrap: true,
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 19,
+//                 color: Colors.white,
+//                 shadows: <Shadow>[
+//                   Shadow(
+//                     offset: Offset(2, 2),
+//                     blurRadius: 8.0,
+//                     color: Color.fromARGB(255, 0, 0, 0),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 }

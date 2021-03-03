@@ -1,15 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/erro_handlers/api_error_handler.dart';
-import 'package:paprica/src/utils/paprica_api_client.dart';
-import 'package:paprica/src/utils/paprica_formatter.dart';
-import 'package:paprica/src/widgets/accessories.dart';
-import 'package:paprica/src/widgets/dialog.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/erro_handlers/api_error_handler.dart';
+import 'package:paprika/src/utils/api_types_helper.dart';
+import 'package:paprika/src/utils/paprica_api_client.dart';
+import 'package:paprika/src/utils/paprika_formatter.dart';
+import 'package:paprika/src/widgets/accessories.dart';
+import 'package:paprika/src/widgets/dialog.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:swagger/api.dart';
-import 'package:circular_check_box/circular_check_box.dart';
-import 'package:paprica/src/utils/api_types_helper.dart';
+
 import '../../screens.dart';
 
 class OpenPollCard extends StatefulWidget {
@@ -124,10 +125,10 @@ class _PollItemState extends State<PollItem> {
             child: Text(
                 S.of(context).closeDate +
                     ": " +
-                    PapricaFormatter.formatDateOnly(
+                    PaprikaFormatter.formatDateOnly(
                         context, widget.openPollItem.closeDate) +
                     "  " +
-                    PapricaFormatter.formatTimeOnly(
+                    PaprikaFormatter.formatTimeOnly(
                         context, widget.openPollItem.closeDate),
                 style: TextStyle(
                     color: Colors.black45,
@@ -165,18 +166,26 @@ class _PollItemState extends State<PollItem> {
             SizedBox(
               width: 5.0,
             ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: ClipRRect(
-                borderRadius: new BorderRadius.circular(
-                    MediaQuery.of(context).size.width * 0.19 * 0.5),
-                child: CachedNetworkImage(
-                    imageUrl: restaurant.logoImage,
-                    placeholder: (context, url) => Image(
-                          image: AssetImage("assets/images/placeholder.png"),
-                          width: MediaQuery.of(context).size.width * 0.19,
-                        ),
-                    width: MediaQuery.of(context).size.width * 0.19),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return RestaurantHome(restaurantId: restaurant.id);
+                }));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: new BorderRadius.circular(
+                      MediaQuery.of(context).size.width * 0.19 * 0.5),
+                  child: CachedNetworkImage(
+                      imageUrl: restaurant.logoImage,
+                      placeholder: (context, url) => Image(
+                            image: AssetImage("assets/images/placeholder.png"),
+                            width: MediaQuery.of(context).size.width * 0.19,
+                          ),
+                      width: MediaQuery.of(context).size.width * 0.19),
+                ),
               ),
             ),
             Padding(
@@ -193,12 +202,24 @@ class _PollItemState extends State<PollItem> {
                   Text(
                     restaurant.name,
                     style: TextStyle(
-                        height: 0.5,
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                  ),
+                  LinearPercentIndicator(
+                    isRTL: Localizations.localeOf(context).languageCode == 'ar',
+                    padding: EdgeInsets.only(left: 2.0, right: 2.0),
+                    alignment: MainAxisAlignment.start,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    lineHeight: 8.0,
+                    percent: _totalVotes == 0
+                        ? 0
+                        : _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)] /
+                            _totalVotes,
+                    progressColor: Theme.of(context).primaryColor,
                   ),
                   Text(
                     "${_restaurantVotes[_idRestaurants.indexOf(restaurant.id)]} " +
@@ -212,18 +233,6 @@ class _PollItemState extends State<PollItem> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  LinearPercentIndicator(
-                    padding: EdgeInsets.only(left: 2.0, right: 2.0),
-                    alignment: MainAxisAlignment.start,
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    lineHeight: 8.0,
-                    percent: _totalVotes == 0
-                        ? 0
-                        : _restaurantVotes[
-                                _idRestaurants.indexOf(restaurant.id)] /
-                            _totalVotes,
-                    progressColor: Theme.of(context).primaryColor,
-                  ),
                 ],
               ),
             ),
@@ -232,7 +241,7 @@ class _PollItemState extends State<PollItem> {
         Column(
           children: [
             SizedBox(
-              height: 28.0,
+              height: 2.0,
             ),
             CircularCheckBox(
                 activeColor: Theme.of(context).primaryColor,
@@ -244,41 +253,41 @@ class _PollItemState extends State<PollItem> {
                       if (_checkBoxValues.indexOf(true) != -1) {
                         if (_idRestaurants[_checkBoxValues.indexOf(true)] ==
                             restaurant.id) {
-                            _checkBoxValues[_idRestaurants
-                                .indexOf(restaurant.id)] = newValue;
-                            setState(() {
-                              _totalVotes--;
-                              _restaurantVotes[
-                                  _idRestaurants.indexOf(restaurant.id)]--;
-                            });
-                          _onClearVote(context);
-                        } else {
-                            setState(() {
-                              _restaurantVotes[
-                                  _idRestaurants.indexOf(restaurant.id)]++;
-                              _restaurantVotes[_checkBoxValues.indexOf(true)]--;
-                            });
-                            _checkBoxValues[_checkBoxValues.indexOf(true)] =
-                                false;
-                            _checkBoxValues[_idRestaurants
-                                .indexOf(restaurant.id)] = newValue;
-                          _onAddVote(context, restaurant.id);
-                        }
-                      } else {
                           _checkBoxValues[
                               _idRestaurants.indexOf(restaurant.id)] = newValue;
                           setState(() {
-                            _totalVotes++;
+                            _totalVotes--;
+                            _restaurantVotes[
+                                _idRestaurants.indexOf(restaurant.id)]--;
+                          });
+                          _onClearVote(context);
+                        } else {
+                          setState(() {
                             _restaurantVotes[
                                 _idRestaurants.indexOf(restaurant.id)]++;
+                            _restaurantVotes[_checkBoxValues.indexOf(true)]--;
                           });
+                          _checkBoxValues[_checkBoxValues.indexOf(true)] =
+                              false;
+                          _checkBoxValues[
+                              _idRestaurants.indexOf(restaurant.id)] = newValue;
+                          _onAddVote(context, restaurant.id);
+                        }
+                      } else {
+                        _checkBoxValues[_idRestaurants.indexOf(restaurant.id)] =
+                            newValue;
+                        setState(() {
+                          _totalVotes++;
+                          _restaurantVotes[
+                              _idRestaurants.indexOf(restaurant.id)]++;
+                        });
                         _onAddVote(context, restaurant.id);
                       }
                     } else {
                       showDialog(
                           context: context,
                           builder: (_context) {
-                            return PapricaSimpleDialog(
+                            return PaprikaSimpleDialog(
                               title: S.of(context).pleaseLoginInOrderToVote,
                               yesButton: FlatButton(
                                   onPressed: () {
@@ -287,12 +296,12 @@ class _PollItemState extends State<PollItem> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            LogInScreen(asAService: true),
+                                            LogInScreen(asAService: false),
                                       ),
                                     ).then((loggedIn) {
                                       if (loggedIn != null && loggedIn) {
                                       } else {
-                                        PapricaToast.showToast(S
+                                        PaprikaToast.showToast(S
                                             .of(context)
                                             .loggingInRequired(
                                                 S.of(context).vote));
@@ -321,7 +330,7 @@ class _PollItemState extends State<PollItem> {
     dialog.show();
     api.apiServicesAppCustomerPollAddVotePost(input: _data).then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).thankYouForVoting);
+      PaprikaToast.showToast(S.of(context).thankYouForVoting);
     }).catchError((err) {
       dialog.hide();
       DefaultErrorHandler.handle(context, err);
@@ -338,7 +347,7 @@ class _PollItemState extends State<PollItem> {
         .apiServicesAppCustomerPollClearVotePost(pollId: widget.openPollItem.id)
         .then((_) {
       dialog.hide();
-      PapricaToast.showToast(S.of(context).theVotingHasBeenCleared);
+      PaprikaToast.showToast(S.of(context).theVotingHasBeenCleared);
     }).catchError((err) {
       dialog.hide();
       DefaultErrorHandler.handle(context, err);
