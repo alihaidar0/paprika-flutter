@@ -11,8 +11,6 @@ class RestaurantHomeDto {
 
   int noiseLevel = null;
 
-  //enum noiseLevelEnum {  1,  2,  3,  };
-
   double ambianceRate = null;
 
   bool isFavorite = null;
@@ -39,6 +37,8 @@ class RestaurantHomeDto {
 
   String phoneNumber = null;
 
+  String tel = null;
+
   int rank = null;
 
   String address = null;
@@ -49,13 +49,11 @@ class RestaurantHomeDto {
 
   int parkingTypes = null;
 
-  //enum parkingTypeEnum {  1,  };
-
   String description = null;
 
   int ambianceTypes = null;
 
-  //enum ambianceTypeEnum {  1,  };
+  int restaurantTypes = null;
 
   String audioTrack = null;
 
@@ -63,16 +61,14 @@ class RestaurantHomeDto {
 
   bool isSmokeFree = null;
 
+  bool hasShisha = null;
+
   bool isAlcoholFree = null;
 
   int cuisineTypes = null;
 
-  //enum cuisineTypesEnum {  1,  2,  };
-
   int amenityTypes = null;
-
-  //enum amenityTypesEnum {  1,  };
-
+  
   bool hasOutdoor = null;
 
   bool isFeatured = null;

@@ -2,14 +2,13 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:paprika/src/screens/restaurant_screen.dart';
 import 'package:paprika/translations.dart';
 import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../utils.dart';
-
-int currentTab;
 
 class RestaurantsPage extends StatefulWidget {
   const RestaurantsPage();
@@ -18,10 +17,14 @@ class RestaurantsPage extends StatefulWidget {
   _RestaurantsPageState createState() => _RestaurantsPageState();
 }
 
-class _RestaurantsPageState extends State<RestaurantsPage> with AutomaticKeepAliveClientMixin<RestaurantsPage> {
+class _RestaurantsPageState extends State<RestaurantsPage>
+    with AutomaticKeepAliveClientMixin<RestaurantsPage> {
   Future<PagedResultDtoRestaurantSummaryDto> futureRestData;
-  List<RestaurantSummaryDto> restaurants;
   ScrollController _scrollController;
+  bool _endOfRestaurants;
+  bool _requestingData;
+  List<dynamic> restaurants = [];
+  bool _firstTime;
 
   Future _getPlacesDataAsync() {
     ApiClient apiClient = PapricaApiClient();
@@ -36,21 +39,92 @@ class _RestaurantsPageState extends State<RestaurantsPage> with AutomaticKeepAli
     });
   }
 
+  void _requestData(BuildContext context, {int skipCount, int maxResult = 10}) {
+    if (_requestingData) return;
+    setState(() {
+      _requestingData = true;
+    });
+    ApiClient client = PapricaApiClient();
+    PlacesApi api = PlacesApi(client);
+    api
+        .apiServicesAppPlacesGetAllGet(
+      skipCount: skipCount ?? 0,
+      maxResultCount: maxResult,
+    )
+        .then((restaurantsDto) {
+      setState(() {
+        _requestingData = false;
+        // Load More
+        if (skipCount != null && skipCount > 0) {
+          // Just remove the loader
+          if (restaurants.isNotEmpty && restaurants.last is SpinKitCircle) {
+            restaurants.removeLast();
+          }
+          if (restaurantsDto.items.isNotEmpty) {
+            restaurants.addAll(restaurantsDto.items);
+          } else {
+            _endOfRestaurants = true;
+          }
+        }
+      });
+    }).catchError((err) {
+      setState(() {
+        _requestingData = false;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getPlacesDataAsync();
+    _endOfRestaurants = false;
+    _requestingData = false;
+    _firstTime = true;
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
+          !_requestingData &&
+          restaurants.isNotEmpty &&
+          context != null &&
+          !_endOfRestaurants) {
+        _requestData(context, skipCount: restaurants.length);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
-    return FutureBuilder<PagedResultDtoRestaurantSummaryDto>(
+    return FutureBuilder(
       future: futureRestData,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            restaurants = snapshot.data.items;
+            if (snapshot.data.items != null &&
+                snapshot.data.items.length > 0 &&
+                _firstTime) {
+              for (var item in snapshot.data.items) {
+                restaurants.add(item);
+              }
+              _firstTime = false;
+            }
+            if (_requestingData) {
+              restaurants.add(SpinKitCircle(color: Colors.grey, size: 32));
+            } else {
+              if (restaurants != null &&
+                  restaurants.length > 0 &&
+                  restaurants.last is SpinKitCircle) {
+                restaurants.removeLast();
+              }
+            }
             return Scaffold(
               body: CustomScrollView(
                 controller: _scrollController,
@@ -62,10 +136,10 @@ class _RestaurantsPageState extends State<RestaurantsPage> with AutomaticKeepAli
                       ? SliverList(
                           delegate: SliverChildListDelegate(
                             restaurants.map<Widget>((item) {
-                                  if (item is RestaurantSummaryDto)
+                                  if (item is RestaurantSummaryDto) {
                                     return _RestaurantItem(item);
-                                  else {
-                                    return null;
+                                  } else {
+                                    return item;
                                   }
                                 })?.toList() ??
                                 [],
@@ -122,10 +196,12 @@ class _RestaurantsPagePlaceHolder extends StatefulWidget {
   _RestaurantsPagePlaceHolder(this.child, {this.getData});
 
   @override
-  __RestaurantsPagePlaceHolderState createState() => __RestaurantsPagePlaceHolderState();
+  __RestaurantsPagePlaceHolderState createState() =>
+      __RestaurantsPagePlaceHolderState();
 }
 
-class __RestaurantsPagePlaceHolderState extends State<_RestaurantsPagePlaceHolder> {
+class __RestaurantsPagePlaceHolderState
+    extends State<_RestaurantsPagePlaceHolder> {
   @override
   void initState() {
     super.initState();
