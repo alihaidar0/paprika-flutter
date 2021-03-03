@@ -105,6 +105,7 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                                   widget.reviewsState.customerReview != null
                                       ? widget.reviewsState.customerReview
                                       : snapshot.data?.customerReview,
+                              hasShisha: widget.restaurantData.hasShisha,
                               onSubmit: (jsonData) => widget.storeReviewsState(
                                   ReviewsState(
                                       summary: reviewsSummary,

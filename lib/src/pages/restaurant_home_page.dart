@@ -429,7 +429,7 @@ class _InformationSectionState extends State<InformationSection> {
         ),
       );
     }
-    if (widget.restData.isSmokeFree != null && widget.restData.isSmokeFree) {
+    if (widget.restData.isSmokeFree != null) {
       drawables.add(
         InfoRow(
           title: this.widget.restData.isSmokeFree != null &&
@@ -440,7 +440,17 @@ class _InformationSectionState extends State<InformationSection> {
         ),
       );
     }
-
+    if (widget.restData.hasShisha != null) {
+      drawables.add(
+        InfoRow(
+          title: this.widget.restData.hasShisha != null &&
+              this.widget.restData.hasShisha
+              ? S.of(context).hssShisha
+              : S.of(context).noShisha,
+          icon: AssetImage('assets/icons/shisha.png'),
+        ),
+      );
+    }
     if (widget.restData.isAlcoholFree != null &&
         widget.restData.isAlcoholFree) {
       drawables.add(
