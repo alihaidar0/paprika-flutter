@@ -328,14 +328,42 @@ class _InformationSectionState extends State<InformationSection> {
     );
   }
 
+  void _actionCallRestaurant(BuildContext context, String number) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return CallRestaurantDialog(
+          phoneNumber: number,
+          restaurantName: widget.restData.name,
+        );
+      },
+    );
+  }
+
   List<Widget> getDrawableInformation(BuildContext context) {
     List<Widget> drawables = List();
     if (widget.restData.phoneNumber != null) {
       drawables.add(
-        InfoRow(
-          title: widget.restData.phoneNumber,
-          icon: AssetImage('assets/icons/phone.png'),
-          textDirection: TextDirection.ltr,
+        InkWell(
+          onTap: () => _actionCallRestaurant(context, widget.restData.phoneNumber),
+          child: InfoRow(
+            title: widget.restData.phoneNumber,
+            icon: AssetImage('assets/icons/phone.png'),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+      );
+    }
+    if (widget.restData.tel != null) {
+      drawables.add(
+        InkWell(
+          onTap: () => _actionCallRestaurant(context, widget.restData.tel),
+          child: InfoRow(
+            title: widget.restData.tel,
+            icon: AssetImage('assets/icons/telephone.png'),
+            textDirection: TextDirection.ltr,
+          ),
         ),
       );
     }
