@@ -139,6 +139,7 @@ class ServiceReviewsLine extends StatelessWidget {
   final double foodRate;
   final double serviceRate;
   final double shishaRate;
+  final bool hasShisha;
   final double ambianceRate;
   final String noiseLevel;
 
@@ -148,6 +149,7 @@ class ServiceReviewsLine extends StatelessWidget {
       {@required this.foodRate,
       @required this.serviceRate,
       @required this.shishaRate,
+        @required this.hasShisha,
       @required this.ambianceRate,
       @required this.noiseLevel,
       this.backgroundColor});
@@ -193,22 +195,24 @@ class ServiceReviewsLine extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  S.of(context).shisha,
-                ),
-                Text(
-                  shishaRate.toString(),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+          hasShisha == true
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        S.of(context).shisha,
+                      ),
+                      Text(
+                        shishaRate.toString(),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : Container(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
