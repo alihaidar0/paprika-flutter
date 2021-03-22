@@ -399,21 +399,21 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
         );
         break;
 
-      case ApiHelper.MyPaprikaTypePublishedPoll:
-        PublishedPollInPapricaItem temp = papricaItem.model;
-        return Column(
-          children: <Widget>[
-            PublishedPollCard(
-              publishedPollItem: papricaItem.model,
-              title: temp.title,
-              titleColor: Theme.of(context).primaryColor,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-          ],
-        );
-        break;
+      // case ApiHelper.MyPaprikaTypePublishedPoll:
+      //   PublishedPollInPapricaItem temp = papricaItem.model;
+      //   return Column(
+      //     children: <Widget>[
+      //       PublishedPollCard(
+      //         publishedPollItem: papricaItem.model,
+      //         title: temp.title,
+      //         titleColor: Theme.of(context).primaryColor,
+      //       ),
+      //       SizedBox(
+      //         height: 15,
+      //       ),
+      //     ],
+      //   );
+      //   break;
 
       case ApiHelper.MyPaprikaTypeOpenPoll:
         OpenPollInPapricaItem temp = papricaItem.model;

@@ -45,12 +45,13 @@ class RestaurantSummaryDto {
 
   @override
   String toString() {
-    return 'RestaurantSummaryDto[name=$name, phoneNumber=$phoneNumber, tel=$tel, address=$address, logoImage=$logoImage, restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, ambianceRate=$ambianceRate, noiseLevel=$noiseLevel, longitude=$longitude, latitude=$latitude, city=$city, country=$country, region=$region, isOpen=$isOpen, hasShisha=$hasShisha, id=$id, ]';
+    return 'RestaurantSummaryDto[name=$name, restaurantTypes=$restaurantTypes, phoneNumber=$phoneNumber, tel=$tel, address=$address, logoImage=$logoImage, restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, ambianceRate=$ambianceRate, noiseLevel=$noiseLevel, longitude=$longitude, latitude=$latitude, city=$city, country=$country, region=$region, isOpen=$isOpen, hasShisha=$hasShisha, id=$id, ]';
   }
 
   RestaurantSummaryDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     name = json['name'];
+    restaurantTypes = json['restaurantTypes'];
     phoneNumber = json['phoneNumber'];
     address = json['address'];
     logoImage = json['logoImage'];
@@ -73,6 +74,7 @@ class RestaurantSummaryDto {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'restaurantTypes': restaurantTypes,
       'phoneNumber': phoneNumber,
       'address': address,
       'logoImage': logoImage,
