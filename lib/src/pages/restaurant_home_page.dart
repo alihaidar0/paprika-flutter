@@ -181,35 +181,7 @@ class _InformationSectionState extends State<InformationSection> {
                   .of(context)
                   .size
                   .width,
-              child: widget.restData.restaurantTypes != null ?
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 16,),
-                      WideInfoRow(
-                        title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
-                            widget.restData.restaurantTypes, Type.places,
-                            maxNumber: 2, separator: S
-                            .of(context)
-                            .comma + ' '),
-                        icon: AssetImage('assets/icons/restaurant_type.png'),
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: drawables.length > 0
-                        ? Wrap(
-                      spacing: 24,
-                      children: drawables,
-                    )
-                        : Container(),
-                  ),
-                ],
-              ):
-              Center(
+              child: Center(
                 child: drawables.length > 0
                     ? Wrap(
                   spacing: 24,
@@ -388,6 +360,18 @@ class _InformationSectionState extends State<InformationSection> {
 
   List<Widget> getDrawableInformation(BuildContext context) {
     List<Widget> drawables = List();
+    if (widget.restData.restaurantTypes != null && widget.restData.restaurantTypes != 0) {
+      drawables.add(
+        WideInfoRow(
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              widget.restData.restaurantTypes, Type.places,
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
+          icon: AssetImage('assets/icons/restaurant_type.png'),
+        ),
+      );
+    }
     if (widget.restData.phoneNumber != null) {
       drawables.add(
         InkWell(
@@ -515,8 +499,7 @@ class _InformationSectionState extends State<InformationSection> {
         ),
       );
     }
-    if (widget.restData.isAlcoholFree != null &&
-        widget.restData.isAlcoholFree) {
+    if (widget.restData.isAlcoholFree != null) {
       drawables.add(
         InfoRow(
           title: this.widget.restData.isAlcoholFree != null &&

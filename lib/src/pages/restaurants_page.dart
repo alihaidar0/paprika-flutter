@@ -618,8 +618,10 @@ class _RestaurantItem extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 16),
-                              child: this.restaurant.phoneNumber != null
-                                  ? GestureDetector(
+                              child: this.restaurant.phoneNumber == null &&
+                                      this.restaurant.tel == null
+                                  ? Container()
+                                  : GestureDetector(
                                       onTap: () {
                                         showDialog(
                                           context: context,
@@ -627,7 +629,7 @@ class _RestaurantItem extends StatelessWidget {
                                           builder: (context) {
                                             return CallRestaurantDialog(
                                               phoneNumber:
-                                                  this.restaurant.phoneNumber,
+                                                  this.restaurant.phoneNumber != null ? this.restaurant.phoneNumber : this.restaurant.tel,
                                               restaurantName:
                                                   this.restaurant.name,
                                             );
@@ -639,8 +641,7 @@ class _RestaurantItem extends StatelessWidget {
                                         size: 24,
                                         color: Theme.of(context).primaryColor,
                                       ),
-                                    )
-                                  : Container(),
+                                    ),
                             )
                           ],
                         ),
