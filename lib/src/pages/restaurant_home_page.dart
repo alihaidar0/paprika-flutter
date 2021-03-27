@@ -365,7 +365,7 @@ class _InformationSectionState extends State<InformationSection> {
         WideInfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.restaurantTypes, Type.places,
-              maxNumber: 2, separator: S
+              maxNumber: 5, separator: S
               .of(context)
               .comma + ' '),
           icon: AssetImage('assets/icons/restaurant_type.png'),

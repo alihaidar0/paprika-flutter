@@ -17,7 +17,7 @@ class ApiClient {
   final _RegList = new RegExp(r'^List<(.*)>$');
   final _RegMap = new RegExp(r'^Map<String,(.*)>$');
 
-  ApiClient({this.basePath: "https://prodapi.paprika-sy.com"}) {
+  ApiClient({this.basePath: "http://devapi.popina.sy"}) {
     // Setup authentications (key: authentication name, value: authentication).
     _authentications['bearerAuth'] = new ApiKeyAuth("header", "Authorization");
 
