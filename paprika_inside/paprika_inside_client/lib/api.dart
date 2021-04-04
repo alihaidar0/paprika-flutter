@@ -1,9 +1,8 @@
-library swagger.api;
+library swagger_inside.api;
 
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:http/browser_client.dart';
 import 'package:http/http.dart';
 
 part 'api/customer_after_dish_api.dart';

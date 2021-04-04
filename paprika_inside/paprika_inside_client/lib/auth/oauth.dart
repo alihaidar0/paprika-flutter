@@ -1,4 +1,4 @@
-part of swagger.api;
+part of swagger_inside.api;
 
 class OAuth implements Authentication {
   String accessToken;

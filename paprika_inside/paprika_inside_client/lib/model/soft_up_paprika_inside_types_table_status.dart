@@ -1,4 +1,4 @@
-part of swagger.api;
+part of swagger_inside.api;
 
 class SoftUpPaprikaInsideTypesTableStatus {
   /// The underlying value of this enum member.

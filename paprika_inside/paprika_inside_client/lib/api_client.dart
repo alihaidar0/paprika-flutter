@@ -1,4 +1,4 @@
-part of swagger.api;
+part of swagger_inside.api;
 
 class QueryParam {
   String name;
@@ -9,7 +9,7 @@ class QueryParam {
 
 class ApiClient {
   String basePath;
-  var client = new BrowserClient();
+  var client = new Client();
 
   Map<String, String> _defaultHeaderMap = {};
   Map<String, Authentication> _authentications = {};
@@ -17,7 +17,7 @@ class ApiClient {
   final _RegList = new RegExp(r'^List<(.*)>$');
   final _RegMap = new RegExp(r'^Map<String,(.*)>$');
 
-  ApiClient({this.basePath: "https://localhost/Inside.Api"}) {
+  ApiClient({this.basePath: "http://82.137.233.212:9090/Inside.Api"}) {
     // Setup authentications (key: authentication name, value: authentication).
     _authentications['oauth2'] = new OAuth();
   }
@@ -76,13 +76,11 @@ class ApiClient {
         case 'SoftUpPaprikaInsidePlaylistsTrackDto':
           return new SoftUpPaprikaInsidePlaylistsTrackDto.fromJson(value);
         case 'SoftUpPaprikaInsidePlaylistsTrackRequestDto':
-          return new SoftUpPaprikaInsidePlaylistsTrackRequestDto.fromJson(
-              value);
+          return new SoftUpPaprikaInsidePlaylistsTrackRequestDto.fromJson(value);
         case 'SoftUpPaprikaInsideRestaurantsFeedbackDto':
           return new SoftUpPaprikaInsideRestaurantsFeedbackDto.fromJson(value);
         case 'SoftUpPaprikaInsideRestaurantsRestaurantDto':
-          return new SoftUpPaprikaInsideRestaurantsRestaurantDto.fromJson(
-              value);
+          return new SoftUpPaprikaInsideRestaurantsRestaurantDto.fromJson(value);
         case 'SoftUpPaprikaInsideTypesInvoiceStatus':
           return new SoftUpPaprikaInsideTypesInvoiceStatus.fromJson(value);
         case 'SoftUpPaprikaInsideTypesOrderStatus':
@@ -140,8 +138,7 @@ class ApiClient {
 
   // We don't use a Map<String, String> for queryParams.
   // If collectionFormat is 'multi' a key might appear multiple times.
-  Future<Response> invokeAPI(
-      String path,
+  Future<Response> invokeAPI(String path,
       String method,
       Iterable<QueryParam> queryParams,
       Object body,
@@ -149,19 +146,20 @@ class ApiClient {
       Map<String, String> formParams,
       String contentType,
       List<String> authNames) async {
+
     _updateParamsForAuth(authNames, queryParams, headerParams);
 
-    var ps = queryParams
-        .where((p) => p.value != null)
-        .map((p) => '${p.name}=${p.value}');
-    String queryString = ps.isNotEmpty ? '?' + ps.join('&') : '';
+    var ps = queryParams.where((p) => p.value != null).map((p) => '${p.name}=${p.value}');
+    String queryString = ps.isNotEmpty ?
+    '?' + ps.join('&') :
+    '';
 
     String url = basePath + path + queryString;
 
     headerParams.addAll(_defaultHeaderMap);
     headerParams['Content-Type'] = contentType;
 
-    if (body is MultipartRequest) {
+    if(body is MultipartRequest) {
       var request = new MultipartRequest(method, Uri.parse(url));
       request.fields.addAll(body.fields);
       request.files.addAll(body.files);
@@ -170,10 +168,8 @@ class ApiClient {
       var response = await client.send(request);
       return Response.fromStream(response);
     } else {
-      var msgBody = contentType == "application/x-www-form-urlencoded"
-          ? formParams
-          : serialize(body);
-      switch (method) {
+      var msgBody = contentType == "application/x-www-form-urlencoded" ? formParams : serialize(body);
+      switch(method) {
         case "POST":
           return client.post(url, headers: headerParams, body: msgBody);
         case "PUT":
@@ -190,12 +186,10 @@ class ApiClient {
 
   /// Update query and header parameters based on authentication settings.
   /// @param authNames The authentications to apply
-  void _updateParamsForAuth(List<String> authNames,
-      List<QueryParam> queryParams, Map<String, String> headerParams) {
+  void _updateParamsForAuth(List<String> authNames, List<QueryParam> queryParams, Map<String, String> headerParams) {
     authNames.forEach((authName) {
       Authentication auth = _authentications[authName];
-      if (auth == null)
-        throw new ArgumentError("Authentication undefined: " + authName);
+      if (auth == null) throw new ArgumentError("Authentication undefined: " + authName);
       auth.applyToParams(queryParams, headerParams);
     });
   }

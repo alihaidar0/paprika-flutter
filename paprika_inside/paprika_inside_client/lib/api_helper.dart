@@ -1,4 +1,4 @@
-part of swagger.api;
+part of swagger_inside.api;
 
 const _delimiters = const {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 

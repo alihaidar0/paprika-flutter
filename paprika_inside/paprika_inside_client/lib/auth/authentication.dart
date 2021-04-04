@@ -1,4 +1,4 @@
-part of swagger.api;
+part of swagger_inside.api;
 
 abstract class Authentication {
   /// Apply authentication settings to header and query params.
