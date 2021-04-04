@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  swagger:
+    path: paprika_inside_client
 
 
   # The following adds the Cupertino Icons font to your application.

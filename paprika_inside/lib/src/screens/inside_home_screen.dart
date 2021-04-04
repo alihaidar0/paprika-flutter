@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swagger/api.dart';
 
 class InsideHomeScreen extends StatefulWidget {
   @override
@@ -6,6 +7,8 @@ class InsideHomeScreen extends StatefulWidget {
 }
 
 class _InsideHomeScreenState extends State<InsideHomeScreen> {
+  SoftUpPaprikaInsideAfterDishesAfterDishDto a;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
