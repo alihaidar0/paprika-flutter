@@ -12,6 +12,7 @@ import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
 
+import 'package:paprika_inside/screens.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
 
@@ -255,6 +256,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.qr_code),
+          backgroundColor: Colors.white,
+          onPressed: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(builder:
+                    (BuildContext context) {
+                  return InsideHomeScreen();
+                }));
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         bottomNavigationBar: SizedBox(
           height: 50.0,
           child: BottomNavigationBar(
