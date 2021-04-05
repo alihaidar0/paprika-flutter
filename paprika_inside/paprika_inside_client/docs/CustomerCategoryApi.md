@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **apiAppCustomerCategoryRestaurantCategoriesGet**
-> List<SoftUpPaprikaInsideCategoriesCategoryDto> apiAppCustomerCategoryRestaurantCategoriesGet()
+> List<CategoriesCategoryDto> apiAppCustomerCategoryRestaurantCategoriesGet()
 
 
 
@@ -38,7 +38,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<SoftUpPaprikaInsideCategoriesCategoryDto>**](SoftUpPaprikaInsideCategoriesCategoryDto.md)
+[**List<CategoriesCategoryDto>**](CategoriesCategoryDto.md)
 
 ### Authorization
 

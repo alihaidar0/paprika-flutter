@@ -1,6 +1,6 @@
 part of swagger_inside.api;
 
-class SoftUpPaprikaInsideMealsMealDto {
+class MealsMealDto {
   String id = null;
 
   String categoryId = null;
@@ -19,18 +19,18 @@ class SoftUpPaprikaInsideMealsMealDto {
 
   bool isActive = null;
 
-  List<SoftUpPaprikaInsideMealsMealVariantDto> mealVariants = [];
+  List<MealsMealVariantDto> mealVariants = [];
 
-  List<SoftUpPaprikaInsideMealsMealIngredientDto> mealIngredients = [];
+  List<MealsMealIngredientDto> mealIngredients = [];
 
-  SoftUpPaprikaInsideMealsMealDto();
+  MealsMealDto();
 
   @override
   String toString() {
-    return 'SoftUpPaprikaInsideMealsMealDto[id=$id, categoryId=$categoryId, pointOfServiceId=$pointOfServiceId, name=$name, description=$description, price=$price, image=$image, thumbnailImage=$thumbnailImage, isActive=$isActive, mealVariants=$mealVariants, mealIngredients=$mealIngredients, ]';
+    return 'MealsMealDto[id=$id, categoryId=$categoryId, pointOfServiceId=$pointOfServiceId, name=$name, description=$description, price=$price, image=$image, thumbnailImage=$thumbnailImage, isActive=$isActive, mealVariants=$mealVariants, mealIngredients=$mealIngredients, ]';
   }
 
-  SoftUpPaprikaInsideMealsMealDto.fromJson(Map<String, dynamic> json) {
+  MealsMealDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     id = json['id'];
     categoryId = json['categoryId'];
@@ -41,10 +41,9 @@ class SoftUpPaprikaInsideMealsMealDto {
     image = json['image'];
     thumbnailImage = json['thumbnailImage'];
     isActive = json['isActive'];
-    mealVariants = SoftUpPaprikaInsideMealsMealVariantDto.listFromJson(
-        json['mealVariants']);
-    mealIngredients = SoftUpPaprikaInsideMealsMealIngredientDto.listFromJson(
-        json['mealIngredients']);
+    mealVariants = MealsMealVariantDto.listFromJson(json['mealVariants']);
+    mealIngredients =
+        MealsMealIngredientDto.listFromJson(json['mealIngredients']);
   }
 
   Map<String, dynamic> toJson() {
@@ -63,21 +62,18 @@ class SoftUpPaprikaInsideMealsMealDto {
     };
   }
 
-  static List<SoftUpPaprikaInsideMealsMealDto> listFromJson(
-      List<dynamic> json) {
+  static List<MealsMealDto> listFromJson(List<dynamic> json) {
     return json == null
-        ? new List<SoftUpPaprikaInsideMealsMealDto>()
-        : json
-            .map((value) => new SoftUpPaprikaInsideMealsMealDto.fromJson(value))
-            .toList();
+        ? new List<MealsMealDto>()
+        : json.map((value) => new MealsMealDto.fromJson(value)).toList();
   }
 
-  static Map<String, SoftUpPaprikaInsideMealsMealDto> mapFromJson(
+  static Map<String, MealsMealDto> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, SoftUpPaprikaInsideMealsMealDto>();
+    var map = new Map<String, MealsMealDto>();
     if (json != null && json.length > 0) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new SoftUpPaprikaInsideMealsMealDto.fromJson(value));
+          map[key] = new MealsMealDto.fromJson(value));
     }
     return map;
   }

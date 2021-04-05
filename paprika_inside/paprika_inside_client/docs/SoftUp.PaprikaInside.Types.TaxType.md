@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideTypesTaxType
+# swagger.model.TypesTaxType
 
 ## Load the model package
 ```dart

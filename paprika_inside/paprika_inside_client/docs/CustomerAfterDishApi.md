@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **apiAppCustomerAfterDishAfterDishesGet**
-> List<SoftUpPaprikaInsideAfterDishesAfterDishDto> apiAppCustomerAfterDishAfterDishesGet()
+> List<AfterDishesAfterDishDto> apiAppCustomerAfterDishAfterDishesGet()
 
 
 
@@ -39,7 +39,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<SoftUpPaprikaInsideAfterDishesAfterDishDto>**](SoftUpPaprikaInsideAfterDishesAfterDishDto.md)
+[**List<AfterDishesAfterDishDto>**](AfterDishesAfterDishDto.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerAfterDishApi();
-var body = new SoftUpPaprikaInsideAfterDishesAfterDishRequestDto(); // SoftUpPaprikaInsideAfterDishesAfterDishRequestDto | 
+var body = new AfterDishesAfterDishRequestDto(); // AfterDishesAfterDishRequestDto | 
 
 try { 
     api_instance.apiAppCustomerAfterDishChooseAfterDishPost(body);
@@ -77,7 +77,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsideAfterDishesAfterDishRequestDto**](SoftUpPaprikaInsideAfterDishesAfterDishRequestDto.md)|  | [optional] 
+ **body** | [**AfterDishesAfterDishRequestDto**](AfterDishesAfterDishRequestDto.md)|  | [optional] 
 
 ### Return type
 

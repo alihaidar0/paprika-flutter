@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideCategoriesCategoryDto
+# swagger.model.CategoriesCategoryDto
 
 ## Load the model package
 ```dart

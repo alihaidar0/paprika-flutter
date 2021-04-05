@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **apiAppCustomerPlaylistPlaylistTracksPlaylistIdGet**
-> List<SoftUpPaprikaInsidePlaylistsTrackDto> apiAppCustomerPlaylistPlaylistTracksPlaylistIdGet(playlistId)
+> List<PlaylistsTrackDto> apiAppCustomerPlaylistPlaylistTracksPlaylistIdGet(playlistId)
 
 
 
@@ -44,7 +44,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List<SoftUpPaprikaInsidePlaylistsTrackDto>**](SoftUpPaprikaInsidePlaylistsTrackDto.md)
+[**List<PlaylistsTrackDto>**](PlaylistsTrackDto.md)
 
 ### Authorization
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiAppCustomerPlaylistPlaylistsGet**
-> List<SoftUpPaprikaInsidePlaylistsPlaylistDto> apiAppCustomerPlaylistPlaylistsGet()
+> List<PlaylistsPlaylistDto> apiAppCustomerPlaylistPlaylistsGet()
 
 
 
@@ -83,7 +83,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<SoftUpPaprikaInsidePlaylistsPlaylistDto>**](SoftUpPaprikaInsidePlaylistsPlaylistDto.md)
+[**List<PlaylistsPlaylistDto>**](PlaylistsPlaylistDto.md)
 
 ### Authorization
 
@@ -108,7 +108,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerPlaylistApi();
-var body = new SoftUpPaprikaInsidePlaylistsTrackRequestDto(); // SoftUpPaprikaInsidePlaylistsTrackRequestDto | 
+var body = new PlaylistsTrackRequestDto(); // PlaylistsTrackRequestDto | 
 
 try { 
     api_instance.apiAppCustomerPlaylistRequestTrackPost(body);
@@ -121,7 +121,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsidePlaylistsTrackRequestDto**](SoftUpPaprikaInsidePlaylistsTrackRequestDto.md)|  | [optional] 
+ **body** | [**PlaylistsTrackRequestDto**](PlaylistsTrackRequestDto.md)|  | [optional] 
 
 ### Return type
 

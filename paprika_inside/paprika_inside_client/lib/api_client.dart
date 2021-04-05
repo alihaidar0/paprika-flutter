@@ -37,62 +37,56 @@ class ApiClient {
           return value is bool ? value : '$value'.toLowerCase() == 'true';
         case 'double':
           return value is double ? value : double.parse('$value');
-        case 'SoftUpPaprikaInsideAfterDishesAfterDishDto':
-          return new SoftUpPaprikaInsideAfterDishesAfterDishDto.fromJson(value);
-        case 'SoftUpPaprikaInsideAfterDishesAfterDishRequestDto':
-          return new SoftUpPaprikaInsideAfterDishesAfterDishRequestDto.fromJson(
-              value);
-        case 'SoftUpPaprikaInsideCategoriesCategoryDto':
-          return new SoftUpPaprikaInsideCategoriesCategoryDto.fromJson(value);
-        case 'SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto':
-          return new SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto
-              .fromJson(value);
-        case 'SoftUpPaprikaInsideCustomerTablesCreateOrderDto':
-          return new SoftUpPaprikaInsideCustomerTablesCreateOrderDto.fromJson(
-              value);
-        case 'SoftUpPaprikaInsideCustomerTablesCreateOrderMealDto':
-          return new SoftUpPaprikaInsideCustomerTablesCreateOrderMealDto
-              .fromJson(value);
-        case 'SoftUpPaprikaInsideCustomerTablesOrderDto':
-          return new SoftUpPaprikaInsideCustomerTablesOrderDto.fromJson(value);
-        case 'SoftUpPaprikaInsideCustomerTablesOrderMealDto':
-          return new SoftUpPaprikaInsideCustomerTablesOrderMealDto.fromJson(
-              value);
-        case 'SoftUpPaprikaInsideCustomerTablesUpdateOrderDto':
-          return new SoftUpPaprikaInsideCustomerTablesUpdateOrderDto.fromJson(
-              value);
-        case 'SoftUpPaprikaInsideInvoicesInvoiceDto':
-          return new SoftUpPaprikaInsideInvoicesInvoiceDto.fromJson(value);
-        case 'SoftUpPaprikaInsideInvoicesInvoiceTaxDto':
-          return new SoftUpPaprikaInsideInvoicesInvoiceTaxDto.fromJson(value);
-        case 'SoftUpPaprikaInsideMealsMealDto':
-          return new SoftUpPaprikaInsideMealsMealDto.fromJson(value);
-        case 'SoftUpPaprikaInsideMealsMealIngredientDto':
-          return new SoftUpPaprikaInsideMealsMealIngredientDto.fromJson(value);
-        case 'SoftUpPaprikaInsideMealsMealVariantDto':
-          return new SoftUpPaprikaInsideMealsMealVariantDto.fromJson(value);
-        case 'SoftUpPaprikaInsidePlaylistsPlaylistDto':
-          return new SoftUpPaprikaInsidePlaylistsPlaylistDto.fromJson(value);
-        case 'SoftUpPaprikaInsidePlaylistsTrackDto':
-          return new SoftUpPaprikaInsidePlaylistsTrackDto.fromJson(value);
-        case 'SoftUpPaprikaInsidePlaylistsTrackRequestDto':
-          return new SoftUpPaprikaInsidePlaylistsTrackRequestDto.fromJson(value);
-        case 'SoftUpPaprikaInsideRestaurantsFeedbackDto':
-          return new SoftUpPaprikaInsideRestaurantsFeedbackDto.fromJson(value);
-        case 'SoftUpPaprikaInsideRestaurantsRestaurantDto':
-          return new SoftUpPaprikaInsideRestaurantsRestaurantDto.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesInvoiceStatus':
-          return new SoftUpPaprikaInsideTypesInvoiceStatus.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesOrderStatus':
-          return new SoftUpPaprikaInsideTypesOrderStatus.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesPagerType':
-          return new SoftUpPaprikaInsideTypesPagerType.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesRestaurantStatus':
-          return new SoftUpPaprikaInsideTypesRestaurantStatus.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesTableStatus':
-          return new SoftUpPaprikaInsideTypesTableStatus.fromJson(value);
-        case 'SoftUpPaprikaInsideTypesTaxType':
-          return new SoftUpPaprikaInsideTypesTaxType.fromJson(value);
+        case 'AfterDishesAfterDishDto':
+          return new AfterDishesAfterDishDto.fromJson(value);
+        case 'AfterDishesAfterDishRequestDto':
+          return new AfterDishesAfterDishRequestDto.fromJson(value);
+        case 'CategoriesCategoryDto':
+          return new CategoriesCategoryDto.fromJson(value);
+        case 'CustomerTablesCreateCustomerTableDto':
+          return new CustomerTablesCreateCustomerTableDto.fromJson(value);
+        case 'CustomerTablesCreateOrderDto':
+          return new CustomerTablesCreateOrderDto.fromJson(value);
+        case 'CustomerTablesCreateOrderMealDto':
+          return new CustomerTablesCreateOrderMealDto.fromJson(value);
+        case 'CustomerTablesOrderDto':
+          return new CustomerTablesOrderDto.fromJson(value);
+        case 'CustomerTablesOrderMealDto':
+          return new CustomerTablesOrderMealDto.fromJson(value);
+        case 'CustomerTablesUpdateOrderDto':
+          return new CustomerTablesUpdateOrderDto.fromJson(value);
+        case 'InvoicesInvoiceDto':
+          return new InvoicesInvoiceDto.fromJson(value);
+        case 'InvoicesInvoiceTaxDto':
+          return new InvoicesInvoiceTaxDto.fromJson(value);
+        case 'MealsMealDto':
+          return new MealsMealDto.fromJson(value);
+        case 'MealsMealIngredientDto':
+          return new MealsMealIngredientDto.fromJson(value);
+        case 'MealsMealVariantDto':
+          return new MealsMealVariantDto.fromJson(value);
+        case 'PlaylistsPlaylistDto':
+          return new PlaylistsPlaylistDto.fromJson(value);
+        case 'PlaylistsTrackDto':
+          return new PlaylistsTrackDto.fromJson(value);
+        case 'PlaylistsTrackRequestDto':
+          return new PlaylistsTrackRequestDto.fromJson(value);
+        case 'RestaurantsFeedbackDto':
+          return new RestaurantsFeedbackDto.fromJson(value);
+        case 'RestaurantsRestaurantDto':
+          return new RestaurantsRestaurantDto.fromJson(value);
+        case 'TypesInvoiceStatus':
+          return new TypesInvoiceStatus.fromJson(value);
+        case 'TypesOrderStatus':
+          return new TypesOrderStatus.fromJson(value);
+        case 'TypesPagerType':
+          return new TypesPagerType.fromJson(value);
+        case 'TypesRestaurantStatus':
+          return new TypesRestaurantStatus.fromJson(value);
+        case 'TypesTableStatus':
+          return new TypesTableStatus.fromJson(value);
+        case 'TypesTaxType':
+          return new TypesTaxType.fromJson(value);
         default:
           {
             Match match;
@@ -138,7 +132,8 @@ class ApiClient {
 
   // We don't use a Map<String, String> for queryParams.
   // If collectionFormat is 'multi' a key might appear multiple times.
-  Future<Response> invokeAPI(String path,
+  Future<Response> invokeAPI(
+      String path,
       String method,
       Iterable<QueryParam> queryParams,
       Object body,
@@ -146,20 +141,19 @@ class ApiClient {
       Map<String, String> formParams,
       String contentType,
       List<String> authNames) async {
-
     _updateParamsForAuth(authNames, queryParams, headerParams);
 
-    var ps = queryParams.where((p) => p.value != null).map((p) => '${p.name}=${p.value}');
-    String queryString = ps.isNotEmpty ?
-    '?' + ps.join('&') :
-    '';
+    var ps = queryParams
+        .where((p) => p.value != null)
+        .map((p) => '${p.name}=${p.value}');
+    String queryString = ps.isNotEmpty ? '?' + ps.join('&') : '';
 
     String url = basePath + path + queryString;
 
     headerParams.addAll(_defaultHeaderMap);
     headerParams['Content-Type'] = contentType;
 
-    if(body is MultipartRequest) {
+    if (body is MultipartRequest) {
       var request = new MultipartRequest(method, Uri.parse(url));
       request.fields.addAll(body.fields);
       request.files.addAll(body.files);
@@ -168,8 +162,10 @@ class ApiClient {
       var response = await client.send(request);
       return Response.fromStream(response);
     } else {
-      var msgBody = contentType == "application/x-www-form-urlencoded" ? formParams : serialize(body);
-      switch(method) {
+      var msgBody = contentType == "application/x-www-form-urlencoded"
+          ? formParams
+          : serialize(body);
+      switch (method) {
         case "POST":
           return client.post(url, headers: headerParams, body: msgBody);
         case "PUT":
@@ -186,10 +182,12 @@ class ApiClient {
 
   /// Update query and header parameters based on authentication settings.
   /// @param authNames The authentications to apply
-  void _updateParamsForAuth(List<String> authNames, List<QueryParam> queryParams, Map<String, String> headerParams) {
+  void _updateParamsForAuth(List<String> authNames,
+      List<QueryParam> queryParams, Map<String, String> headerParams) {
     authNames.forEach((authName) {
       Authentication auth = _authentications[authName];
-      if (auth == null) throw new ArgumentError("Authentication undefined: " + authName);
+      if (auth == null)
+        throw new ArgumentError("Authentication undefined: " + authName);
       auth.applyToParams(queryParams, headerParams);
     });
   }

@@ -9,7 +9,7 @@ class CustomerCustomerTableApi {
   ///
   ///
   ///
-  Future<SoftUpPaprikaInsideInvoicesInvoiceDto>
+  Future<InvoicesInvoiceDto>
       apiAppCustomerCustomerTableAskForInvoiceCustomerTableIdPost(
           String customerTableId) async {
     Object postBody = null;
@@ -50,9 +50,8 @@ class CustomerCustomerTableApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return apiClient.deserialize(
-              response.body, 'SoftUpPaprikaInsideInvoicesInvoiceDto')
-          as SoftUpPaprikaInsideInvoicesInvoiceDto;
+      return apiClient.deserialize(response.body, 'InvoicesInvoiceDto')
+          as InvoicesInvoiceDto;
     } else {
       return null;
     }
@@ -111,7 +110,7 @@ class CustomerCustomerTableApi {
   ///
   ///
   Future<String> apiAppCustomerCustomerTableCustomerTablePost(
-      {SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto body}) async {
+      {CustomerTablesCreateCustomerTableDto body}) async {
     Object postBody = body;
 
     // verify required params are set
@@ -158,7 +157,7 @@ class CustomerCustomerTableApi {
   ///
   ///
   Future apiAppCustomerCustomerTableOrderMealsPut(
-      {SoftUpPaprikaInsideCustomerTablesUpdateOrderDto body}) async {
+      {CustomerTablesUpdateOrderDto body}) async {
     Object postBody = body;
 
     // verify required params are set
@@ -205,7 +204,7 @@ class CustomerCustomerTableApi {
   ///
   ///
   Future apiAppCustomerCustomerTableOrderPost(
-      {SoftUpPaprikaInsideCustomerTablesCreateOrderDto body}) async {
+      {CustomerTablesCreateOrderDto body}) async {
     Object postBody = body;
 
     // verify required params are set
@@ -251,7 +250,7 @@ class CustomerCustomerTableApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsideCustomerTablesOrderDto>>
+  Future<List<CustomerTablesOrderDto>>
       apiAppCustomerCustomerTableOrdersCustomerTableIdGet(
           String customerTableId) async {
     Object postBody = null;
@@ -290,9 +289,9 @@ class CustomerCustomerTableApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(response.body,
-              'List<SoftUpPaprikaInsideCustomerTablesOrderDto>') as List)
-          .map((item) => item as SoftUpPaprikaInsideCustomerTablesOrderDto)
+      return (apiClient.deserialize(
+              response.body, 'List<CustomerTablesOrderDto>') as List)
+          .map((item) => item as CustomerTablesOrderDto)
           .toList();
     } else {
       return null;

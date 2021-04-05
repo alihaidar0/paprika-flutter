@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsidePlaylistsPlaylistDto
+# swagger.model.PlaylistsPlaylistDto
 
 ## Load the model package
 ```dart

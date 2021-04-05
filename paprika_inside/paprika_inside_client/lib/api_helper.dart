@@ -39,18 +39,18 @@ String parameterToString(dynamic value) {
     return '';
   } else if (value is DateTime) {
     return value.toUtc().toIso8601String();
-  } else if (value is SoftUpPaprikaInsideTypesInvoiceStatus) {
-    return SoftUpPaprikaInsideTypesInvoiceStatus.encode(value).toString();
-  } else if (value is SoftUpPaprikaInsideTypesOrderStatus) {
-    return SoftUpPaprikaInsideTypesOrderStatus.encode(value).toString();
-  } else if (value is SoftUpPaprikaInsideTypesPagerType) {
-    return SoftUpPaprikaInsideTypesPagerType.encode(value).toString();
-  } else if (value is SoftUpPaprikaInsideTypesRestaurantStatus) {
-    return SoftUpPaprikaInsideTypesRestaurantStatus.encode(value).toString();
-  } else if (value is SoftUpPaprikaInsideTypesTableStatus) {
-    return SoftUpPaprikaInsideTypesTableStatus.encode(value).toString();
-  } else if (value is SoftUpPaprikaInsideTypesTaxType) {
-    return SoftUpPaprikaInsideTypesTaxType.encode(value).toString();
+  } else if (value is TypesInvoiceStatus) {
+    return TypesInvoiceStatus.encode(value).toString();
+  } else if (value is TypesOrderStatus) {
+    return TypesOrderStatus.encode(value).toString();
+  } else if (value is TypesPagerType) {
+    return TypesPagerType.encode(value).toString();
+  } else if (value is TypesRestaurantStatus) {
+    return TypesRestaurantStatus.encode(value).toString();
+  } else if (value is TypesTableStatus) {
+    return TypesTableStatus.encode(value).toString();
+  } else if (value is TypesTaxType) {
+    return TypesTaxType.encode(value).toString();
   } else {
     return value.toString();
   }

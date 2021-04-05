@@ -24,9 +24,9 @@ class _RequestRetryState extends State<RequestRetry> {
         children: <Widget>[
           widget.message != null
               ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(widget.message),
-          )
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.message),
+                )
               : Container(),
           Padding(
             padding: Localizations.localeOf(context).languageCode == 'en'
@@ -40,30 +40,30 @@ class _RequestRetryState extends State<RequestRetry> {
                     child: Text('Retry'),
                     onPressed: !isRetrying
                         ? () {
-                      if (widget.retryCallback != null) {
-                        setState(() {
-                          isRetrying = true;
-                        });
-                        widget.retryCallback().then((_) {
-                          if (mounted)
-                            setState(() {
-                              isRetrying = false;
-                            });
-                        });
-                      }
-                    }
+                            if (widget.retryCallback != null) {
+                              setState(() {
+                                isRetrying = true;
+                              });
+                              widget.retryCallback().then((_) {
+                                if (mounted)
+                                  setState(() {
+                                    isRetrying = false;
+                                  });
+                              });
+                            }
+                          }
                         : null,
                     textColor: Colors.white,
                   ),
                   this.isRetrying
                       ? SizedBox(
-                    height: 30,
-                    width: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
+                          height: 30,
+                          width: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
                       : Container(),
                 ],
               ),

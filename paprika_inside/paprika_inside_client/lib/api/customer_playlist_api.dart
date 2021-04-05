@@ -9,7 +9,7 @@ class CustomerPlaylistApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsidePlaylistsTrackDto>>
+  Future<List<PlaylistsTrackDto>>
       apiAppCustomerPlaylistPlaylistTracksPlaylistIdGet(
           String playlistId) async {
     Object postBody = null;
@@ -48,10 +48,9 @@ class CustomerPlaylistApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(
-                  response.body, 'List<SoftUpPaprikaInsidePlaylistsTrackDto>')
+      return (apiClient.deserialize(response.body, 'List<PlaylistsTrackDto>')
               as List)
-          .map((item) => item as SoftUpPaprikaInsidePlaylistsTrackDto)
+          .map((item) => item as PlaylistsTrackDto)
           .toList();
     } else {
       return null;
@@ -61,7 +60,7 @@ class CustomerPlaylistApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsidePlaylistsPlaylistDto>>
+  Future<List<PlaylistsPlaylistDto>>
       apiAppCustomerPlaylistPlaylistsGet() async {
     Object postBody = null;
 
@@ -95,9 +94,9 @@ class CustomerPlaylistApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(response.body,
-              'List<SoftUpPaprikaInsidePlaylistsPlaylistDto>') as List)
-          .map((item) => item as SoftUpPaprikaInsidePlaylistsPlaylistDto)
+      return (apiClient.deserialize(response.body, 'List<PlaylistsPlaylistDto>')
+              as List)
+          .map((item) => item as PlaylistsPlaylistDto)
           .toList();
     } else {
       return null;
@@ -108,7 +107,7 @@ class CustomerPlaylistApi {
   ///
   ///
   Future apiAppCustomerPlaylistRequestTrackPost(
-      {SoftUpPaprikaInsidePlaylistsTrackRequestDto body}) async {
+      {PlaylistsTrackRequestDto body}) async {
     Object postBody = body;
 
     // verify required params are set

@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideCustomerTablesCreateOrderMealDto
+# swagger.model.CustomerTablesCreateOrderMealDto
 
 ## Load the model package
 ```dart

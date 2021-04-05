@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideMealsMealIngredientDto
+# swagger.model.MealsMealIngredientDto
 
 ## Load the model package
 ```dart

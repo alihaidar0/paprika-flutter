@@ -9,7 +9,7 @@ class CustomerAfterDishApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsideAfterDishesAfterDishDto>>
+  Future<List<AfterDishesAfterDishDto>>
       apiAppCustomerAfterDishAfterDishesGet() async {
     Object postBody = null;
 
@@ -43,9 +43,9 @@ class CustomerAfterDishApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(response.body,
-              'List<SoftUpPaprikaInsideAfterDishesAfterDishDto>') as List)
-          .map((item) => item as SoftUpPaprikaInsideAfterDishesAfterDishDto)
+      return (apiClient.deserialize(
+              response.body, 'List<AfterDishesAfterDishDto>') as List)
+          .map((item) => item as AfterDishesAfterDishDto)
           .toList();
     } else {
       return null;
@@ -56,7 +56,7 @@ class CustomerAfterDishApi {
   ///
   ///
   Future apiAppCustomerAfterDishChooseAfterDishPost(
-      {SoftUpPaprikaInsideAfterDishesAfterDishRequestDto body}) async {
+      {AfterDishesAfterDishRequestDto body}) async {
     Object postBody = body;
 
     // verify required params are set

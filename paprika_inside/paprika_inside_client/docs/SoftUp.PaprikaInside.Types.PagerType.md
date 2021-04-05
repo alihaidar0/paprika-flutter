@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideTypesPagerType
+# swagger.model.TypesPagerType
 
 ## Load the model package
 ```dart

@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideTypesRestaurantStatus
+# swagger.model.TypesRestaurantStatus
 
 ## Load the model package
 ```dart

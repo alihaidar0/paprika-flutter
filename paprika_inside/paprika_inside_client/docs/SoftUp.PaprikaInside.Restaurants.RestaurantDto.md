@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideRestaurantsRestaurantDto
+# swagger.model.RestaurantsRestaurantDto
 
 ## Load the model package
 ```dart
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **welcomeMessage** | **String** |  | [optional] [default to null]
 **logoImage** | **String** |  | [optional] [default to null]
 **coverImage** | **String** |  | [optional] [default to null]
-**status** | [**SoftUpPaprikaInsideTypesRestaurantStatus**](SoftUpPaprikaInsideTypesRestaurantStatus.md) |  | [optional] [default to null]
+**status** | [**TypesRestaurantStatus**](TypesRestaurantStatus.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

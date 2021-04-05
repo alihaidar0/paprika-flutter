@@ -1,6 +1,6 @@
 part of swagger_inside.api;
 
-class SoftUpPaprikaInsideCustomerTablesOrderMealDto {
+class CustomerTablesOrderMealDto {
   int id = null;
 
   String mealId = null;
@@ -19,15 +19,14 @@ class SoftUpPaprikaInsideCustomerTablesOrderMealDto {
 
   DateTime estimationTime = null;
 
-  SoftUpPaprikaInsideCustomerTablesOrderMealDto();
+  CustomerTablesOrderMealDto();
 
   @override
   String toString() {
-    return 'SoftUpPaprikaInsideCustomerTablesOrderMealDto[id=$id, mealId=$mealId, name=$name, price=$price, mealVariant=$mealVariant, mealVariantId=$mealVariantId, quantity=$quantity, notes=$notes, estimationTime=$estimationTime, ]';
+    return 'CustomerTablesOrderMealDto[id=$id, mealId=$mealId, name=$name, price=$price, mealVariant=$mealVariant, mealVariantId=$mealVariantId, quantity=$quantity, notes=$notes, estimationTime=$estimationTime, ]';
   }
 
-  SoftUpPaprikaInsideCustomerTablesOrderMealDto.fromJson(
-      Map<String, dynamic> json) {
+  CustomerTablesOrderMealDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     id = json['id'];
     mealId = json['mealId'];
@@ -57,23 +56,20 @@ class SoftUpPaprikaInsideCustomerTablesOrderMealDto {
     };
   }
 
-  static List<SoftUpPaprikaInsideCustomerTablesOrderMealDto> listFromJson(
-      List<dynamic> json) {
+  static List<CustomerTablesOrderMealDto> listFromJson(List<dynamic> json) {
     return json == null
-        ? new List<SoftUpPaprikaInsideCustomerTablesOrderMealDto>()
+        ? new List<CustomerTablesOrderMealDto>()
         : json
-            .map((value) =>
-                new SoftUpPaprikaInsideCustomerTablesOrderMealDto.fromJson(
-                    value))
+            .map((value) => new CustomerTablesOrderMealDto.fromJson(value))
             .toList();
   }
 
-  static Map<String, SoftUpPaprikaInsideCustomerTablesOrderMealDto> mapFromJson(
+  static Map<String, CustomerTablesOrderMealDto> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, SoftUpPaprikaInsideCustomerTablesOrderMealDto>();
+    var map = new Map<String, CustomerTablesOrderMealDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] =
-          new SoftUpPaprikaInsideCustomerTablesOrderMealDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CustomerTablesOrderMealDto.fromJson(value));
     }
     return map;
   }

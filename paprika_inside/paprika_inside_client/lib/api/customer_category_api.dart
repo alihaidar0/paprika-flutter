@@ -9,7 +9,7 @@ class CustomerCategoryApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsideCategoriesCategoryDto>>
+  Future<List<CategoriesCategoryDto>>
       apiAppCustomerCategoryRestaurantCategoriesGet() async {
     Object postBody = null;
 
@@ -43,9 +43,9 @@ class CustomerCategoryApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(response.body,
-              'List<SoftUpPaprikaInsideCategoriesCategoryDto>') as List)
-          .map((item) => item as SoftUpPaprikaInsideCategoriesCategoryDto)
+      return (apiClient.deserialize(
+              response.body, 'List<CategoriesCategoryDto>') as List)
+          .map((item) => item as CategoriesCategoryDto)
           .toList();
     } else {
       return null;

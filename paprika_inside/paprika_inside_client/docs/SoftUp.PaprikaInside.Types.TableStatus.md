@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideTypesTableStatus
+# swagger.model.TypesTableStatus
 
 ## Load the model package
 ```dart

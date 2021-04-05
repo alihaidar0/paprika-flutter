@@ -25,7 +25,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerRestaurantApi();
-var body = new SoftUpPaprikaInsideRestaurantsFeedbackDto(); // SoftUpPaprikaInsideRestaurantsFeedbackDto | 
+var body = new RestaurantsFeedbackDto(); // RestaurantsFeedbackDto | 
 
 try { 
     api_instance.apiAppCustomerRestaurantFeedbackPost(body);
@@ -38,7 +38,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsideRestaurantsFeedbackDto**](SoftUpPaprikaInsideRestaurantsFeedbackDto.md)|  | [optional] 
+ **body** | [**RestaurantsFeedbackDto**](RestaurantsFeedbackDto.md)|  | [optional] 
 
 ### Return type
 
@@ -56,7 +56,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiAppCustomerRestaurantRestaurantProfileGet**
-> SoftUpPaprikaInsideRestaurantsRestaurantDto apiAppCustomerRestaurantRestaurantProfileGet()
+> RestaurantsRestaurantDto apiAppCustomerRestaurantRestaurantProfileGet()
 
 
 
@@ -81,7 +81,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SoftUpPaprikaInsideRestaurantsRestaurantDto**](SoftUpPaprikaInsideRestaurantsRestaurantDto.md)
+[**RestaurantsRestaurantDto**](RestaurantsRestaurantDto.md)
 
 ### Authorization
 

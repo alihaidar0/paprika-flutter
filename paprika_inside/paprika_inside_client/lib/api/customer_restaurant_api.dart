@@ -10,7 +10,7 @@ class CustomerRestaurantApi {
   ///
   ///
   Future apiAppCustomerRestaurantFeedbackPost(
-      {SoftUpPaprikaInsideRestaurantsFeedbackDto body}) async {
+      {RestaurantsFeedbackDto body}) async {
     Object postBody = body;
 
     // verify required params are set
@@ -56,7 +56,7 @@ class CustomerRestaurantApi {
   ///
   ///
   ///
-  Future<SoftUpPaprikaInsideRestaurantsRestaurantDto>
+  Future<RestaurantsRestaurantDto>
       apiAppCustomerRestaurantRestaurantProfileGet() async {
     Object postBody = null;
 
@@ -90,9 +90,8 @@ class CustomerRestaurantApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return apiClient.deserialize(
-              response.body, 'SoftUpPaprikaInsideRestaurantsRestaurantDto')
-          as SoftUpPaprikaInsideRestaurantsRestaurantDto;
+      return apiClient.deserialize(response.body, 'RestaurantsRestaurantDto')
+          as RestaurantsRestaurantDto;
     } else {
       return null;
     }

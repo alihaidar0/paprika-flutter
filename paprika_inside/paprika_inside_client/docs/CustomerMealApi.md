@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **apiAppCustomerMealCategoryMealsCategoryIdGet**
-> List<SoftUpPaprikaInsideMealsMealDto> apiAppCustomerMealCategoryMealsCategoryIdGet(categoryId)
+> List<MealsMealDto> apiAppCustomerMealCategoryMealsCategoryIdGet(categoryId)
 
 
 
@@ -42,7 +42,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List<SoftUpPaprikaInsideMealsMealDto>**](SoftUpPaprikaInsideMealsMealDto.md)
+[**List<MealsMealDto>**](MealsMealDto.md)
 
 ### Authorization
 

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **apiAppCustomerCustomerTableAskForInvoiceCustomerTableIdPost**
-> SoftUpPaprikaInsideInvoicesInvoiceDto apiAppCustomerCustomerTableAskForInvoiceCustomerTableIdPost(customerTableId)
+> InvoicesInvoiceDto apiAppCustomerCustomerTableAskForInvoiceCustomerTableIdPost(customerTableId)
 
 
 
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftUpPaprikaInsideInvoicesInvoiceDto**](SoftUpPaprikaInsideInvoicesInvoiceDto.md)
+[**InvoicesInvoiceDto**](InvoicesInvoiceDto.md)
 
 ### Authorization
 
@@ -114,7 +114,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerCustomerTableApi();
-var body = new SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto(); // SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto | 
+var body = new CustomerTablesCreateCustomerTableDto(); // CustomerTablesCreateCustomerTableDto | 
 
 try { 
     var result = api_instance.apiAppCustomerCustomerTableCustomerTablePost(body);
@@ -128,7 +128,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto**](SoftUpPaprikaInsideCustomerTablesCreateCustomerTableDto.md)|  | [optional] 
+ **body** | [**CustomerTablesCreateCustomerTableDto**](CustomerTablesCreateCustomerTableDto.md)|  | [optional] 
 
 ### Return type
 
@@ -157,7 +157,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerCustomerTableApi();
-var body = new SoftUpPaprikaInsideCustomerTablesUpdateOrderDto(); // SoftUpPaprikaInsideCustomerTablesUpdateOrderDto | 
+var body = new CustomerTablesUpdateOrderDto(); // CustomerTablesUpdateOrderDto | 
 
 try { 
     api_instance.apiAppCustomerCustomerTableOrderMealsPut(body);
@@ -170,7 +170,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsideCustomerTablesUpdateOrderDto**](SoftUpPaprikaInsideCustomerTablesUpdateOrderDto.md)|  | [optional] 
+ **body** | [**CustomerTablesUpdateOrderDto**](CustomerTablesUpdateOrderDto.md)|  | [optional] 
 
 ### Return type
 
@@ -199,7 +199,7 @@ import 'package:swagger/api.dart';
 //swagger.api.Configuration.accessToken = 'YOUR_ACCESS_TOKEN';
 
 var api_instance = new CustomerCustomerTableApi();
-var body = new SoftUpPaprikaInsideCustomerTablesCreateOrderDto(); // SoftUpPaprikaInsideCustomerTablesCreateOrderDto | 
+var body = new CustomerTablesCreateOrderDto(); // CustomerTablesCreateOrderDto | 
 
 try { 
     api_instance.apiAppCustomerCustomerTableOrderPost(body);
@@ -212,7 +212,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SoftUpPaprikaInsideCustomerTablesCreateOrderDto**](SoftUpPaprikaInsideCustomerTablesCreateOrderDto.md)|  | [optional] 
+ **body** | [**CustomerTablesCreateOrderDto**](CustomerTablesCreateOrderDto.md)|  | [optional] 
 
 ### Return type
 
@@ -230,7 +230,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiAppCustomerCustomerTableOrdersCustomerTableIdGet**
-> List<SoftUpPaprikaInsideCustomerTablesOrderDto> apiAppCustomerCustomerTableOrdersCustomerTableIdGet(customerTableId)
+> List<CustomerTablesOrderDto> apiAppCustomerCustomerTableOrdersCustomerTableIdGet(customerTableId)
 
 
 
@@ -259,7 +259,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List<SoftUpPaprikaInsideCustomerTablesOrderDto>**](SoftUpPaprikaInsideCustomerTablesOrderDto.md)
+[**List<CustomerTablesOrderDto>**](CustomerTablesOrderDto.md)
 
 ### Authorization
 

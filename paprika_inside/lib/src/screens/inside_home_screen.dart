@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:swagger_inside/api.dart';
 import 'package:paprika_inside/utils.dart';
 import 'package:paprika_inside/widgets.dart';
+import 'package:swagger_inside/api.dart';
 
 class InsideHomeScreen extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class InsideHomeScreen extends StatefulWidget {
 }
 
 class _InsideHomeScreenState extends State<InsideHomeScreen> {
-  Future<SoftUpPaprikaInsideRestaurantsRestaurantDto> _restaurantProfile;
+  Future<RestaurantsRestaurantDto> _restaurantProfile;
 
   @override
   void initState() {
@@ -21,8 +21,7 @@ class _InsideHomeScreenState extends State<InsideHomeScreen> {
     ApiClient client = PaprikaInsideApiClient();
     CustomerRestaurantApi api = CustomerRestaurantApi(client);
     setState(() {
-      _restaurantProfile =
-          api.apiAppCustomerRestaurantRestaurantProfileGet();
+      _restaurantProfile = api.apiAppCustomerRestaurantRestaurantProfileGet();
     });
     _restaurantProfile.then((_) {
       debugPrint(_restaurantProfile.toString());
@@ -34,7 +33,7 @@ class _InsideHomeScreenState extends State<InsideHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SoftUpPaprikaInsideRestaurantsRestaurantDto>(
+    return FutureBuilder<RestaurantsRestaurantDto>(
         future: _restaurantProfile,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

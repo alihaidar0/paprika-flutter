@@ -9,8 +9,8 @@ class CustomerMealApi {
   ///
   ///
   ///
-  Future<List<SoftUpPaprikaInsideMealsMealDto>>
-      apiAppCustomerMealCategoryMealsCategoryIdGet(String categoryId) async {
+  Future<List<MealsMealDto>> apiAppCustomerMealCategoryMealsCategoryIdGet(
+      String categoryId) async {
     Object postBody = null;
 
     // verify required params are set
@@ -47,9 +47,9 @@ class CustomerMealApi {
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return (apiClient.deserialize(
-              response.body, 'List<SoftUpPaprikaInsideMealsMealDto>') as List)
-          .map((item) => item as SoftUpPaprikaInsideMealsMealDto)
+      return (apiClient.deserialize(response.body, 'List<MealsMealDto>')
+              as List)
+          .map((item) => item as MealsMealDto)
           .toList();
     } else {
       return null;

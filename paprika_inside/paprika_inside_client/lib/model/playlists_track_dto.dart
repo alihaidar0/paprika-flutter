@@ -1,6 +1,6 @@
 part of swagger_inside.api;
 
-class SoftUpPaprikaInsidePlaylistsTrackDto {
+class PlaylistsTrackDto {
   int id = null;
 
   String playlistId = null;
@@ -13,14 +13,14 @@ class SoftUpPaprikaInsidePlaylistsTrackDto {
 
   String album = null;
 
-  SoftUpPaprikaInsidePlaylistsTrackDto();
+  PlaylistsTrackDto();
 
   @override
   String toString() {
-    return 'SoftUpPaprikaInsidePlaylistsTrackDto[id=$id, playlistId=$playlistId, title=$title, duration=$duration, artist=$artist, album=$album, ]';
+    return 'PlaylistsTrackDto[id=$id, playlistId=$playlistId, title=$title, duration=$duration, artist=$artist, album=$album, ]';
   }
 
-  SoftUpPaprikaInsidePlaylistsTrackDto.fromJson(Map<String, dynamic> json) {
+  PlaylistsTrackDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     id = json['id'];
     playlistId = json['playlistId'];
@@ -41,22 +41,18 @@ class SoftUpPaprikaInsidePlaylistsTrackDto {
     };
   }
 
-  static List<SoftUpPaprikaInsidePlaylistsTrackDto> listFromJson(
-      List<dynamic> json) {
+  static List<PlaylistsTrackDto> listFromJson(List<dynamic> json) {
     return json == null
-        ? new List<SoftUpPaprikaInsidePlaylistsTrackDto>()
-        : json
-            .map((value) =>
-                new SoftUpPaprikaInsidePlaylistsTrackDto.fromJson(value))
-            .toList();
+        ? new List<PlaylistsTrackDto>()
+        : json.map((value) => new PlaylistsTrackDto.fromJson(value)).toList();
   }
 
-  static Map<String, SoftUpPaprikaInsidePlaylistsTrackDto> mapFromJson(
+  static Map<String, PlaylistsTrackDto> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, SoftUpPaprikaInsidePlaylistsTrackDto>();
+    var map = new Map<String, PlaylistsTrackDto>();
     if (json != null && json.length > 0) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new SoftUpPaprikaInsidePlaylistsTrackDto.fromJson(value));
+          map[key] = new PlaylistsTrackDto.fromJson(value));
     }
     return map;
   }

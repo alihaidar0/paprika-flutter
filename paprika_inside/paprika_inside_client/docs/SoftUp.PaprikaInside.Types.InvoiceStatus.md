@@ -1,4 +1,4 @@
-# swagger.model.SoftUpPaprikaInsideTypesInvoiceStatus
+# swagger.model.TypesInvoiceStatus
 
 ## Load the model package
 ```dart
