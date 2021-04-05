@@ -18,4 +18,8 @@ class PaprikaInsideApiClient extends ApiClient {
   void setLang(String lang) {
     if (lang != null) this.addDefaultHeader("Accept-Language", lang);
   }
+
+  void setTenant(String tenant) {
+    if (tenant != null) this.addDefaultHeader("__tenant", tenant);
+  }
 }
