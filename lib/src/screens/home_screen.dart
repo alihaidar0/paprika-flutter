@@ -12,7 +12,7 @@ import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
 
-import 'package:paprika_inside/screens.dart';
+import 'package:paprika_inside/app.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
 
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Navigator.of(context).push(
                 MaterialPageRoute(builder:
                     (BuildContext context) {
-                  return InsideHomeScreen();
+                  return PaprikaInsideApp();
                 }));
           },
         ),

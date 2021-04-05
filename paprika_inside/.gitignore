@@ -40,5 +40,3 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# lib.
-**/lib/main.dart
