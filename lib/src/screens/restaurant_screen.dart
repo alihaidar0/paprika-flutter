@@ -1170,7 +1170,8 @@ class _ActionsRowState extends State<ActionsRow> {
 
   List<Widget> getActions() {
     return [
-      GestureDetector(
+      widget.restData.phoneNumber == null && widget.restData.tel == null ?
+      Container():GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => _actionCallRestaurant(context),
         child: Padding(
@@ -1360,7 +1361,7 @@ class _ActionsRowState extends State<ActionsRow> {
       barrierDismissible: false,
       builder: (context) {
         return CallRestaurantDialog(
-          phoneNumber: widget.restData?.phoneNumber,
+          phoneNumber: widget.restData.phoneNumber!= null ? widget.restData.phoneNumber : widget.restData.tel,
           restaurantName: widget.restData.name,
         );
       },

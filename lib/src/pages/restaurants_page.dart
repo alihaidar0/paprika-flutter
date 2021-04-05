@@ -288,8 +288,10 @@ class _RestaurantItem extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 16),
-                              child: this.restaurant.phoneNumber != null
-                                  ? GestureDetector(
+                              child: this.restaurant.phoneNumber == null &&
+                                      this.restaurant.tel == null
+                                  ? Container()
+                                  : GestureDetector(
                                       onTap: () {
                                         showDialog(
                                           context: context,
@@ -297,7 +299,7 @@ class _RestaurantItem extends StatelessWidget {
                                           builder: (context) {
                                             return CallRestaurantDialog(
                                               phoneNumber:
-                                                  this.restaurant.phoneNumber,
+                                                  this.restaurant.phoneNumber != null ? this.restaurant.phoneNumber : this.restaurant.tel,
                                               restaurantName:
                                                   this.restaurant.name,
                                             );
@@ -309,8 +311,7 @@ class _RestaurantItem extends StatelessWidget {
                                         size: 24,
                                         color: Theme.of(context).primaryColor,
                                       ),
-                                    )
-                                  : Container(),
+                                    ),
                             )
                           ],
                         ),
@@ -345,7 +346,12 @@ class _RestaurantItem extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Text(
-                              this.restaurant.address,
+                              ApiTypesHelper()
+                                  .getCommaSeparatedTypeNamesByValue(
+                                      this.restaurant.restaurantTypes,
+                                      Type.places,
+                                      maxNumber: 2,
+                                      separator: S.of(context).comma + ' '),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -413,28 +419,39 @@ class _RestaurantItem extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 4),
-                                child: PaprikaVerticalDivider(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      S.of(context).shisha,
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      this.restaurant.shishaRate.toString(),
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              restaurant.hasShisha != null &&
+                                      restaurant.hasShisha == true
+                                  ? Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          child: PaprikaVerticalDivider(),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(3.0),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Text(
+                                                S.of(context).shisha,
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                this
+                                                    .restaurant
+                                                    .shishaRate
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Container(),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),

@@ -120,7 +120,7 @@ class ApiHelper {
         return "FastFood";
         break;
       default:
-        return "Garage";
+        return "";
     }
   }
 

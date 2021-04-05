@@ -1,9 +1,9 @@
 part of swagger.api;
 
 class RestaurantSummaryDto {
-  String phoneNumber = null;
-
   String name = null;
+
+  int restaurantTypes = null;
 
   String address = null;
 
@@ -21,8 +21,6 @@ class RestaurantSummaryDto {
 
   int noiseLevel = null;
 
-  //enum noiseLevelEnum {  1,  2,  3,  };
-
   double longitude = null;
 
   double latitude = null;
@@ -35,18 +33,25 @@ class RestaurantSummaryDto {
 
   bool isOpen = null;
 
+  String phoneNumber = null;
+
+  String tel = null;
+
+  bool hasShisha = null;
+
   int id = null;
 
   RestaurantSummaryDto();
 
   @override
   String toString() {
-    return 'RestaurantSummaryDto[name=$name,phoneNumber=$phoneNumber, address=$address, logoImage=$logoImage, restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, ambianceRate=$ambianceRate, noiseLevel=$noiseLevel, longitude=$longitude, latitude=$latitude, city=$city, country=$country, region=$region, isOpen=$isOpen, id=$id, ]';
+    return 'RestaurantSummaryDto[name=$name, restaurantTypes=$restaurantTypes, phoneNumber=$phoneNumber, tel=$tel, address=$address, logoImage=$logoImage, restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, ambianceRate=$ambianceRate, noiseLevel=$noiseLevel, longitude=$longitude, latitude=$latitude, city=$city, country=$country, region=$region, isOpen=$isOpen, hasShisha=$hasShisha, id=$id, ]';
   }
 
   RestaurantSummaryDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     name = json['name'];
+    restaurantTypes = json['restaurantTypes'];
     phoneNumber = json['phoneNumber'];
     address = json['address'];
     logoImage = json['logoImage'];
@@ -62,12 +67,14 @@ class RestaurantSummaryDto {
     country = new CountryDto.fromJson(json['country']);
     region = new RegionDto.fromJson(json['region']);
     isOpen = json['isOpen'];
+    hasShisha = json['hasShisha'];
     id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'restaurantTypes': restaurantTypes,
       'phoneNumber': phoneNumber,
       'address': address,
       'logoImage': logoImage,
@@ -83,7 +90,8 @@ class RestaurantSummaryDto {
       'country': country,
       'region': region,
       'isOpen': isOpen,
-      'id': id
+      'hasShisha': hasShisha,
+      'id': id,
     };
   }
 

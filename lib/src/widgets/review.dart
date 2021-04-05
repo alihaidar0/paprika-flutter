@@ -139,6 +139,7 @@ class ServiceReviewsLine extends StatelessWidget {
   final double foodRate;
   final double serviceRate;
   final double shishaRate;
+  final bool hasShisha;
   final double ambianceRate;
   final String noiseLevel;
 
@@ -148,6 +149,7 @@ class ServiceReviewsLine extends StatelessWidget {
       {@required this.foodRate,
       @required this.serviceRate,
       @required this.shishaRate,
+        @required this.hasShisha,
       @required this.ambianceRate,
       @required this.noiseLevel,
       this.backgroundColor});
@@ -193,22 +195,24 @@ class ServiceReviewsLine extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  S.of(context).shisha,
-                ),
-                Text(
-                  shishaRate.toString(),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+          hasShisha == true
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        S.of(context).shisha,
+                      ),
+                      Text(
+                        shishaRate.toString(),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : Container(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -339,6 +343,7 @@ class ReviewForm extends StatefulWidget {
   final String restaurantName;
   final ReviewDto oldReview;
   final String customerProfileImage;
+  final bool hasShisha;
   final OnSubmitReviewCallback onSubmit;
 
   const ReviewForm(
@@ -346,6 +351,7 @@ class ReviewForm extends StatefulWidget {
       this.restaurantName,
       this.customerProfileImage,
       this.oldReview,
+      this.hasShisha,
       this.onSubmit});
 
   @override
@@ -442,160 +448,287 @@ class _ReviewFormState extends State<ReviewForm> {
                             0: FlexColumnWidth(3),
                             1: FlexColumnWidth(7)
                           },
-                          children: [
-                            TableRow(children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(null != widget.restaurantName
-                                    ? widget.restaurantName
-                                    : S.of(context).generalRate),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: FlutterRatingBar(
-                                  initialRating: restaurantRate,
-                                  allowHalfRating: true,
-                                  ignoreGestures: false,
-                                  tapOnlyMode: false,
-                                  itemCount: 5,
-                                  itemSize: 20,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 6.0),
-                                  onRatingUpdate: (rating) {
-                                    restaurantRate = rating;
-                                    setState(() {
-                                      if (restaurantRate !=
-                                          widget.oldReview.restaurantRate) {
-                                        restaurantRateEdited = true;
-                                      } else {
-                                        restaurantRateEdited = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(S.of(context).food),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: FlutterRatingBar(
-                                  initialRating: foodRate,
-                                  allowHalfRating: true,
-                                  ignoreGestures: false,
-                                  tapOnlyMode: false,
-                                  itemCount: 5,
-                                  itemSize: 20,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 6.0),
-                                  onRatingUpdate: (rating) {
-                                    foodRate = rating;
-                                    setState(() {
-                                      if (foodRate !=
-                                          widget.oldReview.foodRate) {
-                                        foodRateEdited = true;
-                                      } else {
-                                        foodRateEdited = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(S.of(context).service),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: FlutterRatingBar(
-                                  initialRating: serviceRate,
-                                  allowHalfRating: true,
-                                  ignoreGestures: false,
-                                  tapOnlyMode: false,
-                                  itemCount: 5,
-                                  itemSize: 20,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 6.0),
-                                  onRatingUpdate: (rating) {
-                                    serviceRate = rating;
-                                    setState(() {
-                                      if (serviceRate !=
-                                          widget.oldReview.serviceRate) {
-                                        serviceRateEdited = true;
-                                      } else {
-                                        serviceRateEdited = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(S.of(context).shisha),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: FlutterRatingBar(
-                                  initialRating: shishaRate,
-                                  allowHalfRating: true,
-                                  ignoreGestures: false,
-                                  tapOnlyMode: false,
-                                  itemCount: 5,
-                                  itemSize: 20,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 6.0),
-                                  onRatingUpdate: (rating) {
-                                    shishaRate = rating;
-                                    setState(() {
-                                      if (shishaRate !=
-                                          widget.oldReview.shishaRate) {
-                                        shishaRateEdited = true;
-                                      } else {
-                                        shishaRateEdited = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(S.of(context).ambiance),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: FlutterRatingBar(
-                                  initialRating: ambianceRate,
-                                  allowHalfRating: true,
-                                  ignoreGestures: false,
-                                  tapOnlyMode: false,
-                                  itemCount: 5,
-                                  itemSize: 20,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 6.0),
-                                  onRatingUpdate: (rating) {
-                                    ambianceRate = rating;
-                                    setState(() {
-                                      if (ambianceRate !=
-                                          widget.oldReview.ambianceRate) {
-                                        ambianceRateEdited = true;
-                                      } else {
-                                        ambianceRateEdited = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ]),
-                          ],
+                          children: widget.hasShisha != null && widget.hasShisha
+                              ? [
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(null != widget.restaurantName
+                                          ? widget.restaurantName
+                                          : S.of(context).generalRate),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: restaurantRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          restaurantRate = rating;
+                                          setState(() {
+                                            if (restaurantRate !=
+                                                widget
+                                                    .oldReview.restaurantRate) {
+                                              restaurantRateEdited = true;
+                                            } else {
+                                              restaurantRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).food),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: foodRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          foodRate = rating;
+                                          setState(() {
+                                            if (foodRate !=
+                                                widget.oldReview.foodRate) {
+                                              foodRateEdited = true;
+                                            } else {
+                                              foodRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).service),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: serviceRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          serviceRate = rating;
+                                          setState(() {
+                                            if (serviceRate !=
+                                                widget.oldReview.serviceRate) {
+                                              serviceRateEdited = true;
+                                            } else {
+                                              serviceRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).shisha),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: shishaRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          shishaRate = rating;
+                                          setState(() {
+                                            if (shishaRate !=
+                                                widget.oldReview.shishaRate) {
+                                              shishaRateEdited = true;
+                                            } else {
+                                              shishaRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).ambiance),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: ambianceRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          ambianceRate = rating;
+                                          setState(() {
+                                            if (ambianceRate !=
+                                                widget.oldReview.ambianceRate) {
+                                              ambianceRateEdited = true;
+                                            } else {
+                                              ambianceRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                ]
+                              : [
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(null != widget.restaurantName
+                                          ? widget.restaurantName
+                                          : S.of(context).generalRate),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: restaurantRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          restaurantRate = rating;
+                                          setState(() {
+                                            if (restaurantRate !=
+                                                widget
+                                                    .oldReview.restaurantRate) {
+                                              restaurantRateEdited = true;
+                                            } else {
+                                              restaurantRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).food),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: foodRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          foodRate = rating;
+                                          setState(() {
+                                            if (foodRate !=
+                                                widget.oldReview.foodRate) {
+                                              foodRateEdited = true;
+                                            } else {
+                                              foodRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).service),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: serviceRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          serviceRate = rating;
+                                          setState(() {
+                                            if (serviceRate !=
+                                                widget.oldReview.serviceRate) {
+                                              serviceRateEdited = true;
+                                            } else {
+                                              serviceRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                  TableRow(children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(S.of(context).ambiance),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: FlutterRatingBar(
+                                        initialRating: ambianceRate,
+                                        allowHalfRating: true,
+                                        ignoreGestures: false,
+                                        tapOnlyMode: false,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 6.0),
+                                        onRatingUpdate: (rating) {
+                                          ambianceRate = rating;
+                                          setState(() {
+                                            if (ambianceRate !=
+                                                widget.oldReview.ambianceRate) {
+                                              ambianceRateEdited = true;
+                                            } else {
+                                              ambianceRateEdited = false;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                ],
                         )),
 
                     /// Noise Level
@@ -679,16 +812,20 @@ class _ReviewFormState extends State<ReviewForm> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 8.0),
+                          padding: const EdgeInsets.only(
+                              left: 16.0, top: 16.0, right: 16.0, bottom: 8.0),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: !formEdited
                                 ? null
                                 : () => _onSubmitPressed(context),
-                            child: Text(S.of(context).save,
-                            style: TextStyle(
-                              color: !formEdited ? Colors.grey : Theme.of(context).primaryColor,
-                            ),
+                            child: Text(
+                              S.of(context).save,
+                              style: TextStyle(
+                                color: !formEdited
+                                    ? Colors.grey
+                                    : Theme.of(context).primaryColor,
+                              ),
                             ),
                           ),
                         )
