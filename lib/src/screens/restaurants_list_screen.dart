@@ -1076,28 +1076,34 @@ class _RestaurantItem extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding:
+                              restaurant.hasShisha != null && restaurant.hasShisha == true?
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                child: PaprikaVerticalDivider(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      S.of(context).shisha,
-                                      style: TextStyle(fontSize: 12),
+                                    child: PaprikaVerticalDivider(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          S.of(context).shisha,
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        Text(
+                                          this.restaurant.shishaRate.toString(),
+                                          style: TextStyle(
+                                            color: Theme.of(context).primaryColor,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      this.restaurant.shishaRate.toString(),
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                ],
+                              ):
+                              Container(),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4),

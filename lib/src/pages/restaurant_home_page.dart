@@ -31,19 +31,19 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
           children: <Widget>[
             _checkUpcomingEvents(context),
             widget.restData != null &&
-                    widget.restData.galleryItems != null &&
-                    widget.restData.galleryItems.length > 0
+                widget.restData.galleryItems != null &&
+                widget.restData.galleryItems.length > 0
                 ? Container(
-                    color: Color(0xFFf2f2f2),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ImagesGallery(
-                        thumbnails:
-                            extractThumbnailList(widget.restData.galleryItems),
-                        urls: extractGalleryList(widget.restData.galleryItems),
-                      ),
-                    ),
-                  )
+              color: Color(0xFFf2f2f2),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ImagesGallery(
+                  thumbnails:
+                  extractThumbnailList(widget.restData.galleryItems),
+                  urls: extractGalleryList(widget.restData.galleryItems),
+                ),
+              ),
+            )
                 : Container(),
             ReviewResult(
               restaurantRate: widget.restData.restaurantRate,
@@ -63,14 +63,14 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
             MapSection(
                 address: widget.restData.address,
                 markers: (widget.restData.latitude != null &&
-                        widget.restData.longitude != null)
+                    widget.restData.longitude != null)
                     ? <Marker>[
-                        Marker(
-                            markerId: MarkerId(widget.restData.name),
-                            infoWindow: InfoWindow(title: widget.restData.name),
-                            position: LatLng(widget.restData.latitude,
-                                widget.restData.longitude))
-                      ].toSet()
+                  Marker(
+                      markerId: MarkerId(widget.restData.name),
+                      infoWindow: InfoWindow(title: widget.restData.name),
+                      position: LatLng(widget.restData.latitude,
+                          widget.restData.longitude))
+                ].toSet()
                     : null),
             SizedBox(height: 60)
           ],
@@ -91,7 +91,9 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
-                  S.of(context).comingEvent,
+                  S
+                      .of(context)
+                      .comingEvent,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -109,7 +111,8 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => EventsListScreen(
+                        builder: (context) =>
+                            EventsListScreen(
                               restaurantId: widget.restData.id,
                               restaurantName: widget.restData.name,
                             )));
@@ -124,7 +127,9 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        (S.of(context).viewMoreEvents).toUpperCase(),
+                        (S
+                            .of(context)
+                            .viewMoreEvents).toUpperCase(),
                         style: TextStyle(fontSize: 13),
                       )
                     ],
@@ -172,170 +177,223 @@ class _InformationSectionState extends State<InformationSection> {
           children: <Widget>[
             Container(
               color: Colors.white,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: Center(
                 child: drawables.length > 0
                     ? Wrap(
-                        spacing: 24,
-                        children: drawables,
-                      )
+                  spacing: 24,
+                  children: drawables,
+                )
                     : Container(),
               ),
             ),
 
             /// Opening Time ///
             (widget.restData.is24Hour != null && widget.restData.is24Hour) ||
-                    (widget.restData.openingTimes == null ||
-                        widget.restData.openingTimes.length == 0)
+                (widget.restData.openingTimes == null ||
+                    widget.restData.openingTimes.length == 0)
                 ? Container()
                 : Container(
-                    color: Colors.white,
-                    margin: EdgeInsets.only(top: 15.0),
-                    padding: EdgeInsets.only(left: 12, right: 12),
-                    child: Column(
+              color: Colors.white,
+              margin: EdgeInsets.only(top: 15.0),
+              padding: EdgeInsets.only(left: 12, right: 12),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image(
-                                  image:
-                                      AssetImage("assets/icons/open_time.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, top: 4.0, right: 5.0),
-                                child: Text(
-                                  S.of(context).workingHours,
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: Image(
+                            image:
+                            AssetImage("assets/icons/open_time.png"),
                           ),
                         ),
-                        showWorkingTimes
-                            ? Column(
-                                children: List.generate(
-                                  widget.restData.openingTimes.length,
-                                  (index) => Container(
-                                    color: (index % 2 != 0)
-                                        ? Colors.white
-                                        : Color(0xFFE1E1E1),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0,
-                                          top: 5.0,
-                                          right: 8.0,
-                                          bottom: 5.0),
-                                      child: Table(
-                                        children: [
-                                          TableRow(children: [
-                                            Text(
-                                              ApiHelper.toStringDayOfWeek(
-                                                  context,
-                                                  widget
-                                                      .restData
-                                                      .openingTimes[index]
-                                                      .dayOfWeek),
-                                            ),
-                                            Text(
-                                              PaprikaFormatter.formatTimeOnly(
-                                                  context,
-                                                  widget
-                                                      .restData
-                                                      .openingTimes[index]
-                                                      .fromTime),
-                                            ),
-                                            Text(
-                                              PaprikaFormatter.formatTimeOnly(
-                                                context,
-                                                widget.restData
-                                                    .openingTimes[index].toTime,
-                                              ),
-                                            )
-                                          ]),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0,
-                                    top: 5.0,
-                                    right: 8.0,
-                                    bottom: 5.0),
-                                color: Color(0xFFE1E1E1),
-                                child: Table(
-                                  children: [
-                                    TableRow(children: [
-                                      Text(
-                                        ApiHelper.toStringDayOfWeek(
-                                            context,
-                                            widget.restData.openingTimes[0]
-                                                .dayOfWeek),
-                                      ),
-                                      Text(
-                                        PaprikaFormatter.formatTimeOnly(
-                                            context,
-                                            widget.restData.openingTimes[0]
-                                                .fromTime),
-                                      ),
-                                      Text(
-                                        PaprikaFormatter.formatTimeOnly(
-                                          context,
-                                          widget
-                                              .restData.openingTimes[0].toTime,
-                                        ),
-                                      )
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                        IconButton(
-                          icon: showWorkingTimes
-                              ? Icon(
-                                  CupertinoIcons.chevron_up_circle,
-                                  color: Theme.of(context).primaryColor,
-                                  size: 28.0,
-                                )
-                              : Icon(
-                                  CupertinoIcons.chevron_down_circle,
-                                  color: Theme.of(context).primaryColor,
-                                  size: 28.0,
-                                ),
-                          onPressed: () {
-                            setState(() {
-                              showWorkingTimes = !showWorkingTimes;
-                            });
-                          },
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 5.0, top: 4.0, right: 5.0),
+                          child: Text(
+                            S
+                                .of(context)
+                                .workingHours,
+                            style: TextStyle(
+                                color: Theme
+                                    .of(context)
+                                    .primaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
                   ),
+                  showWorkingTimes
+                      ? Column(
+                    children: List.generate(
+                      widget.restData.openingTimes.length,
+                          (index) =>
+                          Container(
+                            color: (index % 2 != 0)
+                                ? Colors.white
+                                : Color(0xFFE1E1E1),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  top: 5.0,
+                                  right: 8.0,
+                                  bottom: 5.0),
+                              child: Table(
+                                children: [
+                                  TableRow(children: [
+                                    Text(
+                                      ApiHelper.toStringDayOfWeek(
+                                          context,
+                                          widget
+                                              .restData
+                                              .openingTimes[index]
+                                              .dayOfWeek),
+                                    ),
+                                    Text(
+                                      PaprikaFormatter.formatTimeOnly(
+                                          context,
+                                          widget
+                                              .restData
+                                              .openingTimes[index]
+                                              .fromTime),
+                                    ),
+                                    Text(
+                                      PaprikaFormatter.formatTimeOnly(
+                                        context,
+                                        widget.restData
+                                            .openingTimes[index].toTime,
+                                      ),
+                                    )
+                                  ]),
+                                ],
+                              ),
+                            ),
+                          ),
+                    ),
+                  )
+                      : Container(
+                    padding: const EdgeInsets.only(
+                        left: 8.0,
+                        top: 5.0,
+                        right: 8.0,
+                        bottom: 5.0),
+                    color: Color(0xFFE1E1E1),
+                    child: Table(
+                      children: [
+                        TableRow(children: [
+                          Text(
+                            ApiHelper.toStringDayOfWeek(
+                                context,
+                                widget.restData.openingTimes[0]
+                                    .dayOfWeek),
+                          ),
+                          Text(
+                            PaprikaFormatter.formatTimeOnly(
+                                context,
+                                widget.restData.openingTimes[0]
+                                    .fromTime),
+                          ),
+                          Text(
+                            PaprikaFormatter.formatTimeOnly(
+                              context,
+                              widget
+                                  .restData.openingTimes[0].toTime,
+                            ),
+                          )
+                        ]),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: showWorkingTimes
+                        ? Icon(
+                      CupertinoIcons.chevron_up_circle,
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
+                      size: 28.0,
+                    )
+                        : Icon(
+                      CupertinoIcons.chevron_down_circle,
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
+                      size: 28.0,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        showWorkingTimes = !showWorkingTimes;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
+  void _actionCallRestaurant(BuildContext context, String number) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return CallRestaurantDialog(
+          phoneNumber: number,
+          restaurantName: widget.restData.name,
+        );
+      },
+    );
+  }
+
   List<Widget> getDrawableInformation(BuildContext context) {
     List<Widget> drawables = List();
+    if (widget.restData.restaurantTypes != null && widget.restData.restaurantTypes != 0) {
+      drawables.add(
+        WideInfoRow(
+          title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
+              widget.restData.restaurantTypes, Type.places,
+              maxNumber: 5, separator: S
+              .of(context)
+              .comma + ' '),
+          icon: AssetImage('assets/icons/restaurant_type.png'),
+        ),
+      );
+    }
     if (widget.restData.phoneNumber != null) {
       drawables.add(
-        InfoRow(
-          title: widget.restData.phoneNumber,
-          icon: AssetImage('assets/icons/phone.png'),
-          textDirection: TextDirection.ltr,
+        InkWell(
+          onTap: () =>
+              _actionCallRestaurant(context, widget.restData.phoneNumber),
+          child: InfoRow(
+            title: widget.restData.phoneNumber,
+            icon: AssetImage('assets/icons/phone.png'),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+      );
+    }
+    if (widget.restData.tel != null) {
+      drawables.add(
+        InkWell(
+          onTap: () => _actionCallRestaurant(context, widget.restData.tel),
+          child: InfoRow(
+            title: widget.restData.tel,
+            icon: AssetImage('assets/icons/telephone.png'),
+            textDirection: TextDirection.ltr,
+          ),
         ),
       );
     }
@@ -353,7 +411,9 @@ class _InformationSectionState extends State<InformationSection> {
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.cuisineTypes, Type.cuisines,
-              maxNumber: 2, separator: S.of(context).comma + ' '),
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
           icon: AssetImage('assets/icons/cuisine.png'),
         ),
       );
@@ -363,7 +423,9 @@ class _InformationSectionState extends State<InformationSection> {
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.musicTypes, Type.music,
-              maxNumber: 2, separator: S.of(context).comma + ' '),
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
           icon: AssetImage('assets/icons/music.png'),
         ),
       );
@@ -374,7 +436,9 @@ class _InformationSectionState extends State<InformationSection> {
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.parkingTypes, Type.parking,
-              maxNumber: 2, separator: S.of(context).comma + ' '),
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
           icon: AssetImage('assets/icons/parking.png'),
         ),
       );
@@ -385,7 +449,9 @@ class _InformationSectionState extends State<InformationSection> {
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.ambianceTypes, Type.ambiance,
-              maxNumber: 2, separator: S.of(context).comma + ' '),
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
           icon: AssetImage('assets/icons/ambiance.png'),
         ),
       );
@@ -396,31 +462,54 @@ class _InformationSectionState extends State<InformationSection> {
         InfoRow(
           title: ApiTypesHelper().getCommaSeparatedTypeNamesByValue(
               widget.restData.amenityTypes, Type.amenities,
-              maxNumber: 2, separator: S.of(context).comma + ' '),
+              maxNumber: 2, separator: S
+              .of(context)
+              .comma + ' '),
           icon: AssetImage('assets/icons/amenities.png'),
         ),
       );
     }
-    if (widget.restData.isSmokeFree != null && widget.restData.isSmokeFree) {
+    if (widget.restData.isSmokeFree != null) {
       drawables.add(
         InfoRow(
           title: this.widget.restData.isSmokeFree != null &&
-                  this.widget.restData.isSmokeFree
-              ? S.of(context).smokeFree
-              : S.of(context).noSmoking,
+              this.widget.restData.isSmokeFree
+              ? S
+              .of(context)
+              .smokeFree
+              : S
+              .of(context)
+              .noSmoking,
           icon: AssetImage('assets/icons/smoking.png'),
         ),
       );
     }
-
-    if (widget.restData.isAlcoholFree != null &&
-        widget.restData.isAlcoholFree) {
+    if (widget.restData.hasShisha != null) {
+      drawables.add(
+        InfoRow(
+          title: this.widget.restData.hasShisha != null &&
+              this.widget.restData.hasShisha
+              ? S
+              .of(context)
+              .hssShisha
+              : S
+              .of(context)
+              .noShisha,
+          icon: AssetImage('assets/icons/shisha.png'),
+        ),
+      );
+    }
+    if (widget.restData.isAlcoholFree != null) {
       drawables.add(
         InfoRow(
           title: this.widget.restData.isAlcoholFree != null &&
-                  this.widget.restData.isAlcoholFree
-              ? S.of(context).alcoholFree
-              : S.of(context).noAlcohol,
+              this.widget.restData.isAlcoholFree
+              ? S
+              .of(context)
+              .alcoholFree
+              : S
+              .of(context)
+              .noAlcohol,
           icon: AssetImage('assets/icons/alcohol.png'),
         ),
       );
@@ -459,12 +548,18 @@ class _MapSectionState extends State<MapSection> {
                     Icon(
                       Icons.location_on,
                       size: 36,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
                     ),
                     Text(
-                      S.of(context).address,
+                      S
+                          .of(context)
+                          .address,
                       style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
                           fontWeight: FontWeight.w500),
                     ),
                     Padding(

@@ -92,7 +92,7 @@ class PublishedPollCard extends StatelessWidget {
                             ? CrossAxisAlignment.start
                             : CrossAxisAlignment.end,
                     children: [
-                      Text(item.meal.name,
+                      Text(item.meal.name != null ? item.meal.name : '',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,

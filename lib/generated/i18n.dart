@@ -539,6 +539,8 @@ class S implements WidgetsLocalizations {
 
   String get noSmoking => "No Smoking";
 
+  String get noShisha => "No Shisha";
+
   String get noUpcomingServices =>
       "Seems like you don't have any plan for the weekend.";
 
@@ -783,6 +785,8 @@ class S implements WidgetsLocalizations {
   String get skip => "Skip";
 
   String get smokeFree => "Smoke Free";
+
+  String get hssShisha => "Has Shisha";
 
   String get submit => "Submit";
 
@@ -2036,6 +2040,9 @@ class $ar extends S {
   String get noSmoking => "التدخين ممنوع";
 
   @override
+  String get noShisha => "الأركيلة ممنوعة";
+
+  @override
   String get youHavePending => "لديك حجز قيد الانتظار";
 
   @override
@@ -2157,7 +2164,10 @@ class $ar extends S {
   String get confirmationCode => "رمز التفعيل";
 
   @override
-  String get smokeFree => "التدخين ممنوع";
+  String get smokeFree => "التدخين مسموح";
+
+  @override
+  String get hssShisha => "يوجد أركيلة";
 
   @override
   String get loadingLocation => "يتم تحميل الموقع على الخريطة...";
