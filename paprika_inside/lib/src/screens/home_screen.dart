@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:paprika_inside/screens.dart';
 import 'package:paprika_inside/utils.dart';
 import 'package:paprika_inside/widgets.dart';
 import 'package:swagger_inside/api.dart';
 
-class InsideHomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _InsideHomeScreenState createState() => _InsideHomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _InsideHomeScreenState extends State<InsideHomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   static String lang = "ar";
   static String tenant = 'e6f62669-bfc5-56da-227a-39f8e0b92d0a';
   Future<RestaurantsRestaurantDto> _restaurantProfileFuture;
@@ -53,7 +54,8 @@ class _InsideHomeScreenState extends State<InsideHomeScreen> {
               body: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/background.png'),
+                      image: AssetImage(
+                          'packages/paprika_inside/assets/images/background.png'),
                       fit: BoxFit.cover),
                 ),
                 child: SingleChildScrollView(
@@ -139,6 +141,10 @@ class _InsideHomeScreenState extends State<InsideHomeScreen> {
                                   setState(() {
                                     _button[1] = true;
                                   });
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return MenuScreen();
+                                  }));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

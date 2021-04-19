@@ -23,6 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_svg: ^0.21.0+1
+
   swagger_inside:
     path: paprika_inside_client
 

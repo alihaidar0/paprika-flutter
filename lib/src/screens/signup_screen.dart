@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Localizations.localeOf(context).languageCode == 'en' ? 10 : 2;
 
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(

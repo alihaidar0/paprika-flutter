@@ -20,7 +20,7 @@ class PaprikaInsideApp extends StatelessWidget {
           ),
           fontFamily: 'hacen-tunisia',
           textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14))),
-      home: InsideHomeScreen(),
+      home: MenuScreen(),
     );
   }
 }
