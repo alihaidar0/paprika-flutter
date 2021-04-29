@@ -225,8 +225,8 @@ class _MyPaprikaPageState extends State<MyPaprikaPage>
                     child: OnlineStatus(
                       child: IncrementallyLoadingListView(
                           controller: _scrollController,
-                          hasMore: !noMorePaprikaItems,
-                          itemCount: paprikaItemsList.length + 1,
+                          hasMore: () => !noMorePaprikaItems,
+                          itemCount: () => paprikaItemsList.length + 1,
                           loadMore: () async {
                             await _loadMoreData(
                                 eventStamp: lastEventsStamp,
