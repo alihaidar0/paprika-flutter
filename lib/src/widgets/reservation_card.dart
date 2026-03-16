@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/widgets/accessories.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/widgets/accessories.dart';
 import 'package:swagger/api.dart';
 
 import '../../translations.dart';
@@ -32,7 +32,8 @@ class ReservationCard extends StatelessWidget {
               children: <Widget>[
                 title != null
                     ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 34),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 34),
                         child: Text(
                           title,
                           style: TextStyle(
@@ -48,15 +49,19 @@ class ReservationCard extends StatelessWidget {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                          return RestaurantHome(restaurantId: reservation.restaurantId);
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return RestaurantHome(
+                              restaurantId: reservation.restaurantId);
                         }));
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 4, left: 2.5, right: 2.5),
+                        padding: const EdgeInsets.only(
+                            top: 4, left: 2.5, right: 2.5),
                         child: CircleAvatar(
 //                          backgroundImage: NetworkImage(reservation.imageUrl),
-                          backgroundImage: CachedNetworkImageProvider(reservation.imageUrl),
+                          backgroundImage:
+                              CachedNetworkImageProvider(reservation.imageUrl),
                           radius: MediaQuery.of(context).size.width * 0.09,
                         ),
                       ),
@@ -64,7 +69,8 @@ class ReservationCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2.5),
                       child: Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.18,
                           width: MediaQuery.of(context).size.width * 0.65,
@@ -73,9 +79,11 @@ class ReservationCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
                                   child: Text(
                                     S.of(context).reservation +
                                         " " +
@@ -97,11 +105,14 @@ class ReservationCard extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
-                                  PapricaFormatter.formatDateOnly(context, reservation.date) +
+                                  PaprikaFormatter.formatDateOnly(
+                                          context, reservation.date) +
                                       "    " +
-                                      PapricaFormatter.formatTimeOnly(context, reservation.date),
+                                      PaprikaFormatter.formatTimeOnly(
+                                          context, reservation.date),
                                   style: TextStyle(
                                     color: Colors.black,
                                   ),
@@ -121,10 +132,10 @@ class ReservationCard extends StatelessWidget {
   }
 }
 
-class MyPapricaReservationCard extends StatelessWidget {
+class MyPaprikaReservationCard extends StatelessWidget {
   final ReservationPapricaItemDto reservation;
 
-  MyPapricaReservationCard({
+  MyPaprikaReservationCard({
     this.reservation,
   });
 
@@ -134,11 +145,15 @@ class MyPapricaReservationCard extends StatelessWidget {
     return reservation != null
         ? Container(
             decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(color: Theme.of(context).primaryColor, width: isLtr ? 0 : 10),
-                  right: BorderSide(color: Theme.of(context).primaryColor, width: !isLtr ? 0 : 10),
-                ),
-                color: Colors.white,
+              border: Border(
+                left: BorderSide(
+                    color: Theme.of(context).primaryColor,
+                    width: isLtr ? 0 : 10),
+                right: BorderSide(
+                    color: Theme.of(context).primaryColor,
+                    width: !isLtr ? 0 : 10),
+              ),
+              color: Colors.white,
             ),
             height: 90,
             child: Row(
@@ -148,16 +163,13 @@ class MyPapricaReservationCard extends StatelessWidget {
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return RestaurantHome(restaurantId: reservation.restaurantId);
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return RestaurantHome(
+                          restaurantId: reservation.restaurantId);
                     }));
                   },
-//                  child: FadeInImage.memoryNetwork(
-//                    image: reservation.restaurantLogo,
-//                    fit: BoxFit.cover,
-//                    placeholder: kTransparentImage,
-//                  ),
-                  child: PapricaCachedImage(
+                  child: PaprikaCachedImage(
                     imageUrl: reservation.restaurantLogo,
                   ),
                 ),
@@ -169,8 +181,9 @@ class MyPapricaReservationCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Text(
-                          reservation.status == ApiHelper.reservationTypeApproved
-                              ? S.of(context).youHaveUpcoming
+                          reservation.status ==
+                                  ApiHelper.reservationTypeApproved
+                              ? S.of(context).youHaveUpcomingDeliveryAt
                               : S.of(context).youHavePending,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -199,9 +212,11 @@ class MyPapricaReservationCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          PapricaFormatter.formatDateOnly(context, reservation.time) +
+                          PaprikaFormatter.formatDateOnly(
+                                  context, reservation.time) +
                               "    " +
-                              PapricaFormatter.formatTimeOnly(context, reservation.time),
+                              PaprikaFormatter.formatTimeOnly(
+                                  context, reservation.time),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(

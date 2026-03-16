@@ -28,19 +28,29 @@ class RestaurantInListPapricaItem {
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'rate': rate, 'logo': logo, 'isOpen': isOpen};
+    return {
+      'id': id,
+      'name': name,
+      'rate': rate,
+      'logo': logo,
+      'isOpen': isOpen
+    };
   }
 
   static List<RestaurantInListPapricaItem> listFromJson(List<dynamic> json) {
     return json == null
         ? new List<RestaurantInListPapricaItem>()
-        : json.map((value) => new RestaurantInListPapricaItem.fromJson(value)).toList();
+        : json
+            .map((value) => new RestaurantInListPapricaItem.fromJson(value))
+            .toList();
   }
 
-  static Map<String, RestaurantInListPapricaItem> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, RestaurantInListPapricaItem> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, RestaurantInListPapricaItem>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RestaurantInListPapricaItem.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new RestaurantInListPapricaItem.fromJson(value));
     }
     return map;
   }

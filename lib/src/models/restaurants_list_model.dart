@@ -12,9 +12,9 @@ class RestaurantsListModel {
     });
   }
 
-  RestaurantsListModel.fromMyPapricaModel(ListPapricaItemDto restList) {
+  RestaurantsListModel.fromMyPaprikaModel(ListPapricaItemDto restList) {
     restList.items.forEach((item) {
-      items.add(RestaurantModel.fromMyPapricaModel(item));
+      items.add(RestaurantModel.fromMyPaprikaModel(item));
     });
   }
 }
@@ -38,13 +38,13 @@ class RestaurantModel {
     this.isOpen,
   });
 
-  RestaurantModel.fromMyPapricaModel(
-      RestaurantInListPapricaItem myPapricaRestaurantsList) {
-    id = myPapricaRestaurantsList.id;
-    isOpen = myPapricaRestaurantsList.isOpen;
-    name = myPapricaRestaurantsList.name;
-    logoImage = myPapricaRestaurantsList.logo;
-    restaurantRate = myPapricaRestaurantsList.rate;
+  RestaurantModel.fromMyPaprikaModel(
+      RestaurantInListPapricaItem myPaprikaRestaurantsList) {
+    id = myPaprikaRestaurantsList.id;
+    isOpen = myPaprikaRestaurantsList.isOpen;
+    name = myPaprikaRestaurantsList.name;
+    logoImage = myPaprikaRestaurantsList.logo;
+    restaurantRate = myPaprikaRestaurantsList.rate;
   }
 
   RestaurantModel.fromRestaurantLiteDto(RestaurantLiteDto restaurantLiteDto) {

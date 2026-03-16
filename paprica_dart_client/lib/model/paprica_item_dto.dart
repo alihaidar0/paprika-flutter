@@ -33,6 +33,12 @@ class PapricaItemDto {
       case 7:
         model = PagedResultDtoMyPapricaOfferDto.fromJson(json['model']);
         break;
+      case 8:
+        model = PublishedPollInPapricaItem.fromJson(json['model']);
+        break;
+      case 9:
+        model = OpenPollInPapricaItem.fromJson(json['model']);
+        break;
     }
   }
 

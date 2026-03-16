@@ -1,20 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/src/widgets/event_card.dart';
-import 'package:swagger/api.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/src/widgets/accessories.dart' show LoadingPlaceHolder;
+import 'package:paprika/src/widgets/event_card.dart';
+import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
-import 'package:paprica/src/widgets/accessories.dart' show LoadingPlaceHolder;
 
 class EventsListScreen extends StatefulWidget {
   final int restaurantId;
   final String restaurantName;
 
-  const EventsListScreen({@required this.restaurantId, @required this.restaurantName});
+  const EventsListScreen(
+      {@required this.restaurantId, @required this.restaurantName});
 
   @override
   _EventsListScreenState createState() => _EventsListScreenState();
@@ -38,7 +40,12 @@ class _EventsListScreenState extends State<EventsListScreen> {
     events = [];
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset && !_requestingData && events.isNotEmpty && context != null && !_endOfEvents) {
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
+          !_requestingData &&
+          events.isNotEmpty &&
+          context != null &&
+          !_endOfEvents) {
         _getEvents(skipCount: events.length);
       }
     });
@@ -69,9 +76,14 @@ class _EventsListScreenState extends State<EventsListScreen> {
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Opacity(
-                                opacity: DateTime.now().isAfter((events[index] as CustomerEventDto).time) ? 0.5 : 1,
+                                opacity: DateTime.now().isAfter(
+                                        (events[index] as CustomerEventDto)
+                                            .time)
+                                    ? 0.5
+                                    : 1,
                                 child: EventCard(
-                                  event: EventModel.fromCustomerEventDto(events[index]),
+                                  event: EventModel.fromCustomerEventDto(
+                                      events[index]),
                                 ),
                               ),
                             );
@@ -100,10 +112,13 @@ class _EventsListScreenState extends State<EventsListScreen> {
     });
     ApiClient client = PapricaApiClient();
     CustomerEventApi api = CustomerEventApi(client);
-    eventFuture = api.apiServicesAppCustomerEventGetAllGet(restaurantId: widget.restaurantId, skipCount: skipCount, maxResultCount: maxResult);
+    eventFuture = api.apiServicesAppCustomerEventGetAllGet(
+        restaurantId: widget.restaurantId,
+        skipCount: skipCount,
+        maxResultCount: maxResult);
     eventFuture.then((data) {
       setState(() {
-        if(events.last is SpinKitCircle) events.removeLast();
+        if (events.last is SpinKitCircle) events.removeLast();
         _requestingData = false;
         if (data.items.isEmpty) {
           _endOfEvents = true;
@@ -114,7 +129,7 @@ class _EventsListScreenState extends State<EventsListScreen> {
     });
     eventFuture.catchError((err) {
       setState(() {
-        if(events.last is SpinKitCircle) events.removeLast();
+        if (events.last is SpinKitCircle) events.removeLast();
         _requestingData = false;
       });
       DefaultErrorHandler.handle(context, err);
@@ -125,7 +140,8 @@ class _EventsListScreenState extends State<EventsListScreen> {
 class NoEventsLayout extends StatelessWidget {
   final String restaurantName;
 
-  const NoEventsLayout({Key key, @required this.restaurantName}) : super(key: key);
+  const NoEventsLayout({Key key, @required this.restaurantName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,22 +1,26 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/search_item.dart';
-import 'package:paprica/src/pages/my_paprica_page.dart';
-import 'package:paprica/translations.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/search_item.dart';
+import 'package:paprika/src/pages/my_paprika_page.dart';
+import 'package:paprika/translations.dart';
 import 'package:swagger/api.dart';
 import 'package:uni_links/uni_links.dart';
+
+import 'package:paprika_inside/app.dart';
 import '../../utils.dart';
 import '../../widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeScreenAction action;
+  final int initialIndex;
 
-  const HomeScreen({this.action});
+  const HomeScreen({Key key, this.initialIndex, this.action}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -24,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   BuildContext buildContext;
-  int _currentIndex = 0;
+  int _currentIndex;
   bool _actionHandled = false;
 
   List<Widget> _tabList = [];
@@ -47,20 +51,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     initUniLinks();
-
     _checkNotificationsCount();
     _refreshStream = StreamController<bool>.broadcast();
     resetScrollPositionStream = StreamController<bool>.broadcast();
     _tabList
-      ..add(MyPapricaPage(
+      ..add(MyPaprikaPage(
         resetScrollPositionStream: resetScrollPositionStream.stream,
         parentScrollNotifier: _handleChildScroll,
       ))
-      ..add(ReservationsPage(changeHomePageIndexHandler))
-      ..add(PlacesPage())
+      ..add(RestaurantsPage())
+      ..add(ServicePage())
       ..add(MorePage());
 
     _tabController = TabController(vsync: this, length: _tabList.length);
+    if (widget.initialIndex != null) {
+      _currentIndex = widget.initialIndex;
+    } else {
+      _currentIndex = 0;
+    }
   }
 
   _handleChildScroll(ScrollDirection direction, double offset) {
@@ -106,7 +114,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         return Future.value(false);
       }
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-
       return Future.value(false);
     }
   }
@@ -120,6 +127,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         widget.action == HomeScreenAction.reservations) {
       setState(() {
         _goToReservationsPage();
+        _actionHandled = true;
+      });
+    }
+    if (widget.initialIndex != null && !_actionHandled) {
+      setState(() {
+        _tabController.animateTo(widget.initialIndex);
         _actionHandled = true;
       });
     }
@@ -155,19 +168,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             context: context, delegate: CustomSearchDelegate());
                       },
                     ),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
+                    IconButton(
+                      icon: Icon(Icons.filter_alt),
+                      onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
                           return DiscoverPage();
                         }));
                       },
-                      child: Image(
-                        width: 40,
-                        height: 40,
-                        image: AssetImage("assets/icons/filter.png"),
-                      ),
                     ),
                     Stack(
                       children: <Widget>[
@@ -233,7 +241,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       (context, _) => Container(
                             height: MediaQuery.of(context).size.height - 70,
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, _currentIndex == 0 ? 0 : 60),
+                              padding: EdgeInsets.fromLTRB(
+                                  0, 0, 0, _currentIndex == 0 ? 0 : 60),
                               child: TabBarView(
                                 physics: const NeverScrollableScrollPhysics(),
                                 controller: _tabController,
@@ -247,77 +256,113 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (currentIndex) {
-            if (currentIndex != _currentIndex) {
-              setState(() {
-                _currentIndex = currentIndex;
-              });
-              _changeTab(currentIndex);
-            } else {
-              if (currentIndex == 0) {
-                resetScrollPositionStream.add(true);
-                _scrollController.animateTo(0,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    duration: Duration(milliseconds: 500));
-              }
-            }
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.qr_code),
+          backgroundColor: Colors.white,
+          onPressed: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(builder:
+                    (BuildContext context) {
+                  return PaprikaInsideApp();
+                }));
           },
-          items: [
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Image.asset("assets/icons/home_inactive.png")),
-              activeIcon: SizedBox(
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        bottomNavigationBar: SizedBox(
+          height: 50.0,
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (currentIndex) {
+              if (currentIndex != _currentIndex) {
+                setState(() {
+                  _currentIndex = currentIndex;
+                });
+                _changeTab(currentIndex);
+              } else {
+                if (currentIndex == 0) {
+                  resetScrollPositionStream.add(true);
+                  _scrollController.animateTo(0,
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      duration: Duration(milliseconds: 500));
+                }
+              }
+            },
+            selectedFontSize: 12.0,
+            showUnselectedLabels: true,
+            selectedItemColor: Theme.of(context).primaryColor,
+            unselectedItemColor: Color(0xFF727272),
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: SizedBox(
                   height: 18,
                   width: 18,
-                  child: Image.asset("assets/icons/home_active.png")),
-              title: Text(S.of(context).home, style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
+                  child: Image.asset("assets/icons/home_inactive.png"),
+                ),
+                activeIcon: SizedBox(
                   height: 18,
                   width: 18,
-                  child: Image.asset("assets/icons/reservation_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/reservation_active.png")),
-              title: Text(S.of(context).reservations,
-                  style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/places_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/places_active.png")),
-              title: Text(S.of(context).places, style: TextStyle(fontSize: 12)),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/more_inactive.png")),
-              activeIcon: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/icons/more_active.png")),
-              title: Text(
-                S.of(context).more,
-                style: TextStyle(fontSize: 12),
+                  child: Image.asset("assets/icons/home_active.png"),
+                ),
+                // ignore: deprecated_member_use
+                title: Text(
+                  S.of(context).home,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-          ],
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/restaurants_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/restaurants_active.png"),
+                ),
+                // ignore: deprecated_member_use
+                title: Text(
+                  S.of(context).restaurants,
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/activities_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/activities_active.png"),
+                ),
+                // ignore: deprecated_member_use
+                title: Text(
+                  S.of(context).activities,
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/more_inactive.png"),
+                ),
+                activeIcon: SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/icons/more_active.png"),
+                ),
+                // ignore: deprecated_member_use
+                title: Text(
+                  S.of(context).more,
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -344,14 +389,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _currentIndex = 1;
     });
     _changeTab(1);
-  }
-
-  changeHomePageIndexHandler(int index) {
-    setState(() {
-      _currentIndex = 0;
-    });
-    _changeTab(0);
-//    _changeTabStream.add(index);
   }
 
   _reservationOpenCallback() {
@@ -401,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     //Event
     if (domain == "event") {
-      openEventcreen(id);
+      openEventScreen(id);
       return;
     }
     //Offer
@@ -437,7 +474,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Navigator.pushNamed(buildContext, '/restaurant', arguments: restaurantId);
   }
 
-  void openEventcreen(int eventId) {
+  void openEventScreen(int eventId) {
     if (buildContext == null) return;
     Navigator.pushNamed(buildContext, '/event', arguments: eventId);
   }
@@ -554,7 +591,11 @@ class CustomSearchDelegate extends SearchDelegate<SearchItem> {
         }
         return Center(
             child: SizedBox(
-                height: 24, width: 24, child: CircularProgressIndicator()));
+                height: 24,
+                width: 24,
+                child: CircularProgressIndicator(
+                  backgroundColor: Theme.of(context).primaryColor,
+                )));
       },
     );
   }

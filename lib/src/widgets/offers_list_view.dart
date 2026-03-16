@@ -2,25 +2,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/offer_model.dart';
-import 'package:paprica/src/screens/offer_screen.dart';
-import 'package:paprica/src/screens/offers_list_screen.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/offer_model.dart';
+import 'package:paprika/src/screens/offer_screen.dart';
+import 'package:paprika/src/screens/offers_list_screen.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-class OffersListInMyPaprica extends StatelessWidget {
+class OffersListInMyPaprika extends StatelessWidget {
   final PagedResultDtoMyPapricaOfferDto offersList;
   final String title;
   final Color titleColor;
-  final bool reversed, isArrowShows, isFromMyPaprica;
+  final bool reversed, isArrowShows, isFromMyPaprika;
 
-//  final PapricaFilterModel filterModel;
+//  final PaprikaFilterModel filterModel;
 
-  OffersListInMyPaprica({
+  OffersListInMyPaprika({
     @required this.offersList,
     @required this.title,
-    this.isFromMyPaprica = false,
+    this.isFromMyPaprika = false,
     this.titleColor,
     this.isArrowShows = true,
     this.reversed = false,
@@ -34,13 +33,14 @@ class OffersListInMyPaprica extends StatelessWidget {
       widgets.add(
         Container(
           height: MediaQuery.of(context).size.width * 0.70,
-          child: isFromMyPaprica ? _buildMyPapricaOffers(context, x) : Container(),
+          child:
+              isFromMyPaprika ? _buildMyPaprikaOffers(context, x) : Container(),
         ),
       );
     }
 
     return Container(
-      color: isFromMyPaprica ? Colors.white : Colors.transparent,
+      color: isFromMyPaprika ? Colors.white : Colors.transparent,
       padding: EdgeInsets.only(bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,10 +70,12 @@ class OffersListInMyPaprica extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 S.of(context).viewAll,
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
                               ),
                               Icon(
-                                Localizations.localeOf(context).languageCode == 'en'
+                                Localizations.localeOf(context).languageCode ==
+                                        'en'
                                     ? Icons.keyboard_arrow_right
                                     : Icons.keyboard_arrow_left,
                                 color: Theme.of(context).primaryColor,
@@ -99,16 +101,19 @@ class OffersListInMyPaprica extends StatelessWidget {
     );
   }
 
-  Widget _buildMyPapricaOffers(BuildContext context, int x) {
+  Widget _buildMyPaprikaOffers(BuildContext context, int x) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-          return OfferScreen(offer: OfferModel.fromMyPapricaEventDto(offersList.items[x]));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return OfferScreen(
+              offer: OfferModel.fromMyPaprikaEventDto(offersList.items[x]));
         }));
       },
       child: Card(
         color: Colors.white70,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +164,8 @@ class OffersListInMyPaprica extends StatelessWidget {
   }
 
   void _onSeeMore(BuildContext mContext) {
-    Navigator.of(mContext).push(MaterialPageRoute(builder: (BuildContext context) {
+    Navigator.of(mContext)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return OffersListScreen();
     }));
   }

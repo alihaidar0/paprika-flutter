@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/event_model.dart';
+import 'package:paprika/src/models/event_model.dart';
 
 import '../../utils.dart';
 
@@ -101,11 +101,13 @@ class EventsListView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        PapricaFormatter.formatDateOnly(context, eventsList[x].date),
+                        PaprikaFormatter.formatDateOnly(
+                            context, eventsList[x].date),
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(
-                        PapricaFormatter.formatTimeOnly(context, eventsList[x].date),
+                        PaprikaFormatter.formatTimeOnly(
+                            context, eventsList[x].date),
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(

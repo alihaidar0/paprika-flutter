@@ -54,6 +54,4 @@ class OfferPapricaItemDto extends CustomerOfferDto {
     restaurantId = dto.restaurantId;
     restaurantLogo = dto.restaurantImage;
   }
-
-
 }

@@ -4,5 +4,4 @@ class SearchItem {
   String imageUrl;
 
   SearchItem([this.id, this.name, this.imageUrl]);
-
 }

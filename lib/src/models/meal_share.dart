@@ -9,6 +9,4 @@ class MealShare {
   String toString() {
     return "MealShare [restaurantId: $restaurantId, categoryId: $categoryId, mealId: $mealId";
   }
-
-
 }

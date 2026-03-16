@@ -27,17 +27,26 @@ class LiteSearchItemDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {'relatedItemId': relatedItemId, 'relatedImage': relatedImage, 'itemType': itemType, 'text': text};
+    return {
+      'relatedItemId': relatedItemId,
+      'relatedImage': relatedImage,
+      'itemType': itemType,
+      'text': text
+    };
   }
 
   static List<LiteSearchItemDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<LiteSearchItemDto>() : json.map((value) => new LiteSearchItemDto.fromJson(value)).toList();
+    return json == null
+        ? new List<LiteSearchItemDto>()
+        : json.map((value) => new LiteSearchItemDto.fromJson(value)).toList();
   }
 
-  static Map<String, LiteSearchItemDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, LiteSearchItemDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, LiteSearchItemDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new LiteSearchItemDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new LiteSearchItemDto.fromJson(value));
     }
     return map;
   }

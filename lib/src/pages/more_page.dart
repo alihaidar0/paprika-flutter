@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/app.dart';
-import 'package:paprica/error_handlers.dart';
-import 'package:paprica/pages.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/src/screens/update_phone_number_screen.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
-import 'package:paprica/utils.dart';
+import 'package:paprika/app.dart';
+import 'package:paprika/error_handlers.dart';
+import 'package:paprika/pages.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -25,7 +24,8 @@ class _MorePageState extends State<MorePage> {
         children: <Widget>[
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) {
               return ProfilePage();
             })),
             child: Padding(
@@ -46,7 +46,8 @@ class _MorePageState extends State<MorePage> {
           Divider(),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Share.share(S.of(context).shareTextApp("https://links.popina.me")),
+            onTap: () => Share.share(
+                S.of(context).shareTextApp("https://links.paprika-sy.com")),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Row(
@@ -65,7 +66,8 @@ class _MorePageState extends State<MorePage> {
           Divider(),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) {
               return AboutUsScreen();
             })),
             child: Padding(
@@ -110,16 +112,18 @@ class _MorePageState extends State<MorePage> {
                 showDialog(
                     context: context,
                     builder: (_context) {
-                      return PapricaSimpleDialog(
+                      return PaprikaSimpleDialog(
                         title: S.of(context).logOutConfirmation,
                         yesButton: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                               _logOut(context);
                             },
-                            child: Text(S.of(context).yes)),
+                            child: Text(S.of(context).yes),
+                        ),
                       );
-                    });
+                    },
+                );
               } else {
                 Navigator.of(context).pushNamed('/logIn');
               }
@@ -128,7 +132,9 @@ class _MorePageState extends State<MorePage> {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: <Widget>[
-                  Text(ApiTypesHelper().isAuthorized ? S.of(context).logOut : S.of(context).logIn),
+                  Text(ApiTypesHelper().isAuthorized
+                      ? S.of(context).logOut
+                      : S.of(context).logIn),
                   Icon(
                     Localizations.localeOf(context).languageCode == 'en'
                         ? Icons.keyboard_arrow_right
@@ -158,14 +164,14 @@ class _MorePageState extends State<MorePage> {
         dialog.show();
         ApiTypesHelper().changeLanguage(context).then((_) {
           dialog.hide();
-          PapricaApp.setLocale(context, lang);
+          PaprikaApp.setLocale(context, lang);
           Navigator.of(context).pushReplacementNamed('/home');
         }).catchError((err) {
           dialog.hide();
           showDialog(
               context: context,
               builder: (context) {
-                return PapricaErrorDialog(
+                return PaprikaErrorDialog(
                   title: S.of(context).error,
                   content: S.of(context).errorChangeLanguage,
                 );
@@ -181,7 +187,9 @@ class _MorePageState extends State<MorePage> {
     ProgressDialog dialog = ProgressDialog(context);
     dialog.setMessage(S.of(context).loggingOut);
     dialog.show();
-    api.apiServicesAppNotificationsUnregisterFirebaseNotificationsPost().then((_) {
+    api
+        .apiServicesAppNotificationsUnregisterFirebaseNotificationsPost()
+        .then((_) {
       SharedPreference.removeTokenFromSharedPrefs().then((_) {
         dialog.hide();
         ApiTypesHelper().setAuthorized(false);
@@ -211,12 +219,13 @@ class _LanguageChangerDialogState extends State<LanguageChangerDialog> {
   @override
   Widget build(BuildContext context) {
     String langCode = Localizations.localeOf(context).languageCode;
-    String defaultLang = langCode == 'en' ? S.of(context).english : S.of(context).arabic;
+    String defaultLang =
+        langCode == 'en' ? S.of(context).english : S.of(context).arabic;
 
     return AlertDialog(
       title: Text(
         S.of(context).pleaseSelectLanguage,
-        style: Theme.of(context).textTheme.subhead,
+        style: Theme.of(context).textTheme.subtitle1,
       ),
       content: Row(
         children: <Widget>[
@@ -248,7 +257,8 @@ class _LanguageChangerDialogState extends State<LanguageChangerDialog> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(S.of(context).cancel, style: TextStyle(color: Colors.grey))),
+            child: Text(S.of(context).cancel,
+                style: TextStyle(color: Colors.grey))),
         FlatButton(
             onPressed: () {
               Navigator.of(context).pop(res != null ? res : langCode);

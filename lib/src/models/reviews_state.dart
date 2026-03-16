@@ -5,5 +5,5 @@ class ReviewsState {
 
   ReviewDto customerReview;
 
-  ReviewsState({this.summary, this.customerReview });
+  ReviewsState({this.summary, this.customerReview});
 }

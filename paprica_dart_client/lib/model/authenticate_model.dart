@@ -34,13 +34,17 @@ class AuthenticateModel {
   }
 
   static List<AuthenticateModel> listFromJson(List<dynamic> json) {
-    return json == null ? new List<AuthenticateModel>() : json.map((value) => new AuthenticateModel.fromJson(value)).toList();
+    return json == null
+        ? new List<AuthenticateModel>()
+        : json.map((value) => new AuthenticateModel.fromJson(value)).toList();
   }
 
-  static Map<String, AuthenticateModel> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, AuthenticateModel> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, AuthenticateModel>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new AuthenticateModel.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new AuthenticateModel.fromJson(value));
     }
     return map;
   }

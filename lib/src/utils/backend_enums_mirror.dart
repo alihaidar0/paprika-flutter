@@ -4,25 +4,29 @@ import 'package:swagger/api.dart';
 import '../../translations.dart';
 import '../../utils.dart';
 
-//import 'package:paprica/utils.dart';
-//
-//class NoiseLevel {
-//  static const int low = 1;
-//  static const int moderate = 2;
-//  static const int high = 3;
-//}
-
 class ApiHelper {
-  static const int MyPapricaTypeRestaurants = 5;
-  static const int MyPapricaTypeReservation = 1;
-  static const int MyPapricaTypeEvent = 3;
-  static const int MyPapricaTypeOffer = 2;
-  static const int MyPapricaTypeListOffers = 7;
+  static const int MyPaprikaTypeRestaurants = 5;
+  static const int MyPaprikaTypeReservation = 1;
+  static const int MyPaprikaTypeEvent = 3;
+  static const int MyPaprikaTypeOffer = 2;
+  static const int MyPaprikaTypeListOffers = 7;
+  static const int MyPaprikaTypePublishedPoll = 8;
+  static const int MyPaprikaTypeOpenPoll = 9;
 
   static const int reservationTypePending = 1;
   static const int reservationTypeRejected = 2;
   static const int reservationTypeCanceled = 3;
   static const int reservationTypeApproved = 4;
+
+  static const int pickupTypePending = 1;
+  static const int pickupTypeRejected = 2;
+  static const int pickupTypeCanceled = 3;
+  static const int pickupTypeApproved = 4;
+
+  static const int deliveryTypePending = 1;
+  static const int deliveryTypeRejected = 2;
+  static const int deliveryTypeCanceled = 3;
+  static const int deliveryTypeApproved = 4;
 
   static String toStringOccasionType(BuildContext context, int occasionType) {
     switch (occasionType) {
@@ -100,7 +104,8 @@ class ApiHelper {
     }
   }
 
-  static String toStringRestaurantTypes(BuildContext context, int restaurantTypes) {
+  static String toStringRestaurantTypes(
+      BuildContext context, int restaurantTypes) {
     switch (restaurantTypes) {
       case 1:
         return "PizzaHouse";
@@ -115,7 +120,7 @@ class ApiHelper {
         return "FastFood";
         break;
       default:
-        return "Garage";
+        return "";
     }
   }
 

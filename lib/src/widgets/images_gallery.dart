@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/carousel_slider.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/carousel_slider.dart';
 
 class ImagesGallery extends StatefulWidget {
   final List<String> thumbnails;
@@ -66,7 +65,8 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                     showDialog(
                         barrierDismissible: false,
                         context: context,
-                        builder: (BuildContext context) => CarouselWithIndicator(
+                        builder: (BuildContext context) =>
+                            CarouselWithIndicator(
                               mInitialPage: 0,
                               urls: this.widget.urls,
                               isLocal: this.widget.isLocale,
@@ -95,13 +95,19 @@ class _ImagesGalleryState extends State<ImagesGallery> {
 //                                  ),
                                   child: CachedNetworkImage(
                                     imageUrl: widget.thumbnails[1],
-                                    width: MediaQuery.of(context).size.width * 0.211,
-                                    height: MediaQuery.of(context).size.width * 0.211,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.211,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.211,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => Image(
-                                      image: AssetImage("assets/images/placeholder.png"),
-                                      width: MediaQuery.of(context).size.width * 0.211,
-                                      height: MediaQuery.of(context).size.width * 0.211,
+                                      image: AssetImage(
+                                          "assets/images/placeholder.png"),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.211,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.211,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -109,7 +115,8 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                 onTap: () {
                                   showDialog(
                                       context: context,
-                                      builder: (BuildContext context) => CarouselWithIndicator(
+                                      builder: (BuildContext context) =>
+                                          CarouselWithIndicator(
                                             mInitialPage: 1,
                                             urls: this.widget.urls,
                                             isLocal: this.widget.isLocale,
@@ -119,10 +126,12 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                             ),
                             widget.thumbnails.length > 2
                                 ? Padding(
-                                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(4, 4, 4, 4),
                                     child: GestureDetector(
                                       child: ClipRRect(
-                                        borderRadius: new BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            new BorderRadius.circular(8.0),
 //                                        child: FadeInImage.memoryNetwork(
 //                                          fit: BoxFit.cover,
 //                                          width: MediaQuery.of(context).size.width * 0.211,
@@ -132,13 +141,26 @@ class _ImagesGalleryState extends State<ImagesGallery> {
 //                                        ),
                                         child: CachedNetworkImage(
                                           imageUrl: widget.thumbnails[2],
-                                          width: MediaQuery.of(context).size.width * 0.211,
-                                          height: MediaQuery.of(context).size.width * 0.211,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.211,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.211,
                                           fit: BoxFit.cover,
                                           placeholder: (context, url) => Image(
-                                            image: AssetImage("assets/images/placeholder.png"),
-                                            width: MediaQuery.of(context).size.width * 0.211,
-                                            height: MediaQuery.of(context).size.width * 0.211,
+                                            image: AssetImage(
+                                                "assets/images/placeholder.png"),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.211,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.211,
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -146,7 +168,8 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                       onTap: () {
                                         showDialog(
                                             context: context,
-                                            builder: (BuildContext context) => CarouselWithIndicator(
+                                            builder: (BuildContext context) =>
+                                                CarouselWithIndicator(
                                                   mInitialPage: 2,
                                                   urls: this.widget.urls,
                                                   isLocal: this.widget.isLocale,
@@ -162,10 +185,12 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(4, 4, 4, 4),
                                     child: GestureDetector(
                                       child: ClipRRect(
-                                        borderRadius: new BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            new BorderRadius.circular(8.0),
 //                                        child: FadeInImage.memoryNetwork(
 //                                          fit: BoxFit.cover,
 //                                          width: MediaQuery.of(context).size.width * 0.211,
@@ -176,13 +201,26 @@ class _ImagesGalleryState extends State<ImagesGallery> {
 
                                         child: CachedNetworkImage(
                                           imageUrl: widget.thumbnails[3],
-                                          width: MediaQuery.of(context).size.width * 0.211,
-                                          height: MediaQuery.of(context).size.width * 0.211,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.211,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.211,
                                           fit: BoxFit.cover,
                                           placeholder: (context, url) => Image(
-                                            image: AssetImage("assets/images/placeholder.png"),
-                                            width: MediaQuery.of(context).size.width * 0.211,
-                                            height: MediaQuery.of(context).size.width * 0.211,
+                                            image: AssetImage(
+                                                "assets/images/placeholder.png"),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.211,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.211,
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -190,7 +228,8 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                       onTap: () {
                                         showDialog(
                                             context: context,
-                                            builder: (BuildContext context) => CarouselWithIndicator(
+                                            builder: (BuildContext context) =>
+                                                CarouselWithIndicator(
                                                   mInitialPage: 3,
                                                   urls: this.widget.urls,
                                                   isLocal: this.widget.isLocale,
@@ -200,56 +239,111 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                   ),
                                   widget.thumbnails.length > 4
                                       ? Padding(
-                                          padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              4, 4, 4, 4),
                                           child: GestureDetector(
                                             child: widget.thumbnails.length > 5
                                                 ? Container(
-                                                    width: MediaQuery.of(context).size.width * 0.211,
-                                                    height: MediaQuery.of(context).size.width * 0.211,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.211,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.211,
                                                     child: Stack(
                                                       fit: StackFit.expand,
                                                       children: <Widget>[
                                                         ClipRRect(
-                                                          borderRadius: new BorderRadius.circular(8.0),
+                                                          borderRadius:
+                                                              new BorderRadius
+                                                                      .circular(
+                                                                  8.0),
 //                                                          child: FadeInImage.memoryNetwork(
 //                                                            fit: BoxFit.cover,
 //                                                            image: widget.thumbnails[4],
 //                                                            placeholder: kTransparentImage,
 //                                                          ),
 
-                                                          child: CachedNetworkImage(
-                                                            imageUrl: widget.thumbnails[4],
-                                                            width: MediaQuery.of(context).size.width * 0.211,
-                                                            height: MediaQuery.of(context).size.width * 0.211,
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: widget
+                                                                .thumbnails[4],
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.211,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.211,
                                                             fit: BoxFit.cover,
-                                                            placeholder: (context, url) => Image(
-                                                              image: AssetImage("assets/images/placeholder.png"),
-                                                              width: MediaQuery.of(context).size.width * 0.211,
-                                                              height: MediaQuery.of(context).size.width * 0.211,
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/placeholder.png"),
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.211,
+                                                              height: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.211,
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
-                                                          decoration: BoxDecoration(
-                                                            color: Colors.grey.withOpacity(0.5),
-                                                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            8)),
                                                           ),
                                                         ),
                                                         Center(
                                                           child: Text(
-                                                            S.of(context).viewGallery,
-                                                            textAlign: TextAlign.center,
+                                                            S
+                                                                .of(context)
+                                                                .viewGallery,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             softWrap: true,
                                                             style: TextStyle(
-                                                              fontWeight: FontWeight.bold,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                               fontSize: 13,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               shadows: <Shadow>[
                                                                 Shadow(
-                                                                  offset: Offset(2, 2),
-                                                                  blurRadius: 8.0,
-                                                                  color: Color.fromARGB(255, 0, 0, 0),
+                                                                  offset:
+                                                                      Offset(
+                                                                          2, 2),
+                                                                  blurRadius:
+                                                                      8.0,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          0,
+                                                                          0,
+                                                                          0),
                                                                 )
                                                               ],
                                                             ),
@@ -259,28 +353,60 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                                     ),
                                                   )
                                                 : Container(
-                                                    width: MediaQuery.of(context).size.width * 0.211,
-                                                    height: MediaQuery.of(context).size.width * 0.211,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.211,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.211,
                                                     child: Stack(
                                                       fit: StackFit.expand,
                                                       children: <Widget>[
                                                         ClipRRect(
-                                                          borderRadius: new BorderRadius.circular(8.0),
+                                                          borderRadius:
+                                                              new BorderRadius
+                                                                      .circular(
+                                                                  8.0),
 //                                                          child: FadeInImage.memoryNetwork(
 //                                                            fit: BoxFit.cover,
 //                                                            image: widget.thumbnails[4],
 //                                                            placeholder: kTransparentImage,
 //                                                          ),
-                                                          child: CachedNetworkImage(
-                                                            imageUrl: widget.thumbnails[4],
-                                                            width: MediaQuery.of(context).size.width * 0.211,
-                                                            height: MediaQuery.of(context).size.width * 0.211,
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: widget
+                                                                .thumbnails[4],
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.211,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.211,
                                                             fit: BoxFit.cover,
-                                                            placeholder: (context, url) => Image(
-                                                              image: AssetImage("assets/images/placeholder.png"),
-
-                                                              width: MediaQuery.of(context).size.width * 0.211,
-                                                              height: MediaQuery.of(context).size.width * 0.211,
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/placeholder.png"),
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.211,
+                                                              height: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.211,
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -291,11 +417,17 @@ class _ImagesGalleryState extends State<ImagesGallery> {
                                             onTap: () {
                                               showDialog(
                                                   context: context,
-                                                  builder: (BuildContext context) => CarouselWithIndicator(
-                                                        mInitialPage: 4,
-                                                        urls: this.widget.urls,
-                                                        isLocal: this.widget.isLocale,
-                                                      ));
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          CarouselWithIndicator(
+                                                            mInitialPage: 4,
+                                                            urls: this
+                                                                .widget
+                                                                .urls,
+                                                            isLocal: this
+                                                                .widget
+                                                                .isLocale,
+                                                          ));
                                             },
                                           ),
                                         )

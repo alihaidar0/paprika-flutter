@@ -3,14 +3,13 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/meal_share.dart';
-import 'package:paprica/src/models/menu_state.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/meal_share.dart';
+import 'package:paprika/src/models/menu_state.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../screens.dart';
 import '../../utils.dart';
@@ -23,8 +22,8 @@ class RestaurantMenuPage extends StatefulWidget {
   final saveMenuState;
   final MealShare mealShare;
 
-  RestaurantMenuPage(
-      this.restData, this.menuState, this.saveMenuState, this.parentScrollController, this.parentScrollDelegate,
+  RestaurantMenuPage(this.restData, this.menuState, this.saveMenuState,
+      this.parentScrollController, this.parentScrollDelegate,
       {this.mealShare});
 
   @override
@@ -58,7 +57,8 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
 
   void _parentScrollCallback() {
     if (false == widget.menuState.isGrid) {
-      if (widget.parentScrollController.offset > 105) widget.parentScrollDelegate(105.0);
+      if (widget.parentScrollController.offset > 105)
+        widget.parentScrollDelegate(105.0);
     }
   }
 
@@ -70,7 +70,9 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
   Widget _menuContent(BuildContext context) {
     return AnimatedCrossFade(
         duration: Duration(milliseconds: 700),
-        crossFadeState: this.widget.menuState.isGrid ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        crossFadeState: this.widget.menuState.isGrid
+            ? CrossFadeState.showFirst
+            : CrossFadeState.showSecond,
         firstChild: FutureBuilder<List<CategoryDto>>(
             future: categories,
             builder: (context, snapshot) {
@@ -90,7 +92,8 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
                             }
                             return _buildMenuGridItem(category);
                           }).toList(),
-                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 25),
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
                         ),
@@ -110,11 +113,14 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
                 color: Color(0xFFF2F2F2),
                 child: NestedScrollView(
                   controller: scrollController,
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverPersistentHeader(
                         pinned: true,
-                        delegate: MealListHeaderDelegate(this.widget.menuState.selectedCategory.name, _toggleMenuView),
+                        delegate: MealListHeaderDelegate(
+                            this.widget.menuState.selectedCategory.name,
+                            _toggleMenuView),
                       ),
                     ];
                   },
@@ -125,25 +131,33 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
                         return Center(
                             child: snapshot.data.length > 0
                                 ? ListView.builder(
-                                    itemExtent: Localizations.localeOf(context).languageCode == 'en' ? 124 : 127.4,
+                                    itemExtent: Localizations.localeOf(context)
+                                                .languageCode ==
+                                            'en'
+                                        ? 124
+                                        : 127.4,
                                     itemCount: snapshot.data.length,
                                     padding: EdgeInsets.only(bottom: 60),
                                     itemBuilder: (context, index) {
                                       if (widget.mealShare != null &&
-                                          snapshot.data[index].id == widget.mealShare.mealId &&
+                                          snapshot.data[index].id ==
+                                              widget.mealShare.mealId &&
                                           !_sharedMealOpened) {
-//
                                         _openSharedMeal(snapshot.data[index]);
                                       }
-                                      return _buildMenuListItem(context, snapshot.data[index]);
+                                      return _buildMenuListItem(
+                                          context, snapshot.data[index]);
                                     },
                                     physics: ClampingScrollPhysics(),
                                   )
-                                : Center(child: Text(S.of(context).menuNoAvailable(selectedCategory.name))));
+                                : Center(
+                                    child: Text(S.of(context).menuNoAvailable(
+                                        selectedCategory.name))));
                       } else if (snapshot.hasError) {
                         return RequestRetry(
                             message: S.of(context).errorUnknown,
-                            retryCallback: () => _getCategoryMealAsync(selectedCategory.id));
+                            retryCallback: () =>
+                                _getCategoryMealAsync(selectedCategory.id));
                       } else {
                         return Center(
                           child: CircularProgressIndicator(),
@@ -185,8 +199,11 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
             context: context,
             builder: (BuildContext context) {
               return MenuItemPopUp(
-                  meal, widget.restData?.logoImage, widget.restData.name, widget.restData.id, selectedCategory.id,
-                  onRateChanged: (newRate) {
+                  meal,
+                  widget.restData?.logoImage,
+                  widget.restData.name,
+                  widget.restData.id,
+                  selectedCategory.id, onRateChanged: (newRate) {
                 setState(() {
                   meal.mealRate = newRate;
                 });
@@ -207,8 +224,9 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
     ApiClient apiClient = PapricaApiClient();
     var apiInstance = new CustomerMenuApi(apiClient);
     setState(() {
-      widget.menuState.categories =
-          categories = apiInstance.apiServicesAppCustomerMenuGetRestaurantCategoriesGet(id: widget.restData.id);
+      widget.menuState.categories = categories =
+          apiInstance.apiServicesAppCustomerMenuGetRestaurantCategoriesGet(
+              id: widget.restData.id);
     });
     return categories.then((_) {
       return Future.value();
@@ -220,7 +238,8 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
   Future _getCategoryMealAsync(int categoryId) {
     ApiClient apiClient = PapricaApiClient();
     var apiInstance = new CustomerMenuApi(apiClient);
-    meals = apiInstance.apiServicesAppCustomerMenuGetRestaurantCategoryMealsGet(id: categoryId);
+    meals = apiInstance.apiServicesAppCustomerMenuGetRestaurantCategoryMealsGet(
+        id: categoryId);
     return meals.then((_) {
       return Future.value();
     }).catchError((err) {
@@ -271,8 +290,11 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
           context: context,
           builder: (BuildContext context) {
             return MenuItemPopUp(
-                meal, widget.restData?.logoImage, widget.restData.name, widget.restData.id, selectedCategory.id,
-                onRateChanged: (newRate) {
+                meal,
+                widget.restData?.logoImage,
+                widget.restData.name,
+                widget.restData.id,
+                selectedCategory.id, onRateChanged: (newRate) {
               setState(() {
                 meal.mealRate = newRate;
               });
@@ -296,11 +318,6 @@ class MenuGridItem extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.width * 0.45, //160
               width: MediaQuery.of(context).size.width * 0.45, //160
-//              child: FadeInImage.assetNetwork(
-//                image: category.thumbnailImage ?? "",
-//                placeholder: "assets/images/placeholder.png",
-//                fit: BoxFit.cover,
-//              ),
               child: CachedNetworkImage(
                 placeholder: (context, url) => Image(
                   image: AssetImage("assets/images/placeholder.png"),
@@ -392,7 +409,9 @@ class MenuListItem extends StatelessWidget {
                           children: <Widget>[
                             Expanded(
                               child: Text(meal.name,
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis),
                             ),
@@ -432,11 +451,15 @@ class MenuListItem extends StatelessWidget {
                             children: <Widget>[
                               Spacer(),
                               Text(S.of(context).price + ":",
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
                               SizedBox(
                                 width: 4,
                               ),
-                              Text(PapricaFormatter.formatNumber(meal.price.floor()),
+                              Text(
+                                  PaprikaFormatter.formatNumber(
+                                      meal.price.floor()),
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
@@ -474,7 +497,8 @@ class MenuItemPopUp extends StatefulWidget {
 
   final String restaurantName;
 
-  MenuItemPopUp(this.meal, this.restaurantLogoUrl, this.restaurantName, this.restaurantId, this.categoryId,
+  MenuItemPopUp(this.meal, this.restaurantLogoUrl, this.restaurantName,
+      this.restaurantId, this.categoryId,
       {this.onRateChanged});
 
   @override
@@ -506,21 +530,29 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               children: <Widget>[
                                 GestureDetector(
                                   onTap: () {
-                                    PapricaToast.showToast(S.of(context).errorRateMeal, ToastType.Error);
+                                    PaprikaToast.showToast(
+                                        S.of(context).errorRateMeal,
+                                        ToastType.Error);
                                     showDialog(
                                         context: context,
                                         builder: (context) {
                                           return FullscreenPhoto(
-                                              provider:
-                                                  NetworkImage(widget.meal.image != null ? widget.meal.image : ""));
+                                              provider: NetworkImage(
+                                                  widget.meal.image != null
+                                                      ? widget.meal.image
+                                                      : ""));
                                         });
                                   },
                                   child: Container(
                                     height: 200,
-                                    width: MediaQuery.of(context).size.width - 24,
+                                    width:
+                                        MediaQuery.of(context).size.width - 24,
                                     child: FadeInImage.assetNetwork(
-                                      image: widget.meal.image != null ? widget.meal.image : "",
-                                      placeholder: "assets/images/placeholder.png",
+                                      image: widget.meal.image != null
+                                          ? widget.meal.image
+                                          : "",
+                                      placeholder:
+                                          "assets/images/placeholder.png",
                                       fit: BoxFit.cover,
 //                                    height: 200,
 //                                    width: MediaQuery.of(context).size.width-24,
@@ -535,14 +567,22 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                     context: context,
                                     builder: (context) {
                                       return Hero(
-                                        tag: widget.meal.image != null ? widget.meal.image : "",
+                                        tag: widget.meal.image != null
+                                            ? widget.meal.image
+                                            : "",
                                         child: FullscreenPhoto(
-                                            provider: NetworkImage(widget.meal.image != null ? widget.meal.image : "")),
-                                        placeholderBuilder: (BuildContext context, Size heroSize, Widget child) {
+                                            provider: NetworkImage(
+                                                widget.meal.image != null
+                                                    ? widget.meal.image
+                                                    : "")),
+                                        placeholderBuilder:
+                                            (BuildContext context,
+                                                Size heroSize, Widget child) {
                                           return Container(
                                             height: 150.0,
                                             width: 150.0,
-                                            child: Image.asset("assets/images/placeholder.png"),
+                                            child: Image.asset(
+                                                "assets/images/placeholder.png"),
                                           );
                                         },
                                       );
@@ -557,7 +597,11 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                         gradient: LinearGradient(
                                           begin: Alignment.center,
                                           end: Alignment.bottomCenter,
-                                          colors: <Color>[Colors.transparent, Colors.black26, Colors.black87],
+                                          colors: <Color>[
+                                            Colors.transparent,
+                                            Colors.black26,
+                                            Colors.black87
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -566,7 +610,9 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               ),
                             ),
                             Positioned.directional(
-                              textDirection: Localizations.localeOf(context).languageCode == "en"
+                              textDirection: Localizations.localeOf(context)
+                                          .languageCode ==
+                                      "en"
                                   ? TextDirection.ltr
                                   : TextDirection.rtl,
                               bottom: 8,
@@ -584,7 +630,9 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               ),
                             ),
                             Positioned.directional(
-                              textDirection: Localizations.localeOf(context).languageCode == "en"
+                              textDirection: Localizations.localeOf(context)
+                                          .languageCode ==
+                                      "en"
                                   ? TextDirection.ltr
                                   : TextDirection.rtl,
                               bottom: -20,
@@ -596,7 +644,8 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                   shape: BoxShape.circle,
                                   image: new DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: NetworkImage(widget.restaurantLogoUrl),
+                                    image:
+                                        NetworkImage(widget.restaurantLogoUrl),
                                   ),
                                 ),
                               ),
@@ -604,38 +653,50 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
                                     child: Text(widget.meal.name,
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis),
                                   ),
                                   GestureDetector(
-                                    onTap: () =>
-                                        _actionShareMeal(widget.restaurantId, widget.categoryId, widget.meal.id),
+                                    onTap: () => _actionShareMeal(
+                                        widget.restaurantId,
+                                        widget.categoryId,
+                                        widget.meal.id),
                                     child: Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Icon(Icons.share, color: Colors.black87),
+                                      child: Icon(Icons.share,
+                                          color: Colors.black87),
                                     ),
                                   )
                                 ],
                               ),
-                              widget.meal?.ingredients != null && widget.meal.ingredients.isNotEmpty
-                                  ? Label(S.of(context).ingredients, fontSize: 16)
+                              widget.meal?.ingredients != null &&
+                                      widget.meal.ingredients.isNotEmpty
+                                  ? Label(S.of(context).ingredients,
+                                      fontSize: 16)
                                   : Container(),
-                              widget.meal?.ingredients != null && widget.meal.ingredients.isNotEmpty
+                              widget.meal?.ingredients != null &&
+                                      widget.meal.ingredients.isNotEmpty
                                   ? Row(
                                       children: <Widget>[
                                         Expanded(
-                                          child: Paragraph(_parseIngredients(widget.meal.ingredients)),
+                                          child: Paragraph(_parseIngredients(
+                                              widget.meal.ingredients)),
                                         ),
                                       ],
                                     )
@@ -644,31 +705,39 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                               Row(
                                 children: <Widget>[
                                   Expanded(
-                                    child: Paragraph(
-                                        widget.meal.description != null && widget.meal.description.isNotEmpty
-                                            ? widget.meal.description
-                                            : S.of(context).noDescription),
+                                    child: Paragraph(widget.meal.description !=
+                                                null &&
+                                            widget.meal.description.isNotEmpty
+                                        ? widget.meal.description
+                                        : S.of(context).noDescription),
                                   ),
                                 ],
                               ),
                               widget.meal.price == null
                                   ? Container()
                                   : Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 16),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Spacer(),
                                           Text(S.of(context).price + ":",
-                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500)),
                                           SizedBox(
                                             width: 4,
                                           ),
-                                          Text(PapricaFormatter.formatNumber(widget.meal.price.floor()),
+                                          Text(
+                                              PaprikaFormatter.formatNumber(
+                                                  widget.meal.price.floor()),
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Theme.of(context).primaryColor)),
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
                                           SizedBox(
                                             width: 4,
                                           ),
@@ -676,7 +745,8 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Theme.of(context).primaryColor)),
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
                                         ],
                                       ),
                                     ),
@@ -699,20 +769,28 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
   _onTapRateMeal(BuildContext context) {
     if (ApiTypesHelper().isAuthorized)
       _showUserRateDialog(context);
-    else{
+    else {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
-              title: S.of(context).loggingInRequired(S.of(context).actionRateMeal),
+            return PaprikaSimpleDialog(
+              title:
+                  S.of(context).loggingInRequired(S.of(context).actionRateMeal),
               yesButton: FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(asAService: true))).then((loggedIn) {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
                         _showUserRateDialog(context);
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(S.of(context).actionRateMeal));
+                        PaprikaToast.showToast(S
+                            .of(context)
+                            .loggingInRequired(S.of(context).actionRateMeal));
                       }
                     });
                   },
@@ -722,7 +800,7 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
     }
   }
 
-  void _showUserRateDialog(BuildContext context){
+  void _showUserRateDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -731,11 +809,12 @@ class _MenuItemPopUpState extends State<MenuItemPopUp> {
           );
         });
   }
+
   void _actionShareMeal(int restId, int catId, int mealId) {
     Share.share(S.of(context).shareTextMeal(
         widget.meal.name,
         widget.restaurantName,
-        "https://links.popina.me/meal/" +
+        "https://links.paprika-sy.com/meal/" +
             widget.restaurantId.toString() +
             "/" +
             widget.categoryId.toString() +
@@ -810,10 +889,12 @@ class _RateMealDialogState extends State<RateMealDialog> {
                   var api = CustomerMenuApi(client);
                   api
                       .apiServicesAppCustomerMenuRateMealPost(
-                          input: MealRateDto.fromJson({"id": widget.meal.id, "rate": rate.floor()}))
+                          input: MealRateDto.fromJson(
+                              {"id": widget.meal.id, "rate": rate.floor()}))
                       .then((_) {
                     dialog.hide();
-                    if (this.widget.onRateChanged != null && this.widget.onRateChanged is Function) {
+                    if (this.widget.onRateChanged != null &&
+                        this.widget.onRateChanged is Function) {
                       this.widget.onRateChanged(rate);
                     }
                     widget.meal.oldUserRate = rate;
@@ -821,13 +902,14 @@ class _RateMealDialogState extends State<RateMealDialog> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => MessageDialog(
-                        S.of(context).successRateMeal(widget.meal.name),
-                        duration: Duration(seconds: 1),
+                        message:
+                            S.of(context).successRateMeal(widget.meal.name),
                       ),
                     );
                   }).catchError((error) {
                     dialog.hide();
-                    PapricaToast.showToast(S.of(context).errorRateMeal, ToastType.Error);
+                    PaprikaToast.showToast(
+                        S.of(context).errorRateMeal, ToastType.Error);
                   });
                 },
         ),
@@ -843,7 +925,8 @@ class MealListHeaderDelegate extends SliverPersistentHeaderDelegate {
   MealListHeaderDelegate(this.categoryName, this.toggleCallback);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return GestureDetector(
       onTap: () {
         toggleCallback();
@@ -867,7 +950,10 @@ class MealListHeaderDelegate extends SliverPersistentHeaderDelegate {
                 padding: const EdgeInsets.only(top: 5.0),
                 child: Text(
                   this.categoryName != null ? this.categoryName : "",
-                  style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
                 ),
               )
             ],

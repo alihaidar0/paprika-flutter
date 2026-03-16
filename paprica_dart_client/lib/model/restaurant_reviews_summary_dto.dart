@@ -1,15 +1,12 @@
 part of swagger.api;
 
 class RestaurantReviewsSummaryDto {
-  
   List<ReviewSummaryDto> reviews = [];
-  
 
   ReviewDto customerReview = null;
-  
 
   String customerProfileImage = null;
-  
+
   RestaurantReviewsSummaryDto();
 
   @override
@@ -19,17 +16,9 @@ class RestaurantReviewsSummaryDto {
 
   RestaurantReviewsSummaryDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    reviews =
-      ReviewSummaryDto.listFromJson(json['reviews'])
-;
-    customerReview =
-      
-      
-      new ReviewDto.fromJson(json['customerReview'])
-;
-    customerProfileImage =
-        json['customerProfileImage']
-    ;
+    reviews = ReviewSummaryDto.listFromJson(json['reviews']);
+    customerReview = new ReviewDto.fromJson(json['customerReview']);
+    customerProfileImage = json['customerProfileImage'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,19 +26,24 @@ class RestaurantReviewsSummaryDto {
       'reviews': reviews,
       'customerReview': customerReview,
       'customerProfileImage': customerProfileImage
-     };
+    };
   }
 
   static List<RestaurantReviewsSummaryDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<RestaurantReviewsSummaryDto>() : json.map((value) => new RestaurantReviewsSummaryDto.fromJson(value)).toList();
+    return json == null
+        ? new List<RestaurantReviewsSummaryDto>()
+        : json
+            .map((value) => new RestaurantReviewsSummaryDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, RestaurantReviewsSummaryDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, RestaurantReviewsSummaryDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, RestaurantReviewsSummaryDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RestaurantReviewsSummaryDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new RestaurantReviewsSummaryDto.fromJson(value));
     }
     return map;
   }
 }
-

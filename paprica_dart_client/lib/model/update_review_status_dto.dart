@@ -1,9 +1,7 @@
 part of swagger.api;
 
 class UpdateReviewStatusDto {
-  
   int id = null;
-  
 
   int status = null;
   //enum statusEnum {  1,  2,  3,  };
@@ -16,31 +14,29 @@ class UpdateReviewStatusDto {
 
   UpdateReviewStatusDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    id =
-        json['id']
-    ;
-    status =
-        json['status']
-    ;
+    id = json['id'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'status': status
-     };
+    return {'id': id, 'status': status};
   }
 
   static List<UpdateReviewStatusDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<UpdateReviewStatusDto>() : json.map((value) => new UpdateReviewStatusDto.fromJson(value)).toList();
+    return json == null
+        ? new List<UpdateReviewStatusDto>()
+        : json
+            .map((value) => new UpdateReviewStatusDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, UpdateReviewStatusDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdateReviewStatusDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdateReviewStatusDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdateReviewStatusDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdateReviewStatusDto.fromJson(value));
     }
     return map;
   }
 }
-

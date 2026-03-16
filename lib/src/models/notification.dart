@@ -34,7 +34,13 @@ class NotificationModel {
 
   ApiNotification notification;
 
-  NotificationModel({this.color, this.imageUrl, this.title, this.body, this.description, this.date});
+  NotificationModel(
+      {this.color,
+      this.imageUrl,
+      this.title,
+      this.body,
+      this.description,
+      this.date});
 
   NotificationModel.fromNotificationDto(NotificationInfoDto infoDto) {
     date = infoDto.creationTime;
@@ -50,7 +56,6 @@ class NotificationModel {
     notification = ApiNotification.fromJson(model["Model"]);
     title = model['Title'];
     body = model['Body'];
-//    type = model['Model']["NotificationType"];
     switch (notificationName) {
       case NotificationType.reservationApproved:
         data = NotificationReservationApproved.fromJson(model['Model']);
@@ -63,6 +68,39 @@ class NotificationModel {
         break;
       case NotificationType.reservationUpdateApproved:
         data = NotificationReservationUpdateApproved.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupApproved:
+        data = NotificationPickupApproved.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupRejected:
+        data = NotificationPickupRejected.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupUpdateRejected:
+        data = NotificationPickupUpdateReject.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupUpdateApproved:
+        data = NotificationPickupUpdateApproved.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupIsReady:
+        data = NotificationPickupIsReady.fromJson(model['Model']);
+        break;
+      case NotificationType.pickupResponseMessage:
+        data = NotificationPickupResponseMessage.fromJson(model['Model']);
+        break;
+      case NotificationType.deliveryApproved:
+        data = NotificationDeliveryApproved.fromJson(model['Model']);
+        break;
+      case NotificationType.deliveryRejected:
+        data = NotificationDeliveryRejected.fromJson(model['Model']);
+        break;
+      case NotificationType.deliveryUpdateRejected:
+        data = NotificationDeliveryUpdateReject.fromJson(model['Model']);
+        break;
+      case NotificationType.deliveryUpdateApproved:
+        data = NotificationDeliveryUpdateApproved.fromJson(model['Model']);
+        break;
+      case NotificationType.deliveryResponseMessage:
+        data = NotificationDeliveryResponseMessage.fromJson(model['Model']);
         break;
       case NotificationType.newRestaurantAdded:
         data = NotificationRestaurantAdded.fromJson(model['Model']);
@@ -83,6 +121,20 @@ class NotificationType {
   static const String reservationRejected = "ReservationRejected";
   static const String reservationUpdateRejected = "ReservationUpdateRejected";
   static const String reservationUpdateApproved = "ReservationUpdateApproved";
+
+  static const String pickupApproved = "PickupApproved";
+  static const String pickupRejected = "PickupRejected";
+  static const String pickupUpdateRejected = "PickupUpdateRejected";
+  static const String pickupUpdateApproved = "PickupUpdateApproved";
+  static const String pickupIsReady = "PickupIsReady";
+  static const String pickupResponseMessage = "PickupResponseMessage";
+
+  static const String deliveryApproved = "DeliveryApproved";
+  static const String deliveryRejected = "DeliveryRejected";
+  static const String deliveryUpdateRejected = "DeliveryUpdateRejected";
+  static const String deliveryUpdateApproved = "DeliveryUpdateApproved";
+  static const String deliveryResponseMessage = "DeliveryResponseMessage";
+
   static const String newRestaurantAdded = "NewRestaurantAdded";
   static const String newEventAdded = "NewEventAdded";
   static const String newOfferAdded = "NewOfferAdded";
@@ -143,7 +195,9 @@ class NotificationRestaurantAdded {
   }
 }
 
-
+///
+/// Reservation
+///
 abstract class NotificationReservation {
   int reservationId;
   int customerId;
@@ -165,7 +219,7 @@ class NotificationReservationUpdateApproved extends NotificationReservation {
   }
 }
 
-class NotificationReservationUpdateReject extends NotificationReservation  {
+class NotificationReservationUpdateReject extends NotificationReservation {
   NotificationReservationUpdateReject.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];
@@ -177,7 +231,7 @@ class NotificationReservationUpdateReject extends NotificationReservation  {
   }
 }
 
-class NotificationReservationApproved extends NotificationReservation  {
+class NotificationReservationApproved extends NotificationReservation {
   NotificationReservationApproved.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];
@@ -189,7 +243,7 @@ class NotificationReservationApproved extends NotificationReservation  {
   }
 }
 
-class NotificationReservationRejected extends NotificationReservation  {
+class NotificationReservationRejected extends NotificationReservation {
   NotificationReservationRejected.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['ReservationId'];
@@ -197,6 +251,154 @@ class NotificationReservationRejected extends NotificationReservation  {
     restaurantId = json['RestaurantId'];
     image = json['Image'];
     reservationTime = json['ReservationTime'];
+    message = json['Message'];
+  }
+}
+
+///
+/// Pickup
+///
+abstract class NotificationPickup {
+  int pickupId;
+  int customerId;
+  int restaurantId;
+  String image;
+  String pickupTime;
+  String message;
+}
+
+class NotificationPickupUpdateApproved extends NotificationPickup {
+  NotificationPickupUpdateApproved.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    pickupTime = json['PickupTime'];
+    message = json['Message'];
+  }
+}
+
+class NotificationPickupUpdateReject extends NotificationPickup {
+  NotificationPickupUpdateReject.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    pickupTime = json['PickupTime'];
+    message = json['Message'];
+  }
+}
+
+class NotificationPickupApproved extends NotificationPickup {
+  NotificationPickupApproved.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    pickupTime = json['PickupTime'];
+    message = json['Message'];
+  }
+}
+
+class NotificationPickupRejected extends NotificationPickup {
+  NotificationPickupRejected.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    pickupTime = json['PickupTime'];
+    message = json['Message'];
+  }
+}
+
+class NotificationPickupIsReady extends NotificationPickup {
+  NotificationPickupIsReady.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+class NotificationPickupResponseMessage extends NotificationPickup {
+  NotificationPickupResponseMessage.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    pickupId = json['PickupId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+///
+/// Delivery
+///
+abstract class NotificationDelivery {
+  int deliveryId;
+  int customerId;
+  int restaurantId;
+  String image;
+  String message;
+}
+
+class NotificationDeliveryUpdateApproved extends NotificationDelivery {
+  NotificationDeliveryUpdateApproved.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    deliveryId = json['DeliveryId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+class NotificationDeliveryUpdateReject extends NotificationDelivery {
+  NotificationDeliveryUpdateReject.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    deliveryId = json['DeliveryId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+class NotificationDeliveryApproved extends NotificationDelivery {
+  NotificationDeliveryApproved.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    deliveryId = json['DeliveryId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+class NotificationDeliveryRejected extends NotificationDelivery {
+  NotificationDeliveryRejected.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    deliveryId = json['DeliveryId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
+    message = json['Message'];
+  }
+}
+
+class NotificationDeliveryResponseMessage extends NotificationDelivery {
+  NotificationDeliveryResponseMessage.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    deliveryId = json['DeliveryId'];
+    customerId = json['CustomerId'];
+    restaurantId = json['RestaurantId'];
+    image = json['Image'];
     message = json['Message'];
   }
 }

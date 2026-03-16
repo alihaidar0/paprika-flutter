@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/models/reviews_state.dart';
-import 'package:paprica/widgets.dart';
-import 'package:swagger/api.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/models/reviews_state.dart';
+import 'package:paprika/widgets.dart';
+import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
 
@@ -16,7 +17,8 @@ class RestaurantReviewsPage extends StatefulWidget {
 
   final storeReviewsState;
 
-  RestaurantReviewsPage(this.reviewsState, this.storeReviewsState, this.restaurantData, this.scrollController);
+  RestaurantReviewsPage(this.reviewsState, this.storeReviewsState,
+      this.restaurantData, this.scrollController);
 
   @override
   _RestaurantReviewsPageState createState() => _RestaurantReviewsPageState();
@@ -49,7 +51,8 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
   }
 
   void _scrollListener() {
-    if (scrollController.position.maxScrollExtent - scrollController.offset <= 0 &&
+    if (scrollController.position.maxScrollExtent - scrollController.offset <=
+            0 &&
         false == isLoading &&
         false == endOfReviewReached) {
       _getAllComments(
@@ -70,7 +73,9 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/images/background_grey.png'), fit: BoxFit.cover)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/background_grey.png'),
+                      fit: BoxFit.cover)),
               child: Column(
                 children: <Widget>[
                   ReviewResult(
@@ -81,42 +86,57 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                     serviceRate: widget.restaurantData.serviceRate,
                     shishaRate: widget.restaurantData.shishaRate,
                     ambianceRate: widget.restaurantData.ambianceRate,
-                    noiseLevel: ApiHelper.toStringNoiseLevel(context, widget.restaurantData?.noiseLevel),
+                    noiseLevel: ApiHelper.toStringNoiseLevel(
+                        context, widget.restaurantData?.noiseLevel),
                   ),
                   FutureBuilder(
                     future: reviewsSummary,
-                    builder: (context, AsyncSnapshot<RestaurantReviewsSummaryDto> snapshot) {
+                    builder: (context,
+                        AsyncSnapshot<RestaurantReviewsSummaryDto> snapshot) {
                       if (snapshot.hasData) {
                         return Column(
                           children: <Widget>[
                             ReviewForm(
                               restaurantId: widget.restaurantData.id,
                               restaurantName: widget.restaurantData.name,
-                              customerProfileImage: ApiTypesHelper().profileImage,
-                              oldReview: widget.reviewsState.customerReview != null
-                                  ? widget.reviewsState.customerReview
-                                  : snapshot.data?.customerReview,
+                              customerProfileImage:
+                                  ApiTypesHelper().profileImage,
+                              oldReview:
+                                  widget.reviewsState.customerReview != null
+                                      ? widget.reviewsState.customerReview
+                                      : snapshot.data?.customerReview,
+                              hasShisha: widget.restaurantData.hasShisha,
                               onSubmit: (jsonData) => widget.storeReviewsState(
-                                  ReviewsState(summary: reviewsSummary, customerReview: ReviewDto.fromJson(jsonData))),
+                                  ReviewsState(
+                                      summary: reviewsSummary,
+                                      customerReview:
+                                          ReviewDto.fromJson(jsonData))),
                             ),
                             Container(
                                 color: Color(0xFFF2F2F2),
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 24.0),
-                                  child: reviewsCommentsList != null && reviewsCommentsList.length > 0
+                                  child: reviewsCommentsList != null &&
+                                          reviewsCommentsList.length > 0
                                       ? ListView.builder(
                                           controller: scrollController,
                                           shrinkWrap: true,
                                           itemCount: reviewsCommentsList.length,
-                                          physics: NeverScrollableScrollPhysics(),
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
                                           padding: EdgeInsets.all(0),
                                           itemBuilder: (context, index) {
-                                            return ReviewCommentsListItem(reviewsCommentsList[index]);
+                                            return ReviewCommentsListItem(
+                                                reviewsCommentsList[index]);
                                           })
                                       : Padding(
-                                          padding: const EdgeInsets.only(bottom: 24),
-                                          child:
-                                              Center(child: Text(S.of(context).noReviews(widget.restaurantData.name))),
+                                          padding:
+                                              const EdgeInsets.only(bottom: 24),
+                                          child: Center(
+                                              child: Text(S
+                                                  .of(context)
+                                                  .noReviews(widget
+                                                      .restaurantData.name))),
                                         ),
                                 )),
                             _renderEndOfReview(),
@@ -128,7 +148,9 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                       } else if (snapshot.hasError) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: RequestRetry(message: S.of(context).errorUnknown, retryCallback: _getReviewsAsync),
+                          child: RequestRetry(
+                              message: S.of(context).errorUnknown,
+                              retryCallback: _getReviewsAsync),
                         );
                       } else {
                         return Padding(
@@ -168,11 +190,13 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
   }
 
   Future _getReviewsAsync() {
-    ApiClient apiClient = ApiTypesHelper().isAuthorized ? PapricaApiClient() : ApiClient();
+    ApiClient apiClient =
+        ApiTypesHelper().isAuthorized ? PapricaApiClient() : ApiClient();
     var apiInstance = new CustomerReviewApi(apiClient);
     setState(() {
-      widget.reviewsState.summary = reviewsSummary =
-          apiInstance.apiServicesAppCustomerReviewGetRestaurantReviewsSummaryGet(id: widget.restaurantData.id);
+      widget.reviewsState.summary = reviewsSummary = apiInstance
+          .apiServicesAppCustomerReviewGetRestaurantReviewsSummaryGet(
+              id: widget.restaurantData.id);
       reviewsSummary.then((data) {
         ApiTypesHelper().setProfileImage(data.customerProfileImage);
         widget.storeReviewsState(ReviewsState(summary: reviewsSummary));
@@ -187,8 +211,11 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
     CustomerReviewApi api = CustomerReviewApi(client);
     setState(() {
       isLoading = true;
-      allCommentsFuture = allCommentsFuture = api.apiServicesAppCustomerReviewGetOldGet(
-          restaurantId: widget.restaurantData.id, skipCount: mSkipCount ?? 0, maxResultCount: mMaxCount ?? 3);
+      allCommentsFuture = allCommentsFuture =
+          api.apiServicesAppCustomerReviewGetOldGet(
+              restaurantId: widget.restaurantData.id,
+              skipCount: mSkipCount ?? 0,
+              maxResultCount: mMaxCount ?? 3);
     });
     return allCommentsFuture.then((onValue) {
       setState(() {

@@ -62,13 +62,17 @@ class MealDto {
   }
 
   static List<MealDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<MealDto>() : json.map((value) => new MealDto.fromJson(value)).toList();
+    return json == null
+        ? new List<MealDto>()
+        : json.map((value) => new MealDto.fromJson(value)).toList();
   }
 
-  static Map<String, MealDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, MealDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, MealDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new MealDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new MealDto.fromJson(value));
     }
     return map;
   }

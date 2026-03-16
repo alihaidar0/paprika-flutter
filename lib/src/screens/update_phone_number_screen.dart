@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
-import '../../screens.dart';
 import '../../utils.dart';
 
 class UpdatePhoneNumberScreen extends StatefulWidget {
   @override
-  _UpdatePhoneNumberScreenState createState() => _UpdatePhoneNumberScreenState();
+  _UpdatePhoneNumberScreenState createState() =>
+      _UpdatePhoneNumberScreenState();
 }
 
 class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
@@ -45,21 +46,23 @@ class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFaa757f)),
-                        borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                        borderRadius:
+                            const BorderRadius.all(const Radius.circular(3.0)),
                       )),
                 ),
                 Center(
                     child: Padding(
                         padding: const EdgeInsets.only(top: 10),
-                      child: CustomizedActiveButton(
-                        title: S.of(context).update,
-                        onPressed: () => _onUpdateNumberPressed(context),
-                      )
-                    )),
+                        child: CustomizedActiveButton(
+                          title: S.of(context).update,
+                          onPressed: () => _onUpdateNumberPressed(context),
+                        ))),
               ],
             )));
   }
@@ -79,7 +82,7 @@ class _UpdatePhoneNumberScreenState extends State<UpdatePhoneNumberScreen> {
 
       api.apiServicesAppCustomerUpdatePhoneNumberPost(input: data).then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).phoneNumberUpdated);
+        PaprikaToast.showToast(S.of(context).phoneNumberUpdated);
         ApiTypesHelper().setPhoneNumber(_currentController.text);
         ApiTypesHelper().setIsPhoneNumberConfirmed(false);
         Navigator.of(context).pop(_currentController.text);

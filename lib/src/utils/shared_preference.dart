@@ -57,6 +57,7 @@ class SharedPreference {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setString("default-lang", lang);
   }
+
   static Future<String> loadDefaultLangFromSharedPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString('default-lang');

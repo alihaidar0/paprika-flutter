@@ -1,27 +1,27 @@
 import 'package:swagger/api.dart';
 
 class ReservationModel {
-  String restaurantName, imageUrl, moreInfo,personName, phoneNumber;
+  String restaurantName, imageUrl, moreInfo, personName, phoneNumber;
   DateTime date;
   int numberOfPeople;
   int id;
   int restaurantId;
 
-  ReservationModel({
-    this.imageUrl,
-    this.date,
-    this.numberOfPeople,
-    this.restaurantName,
-    this.moreInfo,
-    this.personName,
-    this.phoneNumber
-  });
+  ReservationModel(
+      {this.imageUrl,
+      this.date,
+      this.numberOfPeople,
+      this.restaurantName,
+      this.moreInfo,
+      this.personName,
+      this.phoneNumber});
 
-  ReservationModel.fromReservationPapricaItemDto(ReservationPapricaItemDto papricaReservation) {
-    numberOfPeople = papricaReservation.numberOfPeople;
-    date = papricaReservation.time;
-    restaurantName = papricaReservation.restaurantName;
-    id = papricaReservation.id;
+  ReservationModel.fromReservationPaprikaItemDto(
+      ReservationPapricaItemDto paprikaReservation) {
+    numberOfPeople = paprikaReservation.numberOfPeople;
+    date = paprikaReservation.time;
+    restaurantName = paprikaReservation.restaurantName;
+    id = paprikaReservation.id;
   }
 
   ReservationModel.fromOld(CustomerOldReservationDto oldReservation) {
@@ -34,7 +34,8 @@ class ReservationModel {
     restaurantId = oldReservation.restaurantId;
   }
 
-  ReservationModel.fromUpcoming(CustomerUpcomingReservationDto upcomingReservation) {
+  ReservationModel.fromUpcoming(
+      CustomerUpcomingReservationDto upcomingReservation) {
     imageUrl = upcomingReservation.restaurantImage;
     numberOfPeople = upcomingReservation.numberOfPeople;
     date = upcomingReservation.date;
@@ -43,8 +44,8 @@ class ReservationModel {
     id = upcomingReservation.id;
   }
 
-  ReservationModel.fromUpdateRequest(
-      UpdateReservationRequestDto reservation, int reservationId, String restaurantName, String imageUrl) {
+  ReservationModel.fromUpdateRequest(UpdateReservationRequestDto reservation,
+      int reservationId, String restaurantName, String imageUrl) {
     numberOfPeople = reservation.numberOfPeople;
     date = reservation.time;
     moreInfo = reservation.customerAdditionalInfo;

@@ -3,12 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:paprica/src/widgets/slider.dart';
+import 'package:paprika/src/widgets/slider.dart';
 import 'package:swagger/api.dart';
 
 import '../../screens.dart';
 import '../../translations.dart';
-
 import '../../widgets.dart';
 
 GoogleMapController mapController;
@@ -17,7 +16,8 @@ class RestaurantsMapScreen extends StatefulWidget {
   final List<RestaurantSummaryDto> restaurants;
   final String title;
 
-  const RestaurantsMapScreen({Key key, this.restaurants, this.title}) : super(key: key);
+  const RestaurantsMapScreen({Key key, this.restaurants, this.title})
+      : super(key: key);
 
   @override
   _RestaurantsMapScreenState createState() => _RestaurantsMapScreenState();
@@ -62,7 +62,8 @@ class _RestaurantsMapScreenState extends State<RestaurantsMapScreen> {
     }
     return Future<Widget>.delayed(Duration(milliseconds: 500), () {
       if (widget.restaurants.length > 0 && _current == null)
-        _current = LatLng(widget.restaurants[0].latitude, widget.restaurants[0].longitude);
+        _current = LatLng(
+            widget.restaurants[0].latitude, widget.restaurants[0].longitude);
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,10 +81,12 @@ class _RestaurantsMapScreenState extends State<RestaurantsMapScreen> {
                         index,
                         Marker(
                             icon: index == _currentIndex
-                                ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange)
+                                ? BitmapDescriptor.defaultMarkerWithHue(
+                                    BitmapDescriptor.hueOrange)
                                 : BitmapDescriptor.defaultMarker,
                             markerId: MarkerId(restaurant.id.toString()),
-                            position: LatLng(restaurant.latitude, restaurant.longitude),
+                            position: LatLng(
+                                restaurant.latitude, restaurant.longitude),
                             onTap: () {
                               _pageController.jumpToPage(index);
                             }));
@@ -91,7 +94,8 @@ class _RestaurantsMapScreenState extends State<RestaurantsMapScreen> {
                   .values
                   .toSet(),
               gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
-                Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
+                Factory<OneSequenceGestureRecognizer>(
+                    () => EagerGestureRecognizer())
               ].toSet(),
               initialCameraPosition: CameraPosition(
                 target: _current,
@@ -103,7 +107,10 @@ class _RestaurantsMapScreenState extends State<RestaurantsMapScreen> {
             items: widget.restaurants
                 .asMap()
                 .map((index, restaurant) {
-                  return MapEntry(index, _ListItem(restaurant, _pageController, index, widget.restaurants.length));
+                  return MapEntry(
+                      index,
+                      _ListItem(restaurant, _pageController, index,
+                          widget.restaurants.length));
                 })
                 .values
                 .toList(),
@@ -111,8 +118,9 @@ class _RestaurantsMapScreenState extends State<RestaurantsMapScreen> {
               setState(() {
                 _currentIndex = index;
               });
-              mapController.animateCamera(CameraUpdate.newLatLng(
-                  LatLng(widget.restaurants[index].latitude, widget.restaurants[index].longitude)));
+              mapController.animateCamera(CameraUpdate.newLatLng(LatLng(
+                  widget.restaurants[index].latitude,
+                  widget.restaurants[index].longitude)));
             },
             mPageController: _pageController,
             viewportFraction: 0.9,
@@ -148,10 +156,12 @@ class __ListItemState extends State<_ListItem> {
 
   @override
   Widget build(BuildContext context) {
-    _widgetLogoImage ??= CachedNetworkImageProvider(this.widget.restaurant.logoImage);
+    _widgetLogoImage ??=
+        CachedNetworkImageProvider(this.widget.restaurant.logoImage);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
           return RestaurantHome(restaurantId: this.widget.restaurant.id);
         }));
       },
@@ -189,10 +199,12 @@ class __ListItemState extends State<_ListItem> {
                 width: MediaQuery.of(context).size.width * 0.20,
                 height: MediaQuery.of(context).size.width * 0.25,
                 decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.20 * 0.5),
                     shape: BoxShape.rectangle,
                     color: Colors.white,
-                    image: DecorationImage(image: _widgetLogoImage, fit: BoxFit.scaleDown)),
+                    image: DecorationImage(
+                        image: _widgetLogoImage, fit: BoxFit.scaleDown)),
               ),
             ),
             Padding(
@@ -210,13 +222,17 @@ class __ListItemState extends State<_ListItem> {
                           padding: const EdgeInsets.symmetric(horizontal: 2),
                           child: Container(
                             width: MediaQuery.of(context).size.width *
-                                (this.widget.restaurant.phoneNumber != null ? 0.4 : 0.45),
+                                (this.widget.restaurant.phoneNumber != null
+                                    ? 0.4
+                                    : 0.45),
                             child: Text(
                               this.widget.restaurant.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: 18, color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                                  fontSize: 18,
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),
@@ -255,7 +271,8 @@ class __ListItemState extends State<_ListItem> {
                                 barrierDismissible: false,
                                 builder: (context) {
                                   return CallRestaurantDialog(
-                                    phoneNumber: this.widget.restaurant.phoneNumber,
+                                    phoneNumber:
+                                        this.widget.restaurant.phoneNumber,
                                     restaurantName: this.widget.restaurant.name,
                                   );
                                 },

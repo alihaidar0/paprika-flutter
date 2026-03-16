@@ -1,7 +1,6 @@
 part of swagger.api;
 
 class CustomerInfoDto {
-  
   String name = null;
   String phoneNumber = null;
   bool isPhoneNumberConfirmed = null;
@@ -25,19 +24,22 @@ class CustomerInfoDto {
       'name': name,
       'phoneNumber': phoneNumber,
       'isPhoneNumberConfirmed': isPhoneNumberConfirmed
-     };
+    };
   }
 
   static List<CustomerInfoDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<CustomerInfoDto>() : json.map((value) => new CustomerInfoDto.fromJson(value)).toList();
+    return json == null
+        ? new List<CustomerInfoDto>()
+        : json.map((value) => new CustomerInfoDto.fromJson(value)).toList();
   }
 
-  static Map<String, CustomerInfoDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, CustomerInfoDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, CustomerInfoDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new CustomerInfoDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CustomerInfoDto.fromJson(value));
     }
     return map;
   }
 }
-

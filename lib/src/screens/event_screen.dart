@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:paprica/src/models/event_model.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/event_model.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:share/share.dart';
 import 'package:swagger/api.dart';
 
@@ -17,7 +17,8 @@ class EventScreen extends StatefulWidget {
   final int eventId;
 
   const EventScreen({this.event, this.eventId})
-      : assert(event != null || eventId != null, "You must supply an event or an event id");
+      : assert(event != null || eventId != null,
+            "You must supply an event or an event id");
 
   @override
   _EventScreenState createState() => _EventScreenState();
@@ -27,7 +28,9 @@ class _EventScreenState extends State<EventScreen> {
   Future<EventModel> _futureEvent;
   String eventName;
 
-  String get _eventId => widget.eventId != null ? widget.eventId.toString() : widget.event?.id?.toString();
+  String get _eventId => widget.eventId != null
+      ? widget.eventId.toString()
+      : widget.event?.id?.toString();
 
   @override
   void initState() {
@@ -50,7 +53,8 @@ class _EventScreenState extends State<EventScreen> {
               return Scaffold(
                 backgroundColor: Color(0xFFF2F2F2),
                 body: NestedScrollView(
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                         expandedHeight: 320,
@@ -66,7 +70,9 @@ class _EventScreenState extends State<EventScreen> {
                                       context: context,
                                       builder: (context) {
                                         return FullscreenPhoto(
-                                            provider: CachedNetworkImageProvider(snapshot.data.imageUrl));
+                                            provider:
+                                                CachedNetworkImageProvider(
+                                                    snapshot.data.imageUrl));
                                       });
                                 },
 //                                child: FadeInImage.assetNetwork(
@@ -77,7 +83,8 @@ class _EventScreenState extends State<EventScreen> {
                                 child: CachedNetworkImage(
                                   imageUrl: snapshot.data.imageUrl,
                                   placeholder: (context, url) => Image(
-                                    image: AssetImage("assets/images/placeholder.png"),
+                                    image: AssetImage(
+                                        "assets/images/placeholder.png"),
                                     fit: BoxFit.cover,
                                   ),
                                   fit: BoxFit.cover,
@@ -100,7 +107,8 @@ class _EventScreenState extends State<EventScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Flexible(
                                     child: Column(
@@ -110,20 +118,28 @@ class _EventScreenState extends State<EventScreen> {
                                             GestureDetector(
                                               behavior: HitTestBehavior.opaque,
                                               onTap: () {
-                                                Navigator.of(context)
-                                                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                                                  return RestaurantHome(restaurantId: snapshot.data.restaurantId);
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(builder:
+                                                        (BuildContext context) {
+                                                  return RestaurantHome(
+                                                      restaurantId: snapshot
+                                                          .data.restaurantId);
                                                 }));
                                               },
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
                                                 child: CircleAvatar(
                                                   radius: 40,
                                                   backgroundColor: Colors.white,
                                                   child: CircleAvatar(
                                                     radius: 35,
-                                                    backgroundImage: CachedNetworkImageProvider(
-                                                      snapshot.data.restaurantLogo ?? "",
+                                                    backgroundImage:
+                                                        CachedNetworkImageProvider(
+                                                      snapshot.data
+                                                              .restaurantLogo ??
+                                                          "",
                                                     ),
                                                   ),
                                                 ),
@@ -131,39 +147,60 @@ class _EventScreenState extends State<EventScreen> {
                                             ),
                                             Flexible(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: <Widget>[
                                                   Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 4,
+                                                        vertical: 1),
                                                     child: Text(
                                                       snapshot.data.eventName,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       maxLines: 6,
                                                       style: TextStyle(
-                                                          color: Theme.of(context).primaryColor,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
                                                           fontSize: 18,
                                                           height: 1,
-                                                          fontWeight: FontWeight.bold),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 4,
+                                                        vertical: 1),
                                                     child: Row(
                                                       children: <Widget>[
                                                         Text(
                                                           S.of(context).at,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(color: Colors.black),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black),
                                                         ),
                                                         SizedBox(width: 4),
                                                         Text(
-                                                          snapshot.data.restaurantName,
-                                                          overflow: TextOverflow.ellipsis,
+                                                          snapshot.data
+                                                              .restaurantName,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: TextStyle(
                                                               fontSize: 14,
-                                                              fontWeight: FontWeight.bold,
-                                                              color: Colors.black),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.black),
                                                         ),
                                                       ],
                                                     ),
@@ -174,19 +211,28 @@ class _EventScreenState extends State<EventScreen> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12),
                                           child: Row(
                                             children: <Widget>[
                                               Text(
-                                                PapricaFormatter.formatDateOnly(context, snapshot.data.date),
+                                                PaprikaFormatter.formatDateOnly(
+                                                    context,
+                                                    snapshot.data.date),
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w500, color: Theme.of(context).primaryColor),
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
                                               ),
                                               SizedBox(width: 8),
                                               Text(
-                                                PapricaFormatter.formatTimeOnly(context, snapshot.data.date),
+                                                PaprikaFormatter.formatTimeOnly(
+                                                    context,
+                                                    snapshot.data.date),
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w500, color: Theme.of(context).primaryColor),
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
                                               ),
                                             ],
                                           ),
@@ -201,34 +247,49 @@ class _EventScreenState extends State<EventScreen> {
                                         height: 15,
                                       ),
                                       Container(
-                                        alignment: DateTime.now().isAfter(snapshot.data.date)
-                                            ? Localizations.localeOf(context).languageCode == 'en' ? new FractionalOffset(1.5, 0.0) : new FractionalOffset(-0.5, 0.0)
-                                            : null,
-                                        width: 50,
-                                        child: GestureDetector(
-                                          onTap: _actionShare,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Icon(Icons.share, color: Colors.black87),
+                                          alignment: DateTime.now()
+                                                  .isAfter(snapshot.data.date)
+                                              ? Localizations.localeOf(context)
+                                                          .languageCode ==
+                                                      'en'
+                                                  ? new FractionalOffset(
+                                                      1.5, 0.0)
+                                                  : new FractionalOffset(
+                                                      -0.5, 0.0)
+                                              : null,
+                                          width: 50,
+                                          child: GestureDetector(
+                                            onTap: _actionShare,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Icon(Icons.share,
+                                                  color: Colors.black87),
+                                            ),
                                           ),
-                                        )),
+                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 6),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
                                             Text(
-                                              (DateTime.now().isAfter(snapshot.data.date)
+                                              (DateTime.now().isAfter(
+                                                      snapshot.data.date)
                                                   ? S.of(context).oldEvent
                                                   : S.of(context).event),
                                               style: TextStyle(
                                                 fontSize: 18,
-                                                color: (DateTime.now().isAfter(snapshot.data.date)
+                                                color: (DateTime.now().isAfter(
+                                                        snapshot.data.date)
                                                     ? Colors.grey
-                                                    : Theme.of(context).primaryColor),
+                                                    : Theme.of(context)
+                                                        .primaryColor),
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -243,10 +304,12 @@ class _EventScreenState extends State<EventScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
                           child: Text(
                             S.of(context).description,
-                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 16),
                           ),
                         ),
                         (snapshot.data.description != null &&
@@ -281,7 +344,8 @@ class _EventScreenState extends State<EventScreen> {
                         },
                         title: S.of(context).reserveNow,
                       ),
-                floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerFloat,
               );
             } else if (snapshot.hasError) {
               Navigator.of(context).pop();
@@ -298,16 +362,23 @@ class _EventScreenState extends State<EventScreen> {
       showDialog(
           context: context,
           builder: (_context) {
-            return PapricaSimpleDialog(
+            return PaprikaSimpleDialog(
               title: S.of(context).pleaseLoginInOrderToReserve,
               yesButton: FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(asAService: true))).then((loggedIn) {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LogInScreen(asAService: true)))
+                        .then((loggedIn) {
                       if (loggedIn != null && loggedIn) {
                         _showReservationDialog(snapshot);
                       } else {
-                        PapricaToast.showToast(S.of(context).loggingInRequired(S.of(context).actionReserve));
+                        PaprikaToast.showToast(S
+                            .of(context)
+                            .loggingInRequired(S.of(context).actionReserve));
                       }
                     });
                   },
@@ -317,21 +388,20 @@ class _EventScreenState extends State<EventScreen> {
     }
   }
 
-  void _showReservationDialog(AsyncSnapshot<EventModel> snapshot){
+  void _showReservationDialog(AsyncSnapshot<EventModel> snapshot) {
     showDialog(
         context: context,
         builder: (BuildContext context) => ReservationDialog(
-          snapshot.data.restaurantId,
-          snapshot.data.restaurantName,
-          snapshot.data.maxPeopleAllowed,
-          event: snapshot.data,
-        )).then((ok) {
+              snapshot.data.restaurantId,
+              snapshot.data.restaurantName,
+              snapshot.data.maxPeopleAllowed,
+              event: snapshot.data,
+            )).then((ok) {
       if (ok != null)
         showDialog(
           context: context,
           builder: (BuildContext context) => MessageDialog(
-            S.of(context).successReservation,
-            duration: Duration(seconds: 1),
+            message: S.of(context).successReservation,
           ),
         );
     });
@@ -345,20 +415,25 @@ class _EventScreenState extends State<EventScreen> {
     } else {
       ApiClient client = PapricaApiClient();
       CustomerEventApi api = CustomerEventApi(client);
-      api.apiServicesAppCustomerEventGetGet(id: widget.eventId).then((eventDto) {
+      api
+          .apiServicesAppCustomerEventGetGet(id: widget.eventId)
+          .then((eventDto) {
         setState(() {
-          _futureEvent = Future.value(EventModel.fromCustomerEventDto(eventDto));
+          _futureEvent =
+              Future.value(EventModel.fromCustomerEventDto(eventDto));
         });
       }).catchError((err) {
         Navigator.of(context).pop();
-        PapricaToast.showToast(S.of(context).messageEventNotFound, ToastType.Normal, Toast.LENGTH_LONG);
+        PaprikaToast.showToast(S.of(context).messageEventNotFound,
+            ToastType.Normal, Toast.LENGTH_LONG);
       });
     }
   }
 
   void _actionShare() {
-    Share.share(S
-        .of(context)
-        .shareTextEvent(widget.event?.eventName ?? eventName ?? "", "https://links.popina.me/event/" + _eventId));
+    Share.share(S.of(context).shareTextEvent(
+        widget.event.restaurantName ?? '',
+        widget.event?.eventName ?? eventName ?? "",
+        "https://links.paprika-sy.com/event/" + _eventId));
   }
 }

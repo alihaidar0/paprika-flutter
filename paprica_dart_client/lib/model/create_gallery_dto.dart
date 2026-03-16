@@ -1,9 +1,8 @@
 part of swagger.api;
 
 class CreateGalleryDto {
-  
   List<CreateGalleryItemDto> galleryItem = [];
-  
+
   CreateGalleryDto();
 
   @override
@@ -13,27 +12,26 @@ class CreateGalleryDto {
 
   CreateGalleryDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    galleryItem =
-      CreateGalleryItemDto.listFromJson(json['galleryItem'])
-;
+    galleryItem = CreateGalleryItemDto.listFromJson(json['galleryItem']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'galleryItem': galleryItem
-     };
+    return {'galleryItem': galleryItem};
   }
 
   static List<CreateGalleryDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<CreateGalleryDto>() : json.map((value) => new CreateGalleryDto.fromJson(value)).toList();
+    return json == null
+        ? new List<CreateGalleryDto>()
+        : json.map((value) => new CreateGalleryDto.fromJson(value)).toList();
   }
 
-  static Map<String, CreateGalleryDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, CreateGalleryDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, CreateGalleryDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new CreateGalleryDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CreateGalleryDto.fromJson(value));
     }
     return map;
   }
 }
-

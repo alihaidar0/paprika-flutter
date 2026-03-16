@@ -4,12 +4,12 @@ import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:paprica/src/models/paprica_filter_model.dart';
-import 'package:paprica/src/widgets/rating_bar.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/src/models/paprika_filter_model.dart';
+import 'package:paprika/src/widgets/rating_bar.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/utils.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
-import 'package:paprica/utils.dart';
 
 import '../../screens.dart';
 
@@ -18,7 +18,7 @@ class RestaurantsListScreen extends StatefulWidget {
 
   final List<RestaurantSummaryDto> restaurants;
 
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
 
   const RestaurantsListScreen({this.title, this.restaurants, this.filterModel});
 
@@ -27,7 +27,7 @@ class RestaurantsListScreen extends StatefulWidget {
 }
 
 class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
-  PapricaFilterModel filterData;
+  PaprikaFilterModel filterData;
   List<dynamic> restaurants;
 
   ScrollController _scrollController;
@@ -43,11 +43,12 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
     super.initState();
     _requestingData = false;
     _endOfRestaurants = false;
-    filterData = widget.filterModel ?? PapricaFilterModel();
+    filterData = widget.filterModel ?? PaprikaFilterModel();
     restaurants = []..addAll(widget.restaurants);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset &&
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
           !_requestingData &&
           restaurants.isNotEmpty &&
           context != null &&
@@ -69,27 +70,26 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
     if (_requestingData) {
       restaurants.add(SpinKitCircle(color: Colors.grey, size: 32));
     } else {
-      if (restaurants != null && restaurants.length > 0 && restaurants.last is SpinKitCircle) {
+      if (restaurants != null &&
+          restaurants.length > 0 &&
+          restaurants.last is SpinKitCircle) {
         restaurants.removeLast();
       }
     }
     return Scaffold(
         backgroundColor: Color(0xFFF2F2F2),
         appBar: AppBar(
-          title: Text(S.of(context).discover /*widget.title ?? S.of(context).restaurantsForYou*/),
+          title: Text(S
+              .of(context)
+              .discover /*widget.title ?? S.of(context).restaurantsForYou*/),
           actions: <Widget>[
             Builder(
               builder: (BuildContext context) {
-                return
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: ()  => _openFilterSheet(context),
-                    child: Image(
-                      width: 40,
-                      height: 40,
-                      image: AssetImage("assets/icons/filter.png"),
-                    ),
-                  );
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => _openFilterSheet(context),
+                  child: Icon(Icons.filter_alt),
+                );
               },
             ),
             IconButton(
@@ -97,11 +97,14 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
               icon: Icon(Icons.map),
               onPressed: () {
                 if (restaurants != null && restaurants.isNotEmpty) {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return RestaurantsMapScreen(restaurants: _extract(restaurants));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return RestaurantsMapScreen(
+                        restaurants: _extract(restaurants));
                   }));
                 } else {
-                  PapricaToast.showToast(S.of(context).noRestaurantsToViewMap, ToastType.Normal);
+                  PaprikaToast.showToast(
+                      S.of(context).noRestaurantsToViewMap, ToastType.Normal);
                 }
               },
             ),
@@ -121,8 +124,9 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                     delegate: _CustomFilterParamsSliverDelegate(
                         minHeight: filterData.isFilterNotEmpty ? 48.0 : 0,
                         maxHeight: filterData.isFilterNotEmpty ? 130 : 0,
-                        filterModel: PapricaFilterModel.deepCopy(filterData),
-                        editFilterCallback: (filterData) => _editFilterCallback(context, filterData)),
+                        filterModel: PaprikaFilterModel.deepCopy(filterData),
+                        editFilterCallback: (filterData) =>
+                            _editFilterCallback(context, filterData)),
                   ),
                   restaurants != null && restaurants.isNotEmpty
                       ? SliverList(
@@ -144,7 +148,8 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 2,
                               height: MediaQuery.of(context).size.width / 2,
-                              child: Image.asset("assets/images/no_restaurants.png"),
+                              child: Image.asset(
+                                  "assets/images/no_restaurants.png"),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -163,7 +168,8 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                                 child: Text(
                                   S.of(context).filterTrySomethingElse,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Theme.of(context).primaryColor),
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
                                 ),
                               ),
                             ),
@@ -177,7 +183,10 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: <Color>[Colors.white.withOpacity(.4), Colors.white.withOpacity(.4)],
+                          colors: <Color>[
+                            Colors.white.withOpacity(.4),
+                            Colors.white.withOpacity(.4)
+                          ],
                         ),
                       ),
                     )
@@ -187,11 +196,13 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
         ));
   }
 
-  void _editFilterCallback(BuildContext context, PapricaFilterModel filterModel) {
+  void _editFilterCallback(
+      BuildContext context, PaprikaFilterModel filterModel) {
     _requestData(context, filterModel);
   }
 
-  void _requestData(BuildContext context, PapricaFilterModel filter, {int skipCount, int maxResult = 5}) {
+  void _requestData(BuildContext context, PaprikaFilterModel filter,
+      {int skipCount, int maxResult = 5}) {
     if (_requestingData) return;
     setState(() {
       _requestingData = true;
@@ -206,12 +217,18 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
         .apiServicesAppPlacesGetAllGet(
       skipCount: skipCount ?? 0,
       maxResultCount: maxResult,
-      restaurantTypes: helper.calculateTypeValue(filter.placesSelections, Type.places),
-      cuisineTypes: helper.calculateTypeValue(filter.cuisinesSelections, Type.cuisines),
-      ambianceType: helper.calculateTypeValue(filter.ambianceSelections, Type.ambiance),
-      amenityTypes: helper.calculateTypeValue(filter.amenitiesSelections, Type.amenities),
-      musicType: helper.calculateTypeValue(filter.musicTypesSelections, Type.music),
-      parkingType: helper.calculateTypeValue(filter.parkingTypesSelections, Type.parking),
+      restaurantTypes:
+          helper.calculateTypeValue(filter.placesSelections, Type.places),
+      cuisineTypes:
+          helper.calculateTypeValue(filter.cuisinesSelections, Type.cuisines),
+      ambianceType:
+          helper.calculateTypeValue(filter.ambianceSelections, Type.ambiance),
+      amenityTypes:
+          helper.calculateTypeValue(filter.amenitiesSelections, Type.amenities),
+      musicType:
+          helper.calculateTypeValue(filter.musicTypesSelections, Type.music),
+      parkingType: helper.calculateTypeValue(
+          filter.parkingTypesSelections, Type.parking),
       hasOutdoor: filter.outdoor,
       isSmokeFree: filter.smokeFree,
       isAlcoholFree: filter.alcoholFree,
@@ -237,7 +254,8 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
         else {
           restaurants = []..addAll(restaurantsDto.items);
           filterData = filter;
-          _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: ElasticInCurve());
+          _scrollController.animateTo(0,
+              duration: Duration(milliseconds: 300), curve: ElasticInCurve());
         }
       });
     }).catchError((err) {
@@ -260,7 +278,8 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
             maxChildSize: .95,
             builder: (context, scrollController) {
               return QuickFilter(
-                  filterModel: PapricaFilterModel.deepCopy(filterData), scrollController: scrollController);
+                  filterModel: PaprikaFilterModel.deepCopy(filterData),
+                  scrollController: scrollController);
             },
           );
         }).then((newFilter) {
@@ -286,9 +305,12 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
   Function editFilterCallback;
 
   _CustomFilterParamsSliverDelegate(
-      {@required this.minHeight, @required this.maxHeight, @required this.filterModel, this.editFilterCallback});
+      {@required this.minHeight,
+      @required this.maxHeight,
+      @required this.filterModel,
+      this.editFilterCallback});
 
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
   final double minHeight;
   final double maxHeight;
 
@@ -299,7 +321,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => math.max(maxHeight, minHeight);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return SizedBox.expand(
         child: Container(
             color: Colors.grey[100],
@@ -307,7 +330,12 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: <Widget>[Wrap(spacing: 8, runSpacing: -8, children: _extractFilterParams(context))],
+                    children: <Widget>[
+                      Wrap(
+                          spacing: 8,
+                          runSpacing: -8,
+                          children: _extractFilterParams(context))
+                    ],
                   ),
                 ),
               ),
@@ -346,7 +374,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
               label: Text(S.of(context).places + ": " + value),
               onDeleted: () {
                 filterModel.placesSelections.remove(value);
-                if (editFilterCallback is Function && editFilterCallback != null) {
+                if (editFilterCallback is Function &&
+                    editFilterCallback != null) {
                   editFilterCallback(filterModel);
                 }
               },
@@ -359,7 +388,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
             label: Text(S.of(context).cuisines + ": " + value),
             onDeleted: () {
               filterModel.cuisinesSelections.remove(value);
-              if (editFilterCallback is Function && editFilterCallback != null) {
+              if (editFilterCallback is Function &&
+                  editFilterCallback != null) {
                 editFilterCallback(filterModel);
               }
             },
@@ -371,7 +401,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
             label: Text(S.of(context).ambiance + ": " + value),
             onDeleted: () {
               filterModel.ambianceSelections.remove(value);
-              if (editFilterCallback is Function && editFilterCallback != null) {
+              if (editFilterCallback is Function &&
+                  editFilterCallback != null) {
                 editFilterCallback(filterModel);
               }
             },
@@ -383,7 +414,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
             label: Text(S.of(context).amenities + ": " + value),
             onDeleted: () {
               filterModel.amenitiesSelections.remove(value);
-              if (editFilterCallback is Function && editFilterCallback != null) {
+              if (editFilterCallback is Function &&
+                  editFilterCallback != null) {
                 editFilterCallback(filterModel);
               }
             },
@@ -395,7 +427,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
             label: Text(S.of(context).music + ": " + value),
             onDeleted: () {
               filterModel.musicTypesSelections.remove(value);
-              if (editFilterCallback is Function && editFilterCallback != null) {
+              if (editFilterCallback is Function &&
+                  editFilterCallback != null) {
                 editFilterCallback(filterModel);
               }
             },
@@ -408,7 +441,8 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
             label: Text(S.of(context).parking + ": " + value),
             onDeleted: () {
               filterModel.parkingTypesSelections.remove(value);
-              if (editFilterCallback is Function && editFilterCallback != null) {
+              if (editFilterCallback is Function &&
+                  editFilterCallback != null) {
                 editFilterCallback(filterModel);
               }
             },
@@ -472,7 +506,7 @@ class _CustomFilterParamsSliverDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class QuickFilter extends StatefulWidget {
-  final PapricaFilterModel filterModel;
+  final PaprikaFilterModel filterModel;
 
   final ScrollController scrollController;
 
@@ -483,7 +517,7 @@ class QuickFilter extends StatefulWidget {
 }
 
 class _QuickFilterState extends State<QuickFilter> {
-  PapricaFilterModel filterModel;
+  PaprikaFilterModel filterModel;
   List<String> places;
   List<String> cuisines;
   List<String> amenities;
@@ -498,7 +532,7 @@ class _QuickFilterState extends State<QuickFilter> {
     super.initState();
     clearStreamController = StreamController<bool>.broadcast();
 
-    filterModel ??= widget.filterModel ?? PapricaFilterModel();
+    filterModel ??= widget.filterModel ?? PaprikaFilterModel();
 
     ApiTypesHelper helper = ApiTypesHelper();
     places = helper.getTypeNames(Type.places);
@@ -530,8 +564,11 @@ class _QuickFilterState extends State<QuickFilter> {
           actions: <Widget>[
             GestureDetector(
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: Localizations.localeOf(context).languageCode == 'en' ? 20 : 12.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical:
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? 20
+                              : 12.0),
                   child: Text(
                     S.of(context).clearAll,
                     style: TextStyle(color: Colors.black),
@@ -539,17 +576,22 @@ class _QuickFilterState extends State<QuickFilter> {
                 ),
                 onTap: () {
                   if (filterModel.isFilterNotEmpty) {
-                    PapricaToast.showToast(S.of(context).filterCleared, ToastType.Normal);
+                    PaprikaToast.showToast(
+                        S.of(context).filterCleared, ToastType.Normal);
                   }
                   clearStreamController.add(true);
                   setState(() {
-                    filterModel = PapricaFilterModel();
+                    filterModel = PaprikaFilterModel();
                   });
                 }),
             GestureDetector(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: Localizations.localeOf(context).languageCode == 'en' ? 20 : 12.0, horizontal: 16),
+                      vertical:
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? 20
+                              : 12.0,
+                      horizontal: 16),
                   child: Text(
                     S.of(context).apply,
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -662,7 +704,8 @@ class _QuickFilterState extends State<QuickFilter> {
                                 radioValue: filterModel.hasOutdoorValue,
                                 onRadioTab: (value) {
                                   setState(() {
-                                    if (filterModel.hasOutdoorValue == null || filterModel.hasOutdoorValue.isEmpty)
+                                    if (filterModel.hasOutdoorValue == null ||
+                                        filterModel.hasOutdoorValue.isEmpty)
                                       filterModel.hasOutdoorValue = value;
                                     else
                                       filterModel.hasOutdoorValue = null;
@@ -675,7 +718,8 @@ class _QuickFilterState extends State<QuickFilter> {
                                 radioValue: filterModel.smokeValue,
                                 onRadioTab: (value) {
                                   setState(() {
-                                    if (filterModel.smokeValue == null || filterModel.smokeValue.isEmpty)
+                                    if (filterModel.smokeValue == null ||
+                                        filterModel.smokeValue.isEmpty)
                                       filterModel.smokeValue = value;
                                     else
                                       filterModel.smokeValue = null;
@@ -688,7 +732,8 @@ class _QuickFilterState extends State<QuickFilter> {
                                 radioValue: filterModel.alcoholValue,
                                 onRadioTab: (value) {
                                   setState(() {
-                                    if (filterModel.alcoholValue == null || filterModel.alcoholValue.isEmpty)
+                                    if (filterModel.alcoholValue == null ||
+                                        filterModel.alcoholValue.isEmpty)
                                       filterModel.alcoholValue = value;
                                     else
                                       filterModel.alcoholValue = null;
@@ -701,7 +746,8 @@ class _QuickFilterState extends State<QuickFilter> {
                                 radioValue: filterModel.twentyFourValue,
                                 onRadioTab: (value) {
                                   setState(() {
-                                    if (filterModel.twentyFourValue == null || filterModel.twentyFourValue.isEmpty)
+                                    if (filterModel.twentyFourValue == null ||
+                                        filterModel.twentyFourValue.isEmpty)
                                       filterModel.twentyFourValue = value;
                                     else
                                       filterModel.twentyFourValue = null;
@@ -733,10 +779,15 @@ class QuickFilterQueryParameter extends StatefulWidget {
   final QuickFilterQueryParameterSelectionCallback selectionCallback;
 
   const QuickFilterQueryParameter(
-      {@required this.title, @required this.values, this.selectionCallback, this.selections, this.clearParamsStream});
+      {@required this.title,
+      @required this.values,
+      this.selectionCallback,
+      this.selections,
+      this.clearParamsStream});
 
   @override
-  _QuickFilterQueryParameterState createState() => _QuickFilterQueryParameterState();
+  _QuickFilterQueryParameterState createState() =>
+      _QuickFilterQueryParameterState();
 }
 
 class _QuickFilterQueryParameterState extends State<QuickFilterQueryParameter> {
@@ -755,7 +806,8 @@ class _QuickFilterQueryParameterState extends State<QuickFilterQueryParameter> {
     widget.clearParamsStream.listen((clear) {
       if (clear) {
         selections = <String, String>{};
-        if (widget.selectionCallback != null) widget.selectionCallback(selections.values.toList());
+        if (widget.selectionCallback != null)
+          widget.selectionCallback(selections.values.toList());
       }
     });
   }
@@ -789,7 +841,9 @@ class _QuickFilterQueryParameterState extends State<QuickFilterQueryParameter> {
                 elevation: 0,
                 margin: EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(3), bottomRight: Radius.circular(3))),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(3),
+                        bottomRight: Radius.circular(3))),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -806,11 +860,13 @@ class _QuickFilterQueryParameterState extends State<QuickFilterQueryParameter> {
                                       if (selections[value] == null) {
                                         selections[value] = _value;
                                       } else {
-                                        selections.removeWhere((key, _) => selections[key] == value);
+                                        selections.removeWhere((key, _) =>
+                                            selections[key] == value);
                                       }
                                     });
                                     if (widget.selectionCallback != null)
-                                      widget.selectionCallback(selections.values.toList());
+                                      widget.selectionCallback(
+                                          selections.values.toList());
                                   },
                                 ))
                             .toList(),
@@ -841,7 +897,8 @@ class _RestaurantItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
           return RestaurantHome(restaurantId: this.restaurant.id);
         }));
       },
@@ -857,10 +914,12 @@ class _RestaurantItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.25,
                       height: MediaQuery.of(context).size.width * 0.25,
                       decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.25 * 0.5),
                           shape: BoxShape.rectangle,
                           color: Colors.white,
-                          image: DecorationImage(image: _widgetLogoImage, fit: BoxFit.scaleDown)),
+                          image: DecorationImage(
+                              image: _widgetLogoImage, fit: BoxFit.scaleDown)),
                     ),
                   ),
                   Padding(
@@ -872,16 +931,21 @@ class _RestaurantItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               child: Container(
                                 width: MediaQuery.of(context).size.width *
-                                    (this.restaurant.phoneNumber != null ? 0.55 : 0.6),
+                                    (this.restaurant.phoneNumber != null
+                                        ? 0.55
+                                        : 0.6),
                                 child: Text(
                                   this.restaurant.name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 18, color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                                      fontSize: 18,
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ),
@@ -895,8 +959,10 @@ class _RestaurantItem extends StatelessWidget {
                                           barrierDismissible: false,
                                           builder: (context) {
                                             return CallRestaurantDialog(
-                                              phoneNumber: this.restaurant.phoneNumber,
-                                              restaurantName: this.restaurant.name,
+                                              phoneNumber:
+                                                  this.restaurant.phoneNumber,
+                                              restaurantName:
+                                                  this.restaurant.name,
                                             );
                                           },
                                         );
@@ -922,10 +988,14 @@ class _RestaurantItem extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Text(
-                              this.restaurant.isOpen ? S.of(context).opened : S.of(context).closed,
+                              this.restaurant.isOpen
+                                  ? S.of(context).opened
+                                  : S.of(context).closed,
                               style: TextStyle(
                                 fontSize: 11,
-                                color: this.restaurant.isOpen ? Colors.green : Colors.red,
+                                color: this.restaurant.isOpen
+                                    ? Colors.green
+                                    : Colors.red,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -985,8 +1055,9 @@ class _RestaurantItem extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1005,30 +1076,38 @@ class _RestaurantItem extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      S.of(context).shisha,
-                                      style: TextStyle(fontSize: 12),
+                              restaurant.hasShisha != null && restaurant.hasShisha == true?
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                    child: PaprikaVerticalDivider(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          S.of(context).shisha,
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        Text(
+                                          this.restaurant.shishaRate.toString(),
+                                          style: TextStyle(
+                                            color: Theme.of(context).primaryColor,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      this.restaurant.shishaRate.toString(),
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                ],
+                              ):
+                              Container(),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1048,8 +1127,9 @@ class _RestaurantItem extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4),
-                                child: PapricaVerticalDivider(),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                child: PaprikaVerticalDivider(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
@@ -1061,8 +1141,11 @@ class _RestaurantItem extends StatelessWidget {
                                       style: TextStyle(fontSize: 12),
                                     ),
                                     Text(
-                                      ApiHelper.toStringNoiseLevel(context, this.restaurant.noiseLevel),
-                                      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 12),
+                                      ApiHelper.toStringNoiseLevel(
+                                          context, this.restaurant.noiseLevel),
+                                      style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 12),
                                     ),
                                   ],
                                 ),

@@ -25,7 +25,8 @@ class UpdateReservationRequestDto {
   UpdateReservationRequestDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     reservationId = json['reservationId'];
-    time = json['time'] == null ? null : DateTime.parse(json['time'].toString());
+    time =
+        json['time'] == null ? null : DateTime.parse(json['time'].toString());
     customerAdditionalInfo = json['customerAdditionalInfo'];
     phoneNumber = json['phoneNumber'];
     occasionType = json['occasionType'];
@@ -48,13 +49,17 @@ class UpdateReservationRequestDto {
   static List<UpdateReservationRequestDto> listFromJson(List<dynamic> json) {
     return json == null
         ? new List<UpdateReservationRequestDto>()
-        : json.map((value) => new UpdateReservationRequestDto.fromJson(value)).toList();
+        : json
+            .map((value) => new UpdateReservationRequestDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, UpdateReservationRequestDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdateReservationRequestDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdateReservationRequestDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdateReservationRequestDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdateReservationRequestDto.fromJson(value));
     }
     return map;
   }

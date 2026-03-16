@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/translations.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/translations.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
+
 import '../../error_handlers.dart';
 import '../../utils.dart';
 
@@ -42,7 +43,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).forgotPassword)),
       backgroundColor: Color(0xFFF2F2F2),
-      body: SingleChildScrollView(child: true == _requestForgottenPasswordSent ? _renderCodeForm() : _renderPhoneNumberForm()),
+      body: SingleChildScrollView(
+          child: true == _requestForgottenPasswordSent
+              ? _renderCodeForm()
+              : _renderPhoneNumberForm()),
     );
   }
 
@@ -54,7 +58,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Text(S.of(context).pleaseEnterTheCodeAndYourNewPassword, style: Theme.of(context).textTheme.subhead),
+            child: Text(S.of(context).pleaseEnterTheCodeAndYourNewPassword,
+                style: Theme.of(context).textTheme.subtitle1),
           ),
           Text(
             S.of(context).confirmationCode,
@@ -68,11 +73,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFFaa757f)),
-                  borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(3.0)),
                 )),
           ),
           Text(
@@ -88,11 +96,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFFaa757f)),
-                  borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(3.0)),
                 )),
           ),
           Text(
@@ -108,11 +119,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFFaa757f)),
-                  borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(3.0)),
                 )),
           ),
           Center(
@@ -120,7 +134,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: CustomizedActiveButton(
               title: S.of(context).change,
-              onPressed: true == _hasCodeChanged ? () => _onChangePressed(context) : null,
+              onPressed: true == _hasCodeChanged
+                  ? () => _onChangePressed(context)
+                  : null,
             ),
           )),
           GestureDetector(
@@ -131,7 +147,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   S.of(context).resendCode,
-                  style: TextStyle(color: Theme.of(context).primaryColor, decoration: TextDecoration.underline),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ),
@@ -147,7 +165,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(padding: const EdgeInsets.symmetric(vertical: 20), child: Text(S.of(context).enterPhoneNumber, style: Theme.of(context).textTheme.subhead)),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Text(S.of(context).enterPhoneNumber,
+                    style: Theme.of(context).textTheme.subtitle1)),
             Text(
               S.of(context).phoneNumber,
               style: TextStyle(fontSize: 14, color: Color(0xFF747373)),
@@ -161,11 +182,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFFaa757f)),
-                    borderRadius: const BorderRadius.all(const Radius.circular(3.0)),
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(3.0)),
                   )),
             ),
             Center(
@@ -173,7 +197,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     padding: const EdgeInsets.only(top: 10),
                     child: CustomizedActiveButton(
                       title: S.of(context).confirm,
-                      onPressed: _phoneNumberController != null && true == _phoneNumberController.text.isNotEmpty ? () => _onRequestPressed(context) : null,
+                      onPressed: _phoneNumberController != null &&
+                              true == _phoneNumberController.text.isNotEmpty
+                          ? () => _onRequestPressed(context)
+                          : null,
                     ))),
           ],
         ));
@@ -195,9 +222,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         'userNameOrPhoneNumber': _phoneNumberController.text,
       });
 
-      api.apiServicesAppCustomerSendForgetPasswordCodePost(input: data).then((_) {
+      api
+          .apiServicesAppCustomerSendForgetPasswordCodePost(input: data)
+          .then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).forgotPasswordCodeSent);
+        PaprikaToast.showToast(S.of(context).forgotPasswordCodeSent);
 
         setState(() {
           _requestForgottenPasswordSent = true;
@@ -211,23 +240,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void _onChangePressed(BuildContext context) {
-    if (_newPasswordController.text != _newPasswordConfirmationController.text) {
-      PapricaToast.showToast(S.of(context).errorPasswordMatch);
+    if (_newPasswordController.text !=
+        _newPasswordConfirmationController.text) {
+      PaprikaToast.showToast(S.of(context).errorPasswordMatch);
       return;
     }
-    if (_confirmationCodeController.text.isNotEmpty && _confirmationCodeController.text.isNotEmpty && _newPasswordConfirmationController.text.isNotEmpty) {
+    if (_confirmationCodeController.text.isNotEmpty &&
+        _confirmationCodeController.text.isNotEmpty &&
+        _newPasswordConfirmationController.text.isNotEmpty) {
       ProgressDialog dialog = ProgressDialog(context);
       dialog.setMessage(S.of(context).processing);
       ApiClient client = PapricaApiClient();
       CustomerApi api = CustomerApi(client);
 
-      ResetForgottenPasswordDto data = ResetForgottenPasswordDto.fromJson(
-          {'code': _confirmationCodeController.text, 'userNameOrPhoneNumber': _phoneNumberController.text, 'newPassword': _newPasswordController.text});
+      ResetForgottenPasswordDto data = ResetForgottenPasswordDto.fromJson({
+        'code': _confirmationCodeController.text,
+        'userNameOrPhoneNumber': _phoneNumberController.text,
+        'newPassword': _newPasswordController.text
+      });
       dialog.show();
-      api.apiServicesAppCustomerResetForgottenPasswordPost(input: data).then((_) {
+      api
+          .apiServicesAppCustomerResetForgottenPasswordPost(input: data)
+          .then((_) {
         dialog.hide();
-        PapricaToast.showToast(S.of(context).successPasswordChanged);
-        _login(context, _phoneNumberController.text, _newPasswordController.text);
+        PaprikaToast.showToast(S.of(context).successPasswordChanged);
+        _login(
+            context, _phoneNumberController.text, _newPasswordController.text);
       }).catchError((err) {
         dialog.hide();
         debugPrint(err.toString());
@@ -243,19 +281,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     loginDialog.show();
     authApi
         .apiTokenAuthAuthenticatePost(
-            model: AuthenticateModel.fromJson({"userNameOrPhoneNumber": phoneNumber, "password": password, "rememberClient": true, "scope": 1}))
+            model: AuthenticateModel.fromJson({
+      "userNameOrPhoneNumber": phoneNumber,
+      "password": password,
+      "rememberClient": true,
+      "scope": 1
+    }))
         .then((AuthenticateResultModel authModel) {
       loginDialog.hide();
       SharedPreference.saveTokenToSharedPrefs(authModel.accessToken);
       PapricaApiClient().setToken(authModel.accessToken);
-      ApiTypesHelper().initProfile(isAuthorized: true, phoneNumber: _phoneNumberController.text, isPhoneNumberConfirmed: true);
+      ApiTypesHelper().initProfile(
+          isAuthorized: true,
+          phoneNumber: _phoneNumberController.text,
+          isPhoneNumberConfirmed: true);
       Firebase().init(context);
       Navigator.of(context).pushReplacementNamed('/home');
     }).catchError((err) {
       loginDialog.hide();
       DefaultErrorHandler.handle(context, err);
       Future.delayed(Duration.zero, () {
-        //PapricaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
+        //PaprikaToast.showToast(S.of(context).errorUnknown, ToastType.Error);
       });
     });
   }

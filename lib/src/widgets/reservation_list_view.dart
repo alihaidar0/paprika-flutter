@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paprica/src/models/reservation_model.dart';
-import 'package:paprica/src/widgets/reservation_card.dart';
+import 'package:paprika/src/models/reservation_model.dart';
+import 'package:paprika/src/widgets/reservation_card.dart';
 
 class ReservationsListView extends StatelessWidget {
   final List<ReservationModel> reservationsList;

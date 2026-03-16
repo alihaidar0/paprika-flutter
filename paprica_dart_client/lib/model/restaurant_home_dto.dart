@@ -11,8 +11,6 @@ class RestaurantHomeDto {
 
   int noiseLevel = null;
 
-  //enum noiseLevelEnum {  1,  2,  3,  };
-
   double ambianceRate = null;
 
   bool isFavorite = null;
@@ -39,6 +37,8 @@ class RestaurantHomeDto {
 
   String phoneNumber = null;
 
+  String tel = null;
+
   int rank = null;
 
   String address = null;
@@ -49,13 +49,11 @@ class RestaurantHomeDto {
 
   int parkingTypes = null;
 
-  //enum parkingTypeEnum {  1,  };
-
   String description = null;
 
   int ambianceTypes = null;
 
-  //enum ambianceTypeEnum {  1,  };
+  int restaurantTypes = null;
 
   String audioTrack = null;
 
@@ -63,16 +61,14 @@ class RestaurantHomeDto {
 
   bool isSmokeFree = null;
 
+  bool hasShisha = null;
+
   bool isAlcoholFree = null;
 
   int cuisineTypes = null;
 
-  //enum cuisineTypesEnum {  1,  2,  };
-
   int amenityTypes = null;
-
-  //enum amenityTypesEnum {  1,  };
-
+  
   bool hasOutdoor = null;
 
   bool isFeatured = null;
@@ -81,13 +77,15 @@ class RestaurantHomeDto {
 
   bool isOpen = null;
 
+  bool isNotificationsOn = null;
+
   int id = null;
 
   RestaurantHomeDto();
 
   @override
   String toString() {
-    return 'RestaurantHomeDto[restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, noiseLevel=$noiseLevel, ambianceRate=$ambianceRate, isFavorite=$isFavorite, event=$event, openingTimes=$openingTimes, galleryItems=$galleryItems, restaurantRaters=$restaurantRaters, settings=$settings, name=$name, longitude=$longitude, latitude=$latitude, logoImage=$logoImage, coverImage=$coverImage, phoneNumber=$phoneNumber, rank=$rank, address=$address, regionId=$regionId, status=$status, parkingTypes=$parkingTypes, description=$description, ambianceTypes=$ambianceTypes, audioTrack=$audioTrack, musicTypes=$musicTypes, isSmokeFree=$isSmokeFree, isAlcoholFree=$isAlcoholFree, cuisineTypes=$cuisineTypes, amenityTypes=$amenityTypes, hasOutdoor=$hasOutdoor, isFeatured=$isFeatured, is24Hour=$is24Hour, isOpen=$isOpen, id=$id, ]';
+    return 'RestaurantHomeDto[restaurantRate=$restaurantRate, foodRate=$foodRate, serviceRate=$serviceRate, shishaRate=$shishaRate, noiseLevel=$noiseLevel, ambianceRate=$ambianceRate, isFavorite=$isFavorite, event=$event, openingTimes=$openingTimes, galleryItems=$galleryItems, restaurantRaters=$restaurantRaters, settings=$settings, name=$name, longitude=$longitude, latitude=$latitude, logoImage=$logoImage, coverImage=$coverImage, phoneNumber=$phoneNumber, tel=$tel, rank=$rank, address=$address, regionId=$regionId, status=$status, parkingTypes=$parkingTypes, description=$description, ambianceTypes=$ambianceTypes, restaurantTypes=$restaurantTypes, audioTrack=$audioTrack, musicTypes=$musicTypes, isSmokeFree=$isSmokeFree, hasShisha=$hasShisha, isAlcoholFree=$isAlcoholFree, cuisineTypes=$cuisineTypes, amenityTypes=$amenityTypes, hasOutdoor=$hasOutdoor, isFeatured=$isFeatured, is24Hour=$is24Hour, isOpen=$isOpen, isNotificationsOn=$isNotificationsOn, id=$id, ]';
   }
 
   RestaurantHomeDto.fromJson(Map<String, dynamic> json) {
@@ -99,10 +97,13 @@ class RestaurantHomeDto {
     noiseLevel = json['noiseLevel'];
     ambianceRate = json['ambianceRate'];
     isFavorite = json['isFavorite'];
-    event = json['event'] == null ? null : new RestaurantEventDto.fromJson(json['event']);
+    event = json['event'] == null
+        ? null
+        : new RestaurantEventDto.fromJson(json['event']);
     openingTimes = OpeningTimeDto.listFromJson(json['openingTimes']);
     galleryItems = GalleryItemDto.listFromJson(json['galleryItems']);
-    restaurantRaters = new RestaurantRatersDto.fromJson(json['restaurantRaters']);
+    restaurantRaters =
+        new RestaurantRatersDto.fromJson(json['restaurantRaters']);
     settings = new RestaurantSettingsDto.fromJson(json['settings']);
     name = json['name'];
     longitude = json['longitude'];
@@ -110,6 +111,7 @@ class RestaurantHomeDto {
     logoImage = json['logoImage'];
     coverImage = json['coverImage'];
     phoneNumber = json['phoneNumber'];
+    tel = json['tel'];
     rank = json['rank'];
     address = json['address'];
     regionId = json['regionId'];
@@ -117,9 +119,11 @@ class RestaurantHomeDto {
     parkingTypes = json['parkingTypes'];
     description = json['description'];
     ambianceTypes = json['ambianceTypes'];
+    restaurantTypes = json['restaurantTypes'];
     audioTrack = json['audioTrack'];
     musicTypes = json['musicTypes'];
     isSmokeFree = json['isSmokeFree'];
+    hasShisha = json['hasShisha'];
     isAlcoholFree = json['isAlcoholFree'];
     cuisineTypes = json['cuisineTypes'];
     amenityTypes = json['amenityTypes'];
@@ -127,6 +131,7 @@ class RestaurantHomeDto {
     isFeatured = json['isFeatured'];
     is24Hour = json['is24Hour'];
     isOpen = json['isOpen'];
+    isNotificationsOn = json['isNotificationsOn'];
     id = json['id'];
   }
 
@@ -150,6 +155,7 @@ class RestaurantHomeDto {
       'logoImage': logoImage,
       'coverImage': coverImage,
       'phoneNumber': phoneNumber,
+      'tel': tel,
       'rank': rank,
       'address': address,
       'regionId': regionId,
@@ -157,9 +163,11 @@ class RestaurantHomeDto {
       'parkingTypes': parkingTypes,
       'description': description,
       'ambianceTypes': ambianceTypes,
+      'restaurantTypes': restaurantTypes,
       'audioTrack': audioTrack,
       'musicTypes': musicTypes,
       'isSmokeFree': isSmokeFree,
+      'hasShisha': hasShisha,
       'isAlcoholFree': isAlcoholFree,
       'cuisineTypes': cuisineTypes,
       'amenityTypes': amenityTypes,
@@ -167,18 +175,23 @@ class RestaurantHomeDto {
       'isFeatured': isFeatured,
       'is24Hour': is24Hour,
       'isOpen': isOpen,
+      'isNotificationsOn': isNotificationsOn,
       'id': id
     };
   }
 
   static List<RestaurantHomeDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<RestaurantHomeDto>() : json.map((value) => new RestaurantHomeDto.fromJson(value)).toList();
+    return json == null
+        ? new List<RestaurantHomeDto>()
+        : json.map((value) => new RestaurantHomeDto.fromJson(value)).toList();
   }
 
-  static Map<String, RestaurantHomeDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, RestaurantHomeDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, RestaurantHomeDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RestaurantHomeDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new RestaurantHomeDto.fromJson(value));
     }
     return map;
   }

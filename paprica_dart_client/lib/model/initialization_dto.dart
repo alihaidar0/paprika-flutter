@@ -34,8 +34,10 @@ class InitializationDto {
     if (json == null) return;
     isAuthorized = json['isAuthorized'];
     cities = new PagedResultDtoConfigurationCityDto.fromJson(json['cities']);
-    countries = new PagedResultDtoConfigurationCountryDto.fromJson(json['countries']);
-    regions = new PagedResultDtoConfigurationRegionDto.fromJson(json['regions']);
+    countries =
+        new PagedResultDtoConfigurationCountryDto.fromJson(json['countries']);
+    regions =
+        new PagedResultDtoConfigurationRegionDto.fromJson(json['regions']);
     customerInfo = new CustomerInfoDto.fromJson(json['customerInfo']);
     types = new TypesDto.fromJson(json['types']);
     typesHash = json['typesHash'];
@@ -63,13 +65,17 @@ class InitializationDto {
   }
 
   static List<InitializationDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<InitializationDto>() : json.map((value) => new InitializationDto.fromJson(value)).toList();
+    return json == null
+        ? new List<InitializationDto>()
+        : json.map((value) => new InitializationDto.fromJson(value)).toList();
   }
 
-  static Map<String, InitializationDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, InitializationDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, InitializationDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new InitializationDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new InitializationDto.fromJson(value));
     }
     return map;
   }

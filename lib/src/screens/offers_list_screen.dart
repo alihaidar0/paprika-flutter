@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:paprica/error_handlers.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/src/widgets/offer_card.dart';
-import 'package:swagger/api.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paprika/error_handlers.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/src/widgets/accessories.dart' show LoadingPlaceHolder;
+import 'package:paprika/src/widgets/offer_card.dart';
+import 'package:swagger/api.dart';
+
 import '../../utils.dart';
-import 'package:paprica/src/widgets/accessories.dart' show LoadingPlaceHolder;
 
 class OffersListScreen extends StatefulWidget {
   const OffersListScreen();
@@ -32,7 +33,12 @@ class _OffersListScreenState extends State<OffersListScreen> {
     offers = [];
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset && !_requestingData && offers.isNotEmpty && context != null && !_endOfOffers) {
+      if (_scrollController.position.maxScrollExtent ==
+              _scrollController.offset &&
+          !_requestingData &&
+          offers.isNotEmpty &&
+          context != null &&
+          !_endOfOffers) {
         _getOffers(skipCount: offers.length);
       }
     });
@@ -63,7 +69,9 @@ class _OffersListScreenState extends State<OffersListScreen> {
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: OfferCardInList(
-                                offer: OfferPapricaItemDto.fromCustomerOfferDto(offers[index] /*snapshot.data.items[index]*/),
+                                offer: OfferPapricaItemDto.fromCustomerOfferDto(
+                                    offers[
+                                        index] /*snapshot.data.items[index]*/),
                               ),
                             );
                           } else {
@@ -71,9 +79,7 @@ class _OffersListScreenState extends State<OffersListScreen> {
                           }
                         },
                       )
-                    : Center(
-                        child: NoOffersLayout(
-                      ));
+                    : Center(child: NoOffersLayout());
               }
               return LoadingPlaceHolder(
                 icon: SpinKitFadingCube(
@@ -90,7 +96,8 @@ class _OffersListScreenState extends State<OffersListScreen> {
     });
     ApiClient client = PapricaApiClient();
     CustomerOfferApi api = CustomerOfferApi(client);
-    offerFuture = api.apiServicesAppCustomerOfferGetAllActiveGet(skipCount: skipCount, maxResultCount: maxResult);
+    offerFuture = api.apiServicesAppCustomerOfferGetAllActiveGet(
+        skipCount: skipCount, maxResultCount: maxResult);
     offerFuture.then((data) {
       setState(() {
         if (offers.last is SpinKitCircle) offers.removeLast();
@@ -113,14 +120,16 @@ class _OffersListScreenState extends State<OffersListScreen> {
 //    offerFuture.catchError((_) {});
   }
 }
-class NoOffersLayout extends StatelessWidget {
 
+class NoOffersLayout extends StatelessWidget {
   const NoOffersLayout({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(child: Text(S.of(context).noOffers),));
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(S.of(context).noOffers),
+        ));
   }
 }

@@ -4,7 +4,7 @@ class Error {
   String details;
   String validationErrors;
 
-  Error(this.message,{this.code,  this.details});
+  Error(this.message, {this.code, this.details});
 
   Error.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
@@ -18,7 +18,6 @@ class Error {
   String toString() {
     return 'Error {code: $code, message: $message, details: $details, validationError: $validationErrors';
   }
-
 }
 
 class ApiError {

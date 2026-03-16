@@ -37,7 +37,9 @@ class BarLine extends StatelessWidget {
               color: mainBarColor,
               borderRadius: BorderRadius.circular(9),
             ),
-            alignment: Localizations.localeOf(context).languageCode == 'en' ? Alignment.bottomLeft : Alignment.bottomRight,
+            alignment: Localizations.localeOf(context).languageCode == 'en'
+                ? Alignment.bottomLeft
+                : Alignment.bottomRight,
             child: Container(
               height: lineHeight,
               width: (value + 0.01) * totalWidth,

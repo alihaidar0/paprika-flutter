@@ -1,12 +1,10 @@
 part of swagger.api;
 
 class PagedResultDtoConfigurationCityDto {
-  
   int totalCount = null;
-  
 
   List<ConfigurationCityDto> items = [];
-  
+
   PagedResultDtoConfigurationCityDto();
 
   @override
@@ -16,31 +14,31 @@ class PagedResultDtoConfigurationCityDto {
 
   PagedResultDtoConfigurationCityDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    totalCount =
-        json['totalCount']
-    ;
-    items =
-      ConfigurationCityDto.listFromJson(json['items'])
-;
+    totalCount = json['totalCount'];
+    items = ConfigurationCityDto.listFromJson(json['items']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'totalCount': totalCount,
-      'items': items
-     };
+    return {'totalCount': totalCount, 'items': items};
   }
 
-  static List<PagedResultDtoConfigurationCityDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<PagedResultDtoConfigurationCityDto>() : json.map((value) => new PagedResultDtoConfigurationCityDto.fromJson(value)).toList();
+  static List<PagedResultDtoConfigurationCityDto> listFromJson(
+      List<dynamic> json) {
+    return json == null
+        ? new List<PagedResultDtoConfigurationCityDto>()
+        : json
+            .map((value) =>
+                new PagedResultDtoConfigurationCityDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, PagedResultDtoConfigurationCityDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, PagedResultDtoConfigurationCityDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, PagedResultDtoConfigurationCityDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new PagedResultDtoConfigurationCityDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new PagedResultDtoConfigurationCityDto.fromJson(value));
     }
     return map;
   }
 }
-

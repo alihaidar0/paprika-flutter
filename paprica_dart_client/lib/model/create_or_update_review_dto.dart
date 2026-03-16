@@ -1,33 +1,25 @@
 part of swagger.api;
 
 class CreateOrUpdateReviewDto {
-  
   int id = null;
-  
 
   String comment = null;
-  
 
   double foodRate = null;
-  
 
   double serviceRate = null;
-  
 
   double ambianceRate = null;
-  
 
   int noiseLevel = null;
   //enum noiseLevelEnum {  1,  2,  3,  };
 
   double shishaRate = null;
-  
 
   double restaurantRate = null;
-  
 
   int restaurantId = null;
-  
+
   CreateOrUpdateReviewDto();
 
   @override
@@ -37,33 +29,15 @@ class CreateOrUpdateReviewDto {
 
   CreateOrUpdateReviewDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    id =
-        json['id']
-    ;
-    comment =
-        json['comment']
-    ;
-    foodRate =
-        json['foodRate']
-    ;
-    serviceRate =
-        json['serviceRate']
-    ;
-    ambianceRate =
-        json['ambianceRate']
-    ;
-    noiseLevel =
-        json['noiseLevel']
-    ;
-    shishaRate =
-        json['shishaRate']
-    ;
-    restaurantRate =
-        json['restaurantRate']
-    ;
-    restaurantId =
-        json['restaurantId']
-    ;
+    id = json['id'];
+    comment = json['comment'];
+    foodRate = json['foodRate'];
+    serviceRate = json['serviceRate'];
+    ambianceRate = json['ambianceRate'];
+    noiseLevel = json['noiseLevel'];
+    shishaRate = json['shishaRate'];
+    restaurantRate = json['restaurantRate'];
+    restaurantId = json['restaurantId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,19 +51,24 @@ class CreateOrUpdateReviewDto {
       'shishaRate': shishaRate,
       'restaurantRate': restaurantRate,
       'restaurantId': restaurantId
-     };
+    };
   }
 
   static List<CreateOrUpdateReviewDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<CreateOrUpdateReviewDto>() : json.map((value) => new CreateOrUpdateReviewDto.fromJson(value)).toList();
+    return json == null
+        ? new List<CreateOrUpdateReviewDto>()
+        : json
+            .map((value) => new CreateOrUpdateReviewDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, CreateOrUpdateReviewDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, CreateOrUpdateReviewDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, CreateOrUpdateReviewDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new CreateOrUpdateReviewDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new CreateOrUpdateReviewDto.fromJson(value));
     }
     return map;
   }
 }
-

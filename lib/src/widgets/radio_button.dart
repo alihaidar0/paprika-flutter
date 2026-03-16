@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/src/widgets/custom_radio_button.dart';
+import 'package:paprika/src/widgets/custom_radio_button.dart';
 
 typedef RadioTabCallback(String value);
 
@@ -12,7 +12,11 @@ class StringRadioButton extends StatelessWidget {
 
   final EdgeInsets padding;
 
-  StringRadioButton(this.value, {this.padding, this.radioValue, this.onRadioTab, this.duration = const Duration(milliseconds: 600)});
+  StringRadioButton(this.value,
+      {this.padding,
+      this.radioValue,
+      this.onRadioTab,
+      this.duration = const Duration(milliseconds: 600)});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +26,17 @@ class StringRadioButton extends StatelessWidget {
       groupValue: radioValue,
       animsBuilder: (AnimationController controller) => [
         CurvedAnimation(parent: controller, curve: Curves.easeInOut),
-        ColorTween(begin: Colors.white, end: Theme.of(context).primaryColor).animate(controller),
-        ColorTween(begin: Theme.of(context).primaryColor, end: Colors.white).animate(controller),
-        ColorTween(begin: Theme.of(context).primaryColor, end: Theme.of(context).primaryColor).animate(controller),
+        ColorTween(begin: Colors.white, end: Theme.of(context).primaryColor)
+            .animate(controller),
+        ColorTween(begin: Theme.of(context).primaryColor, end: Colors.white)
+            .animate(controller),
+        ColorTween(
+                begin: Theme.of(context).primaryColor,
+                end: Theme.of(context).primaryColor)
+            .animate(controller),
       ],
-      builder: (BuildContext context, List<dynamic> animValues, Function updateState, String value) {
+      builder: (BuildContext context, List<dynamic> animValues,
+          Function updateState, String value) {
         return GestureDetector(
           onTap: () {
             onRadioTab(value);
@@ -39,10 +49,14 @@ class StringRadioButton extends StatelessWidget {
             child: Card(
               color: animValues[1],
               child: Padding(
-                padding: this.padding??const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: this.padding ??
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
                   value,
-                  style: Theme.of(context).textTheme.body1.copyWith(fontSize: 13.0, color: animValues[2]),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontSize: 13.0, color: animValues[2]),
                 ),
               ),
             ),

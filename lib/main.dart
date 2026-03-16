@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paprica/app.dart';
+import 'package:paprika/app.dart';
 
-void main() => runApp(PapricaApp());
+void main() => runApp(PaprikaApp());

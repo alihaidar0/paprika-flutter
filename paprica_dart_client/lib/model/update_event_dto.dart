@@ -1,24 +1,18 @@
 part of swagger.api;
 
 class UpdateEventDto {
-  
   String name = null;
-  
 
   bool isActive = null;
-  
 
   String image = null;
-  
 
   String description = null;
-  
 
   DateTime time = null;
-  
 
   int id = null;
-  
+
   UpdateEventDto();
 
   @override
@@ -28,22 +22,12 @@ class UpdateEventDto {
 
   UpdateEventDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    name =
-        json['name']
-    ;
-    isActive =
-        json['isActive']
-    ;
-    image =
-        json['image']
-    ;
-    description =
-        json['description']
-    ;
+    name = json['name'];
+    isActive = json['isActive'];
+    image = json['image'];
+    description = json['description'];
     time = json['time'] == null ? null : DateTime.parse(json['time']);
-    id =
-        json['id']
-    ;
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -54,19 +38,22 @@ class UpdateEventDto {
       'description': description,
       'time': time == null ? '' : time.toUtc().toIso8601String(),
       'id': id
-     };
+    };
   }
 
   static List<UpdateEventDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<UpdateEventDto>() : json.map((value) => new UpdateEventDto.fromJson(value)).toList();
+    return json == null
+        ? new List<UpdateEventDto>()
+        : json.map((value) => new UpdateEventDto.fromJson(value)).toList();
   }
 
-  static Map<String, UpdateEventDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdateEventDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdateEventDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdateEventDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdateEventDto.fromJson(value));
     }
     return map;
   }
 }
-

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paprica/generated/i18n.dart';
-import 'package:paprica/screens.dart';
-import 'package:paprica/widgets.dart';
+import 'package:paprika/generated/i18n.dart';
+import 'package:paprika/screens.dart';
+import 'package:paprika/widgets.dart';
 import 'package:swagger/api.dart';
 
 import '../../error_handlers.dart';
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Localizations.localeOf(context).languageCode == 'en' ? 10 : 2;
 
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
@@ -87,17 +87,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 80,
+                height: 120,
                 child: Image(
-                  image: AssetImage('assets/images/logo_red_small.png'),
+                  image: AssetImage('assets/images/logo.png'),
                   fit: BoxFit.contain,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 10),
-                child: Text(S
-                    .of(context)
-                    .createNewAccount, style: TextStyle(fontSize: 18)),
+                child: Text(S.of(context).createNewAccount,
+                    style: TextStyle(fontSize: 18)),
               ),
               CustomInputText(
                 S.of(context).yourName,
@@ -303,7 +302,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     showDialog(
         context: generalContext,
         builder: (_context) {
-          return PapricaSimpleDialog(
+          return PaprikaSimpleDialog(
             title: S.of(generalContext).confirmPhoneNumber,
             noButton: FlatButton(
                 onPressed: () {
@@ -311,17 +310,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   _login(generalContext, _phoneNumberController.text,
                       _passwordController.text, false);
                 },
-                child: Text(S.of(generalContext).skip, style: TextStyle(color: Colors.grey))),
+                child: Text(S.of(generalContext).skip,
+                    style: TextStyle(color: Colors.grey))),
             yesButton: FlatButton(
                 onPressed: () {
                   Navigator.pop(generalContext);
                   Navigator.push(
                           generalContext,
                           MaterialPageRoute(
-                              builder: (context) => ConfirmPhoneNumberScreen(phoneNumber: _phoneNumberController.text)))
+                              builder: (context) => ConfirmPhoneNumberScreen(
+                                  phoneNumber: _phoneNumberController.text)))
                       .then((confirmed) {
                     if (confirmed == null || !confirmed) {
-                      PapricaToast.showToast(S
+                      PaprikaToast.showToast(S
                           .of(generalContext)
                           .loggingInRequired(S
                               .of(generalContext)

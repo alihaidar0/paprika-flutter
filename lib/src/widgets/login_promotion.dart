@@ -14,15 +14,19 @@ class LogInPromotion extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        this.loginLine != null && this.loginLine.isNotEmpty ? Text(this.loginLine) : Text(S.of(context).pleaseLogIn),
+        this.loginLine != null && this.loginLine.isNotEmpty
+            ? Text(this.loginLine)
+            : Text(S.of(context).pleaseLogIn),
         GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil('/logIn', ModalRoute.withName('/home'));
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/logIn', ModalRoute.withName('/home'));
             },
             child: Text(
               S.of(context).logIn,
               style: TextStyle(color: Theme.of(context).primaryColor),
-            ))
+            ),
+        )
       ],
     ));
   }

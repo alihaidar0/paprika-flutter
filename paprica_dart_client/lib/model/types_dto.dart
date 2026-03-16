@@ -46,13 +46,17 @@ class TypesDto {
   }
 
   static List<TypesDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<TypesDto>() : json.map((value) => new TypesDto.fromJson(value)).toList();
+    return json == null
+        ? new List<TypesDto>()
+        : json.map((value) => new TypesDto.fromJson(value)).toList();
   }
 
-  static Map<String, TypesDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, TypesDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, TypesDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new TypesDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new TypesDto.fromJson(value));
     }
     return map;
   }

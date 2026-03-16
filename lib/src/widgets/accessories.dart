@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:paprika/translations.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:paprica/translations.dart';
+
 import '../../screens.dart';
-import 'package:connectivity/connectivity.dart';
 
 class CircularAvatar extends StatelessWidget {
   final String path;
@@ -102,7 +103,7 @@ class Paragraph extends StatelessWidget {
   }
 }
 
-class PapricaToast {
+class PaprikaToast {
   static void showToast(String text,
       [ToastType type = ToastType.Normal, Toast length = Toast.LENGTH_SHORT]) {
     Color backgroundColor;
@@ -123,7 +124,7 @@ class PapricaToast {
       msg: text,
       toastLength: length,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIos: 3,
+      timeInSecForIosWeb: 3,
       backgroundColor: backgroundColor,
       textColor: Colors.white,
       fontSize: 14.0,
@@ -208,11 +209,11 @@ class _RequestRetryState extends State<RequestRetry> {
   }
 }
 
-class PapricaVerticalDivider extends StatelessWidget {
+class PaprikaVerticalDivider extends StatelessWidget {
   final double height;
   final Color color;
 
-  const PapricaVerticalDivider(
+  const PaprikaVerticalDivider(
       {Key key, this.height = 12, this.color = Colors.black})
       : super(key: key);
 
@@ -258,7 +259,6 @@ class RestaurantNamedLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var at = Localizations.localeOf(context).languageCode == 'en' ? "@" : "";
     return Padding(
       padding: this.padding ?? const EdgeInsets.all(2.0),
       child: GestureDetector(
@@ -269,7 +269,7 @@ class RestaurantNamedLink extends StatelessWidget {
           }));
         },
         child: Text(
-          at + restaurantName,
+          restaurantName,
           style: TextStyle(
               color: this.textColor ?? Theme.of(context).primaryColor,
               fontWeight: FontWeight.w500),
@@ -553,7 +553,8 @@ class FullscreenPhoto extends StatelessWidget {
       body: Center(
         child: Container(
             child: PhotoView(
-          loadingChild: Container(),
+          loadingBuilder: (context, progress) => Container(),
+          // loadingChild: Container(),
           backgroundDecoration: BoxDecoration(color: Colors.black87),
           minScale: PhotoViewComputedScale.contained * 0.8,
           imageProvider: provider,
@@ -563,10 +564,10 @@ class FullscreenPhoto extends StatelessWidget {
   }
 }
 
-class PapricaCachedImage extends StatelessWidget {
+class PaprikaCachedImage extends StatelessWidget {
   final String imageUrl;
 
-  const PapricaCachedImage({Key key, @required this.imageUrl})
+  const PaprikaCachedImage({Key key, @required this.imageUrl})
       : super(key: key);
 
   @override
@@ -585,6 +586,7 @@ class PapricaCachedImage extends StatelessWidget {
 
 class HorizontalLineWithWidget extends StatelessWidget {
   final Widget child;
+
   const HorizontalLineWithWidget({this.child});
 
   @override

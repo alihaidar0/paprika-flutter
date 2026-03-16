@@ -1,9 +1,8 @@
 part of swagger.api;
 
 class UpdatePhoneNumberDto {
-  
   String phoneNumber = null;
-  
+
   UpdatePhoneNumberDto();
 
   @override
@@ -13,27 +12,28 @@ class UpdatePhoneNumberDto {
 
   UpdatePhoneNumberDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    phoneNumber =
-        json['phoneNumber']
-    ;
+    phoneNumber = json['phoneNumber'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'phoneNumber': phoneNumber
-     };
+    return {'phoneNumber': phoneNumber};
   }
 
   static List<UpdatePhoneNumberDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<UpdatePhoneNumberDto>() : json.map((value) => new UpdatePhoneNumberDto.fromJson(value)).toList();
+    return json == null
+        ? new List<UpdatePhoneNumberDto>()
+        : json
+            .map((value) => new UpdatePhoneNumberDto.fromJson(value))
+            .toList();
   }
 
-  static Map<String, UpdatePhoneNumberDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdatePhoneNumberDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdatePhoneNumberDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdatePhoneNumberDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdatePhoneNumberDto.fromJson(value));
     }
     return map;
   }
 }
-

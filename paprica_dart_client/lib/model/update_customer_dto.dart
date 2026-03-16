@@ -1,18 +1,14 @@
 part of swagger.api;
 
 class UpdateCustomerDto {
-  
   String name = null;
-  
 
   String profileImage = null;
-  
 
   String phoneNumber = null;
-  
 
   int regionId = null;
-  
+
   UpdateCustomerDto();
 
   @override
@@ -22,18 +18,10 @@ class UpdateCustomerDto {
 
   UpdateCustomerDto.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    name =
-        json['name']
-    ;
-    profileImage =
-        json['profileImage']
-    ;
-    phoneNumber =
-        json['phoneNumber']
-    ;
-    regionId =
-        json['regionId']
-    ;
+    name = json['name'];
+    profileImage = json['profileImage'];
+    phoneNumber = json['phoneNumber'];
+    regionId = json['regionId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,19 +30,22 @@ class UpdateCustomerDto {
       'profileImage': profileImage,
       'phoneNumber': phoneNumber,
       'regionId': regionId
-     };
+    };
   }
 
   static List<UpdateCustomerDto> listFromJson(List<dynamic> json) {
-    return json == null ? new List<UpdateCustomerDto>() : json.map((value) => new UpdateCustomerDto.fromJson(value)).toList();
+    return json == null
+        ? new List<UpdateCustomerDto>()
+        : json.map((value) => new UpdateCustomerDto.fromJson(value)).toList();
   }
 
-  static Map<String, UpdateCustomerDto> mapFromJson(Map<String, Map<String, dynamic>> json) {
+  static Map<String, UpdateCustomerDto> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
     var map = new Map<String, UpdateCustomerDto>();
     if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new UpdateCustomerDto.fromJson(value));
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = new UpdateCustomerDto.fromJson(value));
     }
     return map;
   }
 }
-
